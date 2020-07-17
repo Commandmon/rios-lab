@@ -17,22 +17,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Update rule response.
-  class SensitiveDataScannerRuleUpdateResponse
+  # RUM application creation.
+  class RUMApplicationCreate
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Meta payload containing information about the API.
-    attr_accessor :meta
+    # RUM application creation attributes.
+    attr_reader :attributes
+
+    # RUM application creation type.
+    attr_reader :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'meta' => :'meta'
+        :'attributes' => :'attributes',
+        :'type' => :'type'
       }
     end
 
@@ -40,7 +44,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'meta' => :'SensitiveDataScannerMetaVersionOnly'
+        :'attributes' => :'RUMApplicationCreateAttributes',
+        :'type' => :'RUMApplicationCreateType'
       }
     end
 
@@ -49,19 +54,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerRuleUpdateResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMApplicationCreate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerRuleUpdateResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMApplicationCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'attributes')
+        self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -69,23 +78,14 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @attributes.nil?
+      return false if @type.nil?
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param o [Object] Object to be compared
+    # Custom attribute writer method with validation
+    # @param attributes [Object] Object to be assigned
     # @!visibility private
-    def ==(o)
-      return true if self.equal?(o)
-      self.class == o.class &&
-          meta == o.meta
-    end
-
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    # @!visibility private
-    def hash
-      [meta].hash
-    end
-  end
-end
+    def attributes=(attributes)
+      if attributes.nil?
+        fail ArgumentError, 'invalid value f
