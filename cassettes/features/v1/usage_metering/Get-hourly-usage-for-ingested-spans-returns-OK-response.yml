@@ -1,0 +1,40 @@
+http_interactions:
+- recorded_at: Mon, 31 Jan 2022 09:34:33 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json;datetime-format=rfc3339
+    method: GET
+    uri: https://api.datadoghq.com/api/v1/usage/ingested-spans?start_hr=2022-01-26T09%3A34%3A33.739Z&end_hr=2022-01-28T09%3A34%3A33.739Z
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"usage":[{"org_name":"DD Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T09:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T10:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T11:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T12:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T13:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T14:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T15:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T16:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T17:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T18:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T19:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T20:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T21:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":569960,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T22:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":2118720,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-26T23:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T00:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T01:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T02:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T03:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T04:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T05:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T06:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T07:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T08:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T09:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T10:00:00+00:00"},{"org_name":"DD
+        Integration Tests (321813)","ingested_events_bytes":0,"public_id":"fasjyydbcgwwc2uc","hour":"2022-01-27T11:00:00+00:00"},{"org_name":"DD
+        Integra
