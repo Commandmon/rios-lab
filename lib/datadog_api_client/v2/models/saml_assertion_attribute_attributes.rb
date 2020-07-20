@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,26 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # RUM application creation.
-  class RUMApplicationCreate
+  # Key/Value pair of attributes used in SAML assertion attributes.
+  class SAMLAssertionAttributeAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # RUM application creation attributes.
-    attr_reader :attributes
+    # Key portion of a key/value pair of the attribute sent from the Identity Provider.
+    attr_accessor :attribute_key
 
-    # RUM application creation type.
-    attr_reader :type
+    # Value portion of a key/value pair of the attribute sent from the Identity Provider.
+    attr_accessor :attribute_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'attributes' => :'attributes',
-        :'type' => :'type'
+        :'attribute_key' => :'attribute_key',
+        :'attribute_value' => :'attribute_value'
       }
     end
 
@@ -44,8 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'attributes' => :'RUMApplicationCreateAttributes',
-        :'type' => :'RUMApplicationCreateType'
+        :'attribute_key' => :'String',
+        :'attribute_value' => :'String'
       }
     end
 
@@ -54,23 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMApplicationCreate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SAMLAssertionAttributeAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMApplicationCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SAMLAssertionAttributeAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'attributes')
-        self.attributes = attributes[:'attributes']
+      if attributes.key?(:'attribute_key')
+        self.attribute_key = attributes[:'attribute_key']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'attribute_value')
+        self.attribute_value = attributes[:'attribute_value']
       end
     end
 
@@ -78,29 +79,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @attributes.nil?
-      return false if @type.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param attributes [Object] Object to be assigned
-    # @!visibility private
-    def attributes=(attributes)
-      if attributes.nil?
-        fail ArgumentError, 'invalid value for "attributes", attributes cannot be nil.'
-      end
-      @attributes = attributes
-    end
-
-    # Custom attribute writer method with validation
-    # @param type [Object] Object to be assigned
-    # @!visibility private
-    def type=(type)
-      if type.nil?
-        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -109,15 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          attributes == o.attributes &&
-          type == o.type
+          attribute_key == o.attribute_key &&
+          attribute_value == o.attribute_value
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [attributes, type].hash
+      [attribute_key, attribute_value].hash
     end
   end
 end
