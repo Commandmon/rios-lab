@@ -58,4 +58,79 @@ module DatadogAPIClient::V2
     def self.openapi_types
       {
         :'compute' => :'Array<LogsCompute>',
-        :'filter' => :'LogsQueryFil
+        :'filter' => :'LogsQueryFilter',
+        :'group_by' => :'Array<LogsGroupBy>',
+        :'options' => :'LogsQueryOptions',
+        :'page' => :'LogsAggregateRequestPage'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::LogsAggregateRequest` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::LogsAggregateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'compute')
+        if (value = attributes[:'compute']).is_a?(Array)
+          self.compute = value
+        end
+      end
+
+      if attributes.key?(:'filter')
+        self.filter = attributes[:'filter']
+      end
+
+      if attributes.key?(:'group_by')
+        if (value = attributes[:'group_by']).is_a?(Array)
+          self.group_by = value
+        end
+      end
+
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          compute == o.compute &&
+          filter == o.filter &&
+          group_by == o.group_by &&
+          options == o.options &&
+          page == o.page
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [compute, filter, group_by, options, page].hash
+    end
+  end
+end
