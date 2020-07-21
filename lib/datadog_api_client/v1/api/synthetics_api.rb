@@ -1705,3 +1705,141 @@ module DatadogAPIClient::V1
       data, _status_code, _headers = update_private_location_with_http_info(location_id, body, opts)
       data
     end
+
+    # Edit a private location.
+    #
+    # Edit a Synthetics private location.
+    #
+    # @param location_id [String] The ID of the private location.
+    # @param body [SyntheticsPrivateLocation] Details of the private location to be updated.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(SyntheticsPrivateLocation, Integer, Hash)>] SyntheticsPrivateLocation data, response status code and response headers
+    def update_private_location_with_http_info(location_id, body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SyntheticsAPI.update_private_location ...'
+      end
+      # verify the required parameter 'location_id' is set
+      if @api_client.config.client_side_validation && location_id.nil?
+        fail ArgumentError, "Missing the required parameter 'location_id' when calling SyntheticsAPI.update_private_location"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling SyntheticsAPI.update_private_location"
+      end
+      # resource path
+      local_var_path = '/api/v1/synthetics/private-locations/{location_id}'.sub('{location_id}', CGI.escape(location_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SyntheticsPrivateLocation'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :update_private_location,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Put, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SyntheticsAPI#update_private_location\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Pause or start a test.
+    #
+    # @see #update_test_pause_status_with_http_info
+    def update_test_pause_status(public_id, body, opts = {})
+      data, _status_code, _headers = update_test_pause_status_with_http_info(public_id, body, opts)
+      data
+    end
+
+    # Pause or start a test.
+    #
+    # Pause or start a Synthetics test by changing the status.
+    #
+    # @param public_id [String] The public ID of the Synthetic test to update.
+    # @param body [SyntheticsUpdateTestPauseStatusPayload] Status to set the given Synthetic test to.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(Boolean, Integer, Hash)>] Boolean data, response status code and response headers
+    def update_test_pause_status_with_http_info(public_id, body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SyntheticsAPI.update_test_pause_status ...'
+      end
+      # verify the required parameter 'public_id' is set
+      if @api_client.config.client_side_validation && public_id.nil?
+        fail ArgumentError, "Missing the required parameter 'public_id' when calling SyntheticsAPI.update_test_pause_status"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling SyntheticsAPI.update_test_pause_status"
+      end
+      # resource path
+      local_var_path = '/api/v1/synthetics/tests/{public_id}/status'.sub('{public_id}', CGI.escape(public_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Boolean'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :update_test_pause_status,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Put, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SyntheticsAPI#update_test_pause_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+  end
+end
