@@ -1,0 +1,18 @@
+http_interactions:
+- recorded_at: Tue, 12 Apr 2022 12:55:55 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"filter":{"from":"now-15m","query":"@type:session AND @session.type:user","to":"now"},"options":{"time_offset":0,"timezone":"GMT"},"page":{"limit":2},"sort":"timestamp"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v2/rum/events/search
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"page":{"after":"eyJhZnRlciI6IkFRQUFBWUFkeXBJYXB1d21Sd0FBQUFCeWMxOWlNVGcxTW1Fd1l5MDROV0V5TFRRNFlqWXRZak0wTnkxbVpUSXhN"}},"data":[{"attributes":{"attributes":{"resource":{"first_byte":{"duration":210600000,"start":1500000},"url":"https://example.com/something","status_code":200,"provider":{"domain":"datadoghq.com","type":"first
+        party","name":"unknown"},"id":"bd12c722-d1fd-4af6-888a-fdd255eff318","download":{"duration":300000,"start":212100000},"url_host":"example.com","url_scheme":"https","duration":212400000,"url_path_group":"/something","url_path":"/s

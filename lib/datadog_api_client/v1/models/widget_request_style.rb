@@ -17,22 +17,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response containing the Cloud Workload Security usage for each hour for a given organization.
-  class UsageCWSResponse
+  # Define request widget style.
+  class WidgetRequestStyle
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Get hourly usage for Cloud Workload Security.
-    attr_accessor :usage
+    # Type of lines displayed.
+    attr_accessor :line_type
+
+    # Width of line displayed.
+    attr_accessor :line_width
+
+    # Color palette to apply to the widget.
+    attr_accessor :palette
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'usage' => :'usage'
+        :'line_type' => :'line_type',
+        :'line_width' => :'line_width',
+        :'palette' => :'palette'
       }
     end
 
@@ -40,7 +48,9 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'usage' => :'Array<UsageCWSHour>'
+        :'line_type' => :'WidgetLineType',
+        :'line_width' => :'WidgetLineWidth',
+        :'palette' => :'String'
       }
     end
 
@@ -49,21 +59,27 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageCWSResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::WidgetRequestStyle` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageCWSResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::WidgetRequestStyle`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'usage')
-        if (value = attributes[:'usage']).is_a?(Array)
-          self.usage = value
-        end
+      if attributes.key?(:'line_type')
+        self.line_type = attributes[:'line_type']
+      end
+
+      if attributes.key?(:'line_width')
+        self.line_width = attributes[:'line_width']
+      end
+
+      if attributes.key?(:'palette')
+        self.palette = attributes[:'palette']
       end
     end
 
@@ -80,14 +96,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          usage == o.usage
+          line_type == o.line_type &&
+          line_width == o.line_width &&
+          palette == o.palette
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [usage].hash
+      [line_type, line_width, palette].hash
     end
   end
 end
