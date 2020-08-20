@@ -115,4 +115,16 @@ Feature: Slack Integration
   Scenario: Update a Slack integration channel returns "Item Not Found" response
     Given new "UpdateSlackIntegrationChannel" request
     And request contains "account_name" parameter from "REPLACE.ME"
-    And request contains "channel_name" parameter from "REPLAC
+    And request contains "channel_name" parameter from "REPLACE.ME"
+    And body with value {"display": {"message": true, "notified": true, "snapshot": true, "tags": true}, "name": "#general"}
+    When the request is sent
+    Then the response status is 404 Item Not Found
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Update a Slack integration channel returns "OK" response
+    Given new "UpdateSlackIntegrationChannel" request
+    And request contains "account_name" parameter from "REPLACE.ME"
+    And request contains "channel_name" parameter from "REPLACE.ME"
+    And body with value {"display": {"message": true, "notified": true, "snapshot": true, "tags": true}, "name": "#general"}
+    When the request is sent
+    Then the response status is 200 OK
