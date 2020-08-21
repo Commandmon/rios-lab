@@ -144,4 +144,136 @@ module DatadogAPIClient::V1
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-   
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::TableWidgetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'aggregator')
+        self.aggregator = attributes[:'aggregator']
+      end
+
+      if attributes.key?(:'_alias')
+        self._alias = attributes[:'_alias']
+      end
+
+      if attributes.key?(:'apm_query')
+        self.apm_query = attributes[:'apm_query']
+      end
+
+      if attributes.key?(:'apm_stats_query')
+        self.apm_stats_query = attributes[:'apm_stats_query']
+      end
+
+      if attributes.key?(:'cell_display_mode')
+        if (value = attributes[:'cell_display_mode']).is_a?(Array)
+          self.cell_display_mode = value
+        end
+      end
+
+      if attributes.key?(:'conditional_formats')
+        if (value = attributes[:'conditional_formats']).is_a?(Array)
+          self.conditional_formats = value
+        end
+      end
+
+      if attributes.key?(:'event_query')
+        self.event_query = attributes[:'event_query']
+      end
+
+      if attributes.key?(:'formulas')
+        if (value = attributes[:'formulas']).is_a?(Array)
+          self.formulas = value
+        end
+      end
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'log_query')
+        self.log_query = attributes[:'log_query']
+      end
+
+      if attributes.key?(:'network_query')
+        self.network_query = attributes[:'network_query']
+      end
+
+      if attributes.key?(:'order')
+        self.order = attributes[:'order']
+      end
+
+      if attributes.key?(:'process_query')
+        self.process_query = attributes[:'process_query']
+      end
+
+      if attributes.key?(:'profile_metrics_query')
+        self.profile_metrics_query = attributes[:'profile_metrics_query']
+      end
+
+      if attributes.key?(:'q')
+        self.q = attributes[:'q']
+      end
+
+      if attributes.key?(:'queries')
+        if (value = attributes[:'queries']).is_a?(Array)
+          self.queries = value
+        end
+      end
+
+      if attributes.key?(:'response_format')
+        self.response_format = attributes[:'response_format']
+      end
+
+      if attributes.key?(:'rum_query')
+        self.rum_query = attributes[:'rum_query']
+      end
+
+      if attributes.key?(:'security_query')
+        self.security_query = attributes[:'security_query']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          aggregator == o.aggregator &&
+          _alias == o._alias &&
+          apm_query == o.apm_query &&
+          apm_stats_query == o.apm_stats_query &&
+          cell_display_mode == o.cell_display_mode &&
+          conditional_formats == o.conditional_formats &&
+          event_query == o.event_query &&
+          formulas == o.formulas &&
+          limit == o.limit &&
+          log_query == o.log_query &&
+          network_query == o.network_query &&
+          order == o.order &&
+          process_query == o.process_query &&
+          profile_metrics_query == o.profile_metrics_query &&
+          q == o.q &&
+          queries == o.queries &&
+          response_format == o.response_format &&
+          rum_query == o.rum_query &&
+          security_query == o.security_query
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [aggregator, _alias, apm_query, apm_stats_query, cell_display_mode, conditional_formats, event_query, formulas, limit, log_query, network_query, order, process_query, profile_metrics_query, q, queries, response_format, rum_query, security_query].hash
+    end
+  end
+end
