@@ -40,4 +40,24 @@ module DatadogAPIClient::V2
         # - No advanced validation of types in some cases (e.g. "x: { type: string }" will happily match { x: 123 })
         #   due to the way the deserialization is made in the base_object template (it just casts without verifying).
         # - TODO: scalar values are de facto behaving as if they were nullable.
-     
+        # - TODO: logging when debugging is set.
+        openapi_one_of.each do |klass|
+          begin
+            next if klass == :AnyType # "nullable: true"
+            typed_data = find_and_cast_into_type(klass, data)
+            next if typed_data._unparsed
+            return typed_data if typed_data
+          rescue # rescue all errors so we keep iterating even if the current item lookup raises
+          end
+        end
+
+        if openapi_one_of.include?(:AnyType)
+          data
+        else
+          self._unparsed = true
+          DatadogAPIClient::UnparsedObject.new(data)
+        end
+      end
+    end
+  end
+end
