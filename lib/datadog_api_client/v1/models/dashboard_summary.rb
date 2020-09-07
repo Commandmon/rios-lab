@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,34 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response object for an organization creation.
-  class OrganizationCreateResponse
+  # Dashboard summary response.
+  class DashboardSummary
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Datadog API key.
-    attr_accessor :api_key
-
-    # An application key with its associated metadata.
-    attr_accessor :application_key
-
-    # Create, edit, and manage organizations.
-    attr_accessor :org
-
-    # Create, edit, and disable users.
-    attr_accessor :user
+    # List of dashboard definitions.
+    attr_accessor :dashboards
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'api_key' => :'api_key',
-        :'application_key' => :'application_key',
-        :'org' => :'org',
-        :'user' => :'user'
+        :'dashboards' => :'dashboards'
       }
     end
 
@@ -52,10 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'api_key' => :'ApiKey',
-        :'application_key' => :'ApplicationKey',
-        :'org' => :'Organization',
-        :'user' => :'User'
+        :'dashboards' => :'Array<DashboardSummaryDefinition>'
       }
     end
 
@@ -64,31 +50,21 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::OrganizationCreateResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::DashboardSummary` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::OrganizationCreateResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::DashboardSummary`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'api_key')
-        self.api_key = attributes[:'api_key']
-      end
-
-      if attributes.key?(:'application_key')
-        self.application_key = attributes[:'application_key']
-      end
-
-      if attributes.key?(:'org')
-        self.org = attributes[:'org']
-      end
-
-      if attributes.key?(:'user')
-        self.user = attributes[:'user']
+      if attributes.key?(:'dashboards')
+        if (value = attributes[:'dashboards']).is_a?(Array)
+          self.dashboards = value
+        end
       end
     end
 
@@ -105,17 +81,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          api_key == o.api_key &&
-          application_key == o.application_key &&
-          org == o.org &&
-          user == o.user
+          dashboards == o.dashboards
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [api_key, application_key, org, user].hash
+      [dashboards].hash
     end
   end
 end

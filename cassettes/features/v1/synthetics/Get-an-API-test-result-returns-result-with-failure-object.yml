@@ -1,0 +1,19 @@
+http_interactions:
+- recorded_at: Thu, 10 Feb 2022 12:24:18 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"config":{"assertions":[{"operator":"lessThan","target":1000,"type":"responseTime"}],"request":{"method":"GET","url":"https://app.datadfoghq.com"}},"locations":["aws:eu-west-3"],"message":"Testing
+        wrong DNS error","name":"Test-Get_an_API_test_result_returns_result_with_failure_object-1644495858","options":{"min_failure_duration":0,"min_location_failed":1,"monitor_options":{"renotify_interval":0},"tick_every":86400},"subtype":"http","tags":[],"type":"api"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/synthetics/tests/api
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"status":"live","public_id":"ive-g7h-dgu","tags":[],"org_id":321813,"locations":["aws:eu-west-3"],"message":"Testing
+        wrong DNS error","deleted_at":null,"name":"Test-Get_an_API_test_result_returns_result_with_failure_object-1644495858","monitor_id":638
