@@ -1,0 +1,8 @@
+http_interactions:
+- recorded_at: Thu, 12 May 2022 09:51:02 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test-Update_a_webhook_returns_OK_response-1652349062","url":"http://example.com/webhook"}'
+    headers:
+     
