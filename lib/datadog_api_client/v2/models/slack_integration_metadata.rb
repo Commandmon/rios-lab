@@ -17,35 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The object sent with the request to retrieve aggregation buckets of pipeline events from your organization.
-  class CIAppPipelinesAggregateRequest
+  # Incident integration metadata for the Slack integration.
+  class SlackIntegrationMetadata
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The list of metrics or timeseries to compute for the retrieved buckets.
-    attr_accessor :compute
-
-    # The search and filter query settings.
-    attr_accessor :filter
-
-    # The rules for the group-by.
-    attr_accessor :group_by
-
-    # Global query options that are used during the query.
-    # Only supply timezone or time offset, not both. Otherwise, the query fails.
-    attr_accessor :options
+    # Array of Slack channels in this integration metadata.
+    attr_reader :channels
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'compute' => :'compute',
-        :'filter' => :'filter',
-        :'group_by' => :'group_by',
-        :'options' => :'options'
+        :'channels' => :'channels'
       }
     end
 
@@ -53,10 +40,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'compute' => :'Array<CIAppCompute>',
-        :'filter' => :'CIAppPipelinesQueryFilter',
-        :'group_by' => :'Array<CIAppPipelinesGroupBy>',
-        :'options' => :'CIAppQueryOptions'
+        :'channels' => :'Array<SlackIntegrationMetadataChannelItem>'
       }
     end
 
@@ -65,35 +49,21 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppPipelinesAggregateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SlackIntegrationMetadata` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppPipelinesAggregateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SlackIntegrationMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'compute')
-        if (value = attributes[:'compute']).is_a?(Array)
-          self.compute = value
+      if attributes.key?(:'channels')
+        if (value = attributes[:'channels']).is_a?(Array)
+          self.channels = value
         end
-      end
-
-      if attributes.key?(:'filter')
-        self.filter = attributes[:'filter']
-      end
-
-      if attributes.key?(:'group_by')
-        if (value = attributes[:'group_by']).is_a?(Array)
-          self.group_by = value
-        end
-      end
-
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
       end
     end
 
@@ -101,7 +71,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @channels.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param channels [Object] Object to be assigned
+    # @!visibility private
+    def channels=(channels)
+      if channels.nil?
+        fail ArgumentError, 'invalid value for "channels", channels cannot be nil.'
+      end
+      @channels = channels
     end
 
     # Checks equality by comparing each attribute.
@@ -110,17 +91,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          compute == o.compute &&
-          filter == o.filter &&
-          group_by == o.group_by &&
-          options == o.options
+          channels == o.channels
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [compute, filter, group_by, options].hash
+      [channels].hash
     end
   end
 end
