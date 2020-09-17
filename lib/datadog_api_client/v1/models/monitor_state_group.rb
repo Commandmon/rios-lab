@@ -120,3 +120,23 @@ module DatadogAPIClient::V1
 
     # Checks equality by comparing each attribute.
     # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          last_nodata_ts == o.last_nodata_ts &&
+          last_notified_ts == o.last_notified_ts &&
+          last_resolved_ts == o.last_resolved_ts &&
+          last_triggered_ts == o.last_triggered_ts &&
+          name == o.name &&
+          status == o.status
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [last_nodata_ts, last_notified_ts, last_resolved_ts, last_triggered_ts, name, status].hash
+    end
+  end
+end
