@@ -74,4 +74,50 @@ module DatadogAPIClient::V1
       end
     end
 
-    # Check to 
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @service_key.nil?
+      return false if @service_name.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param service_key [Object] Object to be assigned
+    # @!visibility private
+    def service_key=(service_key)
+      if service_key.nil?
+        fail ArgumentError, 'invalid value for "service_key", service_key cannot be nil.'
+      end
+      @service_key = service_key
+    end
+
+    # Custom attribute writer method with validation
+    # @param service_name [Object] Object to be assigned
+    # @!visibility private
+    def service_name=(service_name)
+      if service_name.nil?
+        fail ArgumentError, 'invalid value for "service_name", service_name cannot be nil.'
+      end
+      @service_name = service_name
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          service_key == o.service_key &&
+          service_name == o.service_name
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [service_key, service_name].hash
+    end
+  end
+end
