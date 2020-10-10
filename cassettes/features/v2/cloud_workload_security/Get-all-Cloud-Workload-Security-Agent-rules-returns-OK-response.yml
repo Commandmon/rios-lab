@@ -829,3 +829,7 @@ http_interactions:
     headers:
       Content-Type:
       - application/json;charset=utf-8
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
