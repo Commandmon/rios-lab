@@ -208,4 +208,23 @@ module DatadogAPIClient::V1
       return true if self.equal?(o)
       self.class == o.class &&
           legend_size == o.legend_size &&
-          m
+          markers == o.markers &&
+          requests == o.requests &&
+          show_legend == o.show_legend &&
+          time == o.time &&
+          title == o.title &&
+          title_align == o.title_align &&
+          title_size == o.title_size &&
+          type == o.type &&
+          xaxis == o.xaxis &&
+          yaxis == o.yaxis
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [legend_size, markers, requests, show_legend, time, title, title_align, title_size, type, xaxis, yaxis].hash
+    end
+  end
+end
