@@ -1,4 +1,3 @@
-
 =begin
 #Datadog API V2 Collection
 
@@ -18,22 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # RUM application update request.
-  class RUMApplicationUpdateRequest
+  # On-demand concurrency cap attributes.
+  class OnDemandConcurrencyCapAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # RUM application update.
-    attr_reader :data
+    # Value of the on-demand concurrency cap.
+    attr_accessor :on_demand_concurrency_cap
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'on_demand_concurrency_cap' => :'on_demand_concurrency_cap'
       }
     end
 
@@ -41,7 +40,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'RUMApplicationUpdate'
+        :'on_demand_concurrency_cap' => :'Float'
       }
     end
 
@@ -50,19 +49,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMApplicationUpdateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::OnDemandConcurrencyCapAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMApplicationUpdateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::OnDemandConcurrencyCapAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.key?(:'on_demand_concurrency_cap')
+        self.on_demand_concurrency_cap = attributes[:'on_demand_concurrency_cap']
       end
     end
 
@@ -70,18 +69,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @data.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param data [Object] Object to be assigned
-    # @!visibility private
-    def data=(data)
-      if data.nil?
-        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
-      end
-      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -90,14 +78,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          on_demand_concurrency_cap == o.on_demand_concurrency_cap
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [on_demand_concurrency_cap].hash
     end
   end
 end
