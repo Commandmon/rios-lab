@@ -1,0 +1,19 @@
+http_interactions:
+- recorded_at: Thu, 06 Jan 2022 00:50:25 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"layout_type":"ordered","title":"Test-Create_a_new_dashboard_with_a_query_value_widget_using_the_percentile_aggregator-1641430225
+        with QVW Percentile Aggregator","widgets":[{"definition":{"autoscale":true,"precision":2,"requests":[{"formulas":[{"formula":"query1"}],"queries":[{"aggregator":"percentile","data_source":"metrics","name":"query1","query":"p90:dist.dd.dogweb.latency{*}"}],"response_format":"scalar"}],"time":{},"title":"","title_align":"left","title_size":"16","type":"query_value"},"layout":{"height":2,"width":2,"x":0,"y":0}}]}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/dashboard
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"notify_list":null,"description":null,"restricted_roles":[],"author_name":null,"template_variables":null,"is_read_only":false,"id":"xtt-jph-mde","title":"Test-Create_a_new_dashboard_with_a_query_value_widget_using_the_percentile_aggregator-1641430225
+        with QVW Percentile Aggregator"
