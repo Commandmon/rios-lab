@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,22 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Configuration options for scheduling.
-  class MonitorOptionsSchedulingOptions
+  # An object that defines a correction to be applied to an SLO.
+  class SLOCorrectionCreateRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Configuration options for the evaluation window. If `hour_starts` is set, no other fields may be set. Otherwise, `day_starts` and `month_starts` must be set together.
-    attr_accessor :evaluation_window
+    # The data object associated with the SLO correction to be created.
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'evaluation_window' => :'evaluation_window'
+        :'data' => :'data'
       }
     end
 
@@ -40,7 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'evaluation_window' => :'MonitorOptionsSchedulingOptionsEvaluationWindow'
+        :'data' => :'SLOCorrectionCreateData'
       }
     end
 
@@ -49,19 +50,19 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::MonitorOptionsSchedulingOptions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SLOCorrectionCreateRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MonitorOptionsSchedulingOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SLOCorrectionCreateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'evaluation_window')
-        self.evaluation_window = attributes[:'evaluation_window']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -78,14 +79,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          evaluation_window == o.evaluation_window
+          data == o.data
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [evaluation_window].hash
+      [data].hash
     end
   end
 end

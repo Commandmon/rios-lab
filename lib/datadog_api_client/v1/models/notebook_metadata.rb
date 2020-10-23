@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,22 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Configuration options for scheduling.
-  class MonitorOptionsSchedulingOptions
+  # Metadata associated with the notebook.
+  class NotebookMetadata
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Configuration options for the evaluation window. If `hour_starts` is set, no other fields may be set. Otherwise, `day_starts` and `month_starts` must be set together.
-    attr_accessor :evaluation_window
+    # Whether or not the notebook is a template.
+    attr_accessor :is_template
+
+    # Whether or not the notebook takes snapshot image backups of the notebook's fixed-time graphs.
+    attr_accessor :take_snapshots
+
+    # Metadata type of the notebook.
+    attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'evaluation_window' => :'evaluation_window'
+        :'is_template' => :'is_template',
+        :'take_snapshots' => :'take_snapshots',
+        :'type' => :'type'
       }
     end
 
@@ -40,8 +49,18 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'evaluation_window' => :'MonitorOptionsSchedulingOptionsEvaluationWindow'
+        :'is_template' => :'Boolean',
+        :'take_snapshots' => :'Boolean',
+        :'type' => :'NotebookMetadataType'
       }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'type',
+      ])
     end
 
     # Initializes the object
@@ -49,19 +68,27 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::MonitorOptionsSchedulingOptions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::NotebookMetadata` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MonitorOptionsSchedulingOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::NotebookMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'evaluation_window')
-        self.evaluation_window = attributes[:'evaluation_window']
+      if attributes.key?(:'is_template')
+        self.is_template = attributes[:'is_template']
+      end
+
+      if attributes.key?(:'take_snapshots')
+        self.take_snapshots = attributes[:'take_snapshots']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -78,14 +105,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          evaluation_window == o.evaluation_window
+          is_template == o.is_template &&
+          take_snapshots == o.take_snapshots &&
+          type == o.type
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [evaluation_window].hash
+      [is_template, take_snapshots, type].hash
     end
   end
 end
