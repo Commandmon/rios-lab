@@ -115,4 +115,18 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          func_count ==
+          func_count == o.func_count &&
+          hour == o.hour &&
+          invocations_sum == o.invocations_sum &&
+          org_name == o.org_name &&
+          public_id == o.public_id
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [func_count, hour, invocations_sum, org_name, public_id].hash
+    end
+  end
+end
