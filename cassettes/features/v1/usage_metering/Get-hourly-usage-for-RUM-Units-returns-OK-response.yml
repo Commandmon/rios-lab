@@ -1,0 +1,35 @@
+http_interactions:
+- recorded_at: Fri, 01 Apr 2022 00:41:27 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json;datetime-format=rfc3339
+    method: GET
+    uri: https://api.datadoghq.com/api/v1/usage/rum?start_hr=2022-03-27T00%3A41%3A27.572Z&end_hr=2022-03-29T00%3A41%3A27.572Z
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"usage":[{"org_name":"DD Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T00:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T01:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T02:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T03:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T04:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T05:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T06:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T07:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T08:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T09:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T10:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T11:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T12:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T13:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T14:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T15:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T16:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T17:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T18:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T19:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T20:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T21:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{"org_name":"DD
+        Integration Tests (321813)","browser_rum_units":null,"hour":"2022-03-27T22:00:00+00:00","rum_units":0,"mobile_rum_units":null,"public_id":"fasjyydbcgwwc2uc"},{

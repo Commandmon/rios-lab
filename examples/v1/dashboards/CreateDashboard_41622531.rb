@@ -34,4 +34,23 @@ body = DatadogAPIClient::V1::Dashboard.new({
             queries: [
               DatadogAPIClient::V1::FormulaAndFunctionMetricQueryDefinition.new({
                 query: "avg:system.cpu.user{*}",
-                data_source: DatadogAPIClient::V1::FormulaA
+                data_source: DatadogAPIClient::V1::FormulaAndFunctionMetricDataSource::METRICS,
+                name: "query1",
+              }),
+            ],
+            response_format: DatadogAPIClient::V1::FormulaAndFunctionResponseFormat::TIMESERIES,
+            style: DatadogAPIClient::V1::WidgetRequestStyle.new({
+              palette: "dog_classic",
+              line_type: DatadogAPIClient::V1::WidgetLineType::SOLID,
+              line_width: DatadogAPIClient::V1::WidgetLineWidth::NORMAL,
+            }),
+            display_type: DatadogAPIClient::V1::WidgetDisplayType::LINE,
+          }),
+        ],
+      }),
+    }),
+  ],
+  layout_type: DatadogAPIClient::V1::DashboardLayoutType::ORDERED,
+  reflow_type: DatadogAPIClient::V1::DashboardReflowType::AUTO,
+})
+p api_instance.create_dashboard(body)
