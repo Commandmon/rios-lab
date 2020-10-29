@@ -22,4 +22,6 @@ module DatadogAPIClient::V2
     include BaseEnumModel
 
     INDEXES = "indexes".freeze
-    ONLI
+    ONLINE_ARCHIVES = "online-archives".freeze
+  end
+end
