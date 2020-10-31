@@ -58,4 +58,77 @@ module DatadogAPIClient::V2
     def self.openapi_types
       {
         :'elapsed' => :'Integer',
-        :'page' => :'Audit
+        :'page' => :'AuditLogsResponsePage',
+        :'request_id' => :'String',
+        :'status' => :'AuditLogsResponseStatus',
+        :'warnings' => :'Array<AuditLogsWarning>'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::AuditLogsResponseMetadata` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::AuditLogsResponseMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'elapsed')
+        self.elapsed = attributes[:'elapsed']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'warnings')
+        if (value = attributes[:'warnings']).is_a?(Array)
+          self.warnings = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          elapsed == o.elapsed &&
+          page == o.page &&
+          request_id == o.request_id &&
+          status == o.status &&
+          warnings == o.warnings
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [elapsed, page, request_id, status, warnings].hash
+    end
+  end
+end
