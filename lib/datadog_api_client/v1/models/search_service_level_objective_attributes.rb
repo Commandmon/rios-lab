@@ -17,10 +17,4 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Widget request type.
-  class TopologyRequestType
-    include BaseEnumModel
-
-    TOPOLOGY = "topology".freeze
-  end
-end
+  # A ser
