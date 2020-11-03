@@ -180,4 +180,104 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'env_tags')
-        if (value = att
+        if (value = attributes[:'env_tags']).is_a?(Array)
+          self.env_tags = value
+        end
+      end
+
+      if attributes.key?(:'groups')
+        if (value = attributes[:'groups']).is_a?(Array)
+          self.groups = value
+        end
+      end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
+
+      if attributes.key?(:'monitor_ids')
+        if (value = attributes[:'monitor_ids']).is_a?(Array)
+          self.monitor_ids = value
+        end
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'overall_status')
+        if (value = attributes[:'overall_status']).is_a?(Array)
+          self.overall_status = value
+        end
+      end
+
+      if attributes.key?(:'query')
+        self.query = attributes[:'query']
+      end
+
+      if attributes.key?(:'service_tags')
+        if (value = attributes[:'service_tags']).is_a?(Array)
+          self.service_tags = value
+        end
+      end
+
+      if attributes.key?(:'slo_type')
+        self.slo_type = attributes[:'slo_type']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'team_tags')
+        if (value = attributes[:'team_tags']).is_a?(Array)
+          self.team_tags = value
+        end
+      end
+
+      if attributes.key?(:'thresholds')
+        if (value = attributes[:'thresholds']).is_a?(Array)
+          self.thresholds = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          all_tags == o.all_tags &&
+          created_at == o.created_at &&
+          creator == o.creator &&
+          description == o.description &&
+          env_tags == o.env_tags &&
+          groups == o.groups &&
+          modified_at == o.modified_at &&
+          monitor_ids == o.monitor_ids &&
+          name == o.name &&
+          overall_status == o.overall_status &&
+          query == o.query &&
+          service_tags == o.service_tags &&
+          slo_type == o.slo_type &&
+          status == o.status &&
+          team_tags == o.team_tags &&
+          thresholds == o.thresholds
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [all_tags, created_at, creator, description, env_tags, groups, modified_at, monitor_ids, name, overall_status, query, service_tags, slo_type, status, team_tags, thresholds].hash
+    end
+  end
+end
