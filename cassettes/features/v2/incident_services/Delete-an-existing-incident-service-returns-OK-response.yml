@@ -28,4 +28,29 @@ http_interactions:
       Accept:
       - '*/*'
     method: DELETE
-    uri: https://api.datadoghq.com/api/v2/services/9f42d0e
+    uri: https://api.datadoghq.com/api/v2/services/9f42d0e5-438a-5808-bb84-01ede3c065fb
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+- recorded_at: Thu, 12 May 2022 09:51:30 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/services/9f42d0e5-438a-5808-bb84-01ede3c065fb
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
