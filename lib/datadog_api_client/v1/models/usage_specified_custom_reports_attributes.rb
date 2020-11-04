@@ -50,4 +50,94 @@ module DatadogAPIClient::V1
         :'computed_on' => :'computed_on',
         :'end_date' => :'end_date',
         :'location' => :'location',
-        
+        :'size' => :'size',
+        :'start_date' => :'start_date',
+        :'tags' => :'tags'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'computed_on' => :'String',
+        :'end_date' => :'String',
+        :'location' => :'String',
+        :'size' => :'Integer',
+        :'start_date' => :'String',
+        :'tags' => :'Array<String>'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageSpecifiedCustomReportsAttributes` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageSpecifiedCustomReportsAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'computed_on')
+        self.computed_on = attributes[:'computed_on']
+      end
+
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'location')
+        self.location = attributes[:'location']
+      end
+
+      if attributes.key?(:'size')
+        self.size = attributes[:'size']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          computed_on == o.computed_on &&
+          end_date == o.end_date &&
+          location == o.location &&
+          size == o.size &&
+          start_date == o.start_date &&
+          tags == o.tags
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [computed_on, end_date, location, size, start_date, tags].hash
+    end
+  end
+end
