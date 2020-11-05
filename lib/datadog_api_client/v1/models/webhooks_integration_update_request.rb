@@ -52,4 +52,96 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.attribute_map
       {
-        :'custom_hea
+        :'custom_headers' => :'custom_headers',
+        :'encode_as' => :'encode_as',
+        :'name' => :'name',
+        :'payload' => :'payload',
+        :'url' => :'url'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'custom_headers' => :'String',
+        :'encode_as' => :'WebhooksIntegrationEncoding',
+        :'name' => :'String',
+        :'payload' => :'String',
+        :'url' => :'String'
+      }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'payload',
+      ])
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::WebhooksIntegrationUpdateRequest` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::WebhooksIntegrationUpdateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'custom_headers')
+        self.custom_headers = attributes[:'custom_headers']
+      end
+
+      if attributes.key?(:'encode_as')
+        self.encode_as = attributes[:'encode_as']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
+      end
+
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          custom_headers == o.custom_headers &&
+          encode_as == o.encode_as &&
+          name == o.name &&
+          payload == o.payload &&
+          url == o.url
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [custom_headers, encode_as, name, payload, url].hash
+    end
+  end
+end
