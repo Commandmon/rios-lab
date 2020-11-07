@@ -12,4 +12,13 @@ body = DatadogAPIClient::V1::MonitorUpdateRequest.new({
   options: DatadogAPIClient::V1::MonitorOptions.new({
     evaluation_delay: nil,
     new_group_delay: 600,
-    new_host_delay: nil
+    new_host_delay: nil,
+    renotify_interval: nil,
+    thresholds: DatadogAPIClient::V1::MonitorThresholds.new({
+      critical: 2,
+      warning: nil,
+    }),
+    timeout_h: nil,
+  }),
+})
+p api_instance.update_monitor(MONITOR_ID.to_i, body)
