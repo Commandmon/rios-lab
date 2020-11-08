@@ -17,26 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Object describing the logs filter.
-  class LogsCategoryProcessorCategory
+  # The response containing the Cloud Security Posture Management usage for each hour for a given organization.
+  class UsageCloudSecurityPostureManagementResponse
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Filter for logs.
-    attr_accessor :filter
-
-    # Value to assign to the target attribute.
-    attr_accessor :name
+    # Get hourly usage for Cloud Security Posture Management.
+    attr_accessor :usage
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'filter' => :'filter',
-        :'name' => :'name'
+        :'usage' => :'usage'
       }
     end
 
@@ -44,8 +40,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'filter' => :'LogsFilter',
-        :'name' => :'String'
+        :'usage' => :'Array<UsageCloudSecurityPostureManagementHour>'
       }
     end
 
@@ -54,23 +49,21 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::LogsCategoryProcessorCategory` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageCloudSecurityPostureManagementResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::LogsCategoryProcessorCategory`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageCloudSecurityPostureManagementResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'filter')
-        self.filter = attributes[:'filter']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'usage')
+        if (value = attributes[:'usage']).is_a?(Array)
+          self.usage = value
+        end
       end
     end
 
@@ -87,15 +80,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          filter == o.filter &&
-          name == o.name
+          usage == o.usage
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [filter, name].hash
+      [usage].hash
     end
   end
 end
