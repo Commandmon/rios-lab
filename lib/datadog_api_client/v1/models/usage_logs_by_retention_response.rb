@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,15 +18,15 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response containing the number of Synthetics API tests run for each hour for a given organization.
-  class UsageSyntheticsAPIResponse
+  # Response containing the indexed logs usage broken down by retention period for an organization during a given hour.
+  class UsageLogsByRetentionResponse
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Get hourly usage for Synthetics API tests.
+    # Get hourly usage for indexed logs by retention period.
     attr_accessor :usage
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -40,7 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'usage' => :'Array<UsageSyntheticsAPIHour>'
+        :'usage' => :'Array<UsageLogsByRetentionHour>'
       }
     end
 
@@ -49,13 +50,13 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageSyntheticsAPIResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageLogsByRetentionResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageSyntheticsAPIResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageLogsByRetentionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
