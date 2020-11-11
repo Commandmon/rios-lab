@@ -19,4 +19,19 @@ body = DatadogAPIClient::V1::Dashboard.new({
       }),
       definition: DatadogAPIClient::V1::AlertValueWidgetDefinition.new({
         title: "",
-   
+        title_size: "16",
+        title_align: DatadogAPIClient::V1::WidgetTextAlign::LEFT,
+        type: DatadogAPIClient::V1::AlertValueWidgetDefinitionType::ALERT_VALUE,
+        alert_id: "7",
+        unit: "auto",
+        text_align: DatadogAPIClient::V1::WidgetTextAlign::LEFT,
+        precision: 2,
+      }),
+    }),
+  ],
+  template_variables: [],
+  layout_type: DatadogAPIClient::V1::DashboardLayoutType::FREE,
+  is_read_only: false,
+  notify_list: [],
+})
+p api_instance.create_dashboard(body)
