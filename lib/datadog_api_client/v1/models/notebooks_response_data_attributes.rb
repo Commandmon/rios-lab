@@ -151,4 +151,32 @@ module DatadogAPIClient::V1
         fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 80.'
       end
       if name.to_s.length < 0
-        fail ArgumentError, 'invalid value for "name", the character lengt
+        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 0.'
+      end
+      @name = name
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          author == o.author &&
+          cells == o.cells &&
+          created == o.created &&
+          metadata == o.metadata &&
+          modified == o.modified &&
+          name == o.name &&
+          status == o.status &&
+          time == o.time
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [author, cells, created, metadata, modified, name, status, time].hash
+    end
+  end
+end
