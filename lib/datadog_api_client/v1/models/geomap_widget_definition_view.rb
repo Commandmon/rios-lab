@@ -29,4 +29,74 @@ module DatadogAPIClient::V1
     attr_reader :focus
 
     # Attribute mapping from ruby-style variable name to JSON key.
-    # @!visibil
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'focus' => :'focus'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'focus' => :'String'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::GeomapWidgetDefinitionView` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::GeomapWidgetDefinitionView`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'focus')
+        self.focus = attributes[:'focus']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @focus.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param focus [Object] Object to be assigned
+    # @!visibility private
+    def focus=(focus)
+      if focus.nil?
+        fail ArgumentError, 'invalid value for "focus", focus cannot be nil.'
+      end
+      @focus = focus
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          focus == o.focus
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [focus].hash
+    end
+  end
+end
