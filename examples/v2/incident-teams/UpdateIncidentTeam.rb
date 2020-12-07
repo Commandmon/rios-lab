@@ -12,4 +12,10 @@ TEAM_DATA_ID = ENV["TEAM_DATA_ID"]
 
 body = DatadogAPIClient::V2::IncidentTeamUpdateRequest.new({
   data: DatadogAPIClient::V2::IncidentTeamUpdateData.new({
-   
+    type: DatadogAPIClient::V2::IncidentTeamType::TEAMS,
+    attributes: DatadogAPIClient::V2::IncidentTeamUpdateAttributes.new({
+      name: "team name-updated",
+    }),
+  }),
+})
+p api_instance.update_incident_team(TEAM_DATA_ID, body)
