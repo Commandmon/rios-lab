@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,26 +18,35 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Create rule response.
-  class SensitiveDataScannerCreateRuleResponse
+  # The request for a RUM events list.
+  class RUMSearchEventsRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Response data related to the creation of a rule.
-    attr_accessor :data
+    # The search and filter query settings.
+    attr_accessor :filter
 
-    # Meta payload containing information about the API.
-    attr_accessor :meta
+    # Global query options that are used during the query.
+    # Note: Only supply timezone or time offset, not both. Otherwise, the query fails.
+    attr_accessor :options
+
+    # Paging attributes for listing events.
+    attr_accessor :page
+
+    # Sort parameters when querying events.
+    attr_accessor :sort
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'meta' => :'meta'
+        :'filter' => :'filter',
+        :'options' => :'options',
+        :'page' => :'page',
+        :'sort' => :'sort'
       }
     end
 
@@ -44,8 +54,10 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'SensitiveDataScannerRuleResponse',
-        :'meta' => :'SensitiveDataScannerMetaVersionOnly'
+        :'filter' => :'RUMQueryFilter',
+        :'options' => :'RUMQueryOptions',
+        :'page' => :'RUMQueryPageOptions',
+        :'sort' => :'RUMSort'
       }
     end
 
@@ -54,23 +66,31 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerCreateRuleResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMSearchEventsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerCreateRuleResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMSearchEventsRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.key?(:'filter')
+        self.filter = attributes[:'filter']
       end
 
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
       end
     end
 
@@ -87,15 +107,17 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          meta == o.meta
+          filter == o.filter &&
+          options == o.options &&
+          page == o.page &&
+          sort == o.sort
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data, meta].hash
+      [filter, options, page, sort].hash
     end
   end
 end
