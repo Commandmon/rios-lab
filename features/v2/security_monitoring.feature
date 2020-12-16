@@ -127,4 +127,98 @@ Feature: Security Monitoring
 
   @generated @skip @team:DataDog/k9-cloud-security-platform
   Scenario: Create a security filter returns "Conflict" response
-    Given new "CreateSecurityFilter" requ
+    Given new "CreateSecurityFilter" request
+    And body with value {"data": {"attributes": {"exclusion_filters": [{"name": "Exclude staging", "query": "source:staging"}], "filtered_data_type": "logs", "is_enabled": true, "name": "Custom security filter", "query": "service:api"}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 409 Conflict
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Create a security filter returns "OK" response
+    Given new "CreateSecurityFilter" request
+    And body with value {"data": {"attributes": {"exclusion_filters": [{"name": "Exclude staging", "query": "source:staging"}], "filtered_data_type": "logs", "is_enabled": true, "name": "{{ unique }}", "query": "service:{{ unique_alnum }}"}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.type" is equal to "security_filters"
+    And the response "data.attributes.name" is equal to "{{ unique }}"
+    And the response "data.attributes.is_enabled" is equal to true
+    And the response "data.attributes.exclusion_filters[0].name" is equal to "Exclude staging"
+    And the response "data.attributes.exclusion_filters[0].query" is equal to "source:staging"
+
+  @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete a non existing rule returns "Not Found" response
+    Given new "DeleteSecurityMonitoringRule" request
+    And request contains "rule_id" parameter with value "ThisRuleIdProbablyDoesntExist"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete a security filter returns "No Content" response
+    Given there is a valid "security_filter" in the system
+    And new "DeleteSecurityFilter" request
+    And request contains "security_filter_id" parameter from "security_filter.data.id"
+    When the request is sent
+    Then the response status is 204 No Content
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete a security filter returns "Not Found" response
+    Given new "DeleteSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete a security filter returns "OK" response
+    Given new "DeleteSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete an existing rule returns "Not Found" response
+    Given new "DeleteSecurityMonitoringRule" request
+    And request contains "rule_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Delete an existing rule returns "OK" response
+    Given there is a valid "security_rule" in the system
+    And new "DeleteSecurityMonitoringRule" request
+    And request contains "rule_id" parameter from "security_rule.id"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a cloud configuration rule's details returns "OK" response
+    Given there is a valid "cloud_configuration_rule" in the system
+    And new "GetSecurityMonitoringRule" request
+    And request contains "rule_id" parameter from "cloud_configuration_rule.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "name" is equal to "{{ unique }}_cloud"
+    And the response "id" has the same value as "cloud_configuration_rule.id"
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a list of security signals returns "Bad Request" response
+    Given new "SearchSecurityMonitoringSignals" request
+    And body with value {"filter": {"from": "2019-01-02T09:42:36.320Z", "query": "security:attack status:high", "to": "2019-01-03T09:42:36.320Z"}, "page": {"cursor": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==", "limit": 25}, "sort": "timestamp"}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a list of security signals returns "OK" response
+    Given new "SearchSecurityMonitoringSignals" request
+    And body with value {"filter": {"from": "2019-01-02T09:42:36.320Z", "query": "security:attack status:high", "to": "2019-01-03T09:42:36.320Z"}, "page": {"cursor": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==", "limit": 25}, "sort": "timestamp"}
+    When the request is sent
+    Then the response status is 200 OK
+
+  @replay-only @team:DataDog/k9-cloud-security-platform @with-pagination
+  Scenario: Get a list of security signals returns "OK" response with pagination
+    Given new "SearchSecurityMonitoringSignals" request
+    And body with value {"filter": {"from": "{{ timeISO("now-15m") }}", "query": "security:attack status:high", "to": "{{ timeISO("now") }}"}, "page": {"limit": 2}, "sort": "timestamp"}
+    When the request with pagination is sent
+    Then the response status is 200 OK
+    And the response has 3 items
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a quic
