@@ -221,4 +221,112 @@ Feature: Security Monitoring
     And the response has 3 items
 
   @generated @skip @team:DataDog/k9-cloud-security-platform
-  Scenario: Get a quic
+  Scenario: Get a quick list of security signals returns "Bad Request" response
+    Given new "ListSecurityMonitoringSignals" request
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a quick list of security signals returns "OK" response
+    Given new "ListSecurityMonitoringSignals" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @replay-only @team:DataDog/k9-cloud-security-platform @with-pagination
+  Scenario: Get a quick list of security signals returns "OK" response with pagination
+    Given new "ListSecurityMonitoringSignals" request
+    And request contains "page[limit]" parameter with value 2
+    When the request with pagination is sent
+    Then the response status is 200 OK
+    And the response has 3 items
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a rule's details returns "Not Found" response
+    Given new "GetSecurityMonitoringRule" request
+    And request contains "rule_id" parameter with value "abcde-12345"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a rule's details returns "OK" response
+    Given new "GetSecurityMonitoringRule" request
+    And there is a valid "security_rule" in the system
+    And request contains "rule_id" parameter from "security_rule.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "name" is equal to "{{ unique }}"
+    And the response "id" has the same value as "security_rule.id"
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a security filter returns "Not Found" response
+    Given new "GetSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a security filter returns "OK" response
+    Given there is a valid "security_filter" in the system
+    And new "GetSecurityFilter" request
+    And request contains "security_filter_id" parameter from "security_filter.data.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.type" is equal to "security_filters"
+    And the response "data.attributes.name" is equal to "{{ unique }}"
+    And the response "data.attributes.is_enabled" is equal to true
+    And the response "data.attributes.exclusion_filters[0].name" is equal to "Exclude logs from staging"
+    And the response "data.attributes.exclusion_filters[0].query" is equal to "source:staging"
+
+  @replay-only @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a signal's details returns "Not Found" response
+    Given new "GetSecurityMonitoringSignal" request
+    And request contains "signal_id" parameter with value "AQAAAYNqUBVU4-rffwAAAABBWU5xVUJWVUFBQjJBd3ptCL3QUEm3nt2"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @replay-only @team:DataDog/k9-cloud-security-platform
+  Scenario: Get a signal's details returns "OK" response
+    Given new "GetSecurityMonitoringSignal" request
+    And request contains "signal_id" parameter with value "AQAAAYNqUBVU4-rffwAAAABBWU5xVUJWVUFBQjJBd3ptMDdQUnF3QUE"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Get all security filters returns "OK" response
+    Given new "ListSecurityFilters" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: List rules returns "Bad Request" response
+    Given new "ListSecurityMonitoringRules" request
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: List rules returns "OK" response
+    Given new "ListSecurityMonitoringRules" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Modify the triage assignee of a security signal returns "Bad Request" response
+    Given new "EditSecurityMonitoringSignalAssignee" request
+    And request contains "signal_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"assignee": {"uuid": "773b045d-ccf8-4808-bd3b-955ef6a8c940"}}}}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Modify the triage assignee of a security signal returns "Not Found" response
+    Given new "EditSecurityMonitoringSignalAssignee" request
+    And request contains "signal_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"assignee": {"uuid": "773b045d-ccf8-4808-bd3b-955ef6a8c940"}}}}
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @replay-only @team:DataDog/k9-cloud-security-platform
+  Scenario: Modify the triage assignee of a security signal returns "OK" response
+    Given new "EditSecurityMonitoringSignalAssignee" request
+    And request contains "signal_id" parameter with value "AQAAAYG1bl5K4HuUewAAAABBWUcxYmw1S0FBQmt2RmhRN0V4ZUVnQUE"
+    And body with value {"data": {"attributes": {"assignee": {
