@@ -329,4 +329,77 @@ Feature: Security Monitoring
   Scenario: Modify the triage assignee of a security signal returns "OK" response
     Given new "EditSecurityMonitoringSignalAssignee" request
     And request contains "signal_id" parameter with value "AQAAAYG1bl5K4HuUewAAAABBWUcxYmw1S0FBQmt2RmhRN0V4ZUVnQUE"
-    And body with value {"data": {"attributes": {"assignee": {
+    And body with value {"data": {"attributes": {"assignee": {"uuid": ""}}}}
+    When the request is sent
+    Then the response status is 200 OK
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Update a cloud configuration rule's details returns "OK" response
+    Given new "UpdateSecurityMonitoringRule" request
+    And there is a valid "cloud_configuration_rule" in the system
+    And request contains "rule_id" parameter from "cloud_configuration_rule.id"
+    And body with value {"name":"{{ unique }}_cloud_updated","isEnabled":false,"cases":[{"status":"info","notifications":[]}],"options":{"complianceRuleOptions":{"resourceType":"gcp_compute_disk", "regoRule":{"policy":"package datadog\n","resourceTypes":["gcp_compute_disk"]}}},"message":"ddd","tags":[],"complianceSignalOptions":{"userActivationStatus":false,"userGroupByFields":[]}}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "name" is equal to "{{ unique }}_cloud_updated"
+    And the response "id" has the same value as "cloud_configuration_rule.id"
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Update a security filter returns "Bad Request" response
+    Given new "UpdateSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"exclusion_filters": [], "filtered_data_type": "logs", "is_enabled": true, "name": "Custom security filter", "query": "service:api", "version": 1}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Update a security filter returns "Concurrent Modification" response
+    Given new "UpdateSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"exclusion_filters": [], "filtered_data_type": "logs", "is_enabled": true, "name": "Custom security filter", "query": "service:api", "version": 1}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 409 Concurrent Modification
+
+  @generated @skip @team:DataDog/k9-cloud-security-platform
+  Scenario: Update a security filter returns "Not Found" response
+    Given new "UpdateSecurityFilter" request
+    And request contains "security_filter_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"exclusion_filters": [], "filtered_data_type": "logs", "is_enabled": true, "name": "Custom security filter", "query": "service:api", "version": 1}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Update a security filter returns "OK" response
+    Given new "UpdateSecurityFilter" request
+    And there is a valid "security_filter" in the system
+    And request contains "security_filter_id" parameter from "security_filter.data.id"
+    And body with value {"data": {"attributes": {"exclusion_filters": [], "filtered_data_type": "logs", "is_enabled": true, "name": "{{ unique }}", "query": "service:{{ unique_alnum }}", "version": 1}, "type": "security_filters"}}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.type" is equal to "security_filters"
+    And the response "data.attributes.filtered_data_type" is equal to "logs"
+    And the response "data.attributes.name" is equal to "{{ unique }}"
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Update an existing rule returns "Bad Request" response
+    Given new "UpdateSecurityMonitoringRule" request
+    And there is a valid "security_rule" in the system
+    And request contains "rule_id" parameter from "security_rule.id"
+    And body with value {"name":"{{ unique }}", "queries":[{"query":""}],"cases":[{"status":"info"}],"options":{},"message":"Test rule Bad","tags":[],"isEnabled":true}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Update an existing rule returns "Not Found" response
+    Given new "UpdateSecurityMonitoringRule" request
+    And request contains "rule_id" parameter with value "abcde-12345"
+    And body with value {"name": "{{ unique }}-NotFound","queries": [{"query": "@test:true","aggregation": "count","groupByFields": [],"distinctFields": [],"metrics": []}],"filters": [],"cases": [{"name": "", "status": "info", "condition": "a > 0", "notifications": []}], "options": {"evaluationWindow": 900, "keepAlive": 3600, "maxSignalDuration": 86400}, "message": "Test rule", "tags": [], "isEnabled": true}
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/k9-cloud-security-platform
+  Scenario: Update an existing rule returns "OK" response
+    Given new "UpdateSecurityMonitoringRule" request
+    And there is a valid "security_rule" in the system
+    And request contains "rule_id" parameter from "security_rule.id"
+    And body with value {"name": "{{ unique }}-Updated","queries": [{"query": "@test:true","aggregation": "count","groupByFields": [],"distinctFields": [],"metrics": []}],"filters": [],"cases": [{"name": "", "status": "info", "condition": "a > 0", "notifications": []}], "options": {"evaluationWindow": 900, "keepAlive": 3600, "maxSignalDuratio
