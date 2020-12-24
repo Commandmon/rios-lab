@@ -280,4 +280,155 @@ module DatadogAPIClient::V2
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_c
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RoleCreateResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :create_role,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RolesAPI#create_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete role.
+    #
+    # @see #delete_role_with_http_info
+    def delete_role(role_id, opts = {})
+      delete_role_with_http_info(role_id, opts)
+      nil
+    end
+
+    # Delete role.
+    #
+    # Disables a role.
+    #
+    # @param role_id [String] The unique identifier of the role.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_role_with_http_info(role_id, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RolesAPI.delete_role ...'
+      end
+      # verify the required parameter 'role_id' is set
+      if @api_client.config.client_side_validation && role_id.nil?
+        fail ArgumentError, "Missing the required parameter 'role_id' when calling RolesAPI.delete_role"
+      end
+      # resource path
+      local_var_path = '/api/v2/roles/{role_id}'.sub('{role_id}', CGI.escape(role_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :delete_role,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Delete, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RolesAPI#delete_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a role.
+    #
+    # @see #get_role_with_http_info
+    def get_role(role_id, opts = {})
+      data, _status_code, _headers = get_role_with_http_info(role_id, opts)
+      data
+    end
+
+    # Get a role.
+    #
+    # Get a role in the organization specified by the role’s `role_id`.
+    #
+    # @param role_id [String] The unique identifier of the role.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(RoleResponse, Integer, Hash)>] RoleResponse data, response status code and response headers
+    def get_role_with_http_info(role_id, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RolesAPI.get_role ...'
+      end
+      # verify the required parameter 'role_id' is set
+      if @api_client.config.client_side_validation && role_id.nil?
+        fail ArgumentError, "Missing the required parameter 'role_id' when calling RolesAPI.get_role"
+      end
+      # resource path
+      local_var_path = '/api/v2/roles/{role_id}'.sub('{role_id}', CGI.escape(role_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RoleResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :get_role,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RolesAPI#get_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}
