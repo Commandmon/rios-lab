@@ -431,4 +431,151 @@ module DatadogAPIClient::V2
 
       data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RolesAPI#get_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}
+        @api_client.config.logger.debug "API called: RolesAPI#get_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List permissions.
+    #
+    # @see #list_permissions_with_http_info
+    def list_permissions(opts = {})
+      data, _status_code, _headers = list_permissions_with_http_info(opts)
+      data
+    end
+
+    # List permissions.
+    #
+    # Returns a list of all permissions, including name, description, and ID.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(PermissionsResponse, Integer, Hash)>] PermissionsResponse data, response status code and response headers
+    def list_permissions_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RolesAPI.list_permissions ...'
+      end
+      # resource path
+      local_var_path = '/api/v2/permissions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PermissionsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :list_permissions,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RolesAPI#list_permissions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List permissions for a role.
+    #
+    # @see #list_role_permissions_with_http_info
+    def list_role_permissions(role_id, opts = {})
+      data, _status_code, _headers = list_role_permissions_with_http_info(role_id, opts)
+      data
+    end
+
+    # List permissions for a role.
+    #
+    # Returns a list of all permissions for a single role.
+    #
+    # @param role_id [String] The unique identifier of the role.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(PermissionsResponse, Integer, Hash)>] PermissionsResponse data, response status code and response headers
+    def list_role_permissions_with_http_info(role_id, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RolesAPI.list_role_permissions ...'
+      end
+      # verify the required parameter 'role_id' is set
+      if @api_client.config.client_side_validation && role_id.nil?
+        fail ArgumentError, "Missing the required parameter 'role_id' when calling RolesAPI.list_role_permissions"
+      end
+      # resource path
+      local_var_path = '/api/v2/roles/{role_id}/permissions'.sub('{role_id}', CGI.escape(role_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PermissionsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :list_role_permissions,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RolesAPI#list_role_permissions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List roles.
+    #
+    # @see #list_roles_with_http_info
+    def list_roles(opts = {})
+      data, _status_code, _headers = list_roles_with_http_info(opts)
+      data
+    end
+
+    # List roles.
+    #
+    # Returns all roles, including their names and their unique identifiers.
+    #
+    # @param opts [Hash] the optional parameters
+    # @option opts [Integer] :page_size Size for a given page. The maximum allowed value is 5000.
+    # @option opts [Integer] :page_number Specific page number to return.
+    # @option opts [RolesSort] :sort Sort roles depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign, for example: `sort=-name`.
+    # @option opts [String] :filter Filter all roles by the given string.
+    # @return [Array<(RolesResponse, Integer, Hash)>] RolesResponse data, resp
