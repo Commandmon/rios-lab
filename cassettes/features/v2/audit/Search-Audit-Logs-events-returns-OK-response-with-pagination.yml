@@ -1,0 +1,22 @@
+http_interactions:
+- recorded_at: Wed, 13 Apr 2022 09:36:13 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"filter":{"from":"now-15m","to":"now"},"options":{"timezone":"GMT"},"page":{"limit":2},"sort":"timestamp"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v2/audit/events/search
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"page":{"after":"eyJhZnRlciI6IkFRQUFBWUFpT2hZV1JxeFgzUUFBQUFCQldVRnBUMmh2VFVGQlFrczVOa2wwVFZKVFYycEJRVUUifQ"}},"data":[{"attributes":{"attributes":{"status":"info","http":{"status_code":"200","url_details":{"path":"/api/v1/synthetics/enforced_tags","host":"us1.prod.dog"},"method":"GET","useragent":"Mozilla/5.0
+        (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/100.0.4896.75 Safari/537.36"},"network":{"bytes_read":0,"client":{"ip":"84.102.253.215"},"bytes_written":104},"timestamp":"2022-04-13T09:21:13.750599","usr":{"email":"foo@example.com","id":"foo@example.com","uuid":"0ed5718a-10e0-11ec-8246-da7ad0900002"},"action":"accessed","org":{"uuid":"8dee7c38-00cb-11ea-a77b-8b5a08d3b091"},"evt":{"name":"Request","actor":{"type":"USER"}},"auth_method":"SESSION"},"message":"GET
+        request made to /api/v1/synthetics/enforced_tags by foo@example.com with response
+        200","tags":["source:audit"],"timestamp":"2022-04-13T09:21:13.750Z"},"type":"audit","id":"AQAAAYAiOhYWi7EZ-QAAAABBWUFpT2hvT0FBRGJLTGZoSU50TEVRQUE"},{"attributes":{"attributes":{"status":"info","http":{"status_code":"200","url_details":{"path":"/api/v2/query/timeseries","host":"us1.prod.dog"},"method":"POST","useragent":"Mozilla/5.0
+        (Macinto
