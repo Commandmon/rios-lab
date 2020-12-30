@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,30 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response with Host information from Datadog.
-  class HostListResponse
+  # The metadata for the current pagination.
+  class UsageTopAvgMetricsPagination
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Array of hosts.
-    attr_accessor :host_list
+    # Maximum amount of records to be returned.
+    attr_accessor :limit
 
-    # Number of host matching the query.
-    attr_accessor :total_matching
+    # The cursor to get the next results (if any). To make the next request, use the same parameters and add `next_record_id`.
+    attr_accessor :next_record_id
 
-    # Number of host returned.
-    attr_accessor :total_returned
+    # Total number of records.
+    attr_accessor :total_number_of_records
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'host_list' => :'host_list',
-        :'total_matching' => :'total_matching',
-        :'total_returned' => :'total_returned'
+        :'limit' => :'limit',
+        :'next_record_id' => :'next_record_id',
+        :'total_number_of_records' => :'total_number_of_records'
       }
     end
 
@@ -48,10 +49,18 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'host_list' => :'Array<Host>',
-        :'total_matching' => :'Integer',
-        :'total_returned' => :'Integer'
+        :'limit' => :'Integer',
+        :'next_record_id' => :'String',
+        :'total_number_of_records' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'next_record_id',
+      ])
     end
 
     # Initializes the object
@@ -59,29 +68,27 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::HostListResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageTopAvgMetricsPagination` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::HostListResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageTopAvgMetricsPagination`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'host_list')
-        if (value = attributes[:'host_list']).is_a?(Array)
-          self.host_list = value
-        end
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
       end
 
-      if attributes.key?(:'total_matching')
-        self.total_matching = attributes[:'total_matching']
+      if attributes.key?(:'next_record_id')
+        self.next_record_id = attributes[:'next_record_id']
       end
 
-      if attributes.key?(:'total_returned')
-        self.total_returned = attributes[:'total_returned']
+      if attributes.key?(:'total_number_of_records')
+        self.total_number_of_records = attributes[:'total_number_of_records']
       end
     end
 
@@ -98,16 +105,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          host_list == o.host_list &&
-          total_matching == o.total_matching &&
-          total_returned == o.total_returned
+          limit == o.limit &&
+          next_record_id == o.next_record_id &&
+          total_number_of_records == o.total_number_of_records
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [host_list, total_matching, total_returned].hash
+      [limit, next_record_id, total_number_of_records].hash
     end
   end
 end
