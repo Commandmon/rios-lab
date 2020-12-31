@@ -13,4 +13,11 @@ body = DatadogAPIClient::V1::Monitor.new({
       critical: 0.5,
     }),
     scheduling_options: DatadogAPIClient::V1::MonitorOptionsSchedulingOptions.new({
-      evaluation_window: DatadogAPIClient::V1::MonitorOptionsSchedulingOptionsEvalua
+      evaluation_window: DatadogAPIClient::V1::MonitorOptionsSchedulingOptionsEvaluationWindow.new({
+        day_starts: "04:00",
+        month_starts: 1,
+      }),
+    }),
+  }),
+})
+p api_instance.create_monitor(body)
