@@ -44,4 +44,15 @@ http_interactions:
     body: null
     headers:
       Accept:
-    
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/rum/applications/cae2b3d1-9ea1-4321-8506-725cc4242f6f
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
