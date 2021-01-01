@@ -174,4 +174,33 @@ module DatadogAPIClient::V1
     # @!visibility private
     def name=(name)
       if name.nil?
-        fail A
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      @name = name
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          aggregator == o.aggregator &&
+          data_source == o.data_source &&
+          is_normalized_cpu == o.is_normalized_cpu &&
+          limit == o.limit &&
+          metric == o.metric &&
+          name == o.name &&
+          sort == o.sort &&
+          tag_filters == o.tag_filters &&
+          text_filter == o.text_filter
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [aggregator, data_source, is_normalized_cpu, limit, metric, name, sort, tag_filters, text_filter].hash
+    end
+  end
+end
