@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,30 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The search and filter query settings.
-  class CIAppPipelinesQueryFilter
+  # A field with potentially multiple values selected.
+  class IncidentFieldAttributesMultipleValue
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The minimum time for the requested events; supports date, math, and regular timestamps (in milliseconds).
-    attr_accessor :from
+    # Type of the multiple value field definitions.
+    attr_accessor :type
 
-    # The search query following the Log search syntax.
-    attr_accessor :query
-
-    # The maximum time for the requested events, supports date, math, and regular timestamps (in milliseconds).
-    attr_accessor :to
+    # The multiple values selected for this field.
+    attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'from' => :'from',
-        :'query' => :'query',
-        :'to' => :'to'
+        :'type' => :'type',
+        :'value' => :'value'
       }
     end
 
@@ -48,10 +45,17 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'from' => :'String',
-        :'query' => :'String',
-        :'to' => :'String'
+        :'type' => :'IncidentFieldAttributesValueType',
+        :'value' => :'Array<String>'
       }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'value',
+      ])
     end
 
     # Initializes the object
@@ -59,27 +63,25 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppPipelinesQueryFilter` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::IncidentFieldAttributesMultipleValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppPipelinesQueryFilter`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::IncidentFieldAttributesMultipleValue`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'from')
-        self.from = attributes[:'from']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'query')
-        self.query = attributes[:'query']
-      end
-
-      if attributes.key?(:'to')
-        self.to = attributes[:'to']
+      if attributes.key?(:'value')
+        if (value = attributes[:'value']).is_a?(Array)
+          self.value = value
+        end
       end
     end
 
@@ -96,16 +98,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          from == o.from &&
-          query == o.query &&
-          to == o.to
+          type == o.type &&
+          value == o.value
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [from, query, to].hash
+      [type, value].hash
     end
   end
 end
