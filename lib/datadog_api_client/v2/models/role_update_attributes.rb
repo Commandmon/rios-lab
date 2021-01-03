@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,35 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The request for a logs list.
-  class LogsListRequest
+  # Attributes of the role.
+  class RoleUpdateAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The search and filter query settings
-    attr_accessor :filter
+    # Creation time of the role.
+    attr_accessor :created_at
 
-    # Global query options that are used during the query.
-    # Note: You should only supply timezone or time offset but not both otherwise the query will fail.
-    attr_accessor :options
+    # Time of last role modification.
+    attr_accessor :modified_at
 
-    # Paging attributes for listing logs.
-    attr_accessor :page
-
-    # Sort parameters when querying logs.
-    attr_accessor :sort
+    # Name of the role.
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'filter' => :'filter',
-        :'options' => :'options',
-        :'page' => :'page',
-        :'sort' => :'sort'
+        :'created_at' => :'created_at',
+        :'modified_at' => :'modified_at',
+        :'name' => :'name'
       }
     end
 
@@ -53,10 +49,9 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'filter' => :'LogsQueryFilter',
-        :'options' => :'LogsQueryOptions',
-        :'page' => :'LogsListRequestPage',
-        :'sort' => :'LogsSort'
+        :'created_at' => :'Time',
+        :'modified_at' => :'Time',
+        :'name' => :'String'
       }
     end
 
@@ -65,31 +60,27 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::LogsListRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RoleUpdateAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::LogsListRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RoleUpdateAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'filter')
-        self.filter = attributes[:'filter']
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
       end
 
-      if attributes.key?(:'page')
-        self.page = attributes[:'page']
-      end
-
-      if attributes.key?(:'sort')
-        self.sort = attributes[:'sort']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
     end
 
@@ -106,17 +97,16 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          filter == o.filter &&
-          options == o.options &&
-          page == o.page &&
-          sort == o.sort
+          created_at == o.created_at &&
+          modified_at == o.modified_at &&
+          name == o.name
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [filter, options, page, sort].hash
+      [created_at, modified_at, name].hash
     end
   end
 end

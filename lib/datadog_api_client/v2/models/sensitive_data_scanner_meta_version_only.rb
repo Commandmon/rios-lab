@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,35 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The request for a logs list.
-  class LogsListRequest
+  # Meta payload containing information about the API.
+  class SensitiveDataScannerMetaVersionOnly
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The search and filter query settings
-    attr_accessor :filter
-
-    # Global query options that are used during the query.
-    # Note: You should only supply timezone or time offset but not both otherwise the query will fail.
-    attr_accessor :options
-
-    # Paging attributes for listing logs.
-    attr_accessor :page
-
-    # Sort parameters when querying logs.
-    attr_accessor :sort
+    # Version of the API (optional).
+    attr_reader :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'filter' => :'filter',
-        :'options' => :'options',
-        :'page' => :'page',
-        :'sort' => :'sort'
+        :'version' => :'version'
       }
     end
 
@@ -53,10 +41,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'filter' => :'LogsQueryFilter',
-        :'options' => :'LogsQueryOptions',
-        :'page' => :'LogsListRequestPage',
-        :'sort' => :'LogsSort'
+        :'version' => :'Integer'
       }
     end
 
@@ -65,31 +50,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::LogsListRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerMetaVersionOnly` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::LogsListRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerMetaVersionOnly`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'filter')
-        self.filter = attributes[:'filter']
-      end
-
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
-      end
-
-      if attributes.key?(:'page')
-        self.page = attributes[:'page']
-      end
-
-      if attributes.key?(:'sort')
-        self.sort = attributes[:'sort']
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -97,7 +70,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if !@version.nil? && @version < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param version [Object] Object to be assigned
+    # @!visibility private
+    def version=(version)
+      if !version.nil? && version < 0
+        fail ArgumentError, 'invalid value for "version", must be greater than or equal to 0.'
+      end
+      @version = version
     end
 
     # Checks equality by comparing each attribute.
@@ -106,17 +90,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          filter == o.filter &&
-          options == o.options &&
-          page == o.page &&
-          sort == o.sort
+          version == o.version
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [filter, options, page, sort].hash
+      [version].hash
     end
   end
 end
