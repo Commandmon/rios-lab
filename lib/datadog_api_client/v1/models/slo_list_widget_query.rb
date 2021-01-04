@@ -63,4 +63,77 @@ module DatadogAPIClient::V1
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
-      attributes = attributes.eac
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SLOListWidgetQuery`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'query_string')
+        self.query_string = attributes[:'query_string']
+      end
+
+      if attributes.key?(:'sort')
+        if (value = attributes[:'sort']).is_a?(Array)
+          self.sort = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if !@limit.nil? && @limit > 100
+      return false if !@limit.nil? && @limit < 1
+      return false if @query_string.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param limit [Object] Object to be assigned
+    # @!visibility private
+    def limit=(limit)
+      if !limit.nil? && limit > 100
+        fail ArgumentError, 'invalid value for "limit", must be smaller than or equal to 100.'
+      end
+      if !limit.nil? && limit < 1
+        fail ArgumentError, 'invalid value for "limit", must be greater than or equal to 1.'
+      end
+      @limit = limit
+    end
+
+    # Custom attribute writer method with validation
+    # @param query_string [Object] Object to be assigned
+    # @!visibility private
+    def query_string=(query_string)
+      if query_string.nil?
+        fail ArgumentError, 'invalid value for "query_string", query_string cannot be nil.'
+      end
+      @query_string = query_string
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          limit == o.limit &&
+          query_string == o.query_string &&
+          sort == o.sort
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [limit, query_string, sort].hash
+    end
+  end
+end

@@ -1,0 +1,22 @@
+http_interactions:
+- recorded_at: Tue, 12 Apr 2022 14:46:01 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"index":"main","query":"host:Test*","sort":"asc","time":{"from":"2022-04-12T13:46:01.054Z","timezone":"Europe/Paris","to":"2022-04-12T14:46:01.054Z"}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/logs-queries/list
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"status":"done","nextLogId":"AQAAAYAeNzBYpo9uwQAAAABBWUFlTnphX0FBQ3ZDWWkzMEhwV3lnQUE","logs":[{"content":{"attributes":{"timestamp":1649772129000,"hostname":"Test-Go-TestLogsList-1649773129"},"host":"Test-Go-TestLogsList-1649773129","tags":["source:go-client-test-test-go-testlogslist-1649773129","source:go-client-test-test-go-testlogslist-1649773129","test","go","list"],"message":"test-log-list-1
+        Test-Go-TestLogsList-1649773129","timestamp":"2022-04-12T14:02:09.000Z"},"id":"AQAAAYAeFOro88x3gAAAAABBWUFlSkRBTUFBQTYxd2RPZWdXdkVRQUE"},{"content":{"attributes":{"timestamp":1649772161000,"hostname":"Test-Go-TestLogsListGet-1649773161"},"host":"Test-Go-TestLogsListGet-1649773161","tags":["source:go-client-test-test-go-testlogslistget-1649773161","test","go","list","source:go-client-test-test-go-testlogslistget-1649773161"],"message":"test-log-list-1
+        Test-Go-TestLogsListGet-1649773161","timestamp":"2022-04-12T14:02:41.000Z"},"id":"AQAAAYAeFWfoHAiocAAAAABBWUFlSkt1ZEFBQXVPblNhLTVqU2xnQUE"},{"content":{"attributes":{"timestamp":1649773128000,"hostname":"Test-Go-TestLogsList-1649773129"},"host":"Test-Go-TestLogsList-1649773129","tags":["source:go-client-test-test-go-testlogslist-1649773129","source:go-client-test-test-go-testlogslist-1649773129","test","go","list"],"message":"test-log-list-2
+        Test-Go-TestLogsList-1649773129","timestamp":"2022-04-12T14:18:48.000Z"},"id":"AQAAAYAeJClARmc41AAAAABBWUFlSkRCY0FBQnhWWklPUUhyckd3QUE"},{"content":{"attributes":{"timestamp":1649773160000,"hostname":"Test-Go-TestLogsListGet-1649773161"},"host":"Test-Go-TestLogsListGet-1649773161","tags":["source:go-client-test-test-go-testlogslistget-1649773161","test","go","list","source:go-client-test-test-go-testlogslistget-1649773161"],"message":"test-log-list-2
+        Test-Go-TestLogsListGet-1649773161","timestamp":"2022-04-12T14:19:20.000Z"},"id":"AQAAAYAeJKZAhvnyzgAAAABBWUFlSkt2b0FBQVI1Q0EtS2JyRnJRQUE"},{"content":{"attributes":{"timestamp":1649773195000,"hostname":"Test-Go-TestLogsList-1649774195"},"host":"Test-Go-TestLogsList-1649774195","tags":["source:go-client-test-test-go-testlogslist-1649774195","test","go","list","source:go-client-test-test-go-testlogslist-1649774195"],"message":"test-log-list-1
+        Test-Go-TestLogsList-1649774195","timestamp":"2022-04-12T14:19:55.000Z"},"id":"AQAAAYAeJS745UJvLwAAAABBWUFlTkhOWUFBQmtWQk8zVXkwTDN3QUE"},{"content":{"attributes":{"timestamp":1649773317000,"hostname":"Test-Go-TestLogsList-1649773318"},"host":"Test-Go-TestLogsList-1649773318","tags":["source:go-client-test-1649773318743602624","test","go","list","source:go-client-test-1649773318743
