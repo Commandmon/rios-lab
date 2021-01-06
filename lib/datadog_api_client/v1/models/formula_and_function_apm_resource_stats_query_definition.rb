@@ -67,4 +67,172 @@ module DatadogAPIClient::V1
         :'primary_tag_name' => :'primary_tag_name',
         :'primary_tag_value' => :'primary_tag_value',
         :'resource_name' => :'resource_name',
-        :'service
+        :'service' => :'service',
+        :'stat' => :'stat'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'data_source' => :'FormulaAndFunctionApmResourceStatsDataSource',
+        :'env' => :'String',
+        :'group_by' => :'Array<String>',
+        :'name' => :'String',
+        :'operation_name' => :'String',
+        :'primary_tag_name' => :'String',
+        :'primary_tag_value' => :'String',
+        :'resource_name' => :'String',
+        :'service' => :'String',
+        :'stat' => :'FormulaAndFunctionApmResourceStatName'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::FormulaAndFunctionApmResourceStatsQueryDefinition` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::FormulaAndFunctionApmResourceStatsQueryDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'data_source')
+        self.data_source = attributes[:'data_source']
+      end
+
+      if attributes.key?(:'env')
+        self.env = attributes[:'env']
+      end
+
+      if attributes.key?(:'group_by')
+        if (value = attributes[:'group_by']).is_a?(Array)
+          self.group_by = value
+        end
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'operation_name')
+        self.operation_name = attributes[:'operation_name']
+      end
+
+      if attributes.key?(:'primary_tag_name')
+        self.primary_tag_name = attributes[:'primary_tag_name']
+      end
+
+      if attributes.key?(:'primary_tag_value')
+        self.primary_tag_value = attributes[:'primary_tag_value']
+      end
+
+      if attributes.key?(:'resource_name')
+        self.resource_name = attributes[:'resource_name']
+      end
+
+      if attributes.key?(:'service')
+        self.service = attributes[:'service']
+      end
+
+      if attributes.key?(:'stat')
+        self.stat = attributes[:'stat']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @data_source.nil?
+      return false if @env.nil?
+      return false if @name.nil?
+      return false if @service.nil?
+      return false if @stat.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param data_source [Object] Object to be assigned
+    # @!visibility private
+    def data_source=(data_source)
+      if data_source.nil?
+        fail ArgumentError, 'invalid value for "data_source", data_source cannot be nil.'
+      end
+      @data_source = data_source
+    end
+
+    # Custom attribute writer method with validation
+    # @param env [Object] Object to be assigned
+    # @!visibility private
+    def env=(env)
+      if env.nil?
+        fail ArgumentError, 'invalid value for "env", env cannot be nil.'
+      end
+      @env = env
+    end
+
+    # Custom attribute writer method with validation
+    # @param name [Object] Object to be assigned
+    # @!visibility private
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param service [Object] Object to be assigned
+    # @!visibility private
+    def service=(service)
+      if service.nil?
+        fail ArgumentError, 'invalid value for "service", service cannot be nil.'
+      end
+      @service = service
+    end
+
+    # Custom attribute writer method with validation
+    # @param stat [Object] Object to be assigned
+    # @!visibility private
+    def stat=(stat)
+      if stat.nil?
+        fail ArgumentError, 'invalid value for "stat", stat cannot be nil.'
+      end
+      @stat = stat
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          data_source == o.data_source &&
+          env == o.env &&
+          group_by == o.group_by &&
+          name == o.name &&
+          operation_name == o.operation_name &&
+          primary_tag_name == o.primary_tag_name &&
+          primary_tag_value == o.primary_tag_value &&
+          resource_name == o.resource_name &&
+          service == o.service &&
+          stat == o.stat
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [data_source, env, group_by, name, operation_name, primary_tag_name, primary_tag_value, resource_name, service, stat].hash
+    end
+  end
+end
