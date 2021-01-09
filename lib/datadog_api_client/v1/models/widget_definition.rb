@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,8 +18,8 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Configuration of the legend.
-  module SunburstWidgetLegend
+  # [Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).
+  module WidgetDefinition
     class << self
       include BaseOneOfModel
       include BaseOneOfModelNoDiscriminator
@@ -26,8 +27,38 @@ module DatadogAPIClient::V1
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
-          :'SunburstWidgetLegendTable',
-          :'SunburstWidgetLegendInlineAutomatic'
+          :'AlertGraphWidgetDefinition',
+          :'AlertValueWidgetDefinition',
+          :'ChangeWidgetDefinition',
+          :'CheckStatusWidgetDefinition',
+          :'DistributionWidgetDefinition',
+          :'EventStreamWidgetDefinition',
+          :'EventTimelineWidgetDefinition',
+          :'FreeTextWidgetDefinition',
+          :'GeomapWidgetDefinition',
+          :'GroupWidgetDefinition',
+          :'HeatMapWidgetDefinition',
+          :'HostMapWidgetDefinition',
+          :'IFrameWidgetDefinition',
+          :'ImageWidgetDefinition',
+          :'LogStreamWidgetDefinition',
+          :'MonitorSummaryWidgetDefinition',
+          :'NoteWidgetDefinition',
+          :'QueryValueWidgetDefinition',
+          :'RunWorkflowWidgetDefinition',
+          :'ScatterPlotWidgetDefinition',
+          :'SLOWidgetDefinition',
+          :'SLOListWidgetDefinition',
+          :'ServiceMapWidgetDefinition',
+          :'ServiceSummaryWidgetDefinition',
+          :'SunburstWidgetDefinition',
+          :'TableWidgetDefinition',
+          :'TimeseriesWidgetDefinition',
+          :'ToplistWidgetDefinition',
+          :'TreeMapWidgetDefinition',
+          :'ListStreamWidgetDefinition',
+          :'FunnelWidgetDefinition',
+          :'TopologyMapWidgetDefinition'
         ]
       end
       # Builds the object
