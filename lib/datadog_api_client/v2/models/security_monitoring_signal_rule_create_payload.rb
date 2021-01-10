@@ -211,4 +211,45 @@ module DatadogAPIClient::V2
     # @param options [Object] Object to be assigned
     # @!visibility private
     def options=(options)
-      if optio
+      if options.nil?
+        fail ArgumentError, 'invalid value for "options", options cannot be nil.'
+      end
+      @options = options
+    end
+
+    # Custom attribute writer method with validation
+    # @param queries [Object] Object to be assigned
+    # @!visibility private
+    def queries=(queries)
+      if queries.nil?
+        fail ArgumentError, 'invalid value for "queries", queries cannot be nil.'
+      end
+      @queries = queries
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          cases == o.cases &&
+          filters == o.filters &&
+          has_extended_title == o.has_extended_title &&
+          is_enabled == o.is_enabled &&
+          message == o.message &&
+          name == o.name &&
+          options == o.options &&
+          queries == o.queries &&
+          tags == o.tags &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [cases, filters, has_extended_title, is_enabled, message, name, options, queries, tags, type].hash
+    end
+  end
+end
