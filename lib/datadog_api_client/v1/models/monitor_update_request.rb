@@ -164,4 +164,105 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'modified')
-        self.modified = attributes[:'modifie
+        self.modified = attributes[:'modified']
+      end
+
+      if attributes.key?(:'multi')
+        self.multi = attributes[:'multi']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
+
+      if attributes.key?(:'overall_state')
+        self.overall_state = attributes[:'overall_state']
+      end
+
+      if attributes.key?(:'priority')
+        self.priority = attributes[:'priority']
+      end
+
+      if attributes.key?(:'query')
+        self.query = attributes[:'query']
+      end
+
+      if attributes.key?(:'restricted_roles')
+        if (value = attributes[:'restricted_roles']).is_a?(Array)
+          self.restricted_roles = value
+        end
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if !@priority.nil? && @priority > 5
+      return false if !@priority.nil? && @priority < 1
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param priority [Object] Object to be assigned
+    # @!visibility private
+    def priority=(priority)
+      if !priority.nil? && priority > 5
+        fail ArgumentError, 'invalid value for "priority", must be smaller than or equal to 5.'
+      end
+      if !priority.nil? && priority < 1
+        fail ArgumentError, 'invalid value for "priority", must be greater than or equal to 1.'
+      end
+      @priority = priority
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          created == o.created &&
+          creator == o.creator &&
+          deleted == o.deleted &&
+          id == o.id &&
+          message == o.message &&
+          modified == o.modified &&
+          multi == o.multi &&
+          name == o.name &&
+          options == o.options &&
+          overall_state == o.overall_state &&
+          priority == o.priority &&
+          query == o.query &&
+          restricted_roles == o.restricted_roles &&
+          state == o.state &&
+          tags == o.tags &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [created, creator, deleted, id, message, modified, multi, name, options, overall_state, priority, query, restricted_roles, state, tags, type].hash
+    end
+  end
+end
