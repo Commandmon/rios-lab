@@ -1,0 +1,13 @@
+http_interactions:
+- recorded_at: Thu, 01 Sep 2022 11:59:49 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/metrics?filter%5Bconfigured%5D=true
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"type":"manage_tags","id":"test.metric.1","attributes":{"tags":["datacenter","app"],"created_at":"2022-03-24T18:23:55.957002+00:00","modified_at":"2022-03-28T14:34:32.618807+00:00","metric_type":"gauge","aggregations":[{"space":"avg","time":"avg"}]}},{"type":"manage_tags","id":"foo","attributes":{"tags":["datacenter","sport"],"created_at":"2021-10-27T12:35:56.242671+00:00","modified_at":"2021-10-27T12:41:22.413540+00:00","metric_type":"count","aggregations":[{"space":"sum","time":"sum"}]}},{"type":"manage_tags","id":"ExampleListdistinctmetricvolumesbymetricnamereturnsSuccessresponse1653177320","attributes":{"tags":["datacenter","app","ExampleListdistinctmetricvolumesbymetricnamereturnsSuccessresponse1653177320"],"created_at":"2022-05-21T23:55:28.435000+00:00","modified_at":"2022-05-21T23:55:28.435000+00:00","metric_type":"gauge","aggregations":[{"space":"avg","time":"avg"}]}},{"type":"manage_tags","id":"javaCreateatagconfigu1617241053","attributes":{"tags":["datacenter","app"],"include_percentiles":false,"created_at":"2021-04-01T01:37:34.078032+00:00","modified_at":"2021-05-07T09:02:37.581544+00:00","metric_type":"distribution"}},{"type":"manage_tags","id":"rubyCreateatagconfigurationreturnsCreatedresponse1616498653","attributes":{"tags":["datacenter","app"],"include_percentiles":false,"created_at":"2021-03-23T11:24:13.435931+00:00","modified_at":"2021-03-23T11:24:13.435931+00:00","metric_type":"distribution"}},{"type":"manage_tags","id":"TestRubyListtagsbymetricnamereturnsSuccessresponse1618241083","attributes":{"tags":["datacenter","app","TestRubyListtagsbymetricnamereturnsSuccessresponse1618241083"],"include_percentiles":false,"created_at":"2021-04-12T15:24:43.937851+00:00","modified_at":"2021-04-12T15:24:43.937851+00:00","metric_type":"distribution"}},{"type":"manage_tags","id":"goFeatureMetricsScenarioCreateaTagConfigurationreturnsCreatedresponse462771613138431","attributes":{"tags":["datacenter","app"],"include_percentiles":false,"created_at":"2021-02-12T14:00:32.059033+00:00","modified_at":"2021-02-12T14:00:32.059033+00:00","metric_type":"distribution"}},{"type":"manage_tags","id":"goFeatureMetricsScenarioDeleteaTagConfigu
