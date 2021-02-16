@@ -18,22 +18,23 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Dashboard bulk delete request body.
-  class DashboardBulkDeleteRequest
+  # Wrapper object with the different monitor states.
+  class MonitorState
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # List of dashboard bulk action request data objects.
-    attr_reader :data
+    # Dictionary where the keys are groups (comma separated lists of tags) and the values are
+    # the list of groups your monitor is broken down on.
+    attr_accessor :groups
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'groups' => :'groups'
       }
     end
 
@@ -41,7 +42,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<DashboardBulkActionData>'
+        :'groups' => :'Hash<String, MonitorStateGroup>'
       }
     end
 
@@ -50,21 +51,19 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::DashboardBulkDeleteRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::MonitorState` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::DashboardBulkDeleteRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MonitorState`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'groups')
+        self.groups = attributes[:'groups']
       end
     end
 
@@ -72,18 +71,7 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @data.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param data [Object] Object to be assigned
-    # @!visibility private
-    def data=(data)
-      if data.nil?
-        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
-      end
-      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -92,14 +80,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          groups == o.groups
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [groups].hash
     end
   end
 end

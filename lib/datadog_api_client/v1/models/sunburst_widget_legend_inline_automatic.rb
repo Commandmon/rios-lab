@@ -18,22 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Dashboard bulk delete request body.
-  class DashboardBulkDeleteRequest
+  # Configuration of inline or automatic legends.
+  class SunburstWidgetLegendInlineAutomatic
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # List of dashboard bulk action request data objects.
-    attr_reader :data
+    # Whether to hide the percentages of the groups.
+    attr_accessor :hide_percent
+
+    # Whether to hide the values of the groups.
+    attr_accessor :hide_value
+
+    # Whether to show the legend inline or let it be automatically generated.
+    attr_reader :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'hide_percent' => :'hide_percent',
+        :'hide_value' => :'hide_value',
+        :'type' => :'type'
       }
     end
 
@@ -41,7 +49,9 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<DashboardBulkActionData>'
+        :'hide_percent' => :'Boolean',
+        :'hide_value' => :'Boolean',
+        :'type' => :'SunburstWidgetLegendInlineAutomaticType'
       }
     end
 
@@ -50,21 +60,27 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::DashboardBulkDeleteRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SunburstWidgetLegendInlineAutomatic` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::DashboardBulkDeleteRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SunburstWidgetLegendInlineAutomatic`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'hide_percent')
+        self.hide_percent = attributes[:'hide_percent']
+      end
+
+      if attributes.key?(:'hide_value')
+        self.hide_value = attributes[:'hide_value']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -72,18 +88,18 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @data.nil?
+      return false if @type.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param data [Object] Object to be assigned
+    # @param type [Object] Object to be assigned
     # @!visibility private
-    def data=(data)
-      if data.nil?
-        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
       end
-      @data = data
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -92,14 +108,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          hide_percent == o.hide_percent &&
+          hide_value == o.hide_value &&
+          type == o.type
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [hide_percent, hide_value, type].hash
     end
   end
 end
