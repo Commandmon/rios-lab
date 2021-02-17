@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,28 +18,34 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # A service level objective response containing a single service level objective.
-  class SLOResponse
+  # Incident management usage for a given organization for a given hour.
+  class UsageIncidentManagementHour
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # A service level objective object includes a service level indicator, thresholds
-    # for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).
-    attr_accessor :data
+    # The hour for the usage.
+    attr_accessor :hour
 
-    # An array of error messages. Each endpoint documents how/whether this field is
-    # used.
-    attr_accessor :errors
+    # Contains the total number monthly active users from the start of the given hour's month until the given hour.
+    attr_accessor :monthly_active_users
+
+    # The organization name.
+    attr_accessor :org_name
+
+    # The organization public ID.
+    attr_accessor :public_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'errors' => :'errors'
+        :'hour' => :'hour',
+        :'monthly_active_users' => :'monthly_active_users',
+        :'org_name' => :'org_name',
+        :'public_id' => :'public_id'
       }
     end
 
@@ -46,8 +53,10 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'SLOResponseData',
-        :'errors' => :'Array<String>'
+        :'hour' => :'Time',
+        :'monthly_active_users' => :'Integer',
+        :'org_name' => :'String',
+        :'public_id' => :'String'
       }
     end
 
@@ -56,25 +65,31 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SLOResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageIncidentManagementHour` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SLOResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageIncidentManagementHour`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.key?(:'hour')
+        self.hour = attributes[:'hour']
       end
 
-      if attributes.key?(:'errors')
-        if (value = attributes[:'errors']).is_a?(Array)
-          self.errors = value
-        end
+      if attributes.key?(:'monthly_active_users')
+        self.monthly_active_users = attributes[:'monthly_active_users']
+      end
+
+      if attributes.key?(:'org_name')
+        self.org_name = attributes[:'org_name']
+      end
+
+      if attributes.key?(:'public_id')
+        self.public_id = attributes[:'public_id']
       end
     end
 
@@ -91,15 +106,17 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          errors == o.errors
+          hour == o.hour &&
+          monthly_active_users == o.monthly_active_users &&
+          org_name == o.org_name &&
+          public_id == o.public_id
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data, errors].hash
+      [hour, monthly_active_users, org_name, public_id].hash
     end
   end
 end
