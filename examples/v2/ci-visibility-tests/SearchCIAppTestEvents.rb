@@ -9,4 +9,15 @@ body = DatadogAPIClient::V2::CIAppTestEventsRequest.new({
     query: "@test.service:web-ui-tests AND @test.status:skip",
     to: "now",
   }),
-  option
+  options: DatadogAPIClient::V2::CIAppQueryOptions.new({
+    timezone: "GMT",
+  }),
+  page: DatadogAPIClient::V2::CIAppQueryPageOptions.new({
+    limit: 25,
+  }),
+  sort: DatadogAPIClient::V2::CIAppSort::TIMESTAMP_ASCENDING,
+})
+opts = {
+  body: body,
+}
+p api_instance.search_ci_app_test_events(opts)
