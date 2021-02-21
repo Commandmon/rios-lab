@@ -264,4 +264,133 @@ module DatadogAPIClient::V2
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = 
+      return_type = opts[:debug_return_type] || 'RUMApplicationResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :get_rum_application,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RUMAPI#get_rum_application\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List all the RUM applications.
+    #
+    # @see #get_rum_applications_with_http_info
+    def get_rum_applications(opts = {})
+      data, _status_code, _headers = get_rum_applications_with_http_info(opts)
+      data
+    end
+
+    # List all the RUM applications.
+    #
+    # List all the RUM applications in your organization.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(RUMApplicationsResponse, Integer, Hash)>] RUMApplicationsResponse data, response status code and response headers
+    def get_rum_applications_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RUMAPI.get_rum_applications ...'
+      end
+      # resource path
+      local_var_path = '/api/v2/rum/applications'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RUMApplicationsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :get_rum_applications,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RUMAPI#get_rum_applications\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a list of RUM events.
+    #
+    # @see #list_rum_events_with_http_info
+    def list_rum_events(opts = {})
+      data, _status_code, _headers = list_rum_events_with_http_info(opts)
+      data
+    end
+
+    # Get a list of RUM events.
+    #
+    # List endpoint returns events that match a RUM search query.
+    # [Results are paginated][1].
+    #
+    # Use this endpoint to see your latest RUM events.
+    #
+    # [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+    #
+    # @param opts [Hash] the optional parameters
+    # @option opts [String] :filter_query Search query following RUM syntax.
+    # @option opts [Time] :filter_from Minimum timestamp for requested events.
+    # @option opts [Time] :filter_to Maximum timestamp for requested events.
+    # @option opts [RUMSort] :sort Order of events in results.
+    # @option opts [String] :page_cursor List following results with a cursor provided in the previous query.
+    # @option opts [Integer] :page_limit Maximum number of events in the response.
+    # @return [Array<(RUMEventsResponse, Integer, Hash)>] RUMEventsResponse data, response status code and response headers
+    def list_rum_events_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RUMAPI.list_rum_events ...'
+      end
+      allowable_values = ['timestamp', '-timestamp']
+      if @api_client.config.client_side_validation && opts[:'sort'] && !allowable_values.include?(opts[:'sort'])
+        fail ArgumentError, "invalid value for \"sort\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_limit'].nil? && opts[:'page_limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_limit"]" when calling RUMAPI.list_rum_events, must be smaller than or equal to 1000.'
+      end
+      # resource path
+      local_var_path = '/api/v2/rum/events'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'filter[query]'] = opts[:'filter_query'] if !opts[:'filter_query'].nil?
+      query_params[:'filter[from]'] = opts[:'filter_from'] if !opts[:'filter_from'].nil?
+      query_params[:'filter[to]'] = opts[:'filter_to'] if !opts[:'filter_to'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'page[cu
