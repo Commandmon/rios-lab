@@ -393,4 +393,142 @@ module DatadogAPIClient::V2
       query_params[:'filter[from]'] = opts[:'filter_from'] if !opts[:'filter_from'].nil?
       query_params[:'filter[to]'] = opts[:'filter_to'] if !opts[:'filter_to'].nil?
       query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'page[cu
+      query_params[:'page[cursor]'] = opts[:'page_cursor'] if !opts[:'page_cursor'].nil?
+      query_params[:'page[limit]'] = opts[:'page_limit'] if !opts[:'page_limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RUMEventsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :list_rum_events,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RUMAPI#list_rum_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a list of RUM events.
+    #
+    # Provide a paginated version of {#list_rum_events}, returning all items.
+    #
+    # To use it you need to use a block: list_rum_events_with_pagination { |item| p item }
+    #
+    # @yield [RUMEvent] Paginated items
+    def list_rum_events_with_pagination(opts = {})
+        api_version = "V2"
+        page_size = @api_client.get_attribute_from_path(opts, "page_limit", 10)
+        @api_client.set_attribute_from_path(api_version, opts, "page_limit", Integer, page_size)
+        while true do
+            response = list_rum_events(opts)
+            @api_client.get_attribute_from_path(response, "data").each { |item| yield(item) }
+            if @api_client.get_attribute_from_path(response, "data").length < page_size
+              break
+            end
+            @api_client.set_attribute_from_path(api_version, opts, "page_cursor", Integer, @api_client.get_attribute_from_path(response, "meta.page.after"))
+        end
+    end
+
+    # Search RUM events.
+    #
+    # @see #search_rum_events_with_http_info
+    def search_rum_events(body, opts = {})
+      data, _status_code, _headers = search_rum_events_with_http_info(body, opts)
+      data
+    end
+
+    # Search RUM events.
+    #
+    # List endpoint returns RUM events that match a RUM search query.
+    # [Results are paginated][1].
+    #
+    # Use this endpoint to build complex RUM events filtering and search.
+    #
+    # [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+    #
+    # @param body [RUMSearchEventsRequest] 
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(RUMEventsResponse, Integer, Hash)>] RUMEventsResponse data, response status code and response headers
+    def search_rum_events_with_http_info(body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RUMAPI.search_rum_events ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling RUMAPI.search_rum_events"
+      end
+      # resource path
+      local_var_path = '/api/v2/rum/events/search'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RUMEventsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :search_rum_events,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RUMAPI#search_rum_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search RUM events.
+    #
+    # Provide a paginated version of {#search_rum_events}, returning all items.
+    #
+    # To use it you need to use a block: search_rum_events_with_pagination { |item| p item }
+    #
+    # @yield [RUMEvent] Paginated items
+    def s
