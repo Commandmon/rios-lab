@@ -1,0 +1,17 @@
+http_interactions:
+- recorded_at: Tue, 12 Apr 2022 10:04:40 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/rum/events?page%5Blimit%5D=2
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"page":{"after":"eyJhZnRlciI6IkFRQUFBWUFkTzNLZnB6Zm5nQUFBQUFCQldVRmtUek5TVjBGQlEyOXBOa3BoY2sxZmRVMW5RVU0ifQ"}},"data":[{"attributes":{"attributes":{"resource":{"first_byte":{"duration":210600000,"start":1500000},"url":"https://example.com/something","status_code":200,"provider":{"domain":"datadoghq.com","type":"first
+        party","name":"unknown"},"id":"bd12c722-d1fd-4af6-888a-fdd255eff318","download":{"duration":300000,"start":212100000},"url_host":"example.com","url_scheme":"https","duration":212400000,"url_path_group":"/something","url_path":"/something","type":"xhr","method":"POST","size":4107},"service":"web-ui","os":{"version":"10.15.7","name":"Mac
+        OS X","version_major":"10"},"_dd":{"trace_id":"4461593448038214218","format_version":2,"span_id":"2615287548010540048"},"application":{"id":"ac8218cf-498b-4d33-bd44-151095959547"},"session":{"ip":"52.17.186.3","has_replay":true,"plan":"replay","useragent":"Mozilla/5.0
+        (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/99.0.4844.84 Safari/537.36","type":
