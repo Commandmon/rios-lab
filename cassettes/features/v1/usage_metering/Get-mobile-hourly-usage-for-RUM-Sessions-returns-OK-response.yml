@@ -1,0 +1,19 @@
+http_interactions:
+- recorded_at: Tue, 10 May 2022 15:31:42 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json;datetime-format=rfc3339
+    method: GET
+    uri: https://api.datadoghq.com/api/v1/usage/rum_sessions?start_hr=2022-05-05T15%3A31%3A42.562Z&end_hr=2022-05-07T15%3A31%3A42.562Z&type=mobile
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"usage":[{"org_name":"DD Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T15:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T16:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T17:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T18:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T19:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T20:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnative":null},{"org_name":"DD
+        Integration Tests (321813)","public_id":"fasjyydbcgwwc2uc","hour":"2022-05-05T21:00:00+00:00","session_count_android":null,"session_count":null,"session_count_ios":null,"session_count_reactnati
