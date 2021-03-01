@@ -17,10 +17,10 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # User invitations type.
-  class UserInvitationsType
+  # The JSON:API type for this API. Should always be `cloudflare-accounts`.
+  class CloudflareAccountType
     include BaseEnumModel
 
-    USER_INVITATIONS = "user_invitations".freeze
+    CLOUDFLARE_ACCOUNTS = "cloudflare-accounts".freeze
   end
 end
