@@ -86,4 +86,7 @@ jobs:
             });
             await github.rest.issues.addLabels({
               issue_number: pr.number,
-             
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["changelog/no-changelog"],
+            });

@@ -1,0 +1,4601 @@
+
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    APIKeyFilterCreatedAtEndParameter:
+      description: Only include API keys created on or before the specified date.
+      in: query
+      name: filter[created_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterCreatedAtStartParameter:
+      description: Only include API keys created on or after the specified date.
+      in: query
+      name: filter[created_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterModifiedAtEndParameter:
+      description: Only include API keys modified on or before the specified date.
+      in: query
+      name: filter[modified_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterModifiedAtStartParameter:
+      description: Only include API keys modified on or after the specified date.
+      in: query
+      name: filter[modified_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterParameter:
+      description: Filter API keys by the specified string.
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+    APIKeyId:
+      description: The ID of the API key.
+      in: path
+      name: api_key_id
+      required: true
+      schema:
+        type: string
+    APIKeyIncludeParameter:
+      description: Comma separated list of resource paths for related resources to
+        include in the response. Supported resource paths are `created_by` and `modified_by`.
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by,modified_by
+        type: string
+    APIKeysSortParameter:
+      description: 'API key attribute used to sort results. Sort order is ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/APIKeysSort'
+    ApplicationKeyFilterCreatedAtEndParameter:
+      description: Only include application keys created on or before the specified
+        date.
+      in: query
+      name: filter[created_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterCreatedAtStartParameter:
+      description: Only include application keys created on or after the specified
+        date.
+      in: query
+      name: filter[created_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterParameter:
+      description: Filter application keys by the specified string.
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+    ApplicationKeyID:
+      description: The ID of the application key.
+      in: path
+      name: app_key_id
+      required: true
+      schema:
+        type: string
+    ApplicationKeyIncludeParameter:
+      description: Resource path for related resources to include in the response.
+        Only `owned_by` is supported.
+      in: query
+      name: include
+      required: false
+      schema:
+        example: owned_by
+        type: string
+    ApplicationKeysSortParameter:
+      description: 'Application key attribute used to sort results. Sort order is
+        ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/ApplicationKeysSort'
+    ArchiveID:
+      description: The ID of the archive.
+      in: path
+      name: archive_id
+      required: true
+      schema:
+        type: string
+    AuthNMappingID:
+      description: The UUID of the AuthN Mapping.
+      in: path
+      name: authn_mapping_id
+      required: true
+      schema:
+        type: string
+    CloudWorkloadSecurityAgentRuleID:
+      description: The ID of the Agent rule.
+      example: 3b5-v82-ns6
+      in: path
+      name: agent_rule_id
+      required: true
+      schema:
+        type: string
+    ConfluentAccountID:
+      description: Confluent Account id.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
+    ConfluentResourceID:
+      description: Confluent Account Resource ID.
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        type: string
+    FastlyAccountID:
+      description: Fastly Account id.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
+    FastlyServiceID:
+      description: Fastly Service ID.
+      in: path
+      name: service_id
+      required: true
+      schema:
+        type: string
+    IncidentAttachmentFilterQueryParameter:
+      description: Specifies which types of attachments are included in the response.
+      explode: false
+      in: query
+      name: filter[attachment_type]
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentAttachmentAttachmentType'
+        type: array
+    IncidentAttachmentIncludeQueryParameter:
+      description: Specifies which types of related objects are included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentAttachmentRelatedObject'
+        type: array
+    IncidentIDPathParameter:
+      description: The UUID of the incident.
+      in: path
+      name: incident_id
+      required: true
+      schema:
+        type: string
+    IncidentIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentRelatedObject'
+        type: array
+    IncidentIntegrationMetadataIDPathParameter:
+      description: The UUID of the incident integration metadata.
+      in: path
+      name: integration_metadata_id
+      required: true
+      schema:
+        type: string
+    IncidentSearchIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentRelatedObject'
+    IncidentSearchQueryQueryParameter:
+      description: 'Specifies which incidents should be returned. After entering a
+        search query in your [Incidents page][1],
+
+        use the query parameter value in the URL of the page as the value for this
+        parameter.
+
+
+        The query can contain any number of incident facets joined by `ANDs`, along
+        with multiple values for each of
+
+        those facets joined by `OR`s, for instance: `query="state:active AND severity:(SEV-2
+        OR SEV-1)"`.
+
+
+        [1]: https://app.datadoghq.com/incidents'
+      explode: false
+      in: query
+      name: query
+      required: true
+      schema:
+        type: string
+    IncidentSearchSortQueryParameter:
+      description: Specifies the order of returned incidents.
+      explode: false
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentSearchSortOrder'
+    IncidentServiceIDPathParameter:
+      description: The ID of the incident service.
+      in: path
+      name: service_id
+      required: true
+      schema:
+        type: string
+    IncidentServiceIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentRelatedObject'
+    IncidentServiceSearchQueryParameter:
+      description: A search query that filters services by name.
+      in: query
+      name: filter
+      required: false
+      schema:
+        example: ExampleServiceName
+        type: string
+    IncidentTeamIDPathParameter:
+      description: The ID of the incident team.
+      in: path
+      name: team_id
+      required: true
+      schema:
+        type: string
+    IncidentTeamIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentRelatedObject'
+    IncidentTeamSearchQueryParameter:
+      description: A search query that filters teams by name.
+      in: query
+      name: filter
+      required: false
+      schema:
+        example: ExampleTeamName
+        type: string
+    IncidentTodoIDPathParameter:
+      description: The UUID of the incident todo.
+      in: path
+      name: todo_id
+      required: true
+      schema:
+        type: string
+    MetricID:
+      description: The name of the log-based metric.
+      in: path
+      name: metric_id
+      required: true
+      schema:
+        type: string
+    MetricName:
+      description: The name of the metric.
+      example: dist.http.endpoint.request
+      in: path
+      name: metric_name
+      required: true
+      schema:
+        type: string
+    OpsgenieServiceIDPathParameter:
+      description: The UUID of the service.
+      in: path
+      name: integration_service_id
+      required: true
+      schema:
+        type: string
+    PageNumber:
+      description: Specific page number to return.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 0
+        example: 0
+        format: int64
+        type: integer
+    PageOffset:
+      description: Specific offset to use as the beginning of the returned page.
+      in: query
+      name: page[offset]
+      required: false
+      schema:
+        default: 0
+        example: 0
+        format: int64
+        type: integer
+    PageSize:
+      description: Size for a given page. The maximum allowed value is 5000.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 10
+        example: 10
+        format: int64
+        type: integer
+    ResourceID:
+      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
+        `dashboard`, `notebook`, `security-rule`, `slo`.'
+      example: dashboard:abc-def-ghi
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        type: string
+    RoleID:
+      description: The unique identifier of the role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        type: string
+    SecurityFilterID:
+      description: The ID of the security filter.
+      in: path
+      name: security_filter_id
+      required: true
+      schema:
+        type: string
+    SecurityMonitoringRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerGroupID:
+      description: The ID of a group of rules.
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
+    ServiceAccountID:
+      description: The ID of the service account.
+      in: path
+      name: service_account_id
+      required: true
+      schema:
+        example: 00000000-0000-1234-0000-000000000000
+        type: string
+    ServiceName:
+      description: The name of the service.
+      in: path
+      name: service_name
+      required: true
+      schema:
+        example: my-service
+        type: string
+    SignalID:
+      description: The ID of the signal.
+      in: path
+      name: signal_id
+      required: true
+      schema:
+        type: string
+    UserID:
+      description: The ID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        example: 00000000-0000-9999-0000-000000000000
+        type: string
+  requestBodies: {}
+  responses:
+    BadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Bad Request
+    ConcurrentModificationResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Concurrent Modification
+    ConflictResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Conflict
+    ForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Forbidden
+    NotAuthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Not Authorized
+    NotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Not Found
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Too many requests
+    UnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Unauthorized
+  schemas:
+    APIErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: A list of errors.
+          items:
+            description: A list of items.
+            example: Bad Request
+            type: string
+          type: array
+      required:
+      - errors
+      type: object
+    APIKeyCreateAttributes:
+      description: Attributes used to create an API Key.
+      properties:
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    APIKeyCreateData:
+      description: Object used to create an API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/APIKeyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      required:
+      - attributes
+      - type
+      type: object
+    APIKeyCreateRequest:
+      description: Request used to create an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/APIKeyCreateData'
+      required:
+      - data
+      type: object
+    APIKeyRelationships:
+      description: Resources related to the API key.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+        modified_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    APIKeyResponse:
+      description: Response for retrieving an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullAPIKey'
+        included:
+          description: Array of objects related to the API key.
+          items:
+            $ref: '#/components/schemas/APIKeyResponseIncludedItem'
+          type: array
+      type: object
+    APIKeyResponseIncludedItem:
+      description: An object related to an API key.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    APIKeyUpdateAttributes:
+      description: Attributes used to update an API Key.
+      properties:
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    APIKeyUpdateData:
+      description: Object used to update an API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/APIKeyUpdateAttributes'
+        id:
+          description: ID of the API key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
+          type: string
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    APIKeyUpdateRequest:
+      description: Request used to update an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/APIKeyUpdateData'
+      required:
+      - data
+      type: object
+    APIKeysResponse:
+      description: Response for a list of API keys.
+      properties:
+        data:
+          description: Array of API keys.
+          items:
+            $ref: '#/components/schemas/PartialAPIKey'
+          type: array
+        included:
+          description: Array of objects related to the API key.
+          items:
+            $ref: '#/components/schemas/APIKeyResponseIncludedItem'
+          type: array
+      type: object
+    APIKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - modified_at
+      - -modified_at
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - MODIFIED_AT_ASCENDING
+      - MODIFIED_AT_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+    APIKeysType:
+      default: api_keys
+      description: API Keys resource type.
+      enum:
+      - api_keys
+      example: api_keys
+      type: string
+      x-enum-varnames:
+      - API_KEYS
+    ApplicationKeyCreateAttributes:
+      description: Attributes used to create an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for managing dashboards
+          type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
+      required:
+      - name
+      type: object
+    ApplicationKeyCreateData:
+      description: Object used to create an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationKeyCreateRequest:
+      description: Request used to create an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyCreateData'
+      required:
+      - data
+      type: object
+    ApplicationKeyRelationships:
+      description: Resources related to the application key.
+      properties:
+        owned_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    ApplicationKeyResponse:
+      description: Response for retrieving an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullApplicationKey'
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
+      type: object
+    ApplicationKeyResponseIncludedItem:
+      description: An object related to an application key.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Role'
+      type: object
+    ApplicationKeyUpdateAttributes:
+      description: Attributes used to update an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for managing dashboards
+          type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ApplicationKeyUpdateData:
+      description: Object used to update an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyUpdateAttributes'
+        id:
+          description: ID of the application key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    ApplicationKeyUpdateRequest:
+      description: Request used to update an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+    ApplicationKeysType:
+      default: application_keys
+      description: Application Keys resource type.
+      enum:
+      - application_keys
+      example: application_keys
+      type: string
+      x-enum-varnames:
+      - APPLICATION_KEYS
+    AuditLogsEvent:
+      description: Object description of an Audit Logs event after it is processed
+        and stored by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuditLogsEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/AuditLogsEventType'
+      type: object
+    AuditLogsEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from Audit Logs events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        service:
+          description: 'Name of the application or service generating Audit Logs events.
+
+            This name is used to correlate Audit Logs to APM, so make sure you specify
+            the same
+
+            value when you use both products.'
+          example: web-app
+          type: string
+        tags:
+          description: Array of tags associated with your event.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your event.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp of your event.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    AuditLogsEventType:
+      default: audit
+      description: Type of the event.
+      enum:
+      - audit
+      example: audit
+      type: string
+      x-enum-varnames:
+      - Audit
+    AuditLogsEventsResponse:
+      description: Response object with all events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/AuditLogsEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/AuditLogsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/AuditLogsResponseMetadata'
+      type: object
+    AuditLogsQueryFilter:
+      description: Search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: Minimum time for the requested events. Supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: Search query following the Audit Logs search syntax.
+          example: '@type:session AND @session.type:user'
+          type: string
+        to:
+          default: now
+          description: Maximum time for the requested events. Supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    AuditLogsQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Note: Specify either timezone or time offset, not both. Otherwise, the query
+        fails.'
+      properties:
+        time_offset:
+          description: Time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
+          example: GMT
+          type: string
+      type: object
+    AuditLogsQueryPageOptions:
+      description: Paging attributes for listing events.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    AuditLogsResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    AuditLogsResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: Time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/AuditLogsResponsePage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/AuditLogsResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/AuditLogsWarning'
+          type: array
+      type: object
+    AuditLogsResponsePage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of `page[cursor]`.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    AuditLogsResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    AuditLogsSearchEventsRequest:
+      description: The request for a Audit Logs events list.
+      properties:
+        filter:
+          $ref: '#/components/schemas/AuditLogsQueryFilter'
+        options:
+          $ref: '#/components/schemas/AuditLogsQueryOptions'
+        page:
+          $ref: '#/components/schemas/AuditLogsQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/AuditLogsSort'
+      type: object
+    AuditLogsSort:
+      description: Sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    AuditLogsWarning:
+      description: Warning message indicating something that went wrong with the query.
+      properties:
+        code:
+          description: Unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: Detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: Short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
+    AuthNMapping:
+      description: The AuthN Mapping object returned by API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingAttributes:
+      description: Attributes of AuthN Mapping.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+        created_at:
+          description: Creation time of the AuthN Mapping.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last AuthN Mapping modification.
+          format: date-time
+          readOnly: true
+          type: string
+        saml_assertion_attribute_id:
+          description: The ID of the SAML assertion attribute.
+          example: '0'
+          type: string
+      type: object
+    AuthNMappingCreateAttributes:
+      description: Key/Value pair of attributes used for create request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingCreateData:
+      description: Data for creating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingCreateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - type
+      type: object
+    AuthNMappingCreateRelationships:
+      description: Relationship of AuthN Mapping create object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingCreateRequest:
+      description: Request for creating an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingCreateData'
+      required:
+      - data
+      type: object
+    AuthNMappingIncluded:
+      description: Included data in the AuthN Mapping response.
+      oneOf:
+      - $ref: '#/components/schemas/SAMLAssertionAttribute'
+      - $ref: '#/components/schemas/Role'
+      properties: {}
+      type: object
+    AuthNMappingRelationships:
+      description: All relationships associated with AuthN Mapping.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+        saml_assertion_attribute:
+          $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+      type: object
+    AuthNMappingResponse:
+      description: AuthN Mapping response from the API.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMapping'
+        included:
+          description: Included data in the AuthN Mapping response.
+          items:
+            $ref: '#/components/schemas/AuthNMappingIncluded'
+          type: array
+      type: object
+    AuthNMappingUpdateAttributes:
+      description: Key/Value pair of attributes used for update request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingUpdateData:
+      description: Data for updating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingUpdateAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingUpdateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingUpdateRelationships:
+      description: Relationship of AuthN Mapping update object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingUpdateRequest:
+      description: Request to update an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingUpdateData'
+      required:
+      - data
+      type: object
+    AuthNMappingsResponse:
+      description: Array of AuthN Mappings response.
+      properties:
+        data:
+          description: Array of returned AuthN Mappings.
+          items:
+            $ref: '#/components/schemas/AuthNMapping'
+          type: array
+        included:
+          description: Included data in the AuthN Mapping response.
+          items:
+            $ref: '#/components/schemas/AuthNMappingIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    AuthNMappingsSort:
+      description: Sorting options for AuthN Mappings.
+      enum:
+      - created_at
+      - -created_at
+      - role_id
+      - -role_id
+      - saml_assertion_attribute_id
+      - -saml_assertion_attribute_id
+      - role.name
+      - -role.name
+      - saml_assertion_attribute.attribute_key
+      - -saml_assertion_attribute.attribute_key
+      - saml_assertion_attribute.attribute_value
+      - -saml_assertion_attribute.attribute_value
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - ROLE_ID_ASCENDING
+      - ROLE_ID_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_DESCENDING
+      - ROLE_NAME_ASCENDING
+      - ROLE_NAME_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING
+    AuthNMappingsType:
+      default: authn_mappings
+      description: AuthN Mappings resource type.
+      enum:
+      - authn_mappings
+      example: authn_mappings
+      type: string
+      x-enum-varnames:
+      - AUTHN_MAPPINGS
+    CIAppAggregateBucketValue:
+      description: A bucket value, can either be a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueTimeseries'
+    CIAppAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    CIAppAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    CIAppAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/CIAppAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    CIAppAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2020-06-08T11:55:00.123Z'
+          format: date-time
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    CIAppAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/CIAppAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/CIAppSortOrder'
+        type:
+          $ref: '#/components/schemas/CIAppAggregateSortType'
+      type: object
+    CIAppAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    CIAppAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - median
+      - latest
+      - earliest
+      - most_frequent
+      - delta
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - MEDIAN
+      - LATEST
+      - EARLIEST
+      - MOST_FREQUENT
+      - DELTA
+    CIAppCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/CIAppAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppComputeType'
+      required:
+      - aggregation
+      type: object
+    CIAppComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
+    CIAppComputes:
+      additionalProperties:
+        $ref: '#/components/schemas/CIAppAggregateBucketValue'
+      description: A map of the metric name to value for regular compute, or a list
+        of values for a timeseries.
+      type: object
+    CIAppEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from CI Visibility events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        service:
+          description: 'The name of the application or service generating CI Visibility
+            events.
+
+            It is used to switch from CI Visibility to APM, so make sure you define
+            the same
+
+            value when you use both products.'
+          example: web-ui-tests
+          type: string
+        tags:
+          $ref: '#/components/schemas/TagsEventAttribute'
+        timestamp:
+          $ref: '#/components/schemas/TimestampEventAttribute'
+      type: object
+    CIAppGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        At most, 100 buckets are allowed, the number of buckets is `(max - min)/interval`.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    CIAppGroupByMissing:
+      description: The value to use for logs that don't have the facet used to group-by.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppGroupByMissingString'
+      - $ref: '#/components/schemas/CIAppGroupByMissingNumber'
+    CIAppGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    CIAppGroupByMissingString:
+      description: The missing value to use if there is a string valued facet.
+      type: string
+    CIAppGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppGroupByTotalBoolean'
+      - $ref: '#/components/schemas/CIAppGroupByTotalString'
+      - $ref: '#/components/schemas/CIAppGroupByTotalNumber'
+    CIAppGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    CIAppGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    CIAppGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
+    CIAppPipelineEvent:
+      description: Object description of a pipeline event after being processed and
+        stored by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppPipelineEventTypeName'
+      type: object
+    CIAppPipelineEventTypeName:
+      description: Type of the event.
+      enum:
+      - cipipeline
+      example: cipipeline
+      type: string
+      x-enum-varnames:
+      - cipipeline
+    CIAppPipelineEventsRequest:
+      description: The request for a pipelines search.
+      properties:
+        filter:
+          $ref: '#/components/schemas/CIAppPipelinesQueryFilter'
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/CIAppSort'
+      type: object
+    CIAppPipelineEventsResponse:
+      description: Response object with all pipeline events matching the request and
+        pagination information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/CIAppPipelineEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
+      type: object
+    CIAppPipelinesAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of pipeline events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/CIAppCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/CIAppPipelinesQueryFilter'
+        group_by:
+          description: The rules for the group-by.
+          items:
+            $ref: '#/components/schemas/CIAppPipelinesGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+      type: object
+    CIAppPipelinesAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/CIAppPipelinesBucketResponse'
+          type: array
+      type: object
+    CIAppPipelinesAnalyticsAggregateResponse:
+      description: The response object for the pipeline events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppPipelinesAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppPipelinesBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+          description: The key-value pairs for each group-by.
+          example:
+            '@ci.provider.name': gitlab
+            '@ci.status': success
+          type: object
+        computes:
+          $ref: '#/components/schemas/CIAppComputes'
+      type: object
+    CIAppPipelinesGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@ci.status'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/CIAppGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/CIAppGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/CIAppAggregateSort'
+        total:
+          $ref: '#/components/schemas/CIAppGroupByTotal'
+      required:
+      - facet
+      type: object
+    CIAppPipelinesQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the Log search syntax.
+          example: '@ci.provider.name:github AND @ci.status:error'
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events, supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    CIAppQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Only supply timezone or time offset, not both. Otherwise, the query fails.'
+      properties:
+        time_offset:
+          description: The time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
+          example: GMT
+          type: string
+      type: object
+    CIAppQueryPageOptions:
+      description: Paging attributes for listing events.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    CIAppResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. The request can also be
+            made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/ci/tests/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    CIAppResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/CIAppWarning'
+          type: array
+      type: object
+    CIAppResponseMetadataWithPagination:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/CIAppResponsePage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/CIAppWarning'
+          type: array
+      type: object
+    CIAppResponsePage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of `page[cursor]`.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    CIAppResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    CIAppSort:
+      description: Sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    CIAppSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
+    CIAppTestEvent:
+      description: Object description of test event after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppTestEventTypeName'
+      type: object
+    CIAppTestEventTypeName:
+      description: Type of the event.
+      enum:
+      - citest
+      example: citest
+      type: string
+      x-enum-varnames:
+      - citest
+    CIAppTestEventsRequest:
+      description: The request for a tests search.
+      properties:
+        filter:
+          $ref: '#/components/schemas/CIAppTestsQueryFilter'
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/CIAppSort'
+      type: object
+    CIAppTestEventsResponse:
+      description: Response object with all test events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/CIAppTestEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
+      type: object
+    CIAppTestsAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of test events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/CIAppCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/CIAppTestsQueryFilter'
+        group_by:
+          description: The rules for the group-by.
+          items:
+            $ref: '#/components/schemas/CIAppTestsGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+      type: object
+    CIAppTestsAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/CIAppTestsBucketResponse'
+          type: array
+      type: object
+    CIAppTestsAnalyticsAggregateResponse:
+      description: The response object for the test events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppTestsAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppTestsBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+          description: The key-value pairs for each group-by.
+          example:
+            '@test.service': web-ui-tests
+            '@test.status': skip
+          type: object
+        computes:
+          $ref: '#/components/schemas/CIAppComputes'
+      type: object
+    CIAppTestsGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@test.service'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/CIAppGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/CIAppGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/CIAppAggregateSort'
+        total:
+          $ref: '#/components/schemas/CIAppGroupByTotal'
+      required:
+      - facet
+      type: object
+    CIAppTestsQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the Log search syntax.
+          example: '@test.service:web-ui-tests AND @test.status:fail'
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events, supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    CIAppWarning:
+      description: A warning message indicating something that went wrong with the
+        query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
+    ChargebackBreakdown:
+      description: Charges breakdown.
+      properties:
+        charge_type:
+          description: The type of charge for a particular product.
+          example: on_demand
+          type: string
+        cost:
+          description: The cost for a particular product and charge type during a
+            given month.
+          format: double
+          type: number
+        product_name:
+          description: The product for which cost is being reported.
+          example: infra_host
+          type: string
+      type: object
+    CloudConfigurationComplianceRuleOptions:
+      description: 'Options for cloud_configuration rules.
+
+        Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
+        rules.
+
+        '
+      properties:
+        complexRule:
+          description: 'Whether the rule is a complex one.
+
+            Must be set to true if `regoRule.resourceTypes` contains more than one
+            item. Defaults to false.
+
+            '
+          type: boolean
+        regoRule:
+          $ref: '#/components/schemas/CloudConfigurationRegoRule'
+        resourceType:
+          description: 'Main resource type to be checked by the rule. It should be
+            specified again in `regoRule.resourceTypes`.
+
+            '
+          example: aws_acm
+          type: string
+      type: object
+    CloudConfigurationRegoRule:
+      description: Rule details.
+      properties:
+        policy:
+          description: 'The policy written in `rego`, see: https://www.openpolicyagent.org/docs/latest/policy-language/'
+          example: "package datadog\n\nimport data.datadog.output as dd_output\nimport
+            future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource)
+            = \"skip\" if {\n  # Logic that evaluates to true if the resource should
+            be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true
+            if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that
+            evaluates to true if the resource is not compliant\n  true\n}\n\n# This
+            part remains unchanged for all rules\nresults contains result if {\n  some
+            resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource,
+            eval(resource))\n}\n"
+          type: string
+        resourceTypes:
+          description: List of resource types that will be evaluated upon. Must have
+            at least one element.
+          example:
+          - gcp_iam_service_account
+          - gcp_iam_policy
+          items:
+            type: string
+          type: array
+      required:
+      - policy
+      - resourceTypes
+      type: object
+    CloudConfigurationRuleCaseCreate:
+      description: Description of signals.
+      properties:
+        notifications:
+          description: Notification targets for each rule case.
+          items:
+            description: Notification.
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - status
+      type: object
+    CloudConfigurationRuleComplianceSignalOptions:
+      description: How to generate compliance signals. Useful for cloud_configuration
+        rules only.
+      properties:
+        userActivationStatus:
+          description: Whether signals will be sent.
+          type: boolean
+        userGroupByFields:
+          description: Fields to use to group findings by when sending signals.
+          items:
+            type: string
+          type: array
+      type: object
+    CloudConfigurationRuleCreatePayload:
+      description: Create a new cloud configuration rule.
+      properties:
+        cases:
+          description: 'Description of generated findings and signals (severity and
+            channels to be notified in case of a signal). Must contain exactly one
+            item.
+
+            '
+          items:
+            $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
+          type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message in markdown format for generated findings and signals.
+          example: '#Description
+
+            Explanation of the rule.
+
+
+            #Remediation
+
+            How to fix the security issue.
+
+            '
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/CloudConfigurationRuleOptions'
+        tags:
+          description: Tags for generated findings and signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CloudConfigurationRuleType'
+      required:
+      - name
+      - isEnabled
+      - options
+      - complianceSignalOptions
+      - cases
+      - message
+      type: object
+    CloudConfigurationRuleOptions:
+      description: Options on cloud configuration rules.
+      properties:
+        complianceRuleOptions:
+          $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
+      required:
+      - complianceRuleOptions
+      type: object
+    CloudConfigurationRuleType:
+      description: The rule type.
+      enum:
+      - cloud_configuration
+      type: string
+      x-enum-varnames:
+      - CLOUD_CONFIGURATION
+    CloudWorkloadSecurityAgentRuleAttributes:
+      description: A Cloud Workload Security Agent rule returned by the API.
+      properties:
+        category:
+          description: The category of the Agent rule.
+          example: Process Activity
+          type: string
+        creationDate:
+          description: When the Agent rule was created, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreatorAttributes'
+        defaultRule:
+          description: Whether the rule is included by default.
+          example: false
+          type: boolean
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+        updatedAt:
+          description: When the Agent rule was last updated, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdaterAttributes'
+        version:
+          description: The version of the Agent rule.
+          example: 23
+          format: int64
+          type: integer
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateAttributes:
+      description: Create a new Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+      required:
+      - name
+      - expression
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateRequest:
+      description: Request object that includes the Agent rule to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleCreatorAttributes:
+      description: The attributes of the user who created the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+        id:
+          description: The ID of the Agent rule.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      type: object
+    CloudWorkloadSecurityAgentRuleResponse:
+      description: Response object that includes an Agent rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+      type: object
+    CloudWorkloadSecurityAgentRuleType:
+      default: agent_rule
+      description: The type of the resource. The value should always be `agent_rule`.
+      enum:
+      - agent_rule
+      example: agent_rule
+      type: string
+      x-enum-varnames:
+      - AGENT_RULE
+    CloudWorkloadSecurityAgentRuleUpdateAttributes:
+      description: Update an existing Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateRequest:
+      description: Request object that includes the Agent rule with the attributes
+        to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdaterAttributes:
+      description: The attributes of the user who last updated the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRulesListResponse:
+      description: Response object that includes a list of Agent rule.
+      properties:
+        data:
+          description: A list of Agent rules objects.
+          items:
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+          type: array
+      type: object
+    CloudflareAccountCreateRequest:
+      description: Payload schema when adding a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountCreateRequestAttributes:
+      description: Attributes object for creating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key (or token) for the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - api_key
+      - name
+      type: object
+    CloudflareAccountCreateRequestData:
+      description: Data object for creating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudflareAccountResponse:
+      description: The expected response schema when getting a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountResponseData'
+      type: object
+    CloudflareAccountResponseAttributes:
+      description: Attributes object of a Cloudflare account.
+      properties:
+        email:
+          description: The email associated with the Cloudflare account.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - name
+      type: object
+    CloudflareAccountResponseData:
+      description: Data object of a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountResponseAttributes'
+        id:
+          description: The ID of the Cloudflare account, a hash of the account name.
+          example: c1a8e059bfd1e911cf10b626340c9a54
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    CloudflareAccountType:
+      default: cloudflare-accounts
+      description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
+      enum:
+      - cloudflare-accounts
+      example: cloudflare-accounts
+      type: string
+      x-enum-varnames:
+      - CLOUDFLARE_ACCOUNTS
+    CloudflareAccountUpdateRequest:
+      description: Payload schema when updating a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key of the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+      required:
+      - api_key
+      type: object
+    CloudflareAccountUpdateRequestData:
+      description: Data object for updating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      type: object
+    CloudflareAccountsResponse:
+      description: The expected response schema when getting Cloudflare accounts.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/CloudflareAccountResponseData'
+          type: array
+      type: object
+    ConfluentAccountCreateRequest:
+      description: Payload schema when adding a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    ConfluentAccountCreateRequestAttributes:
+      description: Attributes associated with the account creation request.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        api_secret:
+          description: The API secret associated with your Confluent account.
+          example: test-api-secret-123
+          type: string
+        resources:
+          description: A list of Confluent resources associated with the Confluent
+            account.
+          items:
+            $ref: '#/components/schemas/ConfluentAccountResourceAttributes'
+          type: array
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      - api_secret
+      type: object
+    ConfluentAccountCreateRequestData:
+      description: The data body for adding a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    ConfluentAccountResourceAttributes:
+      description: Attributes object for updating a Confluent resource.
+      properties:
+        id:
+          description: The ID associated with a Confluent resource.
+          example: resource-id-123
+          type: string
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    ConfluentAccountResponse:
+      description: The expected response schema when getting a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountResponseData'
+      type: object
+    ConfluentAccountResponseAttributes:
+      description: The attributes of a Confluent account.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        resources:
+          description: A list of Confluent resources associated with the Confluent
+            account.
+          items:
+            $ref: '#/components/schemas/ConfluentResourceResponseAttributes'
+          type: array
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      type: object
+    ConfluentAccountResponseData:
+      description: An API key and API secret pair that represents a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountResponseAttributes'
+        id:
+          description: A randomly generated ID associated with a Confluent account.
+          example: account_id_abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    ConfluentAccountType:
+      default: confluent-cloud-accounts
+      description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
+      enum:
+      - confluent-cloud-accounts
+      example: confluent-cloud-accounts
+      type: string
+      x-enum-varnames:
+      - CONFLUENT_CLOUD_ACCOUNTS
+    ConfluentAccountUpdateRequest:
+      description: The JSON:API request for updating a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    ConfluentAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Confluent account.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        api_secret:
+          description: The API secret associated with your Confluent account.
+          example: test-api-secret-123
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      - api_secret
+      type: object
+    ConfluentAccountUpdateRequestData:
+      description: Data object for updating a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    ConfluentAccountsResponse:
+      description: Confluent account returned by the API.
+      properties:
+        data:
+          description: The Confluent account.
+          items:
+            $ref: '#/components/schemas/ConfluentAccountResponseData'
+          type: array
+      type: object
+    ConfluentResourceRequest:
+      description: The JSON:API request for updating a Confluent resource.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentResourceRequestData'
+      required:
+      - data
+      type: object
+    ConfluentResourceRequestAttributes:
+      description: Attributes object for updating a Confluent resource.
+      properties:
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    ConfluentResourceRequestData:
+      description: JSON:API request for updating a Confluent resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentResourceRequestAttributes'
+        id:
+          description: The ID associated with a Confluent resource.
+          example: resource-id-123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentResourceType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ConfluentResourceResponse:
+      description: Response schema when interacting with a Confluent resource.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentResourceResponseData'
+      type: object
+    ConfluentResourceResponseAttributes:
+      description: Model representation of a Confluent Cloud resource.
+      properties:
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - resource_type
+      type: object
+    ConfluentResourceResponseData:
+      description: Confluent Cloud resource data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentResourceResponseAttributes'
+        id:
+          description: The ID associated with the Confluent resource.
+          example: resource_id_abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentResourceType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ConfluentResourceType:
+      default: confluent-cloud-resources
+      description: The JSON:API type for this request.
+      enum:
+      - confluent-cloud-resources
+      example: confluent-cloud-resources
+      type: string
+      x-enum-varnames:
+      - CONFLUENT_CLOUD_RESOURCES
+    ConfluentResourcesResponse:
+      description: Response schema when interacting with a list of Confluent resources.
+      properties:
+        data:
+          description: The JSON:API data attribute.
+          items:
+            $ref: '#/components/schemas/ConfluentResourceResponseData'
+          type: array
+      type: object
+    ContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - identity
+      - gzip
+      - deflate
+      type: string
+      x-enum-varnames:
+      - IDENTITY
+      - GZIP
+      - DEFLATE
+    CostByOrg:
+      description: Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CostByOrgAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/CostByOrgType'
+      type: object
+    CostByOrgAttributes:
+      description: Cost attributes data.
+      properties:
+        charges:
+          description: List of charges data reported for the requested month.
+          items:
+            $ref: '#/components/schemas/ChargebackBreakdown'
+          type: array
+        date:
+          description: The month requested.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+        total_cost:
+          description: The total cost of products for the month.
+          format: double
+          type: number
+      type: object
+    CostByOrgResponse:
+      description: Chargeback Summary response.
+      properties:
+        data:
+          description: Response containing Chargeback Summary.
+          items:
+            $ref: '#/components/schemas/CostByOrg'
+          type: array
+      type: object
+    CostByOrgType:
+      default: cost_by_org
+      description: Type of cost data.
+      enum:
+      - cost_by_org
+      example: cost_by_org
+      type: string
+      x-enum-varnames:
+      - COST_BY_ORG
+    Creator:
+      description: Creator of the object.
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        handle:
+          description: Handle of the creator.
+          type: string
+        name:
+          description: Name of the creator.
+          type: string
+      type: object
+    DashboardListAddItemsRequest:
+      description: Request containing a list of dashboards to add.
+      properties:
+        dashboards:
+          description: List of dashboards to add the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
+    DashboardListAddItemsResponse:
+      description: Response containing a list of added dashboards.
+      properties:
+        added_dashboards_to_list:
+          description: List of dashboards added to the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
+      type: object
+    DashboardListDeleteItemsRequest:
+      description: Request containing a list of dashboards to delete.
+      properties:
+        dashboards:
+          description: List of dashboards to delete from the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
+    DashboardListDeleteItemsResponse:
+      description: Response containing a list of deleted dashboards.
+      properties:
+        deleted_dashboards_from_list:
+          description: List of dashboards deleted from the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
+      type: object
+    DashboardListItem:
+      description: A dashboard within a list.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+        created:
+          description: Date of creation of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        icon:
+          description: URL to the icon of the dashboard.
+          readOnly: true
+          type: string
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          type: string
+        is_favorite:
+          description: Whether or not the dashboard is in the favorites.
+          readOnly: true
+          type: boolean
+        is_read_only:
+          description: Whether or not the dashboard is read only.
+          readOnly: true
+          type: boolean
+        is_shared:
+          description: Whether the dashboard is publicly shared or not.
+          readOnly: true
+          type: boolean
+        modified:
+          description: Date of last edition of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        popularity:
+          description: Popularity of the dashboard.
+          format: int32
+          maximum: 5
+          readOnly: true
+          type: integer
+        title:
+          description: Title of the dashboard.
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+        url:
+          description: URL path to the dashboard.
+          readOnly: true
+          type: string
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItemRequest:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItemResponse:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItems:
+      description: Dashboards within a list.
+      properties:
+        dashboards:
+          description: List of dashboards in the dashboard list.
+          example: []
+          items:
+            $ref: '#/components/schemas/DashboardListItem'
+          type: array
+        total:
+          description: Number of dashboards in the dashboard list.
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - dashboards
+      type: object
+    DashboardListUpdateItemsRequest:
+      description: Request containing the list of dashboards to update to.
+      properties:
+        dashboards:
+          description: List of dashboards to update the dashboard list to.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
+    DashboardListUpdateItemsResponse:
+      description: Response containing a list of updated dashboards.
+      properties:
+        dashboards:
+          description: List of dashboards in the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
+      type: object
+    DashboardType:
+      description: The type of the dashboard.
+      enum:
+      - custom_timeboard
+      - custom_screenboard
+      - integration_screenboard
+      - integration_timeboard
+      - host_timeboard
+      example: host_timeboard
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMEBOARD
+      - CUSTOM_SCREENBOARD
+      - INTEGRATION_SCREENBOARD
+      - INTEGRATION_TIMEBOARD
+      - HOST_TIMEBOARD
+    DataScalarColumn:
+      description: A column containing the numerical results for a formula or query.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ScalarMeta'
+        name:
+          description: The name referencing the formula or query for this column.
+          example: a
+          type: string
+        type:
+          description: The type of column present.
+          example: number
+          type: string
+        values:
+          description: The array of numerical values for one formula or query.
+          example:
+          - 0.5
+          items:
+            description: An individual value for a given column and group-by.
+            example: 0.5
+            format: double
+            type: number
+          type: array
+      type: object
+    Event:
+      description: The metadata associated with a request.
+      properties:
+        id:
+          description: Event ID.
+          example: '6509751066204996294'
+          type: string
+        name:
+          description: The event name.
+          type: string
+        source_id:
+          description: Event source ID.
+          example: 36
+          format: int64
+          type: integer
+        type:
+          description: Event type.
+          example: error_tracking_alert
+          type: string
+      type: object
+    EventAttributes:
+      description: Object description of attributes from your event.
+      properties:
+        aggregation_key:
+          description: Aggregation key of the event.
+          type: string
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (no
+            quotation marks).
+
+            Limited to events no older than 18 hours.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        duration:
+          description: The duration between the triggering of the event and its recovery
+            in nanoseconds.
+          format: int64
+          type: integer
+        event_object:
+          description: The event title.
+          example: Did you hear the news today?
+          type: string
+        evt:
+          $ref: '#/components/schemas/Event'
+        hostname:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        monitor:
+          $ref: '#/components/schemas/MonitorType'
+        monitor_groups:
+          description: List of groups referred to in the event.
+          items:
+            description: Group referred to in the event.
+            type: string
+          nullable: true
+          type: array
+        monitor_id:
+          description: ID of the monitor that triggered the event. When an event isn't
+            related to a monitor, this field is empty.
+          format: int64
+          nullable: true
+          type: integer
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: Related event ID.
+          format: int64
+          type: integer
+        service:
+          description: Service that triggered the event.
+          example: datadog-api
+          type: string
+        source_type_name:
+          description: 'The type of event being posted.
+
+            For example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`,
+            `git` or `bitbucket`.
+
+            The list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        sourcecategory:
+          description: Identifier for the source of the event, such as a monitor alert,
+            an externally-submitted event, or an integration.
+          type: string
+        status:
+          $ref: '#/components/schemas/EventStatusType'
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: POSIX timestamp of your event in milliseconds.
+          example: 1652274265000
+          format: int64
+          type: integer
+        title:
+          description: The event title.
+          example: Oh boy!
+          type: string
+      type: object
+    EventPriority:
+      description: The priority of the event's monitor. For example, `normal` or `low`.
+      enum:
+      - normal
+      - low
+      example: normal
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - NORMAL
+      - LOW
+    EventResponse:
+      description: The object description of an event after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventResponseAttributes'
+        id:
+          description: the unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/EventType'
+      type: object
+    EventResponseAttributes:
+      description: The object description of an event response attribute.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        tags:
+          description: An array of tags associated with the event.
+          example:
+          - team:A
+          items:
+            description: The tag associated with the event.
+            type: string
+          type: array
+        timestamp:
+          description: The timestamp of the event.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    EventStatusType:
+      description: 'If an alert event is enabled, its status is one of the following:
+
+        `failure`, `error`, `warning`, `info`, `success`, `user_update`,
+
+        `recommendation`, or `snapshot`.'
+      enum:
+      - failure
+      - error
+      - warning
+      - info
+      - success
+      - user_update
+      - recommendation
+      - snapshot
+      example: info
+      type: string
+      x-enum-varnames:
+      - FAILURE
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+      - USER_UPDATE
+      - RECOMMENDATION
+      - SNAPSHOT
+    EventType:
+      default: event
+      description: Type of the event.
+      enum:
+      - event
+      example: event
+      type: string
+      x-enum-varnames:
+      - EVENT
+    EventsAggregation:
+      default: count
+      description: The type of aggregation that can be performed on events-based queries.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    EventsCompute:
+      description: The instructions for what to compute for this query.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        interval:
+          description: Interval for compute in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: The "measure" attribute on which to perform the computation.
+          type: string
+      required:
+      - aggregation
+      type: object
+    EventsDataSource:
+      default: logs
+      description: A data source that is powered by the Events Platform.
+      enum:
+      - logs
+      - rum
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+    EventsGroupBy:
+      description: A dimension on which to split a query's results.
+      properties:
+        facet:
+          description: The facet by which to split groups.
+          example: '@error.type'
+          type: string
+        limit:
+          description: The maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        sort:
+          $ref: '#/components/schemas/EventsGroupBySort'
+      required:
+      - facet
+      type: object
+    EventsGroupBySort:
+      description: The dimension by which to sort a query's results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        metric:
+          description: Metric whose calculated value should be used to define the
+            sort order of a query's results.
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+        type:
+          $ref: '#/components/schemas/EventsSortType'
+      required:
+      - aggregation
+      type: object
+    EventsListRequest:
+      description: The object sent with the request to retrieve a list of events from
+        your organization.
+      properties:
+        filter:
+          $ref: '#/components/schemas/EventsQueryFilter'
+        options:
+          $ref: '#/components/schemas/EventsQueryOptions'
+        page:
+          $ref: '#/components/schemas/EventsRequestPage'
+        sort:
+          $ref: '#/components/schemas/EventsSort'
+      type: object
+    EventsListResponse:
+      description: The response object with all events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: An array of events matching the request.
+          items:
+            $ref: '#/components/schemas/EventResponse'
+          type: array
+        links:
+          $ref: '#/components/schemas/EventsListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/EventsResponseMetadata'
+      type: object
+    EventsListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    EventsQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events. Supports date math
+            and regular timestamps in milliseconds.
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the event search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events. Supports date math
+            and regular timestamps in milliseconds.
+          example: now
+          type: string
+      type: object
+    EventsQueryGroupBys:
+      description: The list of facets on which to split results.
+      items:
+        $ref: '#/components/schemas/EventsGroupBy'
+      type: array
+    EventsQueryOptions:
+      description: 'The global query options that are used. Either provide a timezone
+        or a time offset but not both,
+
+        otherwise the query fails.'
+      properties:
+        timeOffset:
+          description: The time offset to apply to the query in seconds.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
+          example: GMT
+          type: string
+      type: object
+    EventsRequestPage:
+      description: Pagination settings.
+      properties:
+        cursor:
+          description: The returned paging point to use to get the next results.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of logs in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    EventsResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/EventsResponseMetadataPage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/EventsWarning'
+          type: array
+      type: object
+    EventsResponseMetadataPage:
+      description: Pagination attributes.
+      properties:
+        after:
+          description: 'The cursor to use to get the next results, if any. To make
+            the next request, use the same
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    EventsScalarQuery:
+      description: An individual scalar events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          example:
+          - main
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
+    EventsSearch:
+      description: Configuration of the search/filter for an events query.
+      properties:
+        query:
+          description: The search/filter string for an events query.
+          example: status:warn service:foo
+          type: string
+      type: object
+    EventsSort:
+      description: The sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    EventsSortType:
+      description: The type of sort to use on the calculated value.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    EventsTimeseriesQuery:
+      description: An individual timeseries events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          example:
+          - main
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
+    EventsWarning:
+      description: A warning message indicating something is wrong with the query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid. Results hold data
+            from the other indexes.
+          type: string
+      type: object
+    FastlyAccounResponseAttributes:
+      description: Attributes object of a Fastly account.
+      properties:
+        name:
+          description: The name of the Fastly account.
+          example: test-name
+          type: string
+        services:
+          description: A list of services belonging to the parent account.
+          items:
+            $ref: '#/components/schemas/FastlyService'
+          type: array
+      required:
+      - name
+      type: object
+    FastlyAccountCreateRequest:
+      description: Payload schema when adding a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    FastlyAccountCreateRequestAttributes:
+      description: Attributes object for creating a Fastly account.
+      properties:
+        api_key:
+          description: The API key for the Fastly account.
+          example: ABCDEFG123
+          type: string
+        name:
+          description: The name of the Fastly account.
+          example: test-name
+          type: string
+        services:
+          description: A list of services belonging to the parent account.
+          items:
+            $ref: '#/components/schemas/FastlyService'
+          type: array
+      required:
+      - api_key
+      - name
+      type: object
+    FastlyAccountCreateRequestData:
+      description: Data object for creating a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    FastlyAccountResponse:
+      description: The expected response schema when getting a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountResponseData'
+      type: object
+    FastlyAccountResponseData:
+      description: Data object of a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccounResponseAttributes'
+        id:
+          description: The ID of the Fastly account, a hash of the account name.
+          example: abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    FastlyAccountType:
+      default: fastly-accounts
+      description: The JSON:API type for this API. Should always be `fastly-accounts`.
+      enum:
+      - fastly-accounts
+      example: fastly-accounts
+      type: string
+      x-enum-varnames:
+      - FASTLY_ACCOUNTS
+    FastlyAccountUpdateRequest:
+      description: Payload schema when updating a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    FastlyAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Fastly account.
+      properties:
+        api_key:
+          description: The API key of the Fastly account.
+          example: ABCDEFG123
+          type: string
+      type: object
+    FastlyAccountUpdateRequestData:
+      description: Data object for updating a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      type: object
+    FastlyAccountsResponse:
+      description: The expected response schema when getting Fastly accounts.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/FastlyAccountResponseData'
+          type: array
+      type: object
+    FastlyService:
+      description: The schema representation of a Fastly service.
+      properties:
+        id:
+          description: The id of the Fastly service
+          example: 6abc7de6893AbcDe9fghIj
+          type: string
+        tags:
+          description: A list of tags for the Fastly service.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      type: object
+    FastlyServiceAttributes:
+      description: Attributes object for Fastly service requests.
+      properties:
+        tags:
+          description: A list of tags for the Fastly service.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    FastlyServiceData:
+      description: Data object for Fastly service requests.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyServiceAttributes'
+        id:
+          description: The ID of the Fastly service.
+          example: abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyServiceType'
+      required:
+      - id
+      - type
+      type: object
+    FastlyServiceRequest:
+      description: Payload schema for Fastly service requests.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyServiceData'
+      required:
+      - data
+      type: object
+    FastlyServiceResponse:
+      description: The expected response schema when getting a Fastly service.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyServiceData'
+      type: object
+    FastlyServiceType:
+      default: fastly-services
+      description: The JSON:API type for this API. Should always be `fastly-services`.
+      enum:
+      - fastly-services
+      example: fastly-services
+      type: string
+      x-enum-varnames:
+      - FASTLY_SERVICES
+    FastlyServicesResponse:
+      description: The expected response schema when getting Fastly services.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/FastlyServiceResponse'
+          type: array
+      type: object
+    FormulaLimit:
+      description: Message for specifying limits to the number of values returned
+        by a query.
+      properties:
+        count:
+          description: The number of results to which to limit.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    FullAPIKey:
+      description: Datadog API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullAPIKeyAttributes'
+        id:
+          description: ID of the API key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/APIKeyRelationships'
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      type: object
+    FullAPIKeyAttributes:
+      description: Attributes of a full API key.
+      properties:
+        created_at:
+          description: Creation date of the API key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        key:
+          description: The API key.
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the API key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        modified_at:
+          description: Date the API key was last modified.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      type: object
+    FullApplicationKey:
+      description: Datadog application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullApplicationKeyAttributes'
+        id:
+          description: ID of the application key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ApplicationKeyRelationships'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      type: object
+    FullApplicationKeyAttributes:
+      description: Attributes of a full application key.
+      properties:
+        created_at:
+          description: Creation date of the application key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        key:
+          description: The application key.
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the application key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        name:
+          description: Name of the application key.
+          example: Application Key for managing dashboards
+          type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
+      type: object
+    GroupScalarColumn:
+      description: A column containing the tag keys and values in a group.
+      properties:
+        name:
+          description: The name of the tag key or group.
+          example: env
+          type: string
+        type:
+          description: The type of column present.
+          example: group
+          type: string
+        values:
+          description: The array of tag values for each group found for the results
+            of the formulas or queries.
+          example:
+          - - production
+          - - staging
+          items:
+            description: An individual tag value for a given group column.
+            items:
+              description: One tag value within a values array.
+              example: production
+              type: string
+            type: array
+          type: array
+      type: object
+    GroupTags:
+      description: List of tags that apply to a single response value.
+      items:
+        description: A single tag that applies to a single response value.
+        example: env:production
+        type: string
+      type: array
+    HTTPLog:
+      description: Structured log message.
+      items:
+        $ref: '#/components/schemas/HTTPLogItem'
+      type: array
+    HTTPLogError:
+      description: List of errors.
+      properties:
+        detail:
+          description: Error message.
+          example: Malformed payload
+          type: string
+        status:
+          description: Error code.
+          example: '400'
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    HTTPLogErrors:
+      description: Invalid query performed.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPLogError'
+          type: array
+      type: object
+    HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
+      description: Logs that are sent over HTTP.
+      properties:
+        ddsource:
+          description: 'The integration name associated with your log: the technology
+            from which the log originated.
+
+            When it matches an integration name, Datadog automatically installs the
+            corresponding parsers and facets.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your logs.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+            value when you use both products.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
+          example: payment
+          type: string
+      required:
+      - message
+      type: object
+    HourlyUsage:
+      description: Hourly usage for a product family for an org.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HourlyUsageAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageTimeSeriesType'
+      type: object
+    HourlyUsageAttributes:
+      description: Attributes of hourly usage for a product family for an org for
+        a time period.
+      properties:
+        measurements:
+          description: List of the measured usage values for the product family for
+            the org for the time period.
+          items:
+            $ref: '#/components/schemas/HourlyUsageMeasurement'
+          type: array
+        org_name:
+          description: The organization name.
+          type: string
+        product_family:
+          description: The product for which usage is being reported.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+        timestamp:
+          description: Datetime in ISO-8601 format, UTC. The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    HourlyUsageMeasurement:
+      description: Usage amount for a given usage type.
+      properties:
+        usage_type:
+          description: Type of usage.
+          type: string
+        value:
+          description: Contains the number measured for the given usage_type during
+            the hour.
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    HourlyUsageMetadata:
+      description: The object containing document metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/HourlyUsagePagination'
+      type: object
+    HourlyUsagePagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    HourlyUsageResponse:
+      description: Hourly usage response.
+      properties:
+        data:
+          description: Response containing hourly usage.
+          items:
+            $ref: '#/components/schemas/HourlyUsage'
+          type: array
+        meta:
+          $ref: '#/components/schemas/HourlyUsageMetadata'
+      type: object
+    HourlyUsageType:
+      description: Usage type that is being measured.
+      enum:
+      - app_sec_host_count
+      - observability_pipelines_bytes_processed
+      - lambda_traced_invocations_count
+      example: observability_pipelines_bytes_processed
+      type: string
+      x-enum-varnames:
+      - APP_SEC_HOST_COUNT
+      - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
+      - LAMBDA_TRACED_INVOCATIONS_COUNT
+    IPAllowlistAttributes:
+      description: Attributes of the IP allowlist.
+      properties:
+        enabled:
+          description: Whether the IP allowlist logic is enabled or not.
+          type: boolean
+        entries:
+          description: Array of entries in the IP allowlist.
+          items:
+            $ref: '#/components/schemas/IPAllowlistEntry'
+          type: array
+      type: object
+    IPAllowlistData:
+      description: IP allowlist data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistAttributes'
+        id:
+          description: The unique identifier of the org.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntry:
+      description: IP allowlist entry object.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistEntryData'
+      required:
+      - data
+      type: object
+    IPAllowlistEntryAttributes:
+      description: Attributes of the IP allowlist entry.
+      properties:
+        cidr_block:
+          description: The CIDR block describing the IP range of the entry.
+          type: string
+        created_at:
+          description: Creation time of the entry.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last entry modification.
+          format: date-time
+          readOnly: true
+          type: string
+        note:
+          description: A note describing the IP allowlist entry.
+          type: string
+      type: object
+    IPAllowlistEntryData:
+      description: Data of the IP allowlist entry object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistEntryAttributes'
+        id:
+          description: The unique identifier of the IP allowlist entry.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistEntryType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntryType:
+      default: ip_allowlist_entry
+      description: IP allowlist Entry type.
+      enum:
+      - ip_allowlist_entry
+      example: ip_allowlist_entry
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST_ENTRY
+    IPAllowlistResponse:
+      description: Response containing information about the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      type: object
+    IPAllowlistType:
+      default: ip_allowlist
+      description: IP allowlist type.
+      enum:
+      - ip_allowlist
+      example: ip_allowlist
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST
+    IPAllowlistUpdateRequest:
+      description: Update the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      required:
+      - data
+      type: object
+    IdPMetadataFormData:
+      description: The form data submitted to upload IdP metadata
+      properties:
+        idp_file:
+          description: The IdP metadata XML file
+          format: binary
+          type: string
+          x-mimetype: application/xml
+      type: object
+    IncidentAttachmentAttachmentType:
+      description: The type of the incident attachment attributes.
+      enum:
+      - link
+      - postmortem
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+      - POSTMORTEM
+    IncidentAttachmentAttributes:
+      description: The attributes object for an attachment.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
+      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      type: object
+    IncidentAttachmentData:
+      description: A single incident attachment.
+      example:
+        attributes:
+          attachment:
+            documentUrl: ''
+            title: Postmortem IR-123
+          attachment_type: postmortem
+        id: 00000000-abcd-0002-0000-000000000000
+        relationships:
+          last_modified_by_user:
+            data:
+              id: 00000000-0000-0000-cccc-000000000000
+              type: users
+        type: incident_attachments
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentAttachmentAttributes'
+        id:
+          description: A unique identifier that represents the incident attachment.
+          example: 00000000-abcd-0001-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentAttachmentRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      - id
+      - relationships
+      type: object
+    IncidentAttachmentLinkAttachmentType:
+      default: link
+      description: The type of link attachment attributes.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    IncidentAttachmentLinkAttributes:
+      description: The attributes object for a link attachment.
+      properties:
+        attachment:
+          $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
+        attachment_type:
+          $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
+      required:
+      - attachment_type
+      - attachment
+      type: object
+    IncidentAttachmentLinkAttributesAttachmentObject:
+      description: The link attachment.
+      properties:
+        documentUrl:
+          description: The URL of this link attachment.
+          example: https://www.example.com/webstore-failure-runbook
+          type: string
+        title:
+          description: The title of this link attachment.
+          example: Runbook for webstore service failures
+          type: string
+      required:
+      - documentUrl
+      - title
+      type: object
+    IncidentAttachmentPostmortemAttachmentType:
+      default: postmortem
+      description: The type of postmortem attachment attributes.
+      enum:
+      - postmortem
+      example: postmortem
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+    IncidentAttachmentPostmortemAttributes:
+      description: The attributes object for a postmortem attachment.
+      properties:
+        attachment:
+          $ref: '#/components/schemas/IncidentAttachmentsPostmortemAttributesAttachmentObject'
+        attachment_type:
+          $ref: '#/components/schemas/IncidentAttachmentPostmortemAttachmentType'
+      required:
+      - attachment_type
+      - attachment
+      type: object
+    IncidentAttachmentRelatedObject:
+      description: The object related to an incident attachment.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    IncidentAttachmentRelationships:
+      description: The incident attachment's relationships.
+      properties:
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentAttachmentType:
+      default: incident_attachments
+      description: The incident attachment resource type.
+      enum:
+      - incident_attachments
+      example: incident_attachments
+      type: string
+      x-enum-varnames:
+      - INCIDENT_ATTACHMENTS
+    IncidentAttachmentUpdateAttributes:
+      description: Incident attachment attributes.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
+      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      type: object
+    IncidentAttachmentUpdateData:
+      description: A single incident attachment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentAttachmentUpdateAttributes'
+        id:
+          description: A unique identifier that represents the incident attachment.
+          example: 00000000-abcd-0001-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    IncidentAttachmentUpdateRequest:
+      description: The update request for an incident's attachments.
+      properties:
+        data:
+          description: 'An array of incident attachments. An attachment object without
+            an "id" key indicates that you want to
+
+            create that attachment. An attachment object without an "attributes" key
+            indicates that you want to
+
+            delete that attachment. An attachment object with both the "id" key and
+            a populated "attributes" object
+
+            indicates that you want to update that attachment.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: https://app.datadoghq.com/notebook/123
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            type: incident_attachments
+          - attributes:
+              attachment:
+                documentUrl: https://www.example.com/webstore-failure-runbook
+                title: Runbook for webstore service failures
+              attachment_type: link
+            type: incident_attachments
+          - id: 00000000-abcd-0003-0000-000000000000
+            type: incident_attachments
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentUpdateData'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentUpdateResponse:
+      description: The response object containing the created or updated incident
+        attachments.
+      properties:
+        data:
+          description: 'An array of incident attachments. Only the attachments that
+            were created or updated by the request are
+
+            returned.'
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentsPostmortemAttributesAttachmentObject:
+      description: The postmortem attachment.
+      properties:
+        documentUrl:
+          description: The URL of this notebook attachment.
+          example: https://app.datadoghq.com/notebook/123
+          type: string
+        title:
+          description: The title of this postmortem attachment.
+          example: Postmortem IR-123
+          type: string
+      required:
+      - documentUrl
+      - title
+      type: object
+    IncidentAttachmentsResponse:
+      description: The response object containing an incident's attachments.
+      properties:
+        data:
+          description: An array of incident attachments.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentsResponseIncludedItem:
+      description: An object related to an attachment that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    IncidentCreateAttributes:
+      description: The incident's attributes for a create request.
+      properties:
+        customer_impacted:
+          description: A flag indicating whether the incident caused customer impact.
+          example: false
+          type: boolean
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields for which to create
+            initial selections.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        initial_cells:
+          description: An array of initial timeline cells to be placed at the beginning
+            of the incident timeline.
+          items:
+            $ref: '#/components/schemas/IncidentTimelineCellCreateAttributes'
+          type: array
+        notification_handles:
+          description: Notification handles that will be notified of the incident
+            at creation.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationHandle'
+          type: array
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: A test incident title
+          type: string
+      required:
+      - title
+      - customer_impacted
+      type: object
+    IncidentCreateData:
+      description: Incident data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentCreateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentCreateRelationships:
+      description: The relationships the incident will have with other resources once
+        created.
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+      required:
+      - commander_user
+      type: object
+    IncidentCreateRequest:
+      description: Create request for an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentCreateData'
+      required:
+      - data
+      type: object
+    IncidentFieldAttributes:
+      description: Dynamic fields for which selections can be made, with field names
+        as keys.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
+      - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
+      required:
+      - type
+      type: object
+    IncidentFieldAttributesMultipleValue:
+      description: A field with potentially multiple values selected.
+      properties:
+        type:
+          $ref: '#/components/schemas/IncidentFieldAttributesValueType'
+        value:
+          description: The multiple values selected for this field.
+          example:
+          - '1.0'
+          - '1.1'
+          items:
+            description: A value which has been selected for the parent field.
+            example: '1.1'
+            type: string
+          nullable: true
+          type: array
+      type: object
+    IncidentFieldAttributesSingleValue:
+      description: A field with a single value selected.
+      properties:
+        type:
+          $ref: '#/components/schemas/IncidentFieldAttributesSingleValueType'
+        value:
+          description: The single value selected for this field.
+          example: SEV-1
+          nullable: true
+          type: string
+      type: object
+    IncidentFieldAttributesSingleValueType:
+      default: dropdown
+      description: Type of the single value field definitions.
+      enum:
+      - dropdown
+      - textbox
+      example: dropdown
+      type: string
+      x-enum-varnames:
+      - DROPDOWN
+      - TEXTBOX
+    IncidentFieldAttributesValueType:
+      default: multiselect
+      description: Type of the multiple value field definitions.
+      enum:
+      - multiselect
+      - textarray
+      - metrictag
+      - autocomplete
+      example: multiselect
+      type: string
+      x-enum-varnames:
+      - MULTISELECT
+      - TEXTARRAY
+      - METRICTAG
+      - AUTOCOMPLETE
+    IncidentIntegrationMetadataAttributes:
+      description: Incident integration metadata's attributes for a create request.
+      properties:
+        incident_id:
+          description: UUID of the incident this integration metadata is connected
+            to.
+          example: 00000000-aaaa-0000-0000-000000000000
+          type: string
+        integration_type:
+          description: 'A number indicating the type of integration this metadata
+            is for. 1 indicates Slack;
+
+            8 indicates Jira.'
+          example: 1
+          format: int32
+          maximum: 9
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
+        status:
+          description: 'A number indicating the status of this integration metadata.
+            0 indicates unknown;
+
+            1 indicates pending; 2 indicates complete; 3 indicates manually created;
+
+            4 indicates manually updated; 5 indicates failed.'
+          format: int32
+          maximum: 5
+          type: integer
+      required:
+      - integration_type
+      - metadata
+      type: object
+    IncidentIntegrationMetadataCreateData:
+      description: Incident integration metadata data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentIntegrationMetadataCreateRequest:
+      description: Create request for an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataCreateData'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataListResponse:
+      description: Response with a list of incident integration metadata.
+      properties:
+        data:
+          description: An array of incident integration metadata.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseIncludedItem'
+          readOnly: true
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentResponseMeta'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataMetadata:
+      description: Incident integration metadata's metadata attribute.
+      oneOf:
+      - $ref: '#/components/schemas/SlackIntegrationMetadata'
+      - $ref: '#/components/schemas/JiraIntegrationMetadata'
+      type: object
+    IncidentIntegrationMetadataPatchData:
+      description: Incident integration metadata data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentIntegrationMetadataPatchRequest:
+      description: Patch request for an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataPatchData'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataResponse:
+      description: Response with an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataResponseData:
+      description: Incident integration metadata from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        id:
+          description: The incident integration metadata's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentIntegrationMetadataResponseIncludedItem:
+      description: An object related to an incident integration metadata that is included
+        in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    IncidentIntegrationMetadataType:
+      default: incident_integrations
+      description: Integration metadata resource type.
+      enum:
+      - incident_integrations
+      example: incident_integrations
+      type: string
+      x-enum-varnames:
+      - INCIDENT_INTEGRATIONS
+    IncidentNotificationHandle:
+      description: A notification handle that will be notified at incident creation.
+      properties:
+        display_name:
+          description: The name of the notified handle.
+          example: Jane Doe
+          type: string
+        handle:
+          description: The email address used for the notification.
+          example: '@test.user@test.com'
+          type: string
+      type: object
+    IncidentPostmortemType:
+      default: incident_postmortems
+      description: Incident postmortem resource type.
+      enum:
+      - incident_postmortems
+      example: incident_postmortems
+      type: string
+      x-enum-varnames:
+      - INCIDENT_POSTMORTEMS
+    IncidentRelatedObject:
+      description: Object related to an incident.
+      enum:
+      - users
+      - attachments
+      type: string
+      x-enum-varnames:
+      - USERS
+      - ATTACHMENTS
+    IncidentResponse:
+      description: Response with an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentResponseAttributes:
+      description: The incident's attributes from a response.
+      properties:
+        created:
+          description: Timestamp when the incident was created.
+          format: date-time
+          readOnly: true
+          type: string
+        customer_impact_duration:
+          description: 'Length of the incident''s customer impact in seconds.
+
+            Equals the difference between `customer_impact_start` and `customer_impact_end`.'
+          format: int64
+          readOnly: true
+          type: integer
+        customer_impact_end:
+          description: Timestamp when customers were no longer impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impact_scope:
+          description: A summary of the impact customers experienced during the incident.
+          example: An example customer impact scope
+          nullable: true
+          type: string
+        customer_impact_start:
+          description: Timestamp when customers began being impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impacted:
+          description: A flag indicating whether the incident caused customer impact.
+          example: false
+          type: boolean
+        detected:
+          description: Timestamp when the incident was detected.
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields attached to incidents.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        modified:
+          description: Timestamp when the incident was last modified.
+          format: date-time
+          readOnly: true
+          type: string
