@@ -15409,3 +15409,5360 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-codegen-request-body-name: body
+  /api/v2/integrations/cloudflare/accounts/{account_id}:
+    delete:
+      description: Delete a Cloudflare account.
+      operationId: DeleteCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Cloudflare account
+      tags:
+      - Cloudflare Integration
+    get:
+      description: Get a Cloudflare account.
+      operationId: GetCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Cloudflare account
+      tags:
+      - Cloudflare Integration
+    patch:
+      description: Update a Cloudflare account.
+      operationId: UpdateCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudflareAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-codegen-request-body-name: body
+  /api/v2/integrations/confluent-cloud/accounts:
+    get:
+      description: List Confluent accounts.
+      operationId: ListConfluentAccount
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Confluent accounts
+      tags:
+      - Confluent Cloud
+    post:
+      description: Create a Confluent account.
+      operationId: CreateConfluentAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentAccountCreateRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}:
+    delete:
+      description: Delete a Confluent account with the provided account ID.
+      operationId: DeleteConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Confluent account
+      tags:
+      - Confluent Cloud
+    get:
+      description: Get the Confluent account with the provided account ID.
+      operationId: GetConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Confluent account
+      tags:
+      - Confluent Cloud
+    patch:
+      description: Update the Confluent account with the provided account ID.
+      operationId: UpdateConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentAccountUpdateRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
+    get:
+      description: Get a Confluent resource for the account associated with the provided
+        ID.
+      operationId: ListConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourcesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Confluent Account resources
+      tags:
+      - Confluent Cloud
+    post:
+      description: Create a Confluent resource for the account associated with the
+        provided ID.
+      operationId: CreateConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentResourceRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add resource to Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}:
+    delete:
+      description: Delete a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: DeleteConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete resource from Confluent account
+      tags:
+      - Confluent Cloud
+    get:
+      description: Get a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: GetConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource from Confluent account
+      tags:
+      - Confluent Cloud
+    patch:
+      description: Update a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: UpdateConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentResourceRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update resource in Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+      x-permission:
+        operator: OR
+        permissions:
+        - STANDARD
+  /api/v2/integrations/fastly/accounts:
+    get:
+      description: List Fastly accounts.
+      operationId: ListFastlyAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Fastly accounts
+      tags:
+      - Fastly Integration
+    post:
+      description: Create a Fastly account.
+      operationId: CreateFastlyAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Fastly account
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+  /api/v2/integrations/fastly/accounts/{account_id}:
+    delete:
+      description: Delete a Fastly account.
+      operationId: DeleteFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Fastly account
+      tags:
+      - Fastly Integration
+    get:
+      description: Get a Fastly account.
+      operationId: GetFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Fastly account
+      tags:
+      - Fastly Integration
+    patch:
+      description: Update a Fastly account.
+      operationId: UpdateFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Fastly account
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+  /api/v2/integrations/fastly/accounts/{account_id}/services:
+    get:
+      description: List Fastly services for an account.
+      operationId: ListFastlyServices
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServicesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Fastly services
+      tags:
+      - Fastly Integration
+    post:
+      description: Create a Fastly service for an account.
+      operationId: CreateFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyServiceRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Fastly service
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+  /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
+    delete:
+      description: Delete a Fastly service for an account.
+      operationId: DeleteFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Fastly service
+      tags:
+      - Fastly Integration
+    get:
+      description: Get a Fastly service for an account.
+      operationId: GetFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Fastly service
+      tags:
+      - Fastly Integration
+    patch:
+      description: Update a Fastly service for an account.
+      operationId: UpdateFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyServiceRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Fastly service
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+  /api/v2/ip_allowlist:
+    get:
+      description: Returns the IP allowlist and its enabled or disabled state.
+      operationId: GetIPAllowlist
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Get IP Allowlist
+      tags:
+      - IP Allowlist
+    patch:
+      description: Edit the entries in the IP allowlist, and enable or disable it.
+      operationId: UpdateIPAllowlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IPAllowlistUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update IP Allowlist
+      tags:
+      - IP Allowlist
+      x-codegen-request-body-name: body
+  /api/v2/logs:
+    post:
+      description: 'Send your logs to your Datadog platform over HTTP. Limits per
+        HTTP request are:
+
+
+        - Maximum content size per payload (uncompressed): 5MB
+
+        - Maximum size for a single log: 1MB
+
+        - Maximum array size if sending multiple logs in an array: 1000 entries
+
+
+        Any log exceeding 1MB is accepted and truncated by Datadog:
+
+        - For a single log request, the API truncates the log at 1MB and returns a
+        2xx.
+
+        - For a multi-logs request, the API processes all logs, truncates only logs
+        larger than 1MB, and returns a 2xx.
+
+
+        Datadog recommends sending your logs compressed.
+
+        Add the `Content-Encoding: gzip` header to the request when sending compressed
+        logs.
+
+        Log events can be submitted up to 18 hours in the past and 2 hours in the
+        future.
+
+
+        The status codes answered by the HTTP API are:
+
+        - 202: Accepted: the request has been accepted for processing
+
+        - 400: Bad request (likely an issue in the payload formatting)
+
+        - 401: Unauthorized (likely a missing API Key)
+
+        - 403: Permission issue (likely using an invalid API Key)
+
+        - 408: Request Timeout, request should be retried after some time
+
+        - 413: Payload too large (batch is above 5MB uncompressed)
+
+        - 429: Too Many Requests, request should be retried after some time
+
+        - 500: Internal Server Error, the server encountered an unexpected condition
+        that prevented it from fulfilling the request, request should be retried after
+        some time
+
+        - 503: Service Unavailable, the server is not ready to handle the request
+        probably because it is overloaded, request should be retried after some time'
+      operationId: SubmitLog
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContentEncoding'
+      - description: Log tags can be passed as query parameters with `text/plain`
+          content type.
+        example: env:prod,user:my-user
+        in: query
+        name: ddtags
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              multi-json-messages:
+                description: Pass multiple log objects at once.
+                summary: Multi JSON Messages
+                value:
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                  service: payment
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345679
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] World
+                  service: payment
+              simple-json-message:
+                description: Log attributes can be passed as `key:value` pairs in
+                  valid JSON messages.
+                summary: Simple JSON Message
+                value:
+                  ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                    World
+                  service: payment
+            schema:
+              $ref: '#/components/schemas/HTTPLog'
+          application/logplex-1:
+            examples:
+              multi-raw-message:
+                description: Submit log messages.
+                summary: Multi Logplex Messages
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World'
+              simple-logplex-message:
+                description: Submit log string.
+                summary: Simple Logplex Message
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+            schema:
+              type: string
+          text/plain:
+            examples:
+              multi-raw-message:
+                description: Submit log string.
+                summary: Multi Raw Messages
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World
+
+                  '
+              simple-raw-message:
+                description: 'Submit log string. Log attributes can be passed as query
+                  parameters in the URL. This enables the addition of tags or the
+                  source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
+                summary: Simple Raw Message
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+            schema:
+              type: string
+        description: Log to send (JSON format).
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing (always 202 empty JSON).
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Forbidden
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Request Timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Payload Too Large
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Too Many Requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogErrors'
+          description: Service Unavailable
+      security:
+      - apiKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - datadoghq.eu
+            - ddog-gov.com
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: http-intake.logs.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
+      summary: Send logs
+      tags:
+      - Logs
+      x-codegen-request-body-name: body
+  /api/v2/logs/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate events into buckets and compute metrics
+        and timeseries.
+      operationId: AggregateLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Aggregate events
+      tags:
+      - Logs
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/archive-order:
+    get:
+      description: 'Get the current order of your archives.
+
+        This endpoint takes no JSON arguments.'
+      operationId: GetLogsArchiveOrder
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchiveOrder'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get archive order
+      tags:
+      - Logs Archives
+    put:
+      description: 'Update the order of your archives. Since logs are processed sequentially,
+        reordering an archive may change
+
+        the structure and content of the data processed by other archives.
+
+
+        **Note**: Using the `PUT` method updates your archive''s order by replacing
+        the current order
+
+        with the new one.'
+      operationId: UpdateLogsArchiveOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveOrder'
+        description: An object containing the new ordered list of archive IDs.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchiveOrder'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update archive order
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/archives:
+    get:
+      description: Get the list of configured logs archives with their definitions.
+      operationId: ListLogsArchives
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchives'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all archives
+      tags:
+      - Logs Archives
+    post:
+      description: Create an archive in your organization.
+      operationId: CreateLogsArchive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveCreateRequest'
+        description: The definition of the new archive.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/archives/{archive_id}:
+    delete:
+      description: Delete a given archive from your organization.
+      operationId: DeleteLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an archive
+      tags:
+      - Logs Archives
+    get:
+      description: Get a specific archive from your organization.
+      operationId: GetLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an archive
+      tags:
+      - Logs Archives
+    put:
+      description: 'Update a given archive configuration.
+
+
+        **Note**: Using this method updates your archive configuration by **replacing**
+
+        your current configuration with the new one sent to your Datadog organization.'
+      operationId: UpdateLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveCreateRequest'
+        description: New definition of the archive.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/archives/{archive_id}/readers:
+    delete:
+      description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: RemoveRoleFromArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Revoke role from an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+    get:
+      description: Returns all read roles a given archive is restricted to.
+      operationId: ListArchiveReadRoles
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List read roles for an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+    post:
+      description: Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: AddReadRoleToArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Grant role to an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/metrics:
+    get:
+      description: Get the list of configured log-based metrics with their definitions.
+      operationId: ListLogsMetrics
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all log-based metrics
+      tags:
+      - Logs Metrics
+    post:
+      description: 'Create a metric based on your ingested logs in your organization.
+
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: CreateLogsMetric
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricCreateRequest'
+        description: The definition of the new log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/metrics/{metric_id}:
+    delete:
+      description: Delete a specific log-based metric from your organization.
+      operationId: DeleteLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a log-based metric
+      tags:
+      - Logs Metrics
+    get:
+      description: Get a specific log-based metric from your organization.
+      operationId: GetLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a log-based metric
+      tags:
+      - Logs Metrics
+    patch:
+      description: 'Update a specific log-based metric from your organization.
+
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: UpdateLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricUpdateRequest'
+        description: New definition of the log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+  /api/v2/logs/events:
+    get:
+      description: 'List endpoint returns logs that match a log search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest logs.
+
+
+        **If you are considering archiving logs for your organization,
+
+        consider use of the Datadog archive capabilities instead of the log list API.
+
+        See [Datadog Logs Archive documentation][2].**
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination
+
+        [2]: https://docs.datadoghq.com/logs/archives'
+      operationId: ListLogsGet
+      parameters:
+      - description: Search query following logs syntax.
+        example: '@datacenter:us @role:db'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: 'For customers with multiple indexes, the indexes to search
+
+          Defaults to ''*'' which means all indexes'
+        example: main
+        in: query
+        name: filter[index]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested logs.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested logs.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Specifies the storage type to be used
+        example: indexes
+        in: query
+        name: filter[storage_tier]
+        required: false
+        schema:
+          $ref: '#/components/schemas/LogsStorageTier'
+      - description: Order of logs in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/LogsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of logs in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a list of logs
+      tags:
+      - Logs
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+  /api/v2/logs/events/search:
+    post:
+      description: 'List endpoint returns logs that match a log search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex logs filtering and search.
+
+
+        **If you are considering archiving logs for your organization,
+
+        consider use of the Datadog archive capabilities instead of the log list API.
+
+        See [Datadog Logs Archive documentation][2].**
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination
+
+        [2]: https://docs.datadoghq.com/logs/archives'
+      operationId: ListLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsListRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Search logs
+      tags:
+      - Logs
+      x-codegen-request-body-name: body
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+  /api/v2/metrics:
+    get:
+      description: "Returns all metrics that can be configured in the Metrics Summary
+        page or with Metrics without Limits\u2122 (matching additional filters if
+        specified)."
+      operationId: ListTagConfigurations
+      parameters:
+      - description: Filter custom metrics that have configured tags.
+        example: true
+        in: query
+        name: filter[configured]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter tag configurations by configured tags.
+        example: app
+        in: query
+        name: filter[tags_configured]
+        required: false
+        schema:
+          description: Tag keys to filter by.
+          type: string
+      - description: Filter metrics by metric type.
+        in: query
+        name: filter[metric_type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+      - description: 'Filter distributions with additional percentile
+
+          aggregations enabled or disabled.'
+        example: true
+        in: query
+        name: filter[include_percentiles]
+        required: false
+        schema:
+          type: boolean
+      - description: 'Filter custom metrics that have or have not been queried in
+          the specified window[seconds].
+
+          If no window is provided or the window is less than 2 hours, a default of
+          2 hours will be applied.'
+        example: true
+        in: query
+        name: filter[queried]
+        required: false
+        schema:
+          type: boolean
+      - description: 'Filter metrics that have been submitted with the given tags.
+          Supports boolean and wildcard expressions.
+
+          Can only be combined with the filter[queried] filter.'
+        example: env IN (staging,test) AND service:web
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: 'The number of seconds of look back (from now) to apply to a
+          filter[tag] or filter[queried] query.
+
+          Defaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).'
+        example: 3600
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsAndMetricTagConfigurationsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - metrics_read
+      summary: Get a list of metrics
+      tags:
+      - Metrics
+  /api/v2/metrics/config/bulk-tags:
+    delete:
+      description: 'Delete all custom lists of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: DeleteBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigDeleteRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+    post:
+      description: 'Create and define a list of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix. Use the Delete method
+        of this API path to remove tag configurations.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        If multiple calls include the same metric, the last configuration applied
+        (not by submit order) is used, do not
+
+        expect deterministic ordering of concurrent calls.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: CreateBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigCreateRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+  /api/v2/metrics/{metric_name}/active-configurations:
+    get:
+      description: List tags and aggregations that are actively queried on dashboards
+        and monitors for a given metric name.
+      operationId: ListActiveMetricConfigurations
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: 'The number of seconds of look back (from now).
+
+          Default value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum
+          value is 2,630,000 (1 month).'
+        example: 7200
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSuggestedTagsAndAggregationsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - metrics_read
+      summary: List active tags and aggregations
+      tags:
+      - Metrics
+  /api/v2/metrics/{metric_name}/all-tags:
+    get:
+      description: View indexed tag key-value pairs for a given metric name.
+      operationId: ListTagsByMetricName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAllTagsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List tags by metric name
+      tags:
+      - Metrics
+  /api/v2/metrics/{metric_name}/estimate:
+    get:
+      description: Returns the estimated cardinality for a metric with a given tag,
+        percentile and number of aggregations configuration using Metrics without
+        Limits&trade;.
+      operationId: EstimateMetricsOutputSeries
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: Filtered tag keys that the metric is configured to query with.
+        example: app,host
+        in: query
+        name: filter[groups]
+        required: false
+        schema:
+          type: string
+      - description: The number of hours of look back (from now) to estimate cardinality
+          with.
+        example: 49
+        in: query
+        name: filter[hours_ago]
+        required: false
+        schema:
+          format: int32
+          maximum: 2147483647
+          type: integer
+      - description: The number of aggregations that a `count`, `rate`, or `gauge`
+          metric is configured to use. Max number of aggregation combos is 9.
+        example: 1
+        in: query
+        name: filter[num_aggregations]
+        required: false
+        schema:
+          format: int32
+          maximum: 9
+          type: integer
+      - description: A boolean, for distribution metrics only, to estimate cardinality
+          if the metric includes additional percentile aggregators.
+        example: true
+        in: query
+        name: filter[pct]
+        required: false
+        schema:
+          type: boolean
+      - description: A window, in hours, from the look back to estimate cardinality
+          with.
+        example: 6
+        in: query
+        name: filter[timespan_h]
+        required: false
+        schema:
+          format: int32
+          maximum: 2147483647
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricEstimateResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Tag Configuration Cardinality Estimator
+      tags:
+      - Metrics
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[Points Aggregation] Primary'
+          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
+          prod_low_urgency: '@slack-points-aggr-ops'
+          slack_support_channel: '#points-aggregation'
+          staging_high_urgency: '@slack-points-aggr-stg-ops'
+          staging_low_urgency: '@slack-points-aggr-stg-ops'
+        team: points-aggregation
+        team_escalation: '[Points Aggregation] Primary'
+      x-permission:
+        operator: OPEN
+        permissions: []
+  /api/v2/metrics/{metric_name}/tags:
+    delete:
+      description: 'Deletes a metric''s tag configuration. Can only be used with application
+
+        keys from users with the `Manage Tags for Metrics` permission.'
+      operationId: DeleteTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Delete a tag configuration
+      tags:
+      - Metrics
+    get:
+      description: Returns the tag configuration for the given metric name.
+      operationId: ListTagConfigurationByName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: Success
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - metrics_read
+      summary: List tag configuration by name
+      tags:
+      - Metrics
+    patch:
+      description: 'Update the tag configuration of a metric or percentile aggregations
+        of a distribution metric or custom aggregations
+
+        of a count, rate, or gauge metric.
+
+        Can only be used with application keys from users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: UpdateTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricTagConfigurationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Update a tag configuration
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+    post:
+      description: 'Create and define a list of queryable tag keys for an existing
+        count/gauge/rate/distribution metric.
+
+        Optionally, include percentile aggregations on any distribution metric or
+        configure custom aggregations
+
+        on any count, rate, or gauge metric.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: CreateTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricTagConfigurationCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Create a tag configuration
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+  /api/v2/metrics/{metric_name}/volumes:
+    get:
+      description: 'View distinct metrics volumes for the given metric name.
+
+
+        Custom metrics generated in-app from other products will return `null` for
+        ingested volumes.'
+      operationId: ListVolumesByMetricName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricVolumesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List distinct metric volumes by metric name
+      tags:
+      - Metrics
+  /api/v2/monitor/policy:
+    get:
+      description: Get all monitor configuration policies.
+      operationId: ListMonitorConfigPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor configuration policies
+      tags:
+      - Monitors
+    post:
+      description: Create a monitor configuration policy.
+      operationId: CreateMonitorConfigPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyCreateRequest'
+        description: Create a monitor configuration policy request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+  /api/v2/monitor/policy/{policy_id}:
+    delete:
+      description: Delete a monitor configuration policy.
+      operationId: DeleteMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a monitor configuration policy
+      tags:
+      - Monitors
+    get:
+      description: Get a monitor configuration policy by `policy_id`.
+      operationId: GetMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor configuration policy
+      tags:
+      - Monitors
+    patch:
+      description: Edit a monitor configuration policy.
+      operationId: UpdateMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyEditRequest'
+        description: Description of the update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+  /api/v2/permissions:
+    get:
+      description: Returns a list of all permissions, including name, description,
+        and ID.
+      operationId: ListPermissions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List permissions
+      tags:
+      - Roles
+  /api/v2/processes:
+    get:
+      description: Get all processes for your organization.
+      operationId: ListProcesses
+      parameters:
+      - description: String to search processes by.
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter processes by.
+        example: account:prod,user:admin
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+      - description: 'Unix timestamp (number of seconds since epoch) of the start
+          of the query window.
+
+          If not provided, the start of the query window will be 15 minutes before
+          the `to` timestamp. If neither
+
+          `from` nor `to` are provided, the query window will be `[now - 15m, now]`.'
+        in: query
+        name: from
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'Unix timestamp (number of seconds since epoch) of the end of
+          the query window.
+
+          If not provided, the end of the query window will be 15 minutes after the
+          `from` timestamp. If neither
+
+          `from` nor `to` are provided, the query window will be `[now - 15m, now]`.'
+        in: query
+        name: to
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Maximum number of results returned.
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 1000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.page.after`.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessSummariesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all processes
+      tags:
+      - Processes
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+  /api/v2/query/scalar:
+    post:
+      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+        widgets).
+
+        Multiple data sources are supported with the ability to
+
+        process the data using formulas and functions.'
+      operationId: QueryScalarData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalarFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalarFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query scalar data across multiple products
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
+        (RUM) and cloud cost data sources.
+
+        Support for logs is in beta. We are gradually onboarding support for more
+        sources. If you have any
+
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/query/timeseries:
+    post:
+      description: 'Query timeseries data across various data sources and
+
+        process the data by applying formulas and functions.'
+      operationId: QueryTimeseriesData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query timeseries data across multiple products
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
+        (RUM) and cloud cost data sources.
+
+        Support for logs is in beta. We are gradually onboarding support for more
+        sources. If you have any
+
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/restriction_policy/{resource_id}:
+    delete:
+      description: Deletes the restriction policy associated with a specified resource.
+      operationId: DeleteRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a restriction policy
+      tags:
+      - Restriction Policies
+    get:
+      description: Retrieves the restriction policy associated with a specified resource.
+      operationId: GetRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a restriction policy
+      tags:
+      - Restriction Policies
+    post:
+      description: 'Updates the restriction policy associated with a resource.
+
+
+        #### Supported resources
+
+        Restriction policies can be applied to the following resources:
+
+        - Connections: `connection`
+
+        - Dashboards: `dashboard`
+
+        - Notebooks: `notebook`
+
+        - Security Rules: `security-rule`
+
+        - Service Level Objectives: `slo`'
+      operationId: UpdateRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionPolicyUpdateRequest'
+        description: Restriction policy payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update a restriction policy
+      tags:
+      - Restriction Policies
+      x-codegen-request-body-name: body
+  /api/v2/roles:
+    get:
+      description: Returns all roles, including their names and their unique identifiers.
+      operationId: ListRoles
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: 'Sort roles depending on the given field. Sort order is **ascending**
+          by default.
+
+          Sort order is **descending** if the field is prefixed by a negative sign,
+          for example:
+
+          `sort=-name`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/RolesSort'
+      - description: Filter all roles by the given string.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List roles
+      tags:
+      - Roles
+    post:
+      description: Create a new role for your organization.
+      operationId: CreateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}:
+    delete:
+      description: Disables a role.
+      operationId: DeleteRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Delete role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: "Get a role in the organization specified by the role\u2019s `role_id`."
+      operationId: GetRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    patch:
+      description: Edit a role. Can only be used with application keys belonging to
+        administrators.
+      operationId: UpdateRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Update a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}/clone:
+    post:
+      description: Clone an existing role
+      operationId: CloneRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCloneRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create a new role by cloning an existing role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+      x-permission: OR(USER_ACCESS_MANAGE)
+  /api/v2/roles/{role_id}/permissions:
+    delete:
+      description: Removes a permission from a role.
+      operationId: RemovePermissionFromRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToPermission'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Revoke permission
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: Returns a list of all permissions for a single role.
+      operationId: ListRolePermissions
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List permissions for a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    post:
+      description: Adds a permission to a role.
+      operationId: AddPermissionToRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToPermission'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Grant permission to a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}/users:
+    delete:
+      description: Removes a user from a role.
+      operationId: RemoveUserFromRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToUser'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Remove a user from a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: Gets all users of a role.
+      operationId: ListRoleUsers
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: 'User attribute to order results by. Sort order is **ascending**
+          by default.
+
+          Sort order is **descending** if the field is prefixed by a negative sign,
+
+          for example `sort=-name`. Options: `name`, `email`, `status`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name
+          type: string
+      - description: Filter all users by the given string. Defaults to no filtering.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all users of a role
+      tags:
+      - Roles
+    post:
+      description: Adds a user to a role.
+      operationId: AddUserToRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToUser'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Add a user to a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/rum/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate RUM events into buckets of computed
+        metrics and timeseries.
+      operationId: AggregateRUMEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMAnalyticsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Aggregate RUM events
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+  /api/v2/rum/applications:
+    get:
+      description: List all the RUM applications in your organization.
+      operationId: GetRUMApplications
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationsResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all the RUM applications
+      tags:
+      - RUM
+    post:
+      description: Create a new RUM application in your organization.
+      operationId: CreateRUMApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+  /api/v2/rum/applications/{id}:
+    delete:
+      description: Delete an existing RUM application in your organization.
+      operationId: DeleteRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a RUM application
+      tags:
+      - RUM
+    get:
+      description: Get the RUM application with given ID in your organization.
+      operationId: GetRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a RUM application
+      tags:
+      - RUM
+    patch:
+      description: Update the RUM application with given ID in your organization.
+      operationId: UpdateRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+  /api/v2/rum/events:
+    get:
+      description: 'List endpoint returns events that match a RUM search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest RUM events.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: ListRUMEvents
+      parameters:
+      - description: Search query following RUM syntax.
+        example: '@type:session @application_id:xxxx'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/RUMSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of RUM events
+      tags:
+      - RUM
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+  /api/v2/rum/events/search:
+    post:
+      description: 'List endpoint returns RUM events that match a RUM search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex RUM events filtering and search.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: SearchRUMEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMSearchEventsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Search RUM events
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+  /api/v2/saml_configurations/idp_metadata:
+    post:
+      description: 'Endpoint for uploading IdP metadata for SAML setup.
+
+
+        Use this endpoint to upload or replace IdP metadata for SAML login configuration.'
+      operationId: UploadIdPMetadata
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdPMetadataFormData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upload IdP metadata
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+  /api/v2/security/cloud_workload/policy/download:
+    get:
+      description: 'The download endpoint generates a Cloud Workload Security policy
+        file from your currently active
+
+        Cloud Workload Security rules, and downloads them as a .policy file. This
+        file can then be deployed to
+
+        your Agents to update the policy running in your environment.'
+      operationId: DownloadCloudWorkloadPolicyFile
+      responses:
+        '200':
+          content:
+            application/yaml:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the latest Cloud Workload Security policy
+      tags:
+      - Cloud Workload Security
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules:
+    get:
+      description: Get the list of Agent rules.
+      operationId: ListCloudWorkloadSecurityAgentRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Cloud Workload Security Agent rules
+      tags:
+      - Cloud Workload Security
+    post:
+      description: Create a new Agent rule with the given parameters.
+      operationId: CreateCloudWorkloadSecurityAgentRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
+        description: The definition of the new Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
+    delete:
+      description: Delete a specific Agent rule.
+      operationId: DeleteCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+    get:
+      description: Get the details of a specific Agent rule.
+      operationId: GetCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+    patch:
+      description: 'Update a specific Agent rule.
+
+        Returns the Agent rule object when the request is successful.'
+      operationId: UpdateCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
+        description: New definition of the Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/configuration/security_filters:
+    get:
+      description: Get the list of configured security filters with their definitions.
+      operationId: ListSecurityFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: Get all security filters
+      tags:
+      - Security Monitoring
+    post:
+      description: 'Create a security filter.
+
+
+        See the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)
+
+        for more examples.'
+      operationId: CreateSecurityFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFilterCreateRequest'
+        description: The definition of the new security filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Create a security filter
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/configuration/security_filters/{security_filter_id}:
+    delete:
+      description: Delete a specific security filter.
+      operationId: DeleteSecurityFilter
+      parameters:
+      - $ref: '#/components/parameters/SecurityFilterID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Delete a security filter
+      tags:
+      - Security Monitoring
+    get:
+      description: 'Get the details of a specific security filter.
+
+
+        See the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)
+
+        for more examples.'
+      operationId: GetSecurityFilter
+      parameters:
+      - $ref: '#/components/parameters/SecurityFilterID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: Get a security filter
+      tags:
+      - Security Monitoring
+    patch:
+      description: 'Update a specific security filter.
+
+        Returns the security filter object when the request is successful.'
+      operationId: UpdateSecurityFilter
+      parameters:
+      - $ref: '#/components/parameters/SecurityFilterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFilterUpdateRequest'
+        description: New definition of the security filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Update a security filter
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/rules:
+    get:
+      description: List rules.
+      operationId: ListSecurityMonitoringRules
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringListRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: List rules
+      tags:
+      - Security Monitoring
+    post:
+      description: Create a detection rule.
+      operationId: CreateSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Create a detection rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/rules/{rule_id}:
+    delete:
+      description: Delete an existing rule. Default rules cannot be deleted.
+      operationId: DeleteSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Delete an existing rule
+      tags:
+      - Security Monitoring
+    get:
+      description: Get a rule's details.
+      operationId: GetSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a rule's details
+      tags:
+      - Security Monitoring
+    put:
+      description: 'Update an existing rule. When updating `cases`, `queries` or `options`,
+        the whole field
+
+        must be included. For example, when modifying a query all queries must be
+        included.
+
+        Default rules can only be updated to be enabled and to change notifications.'
+      operationId: UpdateSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleUpdatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Update an existing rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/signals:
+    get:
+      description: 'The list endpoint returns security signals that match a search
+        query.
+
+        Both this endpoint and the POST endpoint can be used interchangeably when
+        listing
+
+        security signals.'
+      operationId: ListSecurityMonitoringSignals
+      parameters:
+      - description: The search query for security signals.
+        example: security:attack status:high
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: The minimum timestamp for requested security signals.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: The maximum timestamp for requested security signals.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: The order of the security signals in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      - description: A list of results using the cursor provided in the previous query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of security signals in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a quick list of security signals
+      tags:
+      - Security Monitoring
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+  /api/v2/security_monitoring/signals/search:
+    post:
+      description: 'Returns security signals that match a search query.
+
+        Both this endpoint and the GET endpoint can be used interchangeably for listing
+
+        security signals.'
+      operationId: SearchSecurityMonitoringSignals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a list of security signals
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+  /api/v2/security_monitoring/signals/{signal_id}:
+    get:
+      description: Get a signal's details.
+      operationId: GetSecurityMonitoringSignal
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignal'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a signal's details
+      tags:
+      - Security Monitoring
+  /api/v2/security_monitoring/signals/{signal_id}/assignee:
+    patch:
+      description: Modify the triage assignee of a security signal.
+      operationId: EditSecurityMonitoringSignalAssignee
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalAssigneeUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Modify the triage assignee of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/signals/{signal_id}/incidents:
+    patch:
+      description: Change the related incidents for a security signal.
+      operationId: EditSecurityMonitoringSignalIncidents
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalIncidentsUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Change the related incidents of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/signals/{signal_id}/state:
+    patch:
+      description: Change the triage state of a security signal.
+      operationId: EditSecurityMonitoringSignalState
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalStateUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Change the triage state of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config:
+    get:
+      description: List all the Scanning groups in your organization.
+      operationId: ListScanningGroups
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Scanning Groups
+      tags:
+      - Sensitive Data Scanner
+    patch:
+      description: Reorder the list of groups.
+      operationId: ReorderScanningGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerReorderGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder Groups
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config/groups:
+    post:
+      description: 'Create a scanning group.
+
+        The request MAY include a configuration relationship.
+
+        A rules relationship can be omitted entirely, but if it is included it MUST
+        be
+
+        null or an empty array (rules cannot be created at the same time).
+
+        The new group will be ordered last within the configuration.'
+      operationId: CreateScanningGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateGroupResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config/groups/{group_id}:
+    delete:
+      description: Delete a given group.
+      operationId: DeleteScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+    patch:
+      description: 'Update a group, including the order of the rules.
+
+        Rules within the group are reordered by including a rules relationship. If
+        the rules
+
+        relationship is present, its data section MUST contain linkages for all of
+        the rules
+
+        currently in the group, and MUST NOT contain any others.'
+      operationId: UpdateScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config/rules:
+    post:
+      description: 'Create a scanning rule in a sensitive data scanner group, ordered
+        last.
+
+        The posted rule MUST include a group relationship.
+
+        It MUST include either a standard_pattern relationship or a regex attribute,
+        but not both.
+
+        If included_attributes is empty or missing, we will scan all attributes except
+
+        excluded_attributes. If both are missing, we will scan the whole event.'
+      operationId: CreateScanningRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config/rules/{rule_id}:
+    delete:
+      description: Delete a given rule.
+      operationId: DeleteScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+    patch:
+      description: 'Update a scanning rule.
+
+        The request body MUST NOT include a standard_pattern relationship, as that
+        relationship
+
+        is non-editable. Trying to edit the regex attribute of a rule with a standard_pattern
+
+        relationship will also result in an error.'
+      operationId: UpdateScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+  /api/v2/sensitive-data-scanner/config/standard-patterns:
+    get:
+      description: Returns all standard patterns.
+      operationId: ListStandardPatterns
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseData'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List standard patterns
+      tags:
+      - Sensitive Data Scanner
+  /api/v2/series:
+    post:
+      description: "The metrics end-point allows you to post time-series data that
+        can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is
+        500 kilobytes (512000 bytes). Compressed payloads must have a decompressed
+        size of less than 5 megabytes (5242880 bytes).\n\nIf you\u2019re submitting
+        metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
+        64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric
+        names\n- 50 bytes for the timeseries\n- The full payload is approximately
+        100 bytes.\n\nHost name is one of the resources in the Resources field."
+      operationId: SubmitMetrics
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricContentEncoding'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              dynamic-points:
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
+                externalValue: examples/metrics/dynamic-points.json.sh
+                summary: Dynamic Points
+                x-variables:
+                  NOW: $(date +%s)
+            schema:
+              $ref: '#/components/schemas/MetricPayload'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+  /api/v2/service_accounts:
+    post:
+      description: Create a service account for your organization.
+      operationId: CreateServiceAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a service account
+      tags:
+      - Service Accounts
+      x-codegen-request-body-name: body
+  /api/v2/service_accounts/{service_account_id}/application_keys:
+    get:
+      description: List all application keys available for this service account.
+      operationId: ListServiceAccountApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List application keys for this service account
+      tags:
+      - Service Accounts
+    post:
+      description: Create an application key for this service account.
+      operationId: CreateServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an application key for this service account
+      tags:
+      - Service Accounts
+      x-codegen-request-body-name: body
+  /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key owned by this service account.
+      operationId: DeleteServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an application key for this service account
+      tags:
+      - Service Accounts
+    get:
+      description: Get an application key owned by this service account.
+      operationId: GetServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get one application key for this service account
+      tags:
+      - Service Accounts
+    patch:
+      description: Edit an application key owned by this service account.
+      operationId: UpdateServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit an application key for this service account
+      tags:
+      - Service Accounts
+      x-codegen-request-body-name: body
+  /api/v2/services:
+    get:
+      description: Get all incident services uploaded for the requesting user's organization.
+        If the `include[users]` query parameter is provided, the included attribute
+        will contain the users related to these incident services.
+      operationId: ListIncidentServices
+      parameters:
+      - $ref: '#/components/parameters/IncidentServiceIncludeQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/IncidentServiceSearchQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentServicesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of all incident services
+      tags:
+      - Incident Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new incident service.
+      operationId: CreateIncidentService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentServiceCreateRequest'
+        description: Incident Service Payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentServiceResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Create a new incident service
+      tags:
+      - Incident Services
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/services/definitions:
+    get:
+      description: Get a list of all service definitions from the Datadog Service
+        Catalog.
+      operationId: ListServiceDefinitions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionsListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all service definitions
+      tags:
+      - Service Definition
+    post:
+      description: Create or update service definition in the Datadog Service Catalog.
+      operationId: CreateOrUpdateServiceDefinitions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceDefinitionsCreateRequest'
+        description: Service Definition YAML/JSON.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionCreateResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create or update service definition
+      tags:
+      - Service Definition
+      x-codegen-request-body-name: body
+  /api/v2/services/definitions/{service_name}:
+    delete:
+      description: Delete a single service definition in the Datadog Service Catalog.
+      operationId: DeleteServiceDefinition
+      parameters:
+      - $ref: '#/components/parameters/ServiceName'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a single service definition
+      tags:
+      - Service Definition
+    get:
+      description: Get a single service definition from the Datadog Service Catalog.
+      operationId: GetServiceDefinition
+      parameters:
+      - $ref: '#/components/parameters/ServiceName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a single service definition
+      tags:
+      - Service Definition
+  /api/v2/services/{service_id}:
+    delete:
+      description: Deletes an existing incident service.
+      operationId: DeleteIncidentService
+      parameters:
+      - $ref: '#/components/parameters/IncidentServiceIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Delete an existing incident service
+      tags:
+      - Incident Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Get details of an incident service. If the `include[users]` query
+        parameter is provided,
+
+        the included attribute will contain the users related to these incident services.'
+      operationId: GetIncidentService
+      parameters:
+      - $ref: '#/components/parameters/IncidentServiceIDPathParameter'
+      - $ref: '#/components/parameters/IncidentServiceIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get details of an incident service
+      tags:
+      - Incident Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an existing incident service. Only provide the attributes
+        which should be updated as this request is a partial update.
+      operationId: UpdateIncidentService
+      parameters:
+      - $ref: '#/components/parameters/IncidentServiceIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentServiceUpdateRequest'
+        description: Incident Service Payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Update an existing incident service
+      tags:
+      - Incident Services
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/synthetics/settings/on_demand_concurrency_cap:
+    get:
+      description: Get the on-demand concurrency cap.
+      operationId: GetOnDemandConcurrencyCap
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the on-demand concurrency cap
+      tags:
+      - Synthetics
+    post:
+      description: Save new value for on-demand concurrency cap.
+      operationId: SetOnDemandConcurrencyCap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+        description: .
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Save new value for on-demand concurrency cap
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v2/teams:
+    get:
+      description: Get all incident teams for the requesting user's organization.
+        If the `include[users]` query parameter is provided, the included attribute
+        will contain the users related to these incident teams.
+      operationId: ListIncidentTeams
+      parameters:
+      - $ref: '#/components/parameters/IncidentTeamIncludeQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/IncidentTeamSearchQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTeamsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of all incident teams
+      tags:
+      - Incident Teams
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new incident team.
+      operationId: CreateIncidentTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTeamCreateRequest'
+        description: Incident Team Payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTeamResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Create a new incident team
+      tags:
+      - Incident Teams
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/teams/{team_id}:
+    delete:
+      description: Deletes an existing incident team.
+      operationId: DeleteIncidentTeam
+      parameters:
+      - $ref: '#/components/parameters/IncidentTeamIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
