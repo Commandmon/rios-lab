@@ -1,0 +1,13 @@
+http_interactions:
+- recorded_at: Thu, 06 Jan 2022 00:52:01 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/permissions
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"type":"permissions","id":"984a2bd4-d3b4-11e8-a1ff-a7f660d43029","attributes":{"name
