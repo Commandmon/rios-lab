@@ -74,4 +74,40 @@ http_interactions:
         Management","display_type":"other","restricted":false}},{"type":"permissions","id":"46a301da-ec5c-11ea-aa9f-73bedeab67ee","attributes":{"name":"user_app_keys","display_name":"User
         Application Keys","description":"The ability to view and manage Application
         Keys owned by the user.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
-        and Application Keys","display_type":"other","restricted":false}},{"type":"permissions","id":"46a301db-ec5c-11ea-aa9f-2fe72193d60e","attributes":{"name":"org_app_keys_read","display_name"
+        and Application Keys","display_type":"other","restricted":false}},{"type":"permissions","id":"46a301db-ec5c-11ea-aa9f-2fe72193d60e","attributes":{"name":"org_app_keys_read","display_name":"Organization
+        Application Keys","description":"The ability to view Application Keys owned
+        by all users in the organization.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
+        and Application Keys","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301dc-ec5c-11ea-aa9f-13b33f8f46ea","attributes":{"name":"org_app_keys_write","display_name":"Organization
+        Application Keys","description":"The ability to manage Application Keys owned
+        by all users in the organization.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
+        and Application Keys","display_type":"write","restricted":false}},{"type":"permissions","id":"46a301dd-ec5c-11ea-aa9f-97edfb345bc9","attributes":{"name":"synthetics_private_location_read","display_name":"Private
+        Locations","description":"The ability to view, search and use in tests the
+        list of private locations available.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Synthetic
+        Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301de-ec5c-11ea-aa9f-a73252c24806","attributes":{"name":"synthetics_private_location_write","display_name":"Private
+        Locations","description":"The ability to create and delete private locations
+        as well as seeing the associated installation guidelines.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Synthetic
+        Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"46a301df-ec5c-11ea-aa9f-970a9ae645e5","attributes":{"name":"billing_read","display_name":"Billing","description":"The
+        ability to view your organization''s subscription and payment method but not
+        make edits.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Billing
+        and Usage","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301e0-ec5c-11ea-aa9f-6ba6cc675d8c","attributes":{"name":"billing_edit","display_name":"Billing","description":"The
+        ability to manage your organization''s subscription and payment method.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Billing
+        and Usage","display_type":"write","restricted":false}},{"type":"permissions","id":"46a301e1-ec5c-11ea-aa9f-afa39f6f3e36","attributes":{"name":"usage_read","display_name":"Usage","description":"The
+        ability to view your organization''s usage and usage attribution.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Billing
+        and Usage","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301e2-ec5c-11ea-aa9f-1f511b7305fd","attributes":{"name":"usage_edit","display_name":"Usage","description":"The
+        ability to manage your organization''s usage attribution set-up.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Billing
+        and Usage","display_type":"write","restricted":false}},{"type":"permissions","id":"46a301e4-ec5c-11ea-aa9f-87282b3a50cc","attributes":{"name":"metric_tags_write","display_name":"Manage
+        Tags for Metrics","description":"The ability to edit and save tag configurations
+        for custom metrics.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Metrics","display_type":"write","restricted":false}},{"type":"permissions","id":"07c3c146-f7f8-11ea-acf6-0bd62b9ae60e","attributes":{"name":"logs_write_historical_view","display_name":"Logs
+        Historical View","description":"The capability to rehydrate logs from Archives.","created":"2020-09-16T08:38:44.242076+00:00","group_name":"Logs","display_type":"write","restricted":false}},{"type":"permissions","id":"2fbdac76-f923-11ea-adbc-07f3823e2b43","attributes":{"name":"audit_logs_read","display_name":"Audit
+        Logs","description":"The ability to view Audit Logs in your organization.","created":"2020-09-17T20:20:10.834252+00:00","group_name":"Organization
+        Management","display_type":"read","restricted":false}},{"type":"permissions","id":"372896c4-f923-11ea-adbc-4fecd107156d","attributes":{"name":"api_keys_read","display_name":"API
+        Keys","description":"The ability to list and retrieve the key values of all
+        API Keys in your organization.","created":"2020-09-17T20:20:23.279769+00:00","group_name":"API
+        and Application Keys","display_type":"read","restricted":false}},{"type":"permissions","id":"3e4d4d28-f923-11ea-adbc-e3565938c12e","attributes":{"name":"api_keys_write","display_name":"API
+        Keys","description":"The ability to create, rename, and revoke API Keys for
+        your organization.","created":"2020-09-17T20:20:35.264430+00:00","group_name":"API
+        and Application Keys","display_type":"write","restricted":false}},{"type":"permissions","id":"4628ca54-f923-11ea-adbc-4b2b7f88c5e9","attributes":{"name":"synthetics_global_variable_read","display_name":"Global
+        Variables","description":"The ability to view, search and use in tests the
+        list of global variables available for Synthetics.","created":"2020-09-17T20:20:48.446916+00:00","group_name":"Synthetic
+        Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"4ada6e36-f923-11ea-adbc-0788e5c5e3cf","attributes":{"name":"synthetics_global_variable_write","display_name":"Global
+        Variables","description":"The ability to create, edit, and
