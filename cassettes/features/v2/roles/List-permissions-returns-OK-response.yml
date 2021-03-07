@@ -110,4 +110,39 @@ http_interactions:
         Variables","description":"The ability to view, search and use in tests the
         list of global variables available for Synthetics.","created":"2020-09-17T20:20:48.446916+00:00","group_name":"Synthetic
         Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"4ada6e36-f923-11ea-adbc-0788e5c5e3cf","attributes":{"name":"synthetics_global_variable_write","display_name":"Global
-        Variables","description":"The ability to create, edit, and
+        Variables","description":"The ability to create, edit, and delete global variables
+        for Synthetics.","created":"2020-09-17T20:20:56.322003+00:00","group_name":"Synthetic
+        Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"5025ee24-f923-11ea-adbc-576ea241df8d","attributes":{"name":"synthetics_read","display_name":"Synthetic
+        Tests","description":"The ability to list and view configured Synthetic tests.","created":"2020-09-17T20:21:05.205361+00:00","group_name":"Synthetic
+        Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"55f4b5ec-f923-11ea-adbc-1bfa2334a755","attributes":{"name":"synthetics_write","display_name":"Synthetic
+        Tests","description":"The ability to create, edit, and delete Synthetic tests.","created":"2020-09-17T20:21:14.949140+00:00","group_name":"Synthetic
+        Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"5c6b88e2-f923-11ea-adbc-abf57d079420","attributes":{"name":"synthetics_default_settings_read","display_name":"Default
+        Settings","description":"The ability to view default settings for Synthetics
+        Monitoring.","created":"2020-09-17T20:21:25.794160+00:00","group_name":"Synthetic
+        Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"642eebe6-f923-11ea-adbc-eb617674ea04","attributes":{"name":"synthetics_default_settings_write","display_name":"Default
+        Settings","description":"The ability to edit default settings for Synthetics
+        Monitoring.","created":"2020-09-17T20:21:38.818771+00:00","group_name":"Synthetic
+        Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"6ba32d22-0e1a-11eb-ba44-bf9a5aafaa39","attributes":{"name":"logs_write_facets","display_name":"Logs
+        Facets","description":"The capability to create or edit logs facets.","created":"2020-10-14T12:40:20.271908+00:00","group_name":"Logs","display_type":"write","restricted":false}},{"type":"permissions","id":"a42e94b2-1476-11eb-bd08-efda28c04248","attributes":{"name":"service_account_write","display_name":"Service
+        Accounts","description":"The ability to create, disable and use Service Accounts
+        in your organization.","created":"2020-10-22T14:55:35.814239+00:00","group_name":"Access
+        Management","display_type":"write","restricted":false}},{"type":"permissions","id":"fcac2ad8-2843-11eb-8315-0fe47949d625","attributes":{"name":"integrations_api","display_name":"Integrations
+        API Access","description":"The ability to use the Integrations APIs to configure
+        Integrations that the user has access to. This permission does not restrict
+        or grant access to Integrations.","created":"2020-11-16T19:43:23.198568+00:00","group_name":"Integrations","display_type":"other","restricted":false}},{"type":"permissions","id":"417ba636-2dce-11eb-84c0-6bce5b0d9de0","attributes":{"name":"apm_read","display_name":"APM
+        Read Access","description":"The ability to read and query APM and Trace Analytics.","created":"2020-11-23T20:55:45.006110+00:00","group_name":"APM","display_type":"read","restricted":true}},{"type":"permissions","id":"43fa188e-2dce-11eb-84c0-835ad1fd6287","attributes":{"name":"apm_retention_filter_read","display_name":"Manage
+        Retention Filters","description":"The ability to read trace retention filters.
+        A user with this permission can view the retention filters page, list of filters,
+        their statistics, and creation info.","created":"2020-11-23T20:55:49.190595+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"465cfe66-2dce-11eb-84c0-6baa888239fa","attributes":{"name":"apm_retention_filter_write","display_name":"Manage
+        Retention Filters","description":"The ability to create, edit and delete trace
+        retention filters. A user with this permission can create new retention filters,
+        and update or delete to existing retention filters.","created":"2020-11-23T20:55:53.194236+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"4916eebe-2dce-11eb-84c0-271cb2c672e8","attributes":{"name":"apm_service_ingest_read","display_name":"Manage
+        Service Ingestion","description":"The ability to access Service Ingestion
+        pages. A user with this permission can view the service ingestion page, list
+        of root service, their statistics, and creation info.","created":"2020-11-23T20:55:57.768261+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"4e3f02b4-2dce-11eb-84c0-2fca946a6efc","attributes":{"name":"apm_service_ingest_write","display_name":"Manage
+        Service Ingestion","description":"The ability to edit Service Ingestion pages
+        root services. A user with this permission can edit the root service ingestion
+        and generate a code snippet to increase ingestion per service.","created":"2020-11-23T20:56:06.419518+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"53950c54-2dce-11eb-84c0-a79ae108f6f8","attributes":{"name":"apm_apdex_manage_write","display_name":"Apdex
+        Management","description":"The ability to set Apdex T value on any service.
+        A user with this permission can set the T value from the Apdex graph on the
+        service page.","created":"2020-11-23T20:56:15.371926+00:00","gro
