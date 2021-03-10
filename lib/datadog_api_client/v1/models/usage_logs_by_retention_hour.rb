@@ -86,4 +86,56 @@ module DatadogAPIClient::V1
       }
 
       if attributes.key?(:'indexed_events_count')
-        self.index
+        self.indexed_events_count = attributes[:'indexed_events_count']
+      end
+
+      if attributes.key?(:'live_indexed_events_count')
+        self.live_indexed_events_count = attributes[:'live_indexed_events_count']
+      end
+
+      if attributes.key?(:'org_name')
+        self.org_name = attributes[:'org_name']
+      end
+
+      if attributes.key?(:'public_id')
+        self.public_id = attributes[:'public_id']
+      end
+
+      if attributes.key?(:'rehydrated_indexed_events_count')
+        self.rehydrated_indexed_events_count = attributes[:'rehydrated_indexed_events_count']
+      end
+
+      if attributes.key?(:'retention')
+        self.retention = attributes[:'retention']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          indexed_events_count == o.indexed_events_count &&
+          live_indexed_events_count == o.live_indexed_events_count &&
+          org_name == o.org_name &&
+          public_id == o.public_id &&
+          rehydrated_indexed_events_count == o.rehydrated_indexed_events_count &&
+          retention == o.retention
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [indexed_events_count, live_indexed_events_count, org_name, public_id, rehydrated_indexed_events_count, retention].hash
+    end
+  end
+end
