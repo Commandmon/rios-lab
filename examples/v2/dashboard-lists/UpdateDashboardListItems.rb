@@ -13,4 +13,8 @@ body = DatadogAPIClient::V2::DashboardListUpdateItemsRequest.new({
   dashboards: [
     DatadogAPIClient::V2::DashboardListItemRequest.new({
       id: SCREENBOARD_DASHBOARD_ID,
-      type: DatadogAPIClient::V2::DashboardType::
+      type: DatadogAPIClient::V2::DashboardType::CUSTOM_SCREENBOARD,
+    }),
+  ],
+})
+p api_instance.update_dashboard_list_items(DASHBOARD_LIST_ID.to_i, body)
