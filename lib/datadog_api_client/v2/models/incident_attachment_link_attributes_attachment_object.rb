@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,23 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The compute rule to compute the log-based metric.
-  class LogsMetricUpdateCompute
+  # The link attachment.
+  class IncidentAttachmentLinkAttributesAttachmentObject
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Toggle to include or exclude percentile aggregations for distribution metrics.
-    # Only present when the `aggregation_type` is `distribution`.
-    attr_accessor :include_percentiles
+    # The URL of this link attachment.
+    attr_reader :document_url
+
+    # The title of this link attachment.
+    attr_reader :title
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'include_percentiles' => :'include_percentiles'
+        :'document_url' => :'documentUrl',
+        :'title' => :'title'
       }
     end
 
@@ -41,7 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'include_percentiles' => :'Boolean'
+        :'document_url' => :'String',
+        :'title' => :'String'
       }
     end
 
@@ -50,19 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::LogsMetricUpdateCompute` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::IncidentAttachmentLinkAttributesAttachmentObject` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::LogsMetricUpdateCompute`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::IncidentAttachmentLinkAttributesAttachmentObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'include_percentiles')
-        self.include_percentiles = attributes[:'include_percentiles']
+      if attributes.key?(:'document_url')
+        self.document_url = attributes[:'document_url']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
     end
 
@@ -70,7 +79,29 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @document_url.nil?
+      return false if @title.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param document_url [Object] Object to be assigned
+    # @!visibility private
+    def document_url=(document_url)
+      if document_url.nil?
+        fail ArgumentError, 'invalid value for "document_url", document_url cannot be nil.'
+      end
+      @document_url = document_url
+    end
+
+    # Custom attribute writer method with validation
+    # @param title [Object] Object to be assigned
+    # @!visibility private
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'invalid value for "title", title cannot be nil.'
+      end
+      @title = title
     end
 
     # Checks equality by comparing each attribute.
@@ -79,14 +110,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          include_percentiles == o.include_percentiles
+          document_url == o.document_url &&
+          title == o.title
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [include_percentiles].hash
+      [document_url, title].hash
     end
   end
 end
