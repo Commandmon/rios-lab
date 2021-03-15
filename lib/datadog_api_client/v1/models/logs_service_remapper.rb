@@ -107,4 +107,42 @@ module DatadogAPIClient::V1
     end
 
     # Custom attribute writer method with validation
-    # @par
+    # @param sources [Object] Object to be assigned
+    # @!visibility private
+    def sources=(sources)
+      if sources.nil?
+        fail ArgumentError, 'invalid value for "sources", sources cannot be nil.'
+      end
+      @sources = sources
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          is_enabled == o.is_enabled &&
+          name == o.name &&
+          sources == o.sources &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [is_enabled, name, sources, type].hash
+    end
+  end
+end
