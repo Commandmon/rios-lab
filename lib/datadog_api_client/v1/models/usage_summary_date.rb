@@ -205,4 +205,100 @@ module DatadogAPIClient::V1
     # Shows the 99th percentile of all hosts reported by the Datadog exporter for the OpenTelemetry Collector over all hours in the current date for all organizations.
     attr_accessor :opentelemetry_host_top99p
 
-    # Organizations associated with
+    # Organizations associated with a user.
+    attr_accessor :orgs
+
+    # Shows the 99th percentile of all profiled hosts over all hours in the current date for all organizations.
+    attr_accessor :profiling_host_top99p
+
+    # Shows the sum of all mobile sessions and all browser lite and legacy sessions over all hours in the current month for all organizations.
+    attr_accessor :rum_browser_and_mobile_session_count
+
+    # Shows the sum of all browser RUM Lite Sessions over all hours in the current date for all organizations
+    attr_accessor :rum_session_count_sum
+
+    # Shows the sum of RUM Sessions (browser and mobile) over all hours in the current date for all organizations.
+    attr_accessor :rum_total_session_count_sum
+
+    # Shows the sum of all browser and mobile RUM units over all hours in the current date for all organizations.
+    attr_accessor :rum_units_sum
+
+    # Sum of all APM bytes scanned with sensitive data scanner over all hours in the current date for all organizations.
+    attr_accessor :sds_apm_scanned_bytes_sum
+
+    # Sum of all event stream events bytes scanned with sensitive data scanner over all hours in the current date for all organizations.
+    attr_accessor :sds_events_scanned_bytes_sum
+
+    # Shows the sum of all bytes scanned of logs usage by the Sensitive Data Scanner over all hours in the current month for all organizations.
+    attr_accessor :sds_logs_scanned_bytes_sum
+
+    # Sum of all RUM bytes scanned with sensitive data scanner over all hours in the current date for all organizations.
+    attr_accessor :sds_rum_scanned_bytes_sum
+
+    # Shows the sum of all bytes scanned across all usage types by the Sensitive Data Scanner over all hours in the current month for all organizations.
+    attr_accessor :sds_total_scanned_bytes_sum
+
+    # Shows the sum of all Synthetic browser tests over all hours in the current date for all organizations.
+    attr_accessor :synthetics_browser_check_calls_count_sum
+
+    # Shows the sum of all Synthetic API tests over all hours in the current date for all organizations.
+    attr_accessor :synthetics_check_calls_count_sum
+
+    # Shows the high-water mark of used synthetics parallel testing slots over all hours in the current date for all organizations.
+    attr_accessor :synthetics_parallel_testing_max_slots_hwm
+
+    # Shows the sum of all Indexed Spans indexed over all hours in the current date for all organizations.
+    attr_accessor :trace_search_indexed_events_count_sum
+
+    # Shows the sum of all ingested APM span bytes over all hours in the current date for all organizations.
+    attr_accessor :twol_ingested_events_bytes_sum
+
+    # Shows the 99th percentile of all vSphere hosts over all hours in the current date for all organizations.
+    attr_accessor :vsphere_host_top99p
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'agent_host_top99p' => :'agent_host_top99p',
+        :'apm_azure_app_service_host_top99p' => :'apm_azure_app_service_host_top99p',
+        :'apm_fargate_count_avg' => :'apm_fargate_count_avg',
+        :'apm_host_top99p' => :'apm_host_top99p',
+        :'appsec_fargate_count_avg' => :'appsec_fargate_count_avg',
+        :'audit_logs_lines_indexed_sum' => :'audit_logs_lines_indexed_sum',
+        :'audit_trail_enabled_hwm' => :'audit_trail_enabled_hwm',
+        :'avg_profiled_fargate_tasks' => :'avg_profiled_fargate_tasks',
+        :'aws_host_top99p' => :'aws_host_top99p',
+        :'aws_lambda_func_count' => :'aws_lambda_func_count',
+        :'aws_lambda_invocations_sum' => :'aws_lambda_invocations_sum',
+        :'azure_app_service_top99p' => :'azure_app_service_top99p',
+        :'billable_ingested_bytes_sum' => :'billable_ingested_bytes_sum',
+        :'browser_rum_lite_session_count_sum' => :'browser_rum_lite_session_count_sum',
+        :'browser_rum_replay_session_count_sum' => :'browser_rum_replay_session_count_sum',
+        :'browser_rum_units_sum' => :'browser_rum_units_sum',
+        :'ci_pipeline_indexed_spans_sum' => :'ci_pipeline_indexed_spans_sum',
+        :'ci_test_indexed_spans_sum' => :'ci_test_indexed_spans_sum',
+        :'ci_visibility_pipeline_committers_hwm' => :'ci_visibility_pipeline_committers_hwm',
+        :'ci_visibility_test_committers_hwm' => :'ci_visibility_test_committers_hwm',
+        :'cloud_cost_management_host_count_avg' => :'cloud_cost_management_host_count_avg',
+        :'container_avg' => :'container_avg',
+        :'container_excl_agent_avg' => :'container_excl_agent_avg',
+        :'container_hwm' => :'container_hwm',
+        :'cspm_aas_host_top99p' => :'cspm_aas_host_top99p',
+        :'cspm_aws_host_top99p' => :'cspm_aws_host_top99p',
+        :'cspm_azure_host_top99p' => :'cspm_azure_host_top99p',
+        :'cspm_container_avg' => :'cspm_container_avg',
+        :'cspm_container_hwm' => :'cspm_container_hwm',
+        :'cspm_gcp_host_top99p' => :'cspm_gcp_host_top99p',
+        :'cspm_host_top99p' => :'cspm_host_top99p',
+        :'custom_ts_avg' => :'custom_ts_avg',
+        :'cws_container_count_avg' => :'cws_container_count_avg',
+        :'cws_host_top99p' => :'cws_host_top99p',
+        :'date' => :'date',
+        :'dbm_host_top99p' => :'dbm_host_top99p',
+        :'dbm_queries_count_avg' => :'dbm_queries_count_avg',
+        :'fargate_tasks_count_avg' => :'fargate_tasks_count_avg',
+        :'fargate_tasks_count_hwm' => :'fargate_tasks_count_hwm',
+        :'gcp_host_top99p' => :'gcp_host_top99p',
+        :'heroku_host_top99p' => :'heroku_host_top99p',
+        :'incident_ma
