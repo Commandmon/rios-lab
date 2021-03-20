@@ -395,4 +395,130 @@ module DatadogAPIClient::V1
         :'mobile_rum_session_count_android_sum' => :'Integer',
         :'mobile_rum_session_count_flutter_sum' => :'Integer',
         :'mobile_rum_session_count_ios_sum' => :'Integer',
-        :'mobile_rum_session_count_reactnative_sum'
+        :'mobile_rum_session_count_reactnative_sum' => :'Integer',
+        :'mobile_rum_session_count_sum' => :'Integer',
+        :'mobile_rum_units_sum' => :'Integer',
+        :'netflow_indexed_events_count_sum' => :'Integer',
+        :'npm_host_top99p' => :'Integer',
+        :'observability_pipelines_bytes_processed_sum' => :'Integer',
+        :'online_archive_events_count_sum' => :'Integer',
+        :'opentelemetry_apm_host_top99p' => :'Integer',
+        :'opentelemetry_host_top99p' => :'Integer',
+        :'orgs' => :'Array<UsageSummaryDateOrg>',
+        :'profiling_host_top99p' => :'Integer',
+        :'rum_browser_and_mobile_session_count' => :'Integer',
+        :'rum_session_count_sum' => :'Integer',
+        :'rum_total_session_count_sum' => :'Integer',
+        :'rum_units_sum' => :'Integer',
+        :'sds_apm_scanned_bytes_sum' => :'Integer',
+        :'sds_events_scanned_bytes_sum' => :'Integer',
+        :'sds_logs_scanned_bytes_sum' => :'Integer',
+        :'sds_rum_scanned_bytes_sum' => :'Integer',
+        :'sds_total_scanned_bytes_sum' => :'Integer',
+        :'synthetics_browser_check_calls_count_sum' => :'Integer',
+        :'synthetics_check_calls_count_sum' => :'Integer',
+        :'synthetics_parallel_testing_max_slots_hwm' => :'Integer',
+        :'trace_search_indexed_events_count_sum' => :'Integer',
+        :'twol_ingested_events_bytes_sum' => :'Integer',
+        :'vsphere_host_top99p' => :'Integer'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageSummaryDate` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageSummaryDate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'agent_host_top99p')
+        self.agent_host_top99p = attributes[:'agent_host_top99p']
+      end
+
+      if attributes.key?(:'apm_azure_app_service_host_top99p')
+        self.apm_azure_app_service_host_top99p = attributes[:'apm_azure_app_service_host_top99p']
+      end
+
+      if attributes.key?(:'apm_fargate_count_avg')
+        self.apm_fargate_count_avg = attributes[:'apm_fargate_count_avg']
+      end
+
+      if attributes.key?(:'apm_host_top99p')
+        self.apm_host_top99p = attributes[:'apm_host_top99p']
+      end
+
+      if attributes.key?(:'appsec_fargate_count_avg')
+        self.appsec_fargate_count_avg = attributes[:'appsec_fargate_count_avg']
+      end
+
+      if attributes.key?(:'audit_logs_lines_indexed_sum')
+        self.audit_logs_lines_indexed_sum = attributes[:'audit_logs_lines_indexed_sum']
+      end
+
+      if attributes.key?(:'audit_trail_enabled_hwm')
+        self.audit_trail_enabled_hwm = attributes[:'audit_trail_enabled_hwm']
+      end
+
+      if attributes.key?(:'avg_profiled_fargate_tasks')
+        self.avg_profiled_fargate_tasks = attributes[:'avg_profiled_fargate_tasks']
+      end
+
+      if attributes.key?(:'aws_host_top99p')
+        self.aws_host_top99p = attributes[:'aws_host_top99p']
+      end
+
+      if attributes.key?(:'aws_lambda_func_count')
+        self.aws_lambda_func_count = attributes[:'aws_lambda_func_count']
+      end
+
+      if attributes.key?(:'aws_lambda_invocations_sum')
+        self.aws_lambda_invocations_sum = attributes[:'aws_lambda_invocations_sum']
+      end
+
+      if attributes.key?(:'azure_app_service_top99p')
+        self.azure_app_service_top99p = attributes[:'azure_app_service_top99p']
+      end
+
+      if attributes.key?(:'billable_ingested_bytes_sum')
+        self.billable_ingested_bytes_sum = attributes[:'billable_ingested_bytes_sum']
+      end
+
+      if attributes.key?(:'browser_rum_lite_session_count_sum')
+        self.browser_rum_lite_session_count_sum = attributes[:'browser_rum_lite_session_count_sum']
+      end
+
+      if attributes.key?(:'browser_rum_replay_session_count_sum')
+        self.browser_rum_replay_session_count_sum = attributes[:'browser_rum_replay_session_count_sum']
+      end
+
+      if attributes.key?(:'browser_rum_units_sum')
+        self.browser_rum_units_sum = attributes[:'browser_rum_units_sum']
+      end
+
+      if attributes.key?(:'ci_pipeline_indexed_spans_sum')
+        self.ci_pipeline_indexed_spans_sum = attributes[:'ci_pipeline_indexed_spans_sum']
+      end
+
+      if attributes.key?(:'ci_test_indexed_spans_sum')
+        self.ci_test_indexed_spans_sum = attributes[:'ci_test_indexed_spans_sum']
+      end
+
+      if attributes.key?(:'ci_visibility_pipeline_committers_hwm')
+        self.ci_visibility_pipeline_committers_hwm = attributes[:'ci_visibility_pipeline_committers_hwm']
+      end
+
+      if attributes.key?(:'ci_visibility_test_committers_hwm')
+        self.ci_visibility_test_committers_hwm = attributes[:'ci_visibility_test_committers_hwm']
+      end
+
+      if attributes.key?(:'cloud_cost_management_host_count_avg')
+        self.clo
