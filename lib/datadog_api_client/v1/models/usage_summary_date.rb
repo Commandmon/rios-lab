@@ -797,4 +797,57 @@ module DatadogAPIClient::V1
           cspm_host_top99p == o.cspm_host_top99p &&
           custom_ts_avg == o.custom_ts_avg &&
           cws_container_count_avg == o.cws_container_count_avg &&
-          cws_host_top99p
+          cws_host_top99p == o.cws_host_top99p &&
+          date == o.date &&
+          dbm_host_top99p == o.dbm_host_top99p &&
+          dbm_queries_count_avg == o.dbm_queries_count_avg &&
+          fargate_tasks_count_avg == o.fargate_tasks_count_avg &&
+          fargate_tasks_count_hwm == o.fargate_tasks_count_hwm &&
+          gcp_host_top99p == o.gcp_host_top99p &&
+          heroku_host_top99p == o.heroku_host_top99p &&
+          incident_management_monthly_active_users_hwm == o.incident_management_monthly_active_users_hwm &&
+          indexed_events_count_sum == o.indexed_events_count_sum &&
+          infra_host_top99p == o.infra_host_top99p &&
+          ingested_events_bytes_sum == o.ingested_events_bytes_sum &&
+          iot_device_sum == o.iot_device_sum &&
+          iot_device_top99p == o.iot_device_top99p &&
+          mobile_rum_lite_session_count_sum == o.mobile_rum_lite_session_count_sum &&
+          mobile_rum_session_count_android_sum == o.mobile_rum_session_count_android_sum &&
+          mobile_rum_session_count_flutter_sum == o.mobile_rum_session_count_flutter_sum &&
+          mobile_rum_session_count_ios_sum == o.mobile_rum_session_count_ios_sum &&
+          mobile_rum_session_count_reactnative_sum == o.mobile_rum_session_count_reactnative_sum &&
+          mobile_rum_session_count_sum == o.mobile_rum_session_count_sum &&
+          mobile_rum_units_sum == o.mobile_rum_units_sum &&
+          netflow_indexed_events_count_sum == o.netflow_indexed_events_count_sum &&
+          npm_host_top99p == o.npm_host_top99p &&
+          observability_pipelines_bytes_processed_sum == o.observability_pipelines_bytes_processed_sum &&
+          online_archive_events_count_sum == o.online_archive_events_count_sum &&
+          opentelemetry_apm_host_top99p == o.opentelemetry_apm_host_top99p &&
+          opentelemetry_host_top99p == o.opentelemetry_host_top99p &&
+          orgs == o.orgs &&
+          profiling_host_top99p == o.profiling_host_top99p &&
+          rum_browser_and_mobile_session_count == o.rum_browser_and_mobile_session_count &&
+          rum_session_count_sum == o.rum_session_count_sum &&
+          rum_total_session_count_sum == o.rum_total_session_count_sum &&
+          rum_units_sum == o.rum_units_sum &&
+          sds_apm_scanned_bytes_sum == o.sds_apm_scanned_bytes_sum &&
+          sds_events_scanned_bytes_sum == o.sds_events_scanned_bytes_sum &&
+          sds_logs_scanned_bytes_sum == o.sds_logs_scanned_bytes_sum &&
+          sds_rum_scanned_bytes_sum == o.sds_rum_scanned_bytes_sum &&
+          sds_total_scanned_bytes_sum == o.sds_total_scanned_bytes_sum &&
+          synthetics_browser_check_calls_count_sum == o.synthetics_browser_check_calls_count_sum &&
+          synthetics_check_calls_count_sum == o.synthetics_check_calls_count_sum &&
+          synthetics_parallel_testing_max_slots_hwm == o.synthetics_parallel_testing_max_slots_hwm &&
+          trace_search_indexed_events_count_sum == o.trace_search_indexed_events_count_sum &&
+          twol_ingested_events_bytes_sum == o.twol_ingested_events_bytes_sum &&
+          vsphere_host_top99p == o.vsphere_host_top99p
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [agent_host_top99p, apm_azure_app_service_host_top99p, apm_fargate_count_avg, apm_host_top99p, appsec_fargate_count_avg, audit_logs_lines_indexed_sum, audit_trail_enabled_hwm, avg_profiled_fargate_tasks, aws_host_top99p, aws_lambda_func_count, aws_lambda_invocations_sum, azure_app_service_top99p, billable_ingested_bytes_sum, browser_rum_lite_session_count_sum, browser_rum_replay_session_count_sum, browser_rum_units_sum, ci_pipeline_indexed_spans_sum, ci_test_indexed_spans_sum, ci_visibility_pipeline_committers_hwm, ci_visibility_test_committers_hwm, cloud_cost_management_host_count_avg, container_avg, container_excl_agent_avg, container_hwm, cspm_aas_host_top99p, cspm_aws_host_top99p, cspm_azure_host_top99p, cspm_container_avg, cspm_container_hwm, cspm_gcp_host_top99p, cspm_host_top99p, custom_ts_avg, cws_container_count_avg, cws_host_top99p, date, dbm_host_top99p, dbm_queries_count_avg, fargate_tasks_count_avg, fargate_tasks_count_hwm, gcp_host_top99p, heroku_host_top99p, incident_management_monthly_active_users_hwm, indexed_events_count_sum, infra_host_top99p, ingested_events_bytes_sum, iot_device_sum, iot_device_top99p, mobile_rum_lite_session_count_sum, mobile_rum_session_count_android_sum, mobile_rum_session_count_flutter_sum, mobile_rum_session_count_ios_sum, mobile_rum_session_count_reactnative_sum, mobile_rum_session_count_sum, mobile_rum_units_sum, netflow_indexed_events_count_sum, npm_host_top99p, observability_pipelines_bytes_processed_sum, online_archive_events_count_sum, opentelemetry_apm_host_top99p, opentelemetry_host_top99p, orgs, profiling_host_top99p, rum_browser_and_mobile_session_count, rum_session_count_sum, rum_total_session_count_sum, rum_units_sum, sds_apm_scanned_bytes_sum, sds_events_scanned_bytes_sum, sds_logs_scanned_bytes_sum, sds_rum_scanned_bytes_sum, sds_total_scanned_bytes_sum, synthetics_browser_check_calls_count_sum, synthetics_check_calls_count_sum, synthetics_parallel_testing_max_slots_hwm, trace_search_indexed_events_count_sum, twol_ingested_events_bytes_sum, vsphere_host_top99p].hash
+    end
+  end
+e
