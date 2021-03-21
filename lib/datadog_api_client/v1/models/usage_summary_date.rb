@@ -675,3 +675,126 @@ module DatadogAPIClient::V1
       if attributes.key?(:'opentelemetry_apm_host_top99p')
         self.opentelemetry_apm_host_top99p = attributes[:'opentelemetry_apm_host_top99p']
       end
+
+      if attributes.key?(:'opentelemetry_host_top99p')
+        self.opentelemetry_host_top99p = attributes[:'opentelemetry_host_top99p']
+      end
+
+      if attributes.key?(:'orgs')
+        if (value = attributes[:'orgs']).is_a?(Array)
+          self.orgs = value
+        end
+      end
+
+      if attributes.key?(:'profiling_host_top99p')
+        self.profiling_host_top99p = attributes[:'profiling_host_top99p']
+      end
+
+      if attributes.key?(:'rum_browser_and_mobile_session_count')
+        self.rum_browser_and_mobile_session_count = attributes[:'rum_browser_and_mobile_session_count']
+      end
+
+      if attributes.key?(:'rum_session_count_sum')
+        self.rum_session_count_sum = attributes[:'rum_session_count_sum']
+      end
+
+      if attributes.key?(:'rum_total_session_count_sum')
+        self.rum_total_session_count_sum = attributes[:'rum_total_session_count_sum']
+      end
+
+      if attributes.key?(:'rum_units_sum')
+        self.rum_units_sum = attributes[:'rum_units_sum']
+      end
+
+      if attributes.key?(:'sds_apm_scanned_bytes_sum')
+        self.sds_apm_scanned_bytes_sum = attributes[:'sds_apm_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_events_scanned_bytes_sum')
+        self.sds_events_scanned_bytes_sum = attributes[:'sds_events_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_logs_scanned_bytes_sum')
+        self.sds_logs_scanned_bytes_sum = attributes[:'sds_logs_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_rum_scanned_bytes_sum')
+        self.sds_rum_scanned_bytes_sum = attributes[:'sds_rum_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_total_scanned_bytes_sum')
+        self.sds_total_scanned_bytes_sum = attributes[:'sds_total_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'synthetics_browser_check_calls_count_sum')
+        self.synthetics_browser_check_calls_count_sum = attributes[:'synthetics_browser_check_calls_count_sum']
+      end
+
+      if attributes.key?(:'synthetics_check_calls_count_sum')
+        self.synthetics_check_calls_count_sum = attributes[:'synthetics_check_calls_count_sum']
+      end
+
+      if attributes.key?(:'synthetics_parallel_testing_max_slots_hwm')
+        self.synthetics_parallel_testing_max_slots_hwm = attributes[:'synthetics_parallel_testing_max_slots_hwm']
+      end
+
+      if attributes.key?(:'trace_search_indexed_events_count_sum')
+        self.trace_search_indexed_events_count_sum = attributes[:'trace_search_indexed_events_count_sum']
+      end
+
+      if attributes.key?(:'twol_ingested_events_bytes_sum')
+        self.twol_ingested_events_bytes_sum = attributes[:'twol_ingested_events_bytes_sum']
+      end
+
+      if attributes.key?(:'vsphere_host_top99p')
+        self.vsphere_host_top99p = attributes[:'vsphere_host_top99p']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          agent_host_top99p == o.agent_host_top99p &&
+          apm_azure_app_service_host_top99p == o.apm_azure_app_service_host_top99p &&
+          apm_fargate_count_avg == o.apm_fargate_count_avg &&
+          apm_host_top99p == o.apm_host_top99p &&
+          appsec_fargate_count_avg == o.appsec_fargate_count_avg &&
+          audit_logs_lines_indexed_sum == o.audit_logs_lines_indexed_sum &&
+          audit_trail_enabled_hwm == o.audit_trail_enabled_hwm &&
+          avg_profiled_fargate_tasks == o.avg_profiled_fargate_tasks &&
+          aws_host_top99p == o.aws_host_top99p &&
+          aws_lambda_func_count == o.aws_lambda_func_count &&
+          aws_lambda_invocations_sum == o.aws_lambda_invocations_sum &&
+          azure_app_service_top99p == o.azure_app_service_top99p &&
+          billable_ingested_bytes_sum == o.billable_ingested_bytes_sum &&
+          browser_rum_lite_session_count_sum == o.browser_rum_lite_session_count_sum &&
+          browser_rum_replay_session_count_sum == o.browser_rum_replay_session_count_sum &&
+          browser_rum_units_sum == o.browser_rum_units_sum &&
+          ci_pipeline_indexed_spans_sum == o.ci_pipeline_indexed_spans_sum &&
+          ci_test_indexed_spans_sum == o.ci_test_indexed_spans_sum &&
+          ci_visibility_pipeline_committers_hwm == o.ci_visibility_pipeline_committers_hwm &&
+          ci_visibility_test_committers_hwm == o.ci_visibility_test_committers_hwm &&
+          cloud_cost_management_host_count_avg == o.cloud_cost_management_host_count_avg &&
+          container_avg == o.container_avg &&
+          container_excl_agent_avg == o.container_excl_agent_avg &&
+          container_hwm == o.container_hwm &&
+          cspm_aas_host_top99p == o.cspm_aas_host_top99p &&
+          cspm_aws_host_top99p == o.cspm_aws_host_top99p &&
+          cspm_azure_host_top99p == o.cspm_azure_host_top99p &&
+          cspm_container_avg == o.cspm_container_avg &&
+          cspm_container_hwm == o.cspm_container_hwm &&
+          cspm_gcp_host_top99p == o.cspm_gcp_host_top99p &&
+          cspm_host_top99p == o.cspm_host_top99p &&
+          custom_ts_avg == o.custom_ts_avg &&
+          cws_container_count_avg == o.cws_container_count_avg &&
+          cws_host_top99p
