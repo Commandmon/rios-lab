@@ -78,4 +78,28 @@ module DatadogAPIClient::V1
       end
     end
 
-    # Check to see if the all the proper
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          prefixes_ipv4 == o.prefixes_ipv4 &&
+          prefixes_ipv6 == o.prefixes_ipv6
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [prefixes_ipv4, prefixes_ipv6].hash
+    end
+  end
+end
