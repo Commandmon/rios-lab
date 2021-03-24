@@ -1,0 +1,36 @@
+http_interactions:
+- recorded_at: Wed, 09 Mar 2022 10:24:17 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://ip-ranges.datadoghq.com/
+  response:
+    body:
+      encoding: UTF-8
+      string: "{\n    \"version\": 47,\n    \"modified\": \"2022-01-25-20-00-00\"\
+        ,\n    \"agents\": {\n        \"prefixes_ipv4\": [\n            \"3.233.144.0/20\"\
+        \n        ],\n        \"prefixes_ipv6\": [\n            \"2600:1f18:24e6:b900::/56\"\
+        \n        ]\n    },\n    \"api\": {\n        \"prefixes_ipv4\": [\n      \
+        \      \"3.233.144.0/20\"\n        ],\n        \"prefixes_ipv6\": [\n    \
+        \        \"2600:1f18:24e6:b900::/56\"\n        ]\n    },\n    \"apm\": {\n\
+        \        \"prefixes_ipv4\": [\n            \"3.233.144.0/20\"\n        ],\n\
+        \        \"prefixes_ipv6\": [\n            \"2600:1f18:24e6:b900::/56\"\n\
+        \        ]\n    },\n    \"global\": {\n        \"prefixes_ipv4\": [\n    \
+        \        \"3.233.144.0/20\"\n        ],\n        \"prefixes_ipv6\": [\n  \
+        \          \"2600:1f18:24e6:b900::/56\"\n        ]\n    },\n    \"logs\":\
+        \ {\n        \"prefixes_ipv4\": [\n            \"3.233.144.0/20\"\n      \
+        \  ],\n        \"prefixes_ipv6\": [\n            \"2600:1f18:24e6:b900::/56\"\
+        \n        ]\n    },\n    \"orchestrator\": {\n        \"prefixes_ipv4\": [\n\
+        \            \"3.233.144.0/20\"\n        ],\n        \"prefixes_ipv6\": [\n\
+        \            \"2600:1f18:24e6:b900::/56\"\n        ]\n    },\n    \"process\"\
+        : {\n        \"prefixes_ipv4\": [\n            \"3.233.144.0/20\"\n      \
+        \  ],\n        \"prefixes_ipv6\": [\n            \"2600:1f18:24e6:b900::/56\"\
+        \n        ]\n    },\n    \"synthetics\": {\n        \"prefixes_ipv4\": [\n\
+        \            \"13.114.211.96/32\",\n            \"13.115.46.213/32\",\n  \
+        \          \"13.126.169.175/32\",\n            \"13.209.118.42/32\",\n   \
+        \         \"13.209.230.111/32\",\n            \"13.234.54.8/32\",\n      \
+        \      \"13.236.246.161/32\",\n            \"13.238.14.57/32\",\n        \
+        \    \"13.48.15
