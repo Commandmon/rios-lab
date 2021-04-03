@@ -74,4 +74,50 @@ module DatadogAPIClient::V2
       end
     end
 
-    #
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @attachment.nil?
+      return false if @attachment_type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param attachment [Object] Object to be assigned
+    # @!visibility private
+    def attachment=(attachment)
+      if attachment.nil?
+        fail ArgumentError, 'invalid value for "attachment", attachment cannot be nil.'
+      end
+      @attachment = attachment
+    end
+
+    # Custom attribute writer method with validation
+    # @param attachment_type [Object] Object to be assigned
+    # @!visibility private
+    def attachment_type=(attachment_type)
+      if attachment_type.nil?
+        fail ArgumentError, 'invalid value for "attachment_type", attachment_type cannot be nil.'
+      end
+      @attachment_type = attachment_type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          attachment == o.attachment &&
+          attachment_type == o.attachment_type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [attachment, attachment_type].hash
+    end
+  end
+end
