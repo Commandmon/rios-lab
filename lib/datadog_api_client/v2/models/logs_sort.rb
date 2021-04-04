@@ -17,18 +17,9 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Link type.
-  class ServiceDefinitionV1ResourceType
+  # Sort parameters when querying logs.
+  class LogsSort
     include BaseEnumModel
 
-    DOC = "doc".freeze
-    WIKI = "wiki".freeze
-    RUNBOOK = "runbook".freeze
-    URL = "url".freeze
-    REPO = "repo".freeze
-    DASHBOARD = "dashboard".freeze
-    ONCALL = "oncall".freeze
-    CODE = "code".freeze
-    LINK = "link".freeze
-  end
-end
+    TIMESTAMP_ASCENDING = "timestamp".freeze
+    TIME
