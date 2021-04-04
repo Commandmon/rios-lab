@@ -52,4 +52,154 @@ module DatadogAPIClient::V1
     # Define how you want the SLO to be displayed.
     attr_accessor :view_mode
 
-    # Type of
+    # Type of view displayed by the widget.
+    attr_reader :view_type
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'global_time_target' => :'global_time_target',
+        :'show_error_budget' => :'show_error_budget',
+        :'slo_id' => :'slo_id',
+        :'time_windows' => :'time_windows',
+        :'title' => :'title',
+        :'title_align' => :'title_align',
+        :'title_size' => :'title_size',
+        :'type' => :'type',
+        :'view_mode' => :'view_mode',
+        :'view_type' => :'view_type'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'global_time_target' => :'String',
+        :'show_error_budget' => :'Boolean',
+        :'slo_id' => :'String',
+        :'time_windows' => :'Array<WidgetTimeWindows>',
+        :'title' => :'String',
+        :'title_align' => :'WidgetTextAlign',
+        :'title_size' => :'String',
+        :'type' => :'SLOWidgetDefinitionType',
+        :'view_mode' => :'WidgetViewMode',
+        :'view_type' => :'String'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SLOWidgetDefinition` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SLOWidgetDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'global_time_target')
+        self.global_time_target = attributes[:'global_time_target']
+      end
+
+      if attributes.key?(:'show_error_budget')
+        self.show_error_budget = attributes[:'show_error_budget']
+      end
+
+      if attributes.key?(:'slo_id')
+        self.slo_id = attributes[:'slo_id']
+      end
+
+      if attributes.key?(:'time_windows')
+        if (value = attributes[:'time_windows']).is_a?(Array)
+          self.time_windows = value
+        end
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'title_align')
+        self.title_align = attributes[:'title_align']
+      end
+
+      if attributes.key?(:'title_size')
+        self.title_size = attributes[:'title_size']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'view_mode')
+        self.view_mode = attributes[:'view_mode']
+      end
+
+      if attributes.key?(:'view_type')
+        self.view_type = attributes[:'view_type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @type.nil?
+      return false if @view_type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param view_type [Object] Object to be assigned
+    # @!visibility private
+    def view_type=(view_type)
+      if view_type.nil?
+        fail ArgumentError, 'invalid value for "view_type", view_type cannot be nil.'
+      end
+      @view_type = view_type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          global_time_target == o.global_time_target &&
+          show_error_budget == o.show_error_budget &&
+          slo_id == o.slo_id &&
+          time_windows == o.time_windows &&
+          title == o.title &&
+          title_align == o.title_align &&
+          title_size == o.title_size &&
+          type == o.type &&
+          view_mode == o.view_mode &&
+          view_type == o.view_type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [global_time_target, show_error_budget, slo_id, time_windows, title, title_align, title_size, type, view_mode, view_type].hash
+    end
+  end
+end
