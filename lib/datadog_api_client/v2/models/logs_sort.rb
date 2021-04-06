@@ -22,4 +22,6 @@ module DatadogAPIClient::V2
     include BaseEnumModel
 
     TIMESTAMP_ASCENDING = "timestamp".freeze
-    TIME
+    TIMESTAMP_DESCENDING = "-timestamp".freeze
+  end
+end
