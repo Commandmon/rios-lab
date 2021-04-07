@@ -171,4 +171,21 @@ module DatadogAPIClient::V2
           category == o.category &&
           creation_date == o.creation_date &&
           creator == o.creator &&
-     
+          default_rule == o.default_rule &&
+          description == o.description &&
+          enabled == o.enabled &&
+          expression == o.expression &&
+          name == o.name &&
+          updated_at == o.updated_at &&
+          updater == o.updater &&
+          version == o.version
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [category, creation_date, creator, default_rule, description, enabled, expression, name, updated_at, updater, version].hash
+    end
+  end
+end
