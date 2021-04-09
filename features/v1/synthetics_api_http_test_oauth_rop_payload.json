@@ -1,0 +1,41 @@
+{
+  "config": {
+    "assertions": [
+      {
+        "operator": "is",
+        "property": "{{ '{{ PROPERTY }}' }}",
+        "target": "text/html",
+        "type": "header"
+      },
+      { "operator": "lessThan", "target": 2000, "type": "responseTime" },
+      {
+        "operator": "validatesJSONPath",
+        "target": {
+          "jsonPath": "topKey",
+          "operator": "isNot",
+          "targetValue": "0"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "validatesXPath",
+        "target": {
+          "xPath": "target-xpath",
+          "targetValue": "0",
+          "operator": "contains"
+        },
+        "type": "body"
+      }
+    ],
+    "configVariables": [
+      {
+        "example": "content-type",
+        "name": "PROPERTY",
+        "pattern": "content-type",
+        "type": "text"
+      }
+    ],
+    "request": {
+      "certificate": {
+        "cert": {
+          "content": "cert-c
