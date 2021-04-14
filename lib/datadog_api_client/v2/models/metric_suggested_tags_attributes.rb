@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,22 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Relationship to role.
-  class RelationshipToRole
+  # Object containing the definition of a metric's actively queried tags and aggregations.
+  class MetricSuggestedTagsAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Relationship to role object.
-    attr_accessor :data
+    # List of aggregation combinations that have been actively queried.
+    attr_accessor :active_aggregations
+
+    # List of tag keys that have been actively queried.
+    attr_accessor :active_tags
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'active_aggregations' => :'active_aggregations',
+        :'active_tags' => :'active_tags'
       }
     end
 
@@ -40,7 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'RelationshipToRoleData'
+        :'active_aggregations' => :'Array<MetricCustomAggregation>',
+        :'active_tags' => :'Array<String>'
       }
     end
 
@@ -49,19 +55,27 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RelationshipToRole` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::MetricSuggestedTagsAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RelationshipToRole`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::MetricSuggestedTagsAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.key?(:'active_aggregations')
+        if (value = attributes[:'active_aggregations']).is_a?(Array)
+          self.active_aggregations = value
+        end
+      end
+
+      if attributes.key?(:'active_tags')
+        if (value = attributes[:'active_tags']).is_a?(Array)
+          self.active_tags = value
+        end
       end
     end
 
@@ -78,14 +92,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          active_aggregations == o.active_aggregations &&
+          active_tags == o.active_tags
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [active_aggregations, active_tags].hash
     end
   end
 end
