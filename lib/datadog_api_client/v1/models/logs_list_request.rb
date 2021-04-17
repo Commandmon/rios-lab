@@ -86,3 +86,83 @@ module DatadogAPIClient::V1
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
           fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::LogsListRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'index')
+        self.index = attributes[:'index']
+      end
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'query')
+        self.query = attributes[:'query']
+      end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
+      end
+
+      if attributes.key?(:'start_at')
+        self.start_at = attributes[:'start_at']
+      end
+
+      if attributes.key?(:'time')
+        self.time = attributes[:'time']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if !@limit.nil? && @limit > 1000
+      return false if @time.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param limit [Object] Object to be assigned
+    # @!visibility private
+    def limit=(limit)
+      if !limit.nil? && limit > 1000
+        fail ArgumentError, 'invalid value for "limit", must be smaller than or equal to 1000.'
+      end
+      @limit = limit
+    end
+
+    # Custom attribute writer method with validation
+    # @param time [Object] Object to be assigned
+    # @!visibility private
+    def time=(time)
+      if time.nil?
+        fail ArgumentError, 'invalid value for "time", time cannot be nil.'
+      end
+      @time = time
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          index == o.index &&
+          limit == o.limit &&
+          query == o.query &&
+          sort == o.sort &&
+          start_at == o.start_at &&
+          time == o.time
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [index, limit, query, sort, start_at, time].hash
+    end
+  end
+end
