@@ -104,4 +104,69 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'dashboard_count')
-        self.dashboard_count = attribu
+        self.dashboard_count = attributes[:'dashboard_count']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'is_favorite')
+        self.is_favorite = attributes[:'is_favorite']
+      end
+
+      if attributes.key?(:'modified')
+        self.modified = attributes[:'modified']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @name.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param name [Object] Object to be assigned
+    # @!visibility private
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      @name = name
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          author == o.author &&
+          created == o.created &&
+          dashboard_count == o.dashboard_count &&
+          id == o.id &&
+          is_favorite == o.is_favorite &&
+          modified == o.modified &&
+          name == o.name &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [author, created, dashboard_count, id, is_favorite, modified, name, type].hash
+    end
+  end
+end
