@@ -33,4 +33,150 @@ module DatadogAPIClient::V1
 
     # Create a user.
     #
-    # Cre
+    # Create a user for your organization.
+    #
+    # **Note**: Users can only be created with the admin access role
+    # if application keys belong to administrators.
+    #
+    # @param body [User] User object that needs to be created.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(UserResponse, Integer, Hash)>] UserResponse data, response status code and response headers
+    def create_user_with_http_info(body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsersAPI.create_user ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling UsersAPI.create_user"
+      end
+      # resource path
+      local_var_path = '/api/v1/user'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UserResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth, :AuthZ]
+
+      new_options = opts.merge(
+        :operation => :create_user,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsersAPI#create_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Disable a user.
+    #
+    # @see #disable_user_with_http_info
+    def disable_user(user_handle, opts = {})
+      data, _status_code, _headers = disable_user_with_http_info(user_handle, opts)
+      data
+    end
+
+    # Disable a user.
+    #
+    # Delete a user from an organization.
+    #
+    # **Note**: This endpoint can only be used with application keys belonging to
+    # administrators.
+    #
+    # @param user_handle [String] The handle of the user.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(UserDisableResponse, Integer, Hash)>] UserDisableResponse data, response status code and response headers
+    def disable_user_with_http_info(user_handle, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsersAPI.disable_user ...'
+      end
+      # verify the required parameter 'user_handle' is set
+      if @api_client.config.client_side_validation && user_handle.nil?
+        fail ArgumentError, "Missing the required parameter 'user_handle' when calling UsersAPI.disable_user"
+      end
+      # resource path
+      local_var_path = '/api/v1/user/{user_handle}'.sub('{user_handle}', CGI.escape(user_handle.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UserDisableResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :disable_user,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Delete, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsersAPI#disable_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get user details.
+    #
+    # @see #get_user_with_http_info
+    def get_user(user_handle, opts = {})
+      data, _status_code, _headers = get_user_with_http_info(user_handle, opts)
+      data
+    end
+
+    # Get user details.
+    #
+    # Get a user's details.
+    #
+    # @param user_handle [String] The ID of the user.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(UserResponse, Integer, Hash)>] UserResponse data, response status code and response headers
+    def get_user_with_http_info(user_handle, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.d
