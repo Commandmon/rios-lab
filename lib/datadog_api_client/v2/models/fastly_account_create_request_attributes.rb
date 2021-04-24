@@ -119,4 +119,17 @@ module DatadogAPIClient::V2
     # @!visibility private
     def ==(o)
       return true if self.equal?(o)
-      self.class == o
+      self.class == o.class &&
+          api_key == o.api_key &&
+          name == o.name &&
+          services == o.services
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [api_key, name, services].hash
+    end
+  end
+end
