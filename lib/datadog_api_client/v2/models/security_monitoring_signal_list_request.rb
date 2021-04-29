@@ -18,22 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Relationship to users.
-  class RelationshipToUsers
+  # The request for a security signal list.
+  class SecurityMonitoringSignalListRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Relationships to user objects.
-    attr_reader :data
+    # Search filters for listing security signals.
+    attr_accessor :filter
+
+    # The paging attributes for listing security signals.
+    attr_accessor :page
+
+    # The sort parameters used for querying security signals.
+    attr_accessor :sort
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'filter' => :'filter',
+        :'page' => :'page',
+        :'sort' => :'sort'
       }
     end
 
@@ -41,7 +49,9 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<RelationshipToUserData>'
+        :'filter' => :'SecurityMonitoringSignalListRequestFilter',
+        :'page' => :'SecurityMonitoringSignalListRequestPage',
+        :'sort' => :'SecurityMonitoringSignalsSort'
       }
     end
 
@@ -50,21 +60,27 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RelationshipToUsers` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SecurityMonitoringSignalListRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RelationshipToUsers`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SecurityMonitoringSignalListRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'filter')
+        self.filter = attributes[:'filter']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
       end
     end
 
@@ -72,18 +88,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @data.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param data [Object] Object to be assigned
-    # @!visibility private
-    def data=(data)
-      if data.nil?
-        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
-      end
-      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -92,14 +97,16 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          filter == o.filter &&
+          page == o.page &&
+          sort == o.sort
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [filter, page, sort].hash
     end
   end
 end
