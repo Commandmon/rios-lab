@@ -29,4 +29,14 @@ module DatadogAPIClient::V1
     GROUP_ASCENDING = "group,asc".freeze
     GROUP_DESCENDING = "group,desc".freeze
     NAME_ASCENDING = "name,asc".freeze
-    NAME
+    NAME_DESCENDING = "name,desc".freeze
+    STATUS_ASCENDING = "status,asc".freeze
+    STATUS_DESCENDING = "status,desc".freeze
+    TAGS_ASCENDING = "tags,asc".freeze
+    TAGS_DESCENDING = "tags,desc".freeze
+    TRIGGERED_ASCENDING = "triggered,asc".freeze
+    TRIGGERED_DESCENDING = "triggered,desc".freeze
+    PRIORITY_ASCENDING = "priority,asc".freeze
+    PRIORITY_DESCENDING = "priority,desc".freeze
+  end
+end
