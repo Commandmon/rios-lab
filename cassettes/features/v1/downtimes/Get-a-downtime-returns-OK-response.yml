@@ -32,4 +32,27 @@ http_interactions:
   response:
     body:
       encoding: UTF-8
-      string: '{"recurrence":{"until_date":1654163396,"until_occurrences":null,"week_days":["Mon","Tue","Wed","Thu","Fri"],
+      string: '{"recurrence":{"until_date":1654163396,"until_occurrences":null,"week_days":["Mon","Tue","Wed","Thu","Fri"],"type":"weeks","period":1},"end":null,"monitor_tags":["*"],"child_id":null,"canceled":null,"monitor_id":null,"mute_first_recovery_notification":false,"created":1652348997,"org_id":321813,"modified":1652348997,"disabled":false,"start":1652348996,"creator_id":1445416,"parent_id":null,"timezone":"Etc/UTC","active":true,"scope":["test:testgetadowntimereturnsokresponse1652348996"],"message":"Test-Get_a_downtime_returns_OK_response-1652348996","downtime_type":2,"id":1944162261,"updater_id":null}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+- recorded_at: Thu, 12 May 2022 09:49:56 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v1/downtime/1944162261
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
