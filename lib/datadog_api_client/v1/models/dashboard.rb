@@ -184,4 +184,116 @@ module DatadogAPIClient::V1
 
       if attributes.key?(:'notify_list')
         if (value = attributes[:'notify_list']).is_a?(Array)
-       
+          self.notify_list = value
+        end
+      end
+
+      if attributes.key?(:'reflow_type')
+        self.reflow_type = attributes[:'reflow_type']
+      end
+
+      if attributes.key?(:'restricted_roles')
+        if (value = attributes[:'restricted_roles']).is_a?(Array)
+          self.restricted_roles = value
+        end
+      end
+
+      if attributes.key?(:'template_variable_presets')
+        if (value = attributes[:'template_variable_presets']).is_a?(Array)
+          self.template_variable_presets = value
+        end
+      end
+
+      if attributes.key?(:'template_variables')
+        if (value = attributes[:'template_variables']).is_a?(Array)
+          self.template_variables = value
+        end
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+
+      if attributes.key?(:'widgets')
+        if (value = attributes[:'widgets']).is_a?(Array)
+          self.widgets = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @layout_type.nil?
+      return false if @title.nil?
+      return false if @widgets.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param layout_type [Object] Object to be assigned
+    # @!visibility private
+    def layout_type=(layout_type)
+      if layout_type.nil?
+        fail ArgumentError, 'invalid value for "layout_type", layout_type cannot be nil.'
+      end
+      @layout_type = layout_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param title [Object] Object to be assigned
+    # @!visibility private
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'invalid value for "title", title cannot be nil.'
+      end
+      @title = title
+    end
+
+    # Custom attribute writer method with validation
+    # @param widgets [Object] Object to be assigned
+    # @!visibility private
+    def widgets=(widgets)
+      if widgets.nil?
+        fail ArgumentError, 'invalid value for "widgets", widgets cannot be nil.'
+      end
+      @widgets = widgets
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          author_handle == o.author_handle &&
+          author_name == o.author_name &&
+          created_at == o.created_at &&
+          description == o.description &&
+          id == o.id &&
+          is_read_only == o.is_read_only &&
+          layout_type == o.layout_type &&
+          modified_at == o.modified_at &&
+          notify_list == o.notify_list &&
+          reflow_type == o.reflow_type &&
+          restricted_roles == o.restricted_roles &&
+          template_variable_presets == o.template_variable_presets &&
+          template_variables == o.template_variables &&
+          title == o.title &&
+          url == o.url &&
+          widgets == o.widgets
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [author_handle, author_name, created_at, description, id, is_read_only, layout_type, modified_at, notify_list, reflow_type, restricted_roles, template_variable_presets, template_variables, title, url, widgets].hash
+    end
+  end
+end
