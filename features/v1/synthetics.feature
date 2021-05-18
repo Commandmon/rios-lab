@@ -162,4 +162,83 @@ Feature: Synthetics
     Then the response status is 400 - JSON format is wrong
 
   @generated @skip @team:DataDog/synthetics-app
-  Scenario: Create an API test 
+  Scenario: Create an API test returns "OK - Returns the created test details." response
+    Given new "CreateSyntheticsAPITest" request
+    And body with value {"config": {"assertions": [{"operator": "lessThan", "target": 1000, "type": "responseTime"}], "request": {"method": "GET", "url": "https://example.com"}}, "locations": ["aws:eu-west-3"], "message": "Notification message", "name": "Example test name", "options": {"ci": {"executionRule": "blocking"}, "device_ids": ["laptop_large"], "httpVersion": "http1", "monitor_options": {}, "restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], "retry": {}, "rumSettings": {"applicationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "clientTokenId": 12345, "isEnabled": true}, "scheduling": {"timeframes": [{"day": 1, "from": "07:00", "to": "16:00"}, {"day": 3, "from": "07:00", "to": "16:00"}], "timezone": "America/New_York"}}, "status": "live", "subtype": "http", "tags": ["env:production"], "type": "api"}
+    When the request is sent
+    Then the response status is 200 OK - Returns the created test details.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Create an API test returns "Test quota is reached" response
+    Given new "CreateSyntheticsAPITest" request
+    And body with value {"config": {"assertions": [{"operator": "lessThan", "target": 1000, "type": "responseTime"}], "request": {"method": "GET", "url": "https://example.com"}}, "locations": ["aws:eu-west-3"], "message": "Notification message", "name": "Example test name", "options": {"ci": {"executionRule": "blocking"}, "device_ids": ["laptop_large"], "httpVersion": "http1", "monitor_options": {}, "restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], "retry": {}, "rumSettings": {"applicationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "clientTokenId": 12345, "isEnabled": true}, "scheduling": {"timeframes": [{"day": 1, "from": "07:00", "to": "16:00"}, {"day": 3, "from": "07:00", "to": "16:00"}], "timezone": "America/New_York"}}, "status": "live", "subtype": "http", "tags": ["env:production"], "type": "api"}
+    When the request is sent
+    Then the response status is 402 Test quota is reached
+
+  @team:DataDog/synthetics-app
+  Scenario: Create an API test with UDP subtype returns "OK - Returns the created test details." response
+    Given new "CreateSyntheticsAPITest" request
+    And body from file "synthetics_api_test_udp_payload.json"
+    When the request is sent
+    Then the response status is 200 OK - Returns the created test details.
+    And the response "name" is equal to "{{ unique }}"
+
+  @team:DataDog/synthetics-app
+  Scenario: Create an API test with WEBSOCKET subtype returns "OK - Returns the created test details." response
+    Given new "CreateSyntheticsAPITest" request
+    And body from file "synthetics_api_test_websocket_payload.json"
+    When the request is sent
+    Then the response status is 200 OK - Returns the created test details.
+    And the response "name" is equal to "{{ unique }}"
+
+  @team:DataDog/synthetics-app
+  Scenario: Create an API test with multi subtype returns "OK - Returns the created test details." response
+    Given new "CreateSyntheticsAPITest" request
+    And body from file "synthetics_api_test_multi_step_payload.json"
+    When the request is sent
+    Then the response status is 200 OK - Returns the created test details.
+    And the response "name" is equal to "{{ unique }}"
+    And the response "config.steps[0].retry.count" is equal to 5
+    And the response "config.steps[0].retry.interval" is equal to 1000
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete a global variable returns "JSON format is wrong" response
+    Given new "DeleteGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 JSON format is wrong
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete a global variable returns "Not found" response
+    Given new "DeleteGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not found
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete a global variable returns "OK" response
+    Given new "DeleteGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete a private location returns "- Private locations are not activated for the user" response
+    Given new "DeletePrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Private locations are not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete a private location returns "OK" response
+    Given new "DeletePrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Delete tests returns "- JSON format is wrong" response
+    Given new "DeleteTests" request
+    And body with value {"public_ids": []}
+    When the request is sent
+    Then the response st
