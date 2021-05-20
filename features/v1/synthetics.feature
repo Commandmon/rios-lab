@@ -285,4 +285,58 @@ Feature: Synthetics
 
   @generated @skip @team:DataDog/synthetics-app
   Scenario: Edit a global variable returns "Invalid request" response
-    Given new 
+    Given new "EditGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    And body with value {"attributes": {"restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]}, "description": "Example description", "name": "MY_VARIABLE", "parse_test_options": {"field": "content-type", "localVariableName": "LOCAL_VARIABLE", "parser": {"type": "regex", "value": ".*"}, "type": "http_body"}, "parse_test_public_id": "abc-def-123", "tags": ["team:front", "test:workflow-1"], "value": {"secure": true, "value": "value"}}
+    When the request is sent
+    Then the response status is 400 Invalid request
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Edit a global variable returns "OK" response
+    Given new "EditGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    And body with value {"attributes": {"restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]}, "description": "Example description", "name": "MY_VARIABLE", "parse_test_options": {"field": "content-type", "localVariableName": "LOCAL_VARIABLE", "parser": {"type": "regex", "value": ".*"}, "type": "http_body"}, "parse_test_public_id": "abc-def-123", "tags": ["team:front", "test:workflow-1"], "value": {"secure": true, "value": "value"}}
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Edit a private location returns "- Private locations are not activated for the user" response
+    Given new "UpdatePrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    And body with value {"description": "Description of private location", "metadata": {"restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]}, "name": "New private location", "tags": ["team:front"]}
+    When the request is sent
+    Then the response status is 404 - Private locations are not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Edit a private location returns "OK" response
+    Given new "UpdatePrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    And body with value {"description": "Description of private location", "metadata": {"restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]}, "name": "New private location", "tags": ["team:front"]}
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Edit an API test returns "- JSON format is wrong" response
+    Given new "UpdateAPITest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And body with value {"config": {"assertions": [{"operator": "lessThan", "target": 1000, "type": "responseTime"}], "request": {"method": "GET", "url": "https://example.com"}}, "locations": ["aws:eu-west-3"], "message": "Notification message", "name": "Example test name", "options": {"ci": {"executionRule": "blocking"}, "device_ids": ["laptop_large"], "httpVersion": "http1", "monitor_options": {}, "restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], "retry": {}, "rumSettings": {"applicationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "clientTokenId": 12345, "isEnabled": true}, "scheduling": {"timeframes": [{"day": 1, "from": "07:00", "to": "16:00"}, {"day": 3, "from": "07:00", "to": "16:00"}], "timezone": "America/New_York"}}, "status": "live", "subtype": "http", "tags": ["env:production"], "type": "api"}
+    When the request is sent
+    Then the response status is 400 - JSON format is wrong
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Edit an API test returns "- Synthetic Monitoring is not activated for the user" response
+    Given new "UpdateAPITest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And body with value {"config": {"assertions": [{"operator": "lessThan", "target": 1000, "type": "responseTime"}], "request": {"method": "GET", "url": "https://example.com"}}, "locations": ["aws:eu-west-3"], "message": "Notification message", "name": "Example test name", "options": {"ci": {"executionRule": "blocking"}, "device_ids": ["laptop_large"], "httpVersion": "http1", "monitor_options": {}, "restricted_roles": ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], "retry": {}, "rumSettings": {"applicationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "clientTokenId": 12345, "isEnabled": true}, "scheduling": {"timeframes": [{"day": 1, "from": "07:00", "to": "16:00"}, {"day": 3, "from": "07:00", "to": "16:00"}], "timezone": "America/New_York"}}, "status": "live", "subtype": "http", "tags": ["env:production"], "type": "api"}
+    When the request is sent
+    Then the response status is 404 - Synthetic Monitoring is not activated for the user
+
+  @team:DataDog/synthetics-app
+  Scenario: Edit an API test returns "OK" response
+    Given there is a valid "synthetics_api_test" in the system
+    And new "UpdateAPITest" request
+    And request contains "public_id" parameter from "synthetics_api_test.public_id"
+    And body from file "synthetics_api_test_update_payload.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "n
