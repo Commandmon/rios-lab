@@ -339,4 +339,119 @@ Feature: Synthetics
     And body from file "synthetics_api_test_update_payload.json"
     When the request is sent
     Then the response status is 200 OK
-    And the response "n
+    And the response "name" is equal to "{{ synthetics_api_test.name }}-updated"
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a browser test result returns "- Synthetic is not activated for the user" response
+    Given new "GetBrowserTestResult" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And request contains "result_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @replay-only @team:DataDog/synthetics-app
+  Scenario: Get a browser test result returns "OK" response
+    Given new "GetBrowserTestResult" request
+    And request contains "public_id" parameter with value "2yy-sem-mjh"
+    And request contains "result_id" parameter with value "5671719892074090418"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "result_id" is equal to "5671719892074090418"
+    And the response "probe_dc" is equal to "aws:ca-central-1"
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a browser test returns "- Synthetic is not activated for the user" response
+    Given new "GetBrowserTest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a browser test returns "OK" response
+    Given new "GetBrowserTest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a browser test's latest results summaries returns "- Synthetic is not activated for the user" response
+    Given new "GetBrowserTestLatestResults" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @replay-only @team:DataDog/synthetics-app
+  Scenario: Get a browser test's latest results summaries returns "OK" response
+    Given new "GetBrowserTestLatestResults" request
+    And request contains "public_id" parameter with value "2yy-sem-mjh"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "results" has length 3
+    And the response "results[0].status" is equal to 0
+    And the response "results[0].probe_dc" is equal to "aws:ca-central-1"
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a global variable returns "Not found" response
+    Given new "GetGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not found
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a global variable returns "OK" response
+    Given new "GetGlobalVariable" request
+    And request contains "variable_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a private location returns "- Synthetic private locations are not activated for the user" response
+    Given new "GetPrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic private locations are not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a private location returns "OK" response
+    Given new "GetPrivateLocation" request
+    And request contains "location_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a test configuration returns "- Synthetic is not activated for the user" response
+    Given new "GetTest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get a test configuration returns "OK" response
+    Given new "GetTest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get all global variables returns "OK" response
+    Given new "ListGlobalVariables" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get all locations (public and private) returns "OK" response
+    Given new "ListLocations" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get an API test result returns "- Synthetic is not activated for the user" response
+    Given new "GetAPITestResult" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And request contains "result_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @replay-only @team:DataDog/synthetics-app
+  Scenario: Get an API test result returns "OK" response
+    G
