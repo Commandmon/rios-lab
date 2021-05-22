@@ -454,4 +454,110 @@ Feature: Synthetics
 
   @replay-only @team:DataDog/synthetics-app
   Scenario: Get an API test result returns "OK" response
-    G
+    Given new "GetAPITestResult" request
+    And request contains "public_id" parameter with value "hwb-332-3xe"
+    And request contains "result_id" parameter with value "3420446318379485707"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "result_id" is equal to "3420446318379485707"
+    And the response "probe_dc" is equal to "aws:us-west-1"
+
+  @replay-only @team:DataDog/synthetics-app
+  Scenario: Get an API test result returns result with failure object
+    Given there is a "synthetics_api_test_with_wrong_dns" in the system
+    And the "synthetics_api_test_with_wrong_dns" is triggered
+    And new "GetAPITestResult" request
+    And request contains "public_id" parameter from "synthetics_api_test_with_wrong_dns.public_id"
+    And request contains "result_id" parameter from "synthetics_api_test_with_wrong_dns_result.results[0].result_id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "result.failure.code" is equal to "DNS"
+    And the response "result.failure.message" is equal to "Error during DNS resolution of hostname app.datadfoghq.com (ENOTFOUND)."
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get an API test returns "- Synthetic Monitoring is not activated for the user" response
+    Given new "GetAPITest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic Monitoring is not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get an API test returns "OK" response
+    Given new "GetAPITest" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get an API test's latest results summaries returns "- Synthetic is not activated for the user" response
+    Given new "GetAPITestLatestResults" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @replay-only @team:DataDog/synthetics-app
+  Scenario: Get an API test's latest results summaries returns "OK" response
+    Given new "GetAPITestLatestResults" request
+    And request contains "public_id" parameter with value "hwb-332-3xe"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "results" has length 150
+    And the response "results[0].status" is equal to 0
+    And the response "results[0].probe_dc" is equal to "aws:us-west-1"
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get details of batch returns "Batch does not exist." response
+    Given new "GetSyntheticsCIBatch" request
+    And request contains "batch_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Batch does not exist.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get details of batch returns "OK" response
+    Given new "GetSyntheticsCIBatch" request
+    And request contains "batch_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get the list of all Synthetic tests returns "OK - Returns the list of all Synthetic tests." response
+    Given new "ListTests" request
+    When the request is sent
+    Then the response status is 200 OK - Returns the list of all Synthetic tests.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Get the list of all Synthetic tests returns "Synthetics is not activated for the user." response
+    Given new "ListTests" request
+    When the request is sent
+    Then the response status is 404 Synthetics is not activated for the user.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Pause or start a test returns "- Synthetic is not activated for the user" response
+    Given new "UpdateTestPauseStatus" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And body with value {"new_status": "live"}
+    When the request is sent
+    Then the response status is 404 - Synthetic is not activated for the user
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Pause or start a test returns "JSON format is wrong." response
+    Given new "UpdateTestPauseStatus" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And body with value {"new_status": "live"}
+    When the request is sent
+    Then the response status is 400 JSON format is wrong.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Pause or start a test returns "OK - Returns a boolean indicating if the update was successful." response
+    Given new "UpdateTestPauseStatus" request
+    And request contains "public_id" parameter from "REPLACE.ME"
+    And body with value {"new_status": "live"}
+    When the request is sent
+    Then the response status is 200 OK - Returns a boolean indicating if the update was successful.
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Trigger Synthetics tests returns "Bad Request" response
+    Given new "TriggerTests" request
+    And body with value {"tests": [{"metadata": {"ci": {"pipeline": {}, "provider": {}}, "git": {}}, "public_id": "aaa-aaa-aaa"}]}
+    When the request is sent
+    Then the response statu
