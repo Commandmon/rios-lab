@@ -560,4 +560,26 @@ Feature: Synthetics
     Given new "TriggerTests" request
     And body with value {"tests": [{"metadata": {"ci": {"pipeline": {}, "provider": {}}, "git": {}}, "public_id": "aaa-aaa-aaa"}]}
     When the request is sent
-    Then the response statu
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/synthetics-app
+  Scenario: Trigger Synthetics tests returns "OK" response
+    Given there is a valid "synthetics_api_test" in the system
+    And new "TriggerTests" request
+    And body with value {"tests": [{"public_id": "{{ synthetics_api_test.public_id }}"}]}
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Trigger tests from CI/CD pipelines returns "JSON format is wrong" response
+    Given new "TriggerCITests" request
+    And body with value {"tests": [{"basicAuth": {"password": "PaSSw0RD!", "type": "web", "username": "my_username"}, "deviceIds": ["laptop_large"], "locations": ["aws:eu-west-3"], "metadata": {"ci": {"pipeline": {}, "provider": {}}, "git": {}}, "public_id": "aaa-aaa-aaa", "retry": {}}]}
+    When the request is sent
+    Then the response status is 400 JSON format is wrong
+
+  @generated @skip @team:DataDog/synthetics-app
+  Scenario: Trigger tests from CI/CD pipelines returns "OK" response
+    Given new "TriggerCITests" request
+    And body with value {"tests": [{"basicAuth": {"password": "PaSSw0RD!", "type": "web", "username": "my_username"}, "deviceIds": ["laptop_large"], "locations": ["aws:eu-west-3"], "metadata": {"ci": {"pipeline": {}, "provider": {}}, "git": {}}, "public_id": "aaa-aaa-aaa", "retry": {}}]}
+    When the request is sent
+    Then the response status is 200 OK
