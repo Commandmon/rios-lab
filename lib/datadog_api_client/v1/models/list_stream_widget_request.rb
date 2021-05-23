@@ -96,4 +96,51 @@ module DatadogAPIClient::V1
     end
 
     # Custom attribute writer method with validation
-    # @param columns [Object]
+    # @param columns [Object] Object to be assigned
+    # @!visibility private
+    def columns=(columns)
+      if columns.nil?
+        fail ArgumentError, 'invalid value for "columns", columns cannot be nil.'
+      end
+      @columns = columns
+    end
+
+    # Custom attribute writer method with validation
+    # @param query [Object] Object to be assigned
+    # @!visibility private
+    def query=(query)
+      if query.nil?
+        fail ArgumentError, 'invalid value for "query", query cannot be nil.'
+      end
+      @query = query
+    end
+
+    # Custom attribute writer method with validation
+    # @param response_format [Object] Object to be assigned
+    # @!visibility private
+    def response_format=(response_format)
+      if response_format.nil?
+        fail ArgumentError, 'invalid value for "response_format", response_format cannot be nil.'
+      end
+      @response_format = response_format
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          columns == o.columns &&
+          query == o.query &&
+          response_format == o.response_format
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [columns, query, response_format].hash
+    end
+  end
+end
