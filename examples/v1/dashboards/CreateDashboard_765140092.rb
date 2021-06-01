@@ -36,4 +36,18 @@ body = DatadogAPIClient::V1::Dashboard.new({
         type: DatadogAPIClient::V1::QueryValueWidgetDefinitionType::QUERY_VALUE,
         timeseries_background: DatadogAPIClient::V1::TimeseriesBackground.new({
           type: DatadogAPIClient::V1::TimeseriesBackgroundType::AREA,
-          yaxis: DatadogAPIClient::V1::WidgetAxis.ne
+          yaxis: DatadogAPIClient::V1::WidgetAxis.new({
+            include_zero: true,
+          }),
+        }),
+      }),
+      layout: DatadogAPIClient::V1::WidgetLayout.new({
+        y: 0,
+        x: 0,
+        height: 2,
+        width: 2,
+      }),
+    }),
+  ],
+})
+p api_instance.create_dashboard(body)
