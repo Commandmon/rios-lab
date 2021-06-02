@@ -117,4 +117,23 @@ module DatadogAPIClient::V1
     end
 
     # Checks equality by comparing each attribute.
-    # 
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          browser_rum_units == o.browser_rum_units &&
+          mobile_rum_units == o.mobile_rum_units &&
+          org_name == o.org_name &&
+          public_id == o.public_id &&
+          rum_units == o.rum_units
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [browser_rum_units, mobile_rum_units, org_name, public_id, rum_units].hash
+    end
+  end
+end
