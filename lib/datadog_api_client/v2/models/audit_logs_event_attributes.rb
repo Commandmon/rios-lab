@@ -17,22 +17,36 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The incident attachment's relationships.
-  class IncidentAttachmentRelationships
+  # JSON object containing all event attributes and their associated values.
+  class AuditLogsEventAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Relationship to user.
-    attr_accessor :last_modified_by_user
+    # JSON object of attributes from Audit Logs events.
+    attr_accessor :attributes
+
+    # Name of the application or service generating Audit Logs events.
+    # This name is used to correlate Audit Logs to APM, so make sure you specify the same
+    # value when you use both products.
+    attr_accessor :service
+
+    # Array of tags associated with your event.
+    attr_accessor :tags
+
+    # Timestamp of your event.
+    attr_accessor :timestamp
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'last_modified_by_user' => :'last_modified_by_user'
+        :'attributes' => :'attributes',
+        :'service' => :'service',
+        :'tags' => :'tags',
+        :'timestamp' => :'timestamp'
       }
     end
 
@@ -40,7 +54,10 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'last_modified_by_user' => :'RelationshipToUser'
+        :'attributes' => :'Hash<String, Object>',
+        :'service' => :'String',
+        :'tags' => :'Array<String>',
+        :'timestamp' => :'Time'
       }
     end
 
@@ -49,19 +66,33 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::IncidentAttachmentRelationships` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::AuditLogsEventAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::IncidentAttachmentRelationships`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::AuditLogsEventAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'last_modified_by_user')
-        self.last_modified_by_user = attributes[:'last_modified_by_user']
+      if attributes.key?(:'attributes')
+        self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'service')
+        self.service = attributes[:'service']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
       end
     end
 
@@ -78,14 +109,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          last_modified_by_user == o.last_modified_by_user
+          attributes == o.attributes &&
+          service == o.service &&
+          tags == o.tags &&
+          timestamp == o.timestamp
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [last_modified_by_user].hash
-    end
-  end
-end
+      [attributes, service, tags, timestamp].
