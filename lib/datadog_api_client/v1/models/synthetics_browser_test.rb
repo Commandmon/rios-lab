@@ -146,4 +146,119 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'steps')
-        if (value = att
+        if (value = attributes[:'steps']).is_a?(Array)
+          self.steps = value
+        end
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @config.nil?
+      return false if @locations.nil?
+      return false if @message.nil?
+      return false if @name.nil?
+      return false if @options.nil?
+      return false if @type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param config [Object] Object to be assigned
+    # @!visibility private
+    def config=(config)
+      if config.nil?
+        fail ArgumentError, 'invalid value for "config", config cannot be nil.'
+      end
+      @config = config
+    end
+
+    # Custom attribute writer method with validation
+    # @param locations [Object] Object to be assigned
+    # @!visibility private
+    def locations=(locations)
+      if locations.nil?
+        fail ArgumentError, 'invalid value for "locations", locations cannot be nil.'
+      end
+      @locations = locations
+    end
+
+    # Custom attribute writer method with validation
+    # @param message [Object] Object to be assigned
+    # @!visibility private
+    def message=(message)
+      if message.nil?
+        fail ArgumentError, 'invalid value for "message", message cannot be nil.'
+      end
+      @message = message
+    end
+
+    # Custom attribute writer method with validation
+    # @param name [Object] Object to be assigned
+    # @!visibility private
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param options [Object] Object to be assigned
+    # @!visibility private
+    def options=(options)
+      if options.nil?
+        fail ArgumentError, 'invalid value for "options", options cannot be nil.'
+      end
+      @options = options
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          config == o.config &&
+          locations == o.locations &&
+          message == o.message &&
+          monitor_id == o.monitor_id &&
+          name == o.name &&
+          options == o.options &&
+          public_id == o.public_id &&
+          status == o.status &&
+          steps == o.steps &&
+          tags == o.tags &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [config, locations, message, monitor_id, name, options, public_id, status, steps, tags, type].hash
+    end
+  end
+end
