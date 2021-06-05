@@ -727,3 +727,852 @@ ScenariosModelMappings = {
             "from_ts" => "Integer",
             "to_ts" => "Integer",
             "probe_dc" => "Array<String>",
+    },
+    "v1.GetAPITestResult" => {
+            "public_id" => "String",
+            "result_id" => "String",
+    },
+    "v1.UpdateTestPauseStatus" => {
+            "public_id" => "String",
+            "body" => "SyntheticsUpdateTestPauseStatusPayload",
+    },
+    "v1.CreateGlobalVariable" => {
+            "body" => "SyntheticsGlobalVariable",
+    },
+    "v1.DeleteGlobalVariable" => {
+            "variable_id" => "String",
+    },
+    "v1.GetGlobalVariable" => {
+            "variable_id" => "String",
+    },
+    "v1.EditGlobalVariable" => {
+            "variable_id" => "String",
+            "body" => "SyntheticsGlobalVariable",
+    },
+    "v1.ListHostTags" => {
+            "source" => "String",
+    },
+    "v1.DeleteHostTags" => {
+            "host_name" => "String",
+            "source" => "String",
+    },
+    "v1.GetHostTags" => {
+            "host_name" => "String",
+            "source" => "String",
+    },
+    "v1.CreateHostTags" => {
+            "host_name" => "String",
+            "source" => "String",
+            "body" => "HostTags",
+    },
+    "v1.UpdateHostTags" => {
+            "host_name" => "String",
+            "source" => "String",
+            "body" => "HostTags",
+    },
+    "v1.CreateUser" => {
+            "body" => "User",
+    },
+    "v1.DisableUser" => {
+            "user_handle" => "String",
+    },
+    "v1.GetUser" => {
+            "user_handle" => "String",
+    },
+    "v1.UpdateUser" => {
+            "user_handle" => "String",
+            "body" => "User",
+    },
+    "v2.ListAPIKeys" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "APIKeysSort",
+            "filter" => "String",
+            "filter_created_at_start" => "String",
+            "filter_created_at_end" => "String",
+            "filter_modified_at_start" => "String",
+            "filter_modified_at_end" => "String",
+            "include" => "String",
+    },
+    "v2.CreateAPIKey" => {
+            "body" => "APIKeyCreateRequest",
+    },
+    "v2.DeleteAPIKey" => {
+            "api_key_id" => "String",
+    },
+    "v2.GetAPIKey" => {
+            "api_key_id" => "String",
+            "include" => "String",
+    },
+    "v2.UpdateAPIKey" => {
+            "api_key_id" => "String",
+            "body" => "APIKeyUpdateRequest",
+    },
+    "v2.ListApplicationKeys" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "ApplicationKeysSort",
+            "filter" => "String",
+            "filter_created_at_start" => "String",
+            "filter_created_at_end" => "String",
+    },
+    "v2.DeleteApplicationKey" => {
+            "app_key_id" => "String",
+    },
+    "v2.GetApplicationKey" => {
+            "app_key_id" => "String",
+            "include" => "String",
+    },
+    "v2.UpdateApplicationKey" => {
+            "app_key_id" => "String",
+            "body" => "ApplicationKeyUpdateRequest",
+    },
+    "v2.ListCurrentUserApplicationKeys" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "ApplicationKeysSort",
+            "filter" => "String",
+            "filter_created_at_start" => "String",
+            "filter_created_at_end" => "String",
+    },
+    "v2.CreateCurrentUserApplicationKey" => {
+            "body" => "ApplicationKeyCreateRequest",
+    },
+    "v2.DeleteCurrentUserApplicationKey" => {
+            "app_key_id" => "String",
+    },
+    "v2.GetCurrentUserApplicationKey" => {
+            "app_key_id" => "String",
+    },
+    "v2.UpdateCurrentUserApplicationKey" => {
+            "app_key_id" => "String",
+            "body" => "ApplicationKeyUpdateRequest",
+    },
+    "v2.ListAuditLogs" => {
+            "filter_query" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "sort" => "AuditLogsSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchAuditLogs" => {
+            "body" => "AuditLogsSearchEventsRequest",
+    },
+    "v2.ListAuthNMappings" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "AuthNMappingsSort",
+            "filter" => "String",
+    },
+    "v2.CreateAuthNMapping" => {
+            "body" => "AuthNMappingCreateRequest",
+    },
+    "v2.DeleteAuthNMapping" => {
+            "authn_mapping_id" => "String",
+    },
+    "v2.GetAuthNMapping" => {
+            "authn_mapping_id" => "String",
+    },
+    "v2.UpdateAuthNMapping" => {
+            "authn_mapping_id" => "String",
+            "body" => "AuthNMappingUpdateRequest",
+    },
+    "v2.AggregateCIAppPipelineEvents" => {
+            "body" => "CIAppPipelinesAggregateRequest",
+    },
+    "v2.ListCIAppPipelineEvents" => {
+            "filter_query" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "sort" => "CIAppSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchCIAppPipelineEvents" => {
+            "body" => "CIAppPipelineEventsRequest",
+    },
+    "v2.AggregateCIAppTestEvents" => {
+            "body" => "CIAppTestsAggregateRequest",
+    },
+    "v2.ListCIAppTestEvents" => {
+            "filter_query" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "sort" => "CIAppSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchCIAppTestEvents" => {
+            "body" => "CIAppTestEventsRequest",
+    },
+    "v2.DeleteDashboardListItems" => {
+            "dashboard_list_id" => "Integer",
+            "body" => "DashboardListDeleteItemsRequest",
+    },
+    "v2.GetDashboardListItems" => {
+            "dashboard_list_id" => "Integer",
+    },
+    "v2.CreateDashboardListItems" => {
+            "dashboard_list_id" => "Integer",
+            "body" => "DashboardListAddItemsRequest",
+    },
+    "v2.UpdateDashboardListItems" => {
+            "dashboard_list_id" => "Integer",
+            "body" => "DashboardListUpdateItemsRequest",
+    },
+    "v2.ListEvents" => {
+            "filter_query" => "String",
+            "filter_from" => "String",
+            "filter_to" => "String",
+            "sort" => "EventsSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchEvents" => {
+            "body" => "EventsListRequest",
+    },
+    "v2.ListIncidents" => {
+            "include" => "Array<IncidentRelatedObject>",
+            "page_size" => "Integer",
+            "page_offset" => "Integer",
+    },
+    "v2.CreateIncident" => {
+            "body" => "IncidentCreateRequest",
+    },
+    "v2.SearchIncidents" => {
+            "include" => "IncidentRelatedObject",
+            "query" => "String",
+            "sort" => "IncidentSearchSortOrder",
+    },
+    "v2.DeleteIncident" => {
+            "incident_id" => "String",
+    },
+    "v2.GetIncident" => {
+            "incident_id" => "String",
+            "include" => "Array<IncidentRelatedObject>",
+    },
+    "v2.UpdateIncident" => {
+            "incident_id" => "String",
+            "include" => "Array<IncidentRelatedObject>",
+            "body" => "IncidentUpdateRequest",
+    },
+    "v2.ListIncidentAttachments" => {
+            "incident_id" => "String",
+            "include" => "Array<IncidentAttachmentRelatedObject>",
+            "filter_attachment_type" => "Array<IncidentAttachmentAttachmentType>",
+    },
+    "v2.UpdateIncidentAttachments" => {
+            "incident_id" => "String",
+            "include" => "Array<IncidentAttachmentRelatedObject>",
+            "body" => "IncidentAttachmentUpdateRequest",
+    },
+    "v2.ListIncidentIntegrations" => {
+            "incident_id" => "String",
+    },
+    "v2.CreateIncidentIntegration" => {
+            "incident_id" => "String",
+            "body" => "IncidentIntegrationMetadataCreateRequest",
+    },
+    "v2.DeleteIncidentIntegration" => {
+            "incident_id" => "String",
+            "integration_metadata_id" => "String",
+    },
+    "v2.GetIncidentIntegration" => {
+            "incident_id" => "String",
+            "integration_metadata_id" => "String",
+    },
+    "v2.UpdateIncidentIntegration" => {
+            "incident_id" => "String",
+            "integration_metadata_id" => "String",
+            "body" => "IncidentIntegrationMetadataPatchRequest",
+    },
+    "v2.ListIncidentTodos" => {
+            "incident_id" => "String",
+    },
+    "v2.CreateIncidentTodo" => {
+            "incident_id" => "String",
+            "body" => "IncidentTodoCreateRequest",
+    },
+    "v2.DeleteIncidentTodo" => {
+            "incident_id" => "String",
+            "todo_id" => "String",
+    },
+    "v2.GetIncidentTodo" => {
+            "incident_id" => "String",
+            "todo_id" => "String",
+    },
+    "v2.UpdateIncidentTodo" => {
+            "incident_id" => "String",
+            "todo_id" => "String",
+            "body" => "IncidentTodoPatchRequest",
+    },
+    "v2.CreateOpsgenieService" => {
+            "body" => "OpsgenieServiceCreateRequest",
+    },
+    "v2.DeleteOpsgenieService" => {
+            "integration_service_id" => "String",
+    },
+    "v2.GetOpsgenieService" => {
+            "integration_service_id" => "String",
+    },
+    "v2.UpdateOpsgenieService" => {
+            "integration_service_id" => "String",
+            "body" => "OpsgenieServiceUpdateRequest",
+    },
+    "v2.CreateCloudflareAccount" => {
+            "body" => "CloudflareAccountCreateRequest",
+    },
+    "v2.DeleteCloudflareAccount" => {
+            "account_id" => "String",
+    },
+    "v2.GetCloudflareAccount" => {
+            "account_id" => "String",
+    },
+    "v2.UpdateCloudflareAccount" => {
+            "account_id" => "String",
+            "body" => "CloudflareAccountUpdateRequest",
+    },
+    "v2.CreateConfluentAccount" => {
+            "body" => "ConfluentAccountCreateRequest",
+    },
+    "v2.DeleteConfluentAccount" => {
+            "account_id" => "String",
+    },
+    "v2.GetConfluentAccount" => {
+            "account_id" => "String",
+    },
+    "v2.UpdateConfluentAccount" => {
+            "account_id" => "String",
+            "body" => "ConfluentAccountUpdateRequest",
+    },
+    "v2.ListConfluentResource" => {
+            "account_id" => "String",
+    },
+    "v2.CreateConfluentResource" => {
+            "account_id" => "String",
+            "body" => "ConfluentResourceRequest",
+    },
+    "v2.DeleteConfluentResource" => {
+            "account_id" => "String",
+            "resource_id" => "String",
+    },
+    "v2.GetConfluentResource" => {
+            "account_id" => "String",
+            "resource_id" => "String",
+    },
+    "v2.UpdateConfluentResource" => {
+            "account_id" => "String",
+            "resource_id" => "String",
+            "body" => "ConfluentResourceRequest",
+    },
+    "v2.CreateFastlyAccount" => {
+            "body" => "FastlyAccountCreateRequest",
+    },
+    "v2.DeleteFastlyAccount" => {
+            "account_id" => "String",
+    },
+    "v2.GetFastlyAccount" => {
+            "account_id" => "String",
+    },
+    "v2.UpdateFastlyAccount" => {
+            "account_id" => "String",
+            "body" => "FastlyAccountUpdateRequest",
+    },
+    "v2.ListFastlyServices" => {
+            "account_id" => "String",
+    },
+    "v2.CreateFastlyService" => {
+            "account_id" => "String",
+            "body" => "FastlyServiceRequest",
+    },
+    "v2.DeleteFastlyService" => {
+            "account_id" => "String",
+            "service_id" => "String",
+    },
+    "v2.GetFastlyService" => {
+            "account_id" => "String",
+            "service_id" => "String",
+    },
+    "v2.UpdateFastlyService" => {
+            "account_id" => "String",
+            "service_id" => "String",
+            "body" => "FastlyServiceRequest",
+    },
+    "v2.UpdateIPAllowlist" => {
+            "body" => "IPAllowlistUpdateRequest",
+    },
+    "v2.SubmitLog" => {
+            "content_encoding" => "ContentEncoding",
+            "ddtags" => "String",
+            "body" => "Array<HTTPLogItem>",
+    },
+    "v2.AggregateLogs" => {
+            "body" => "LogsAggregateRequest",
+    },
+    "v2.ListLogsGet" => {
+            "filter_query" => "String",
+            "filter_index" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "filter_storage_tier" => "LogsStorageTier",
+            "sort" => "LogsSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.ListLogs" => {
+            "body" => "LogsListRequest",
+    },
+    "v2.UpdateLogsArchiveOrder" => {
+            "body" => "LogsArchiveOrder",
+    },
+    "v2.CreateLogsArchive" => {
+            "body" => "LogsArchiveCreateRequest",
+    },
+    "v2.DeleteLogsArchive" => {
+            "archive_id" => "String",
+    },
+    "v2.GetLogsArchive" => {
+            "archive_id" => "String",
+    },
+    "v2.UpdateLogsArchive" => {
+            "archive_id" => "String",
+            "body" => "LogsArchiveCreateRequest",
+    },
+    "v2.RemoveRoleFromArchive" => {
+            "archive_id" => "String",
+            "body" => "RelationshipToRole",
+    },
+    "v2.ListArchiveReadRoles" => {
+            "archive_id" => "String",
+    },
+    "v2.AddReadRoleToArchive" => {
+            "archive_id" => "String",
+            "body" => "RelationshipToRole",
+    },
+    "v2.CreateLogsMetric" => {
+            "body" => "LogsMetricCreateRequest",
+    },
+    "v2.DeleteLogsMetric" => {
+            "metric_id" => "String",
+    },
+    "v2.GetLogsMetric" => {
+            "metric_id" => "String",
+    },
+    "v2.UpdateLogsMetric" => {
+            "metric_id" => "String",
+            "body" => "LogsMetricUpdateRequest",
+    },
+    "v2.ListTagConfigurations" => {
+            "filter_configured" => "Boolean",
+            "filter_tags_configured" => "String",
+            "filter_metric_type" => "MetricTagConfigurationMetricTypes",
+            "filter_include_percentiles" => "Boolean",
+            "filter_queried" => "Boolean",
+            "filter_tags" => "String",
+            "window_seconds" => "Integer",
+    },
+    "v2.DeleteBulkTagsMetricsConfiguration" => {
+            "body" => "MetricBulkTagConfigDeleteRequest",
+    },
+    "v2.CreateBulkTagsMetricsConfiguration" => {
+            "body" => "MetricBulkTagConfigCreateRequest",
+    },
+    "v2.ListActiveMetricConfigurations" => {
+            "metric_name" => "String",
+            "window_seconds" => "Integer",
+    },
+    "v2.ListTagsByMetricName" => {
+            "metric_name" => "String",
+    },
+    "v2.EstimateMetricsOutputSeries" => {
+            "metric_name" => "String",
+            "filter_groups" => "String",
+            "filter_hours_ago" => "Integer",
+            "filter_num_aggregations" => "Integer",
+            "filter_pct" => "Boolean",
+            "filter_timespan_h" => "Integer",
+    },
+    "v2.DeleteTagConfiguration" => {
+            "metric_name" => "String",
+    },
+    "v2.ListTagConfigurationByName" => {
+            "metric_name" => "String",
+    },
+    "v2.UpdateTagConfiguration" => {
+            "metric_name" => "String",
+            "body" => "MetricTagConfigurationUpdateRequest",
+    },
+    "v2.CreateTagConfiguration" => {
+            "metric_name" => "String",
+            "body" => "MetricTagConfigurationCreateRequest",
+    },
+    "v2.ListVolumesByMetricName" => {
+            "metric_name" => "String",
+    },
+    "v2.QueryScalarData" => {
+            "body" => "ScalarFormulaQueryRequest",
+    },
+    "v2.QueryTimeseriesData" => {
+            "body" => "TimeseriesFormulaQueryRequest",
+    },
+    "v2.SubmitMetrics" => {
+            "content_encoding" => "MetricContentEncoding",
+            "body" => "MetricPayload",
+    },
+    "v2.CreateMonitorConfigPolicy" => {
+            "body" => "MonitorConfigPolicyCreateRequest",
+    },
+    "v2.DeleteMonitorConfigPolicy" => {
+            "policy_id" => "String",
+    },
+    "v2.GetMonitorConfigPolicy" => {
+            "policy_id" => "String",
+    },
+    "v2.UpdateMonitorConfigPolicy" => {
+            "policy_id" => "String",
+            "body" => "MonitorConfigPolicyEditRequest",
+    },
+    "v2.ListRoles" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "RolesSort",
+            "filter" => "String",
+    },
+    "v2.CreateRole" => {
+            "body" => "RoleCreateRequest",
+    },
+    "v2.DeleteRole" => {
+            "role_id" => "String",
+    },
+    "v2.GetRole" => {
+            "role_id" => "String",
+    },
+    "v2.UpdateRole" => {
+            "role_id" => "String",
+            "body" => "RoleUpdateRequest",
+    },
+    "v2.CloneRole" => {
+            "role_id" => "String",
+            "body" => "RoleCloneRequest",
+    },
+    "v2.RemovePermissionFromRole" => {
+            "role_id" => "String",
+            "body" => "RelationshipToPermission",
+    },
+    "v2.ListRolePermissions" => {
+            "role_id" => "String",
+    },
+    "v2.AddPermissionToRole" => {
+            "role_id" => "String",
+            "body" => "RelationshipToPermission",
+    },
+    "v2.RemoveUserFromRole" => {
+            "role_id" => "String",
+            "body" => "RelationshipToUser",
+    },
+    "v2.ListRoleUsers" => {
+            "role_id" => "String",
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "String",
+            "filter" => "String",
+    },
+    "v2.AddUserToRole" => {
+            "role_id" => "String",
+            "body" => "RelationshipToUser",
+    },
+    "v2.ListProcesses" => {
+            "search" => "String",
+            "tags" => "String",
+            "from" => "Integer",
+            "to" => "Integer",
+            "page_limit" => "Integer",
+            "page_cursor" => "String",
+    },
+    "v2.DeleteRestrictionPolicy" => {
+            "resource_id" => "String",
+    },
+    "v2.GetRestrictionPolicy" => {
+            "resource_id" => "String",
+    },
+    "v2.UpdateRestrictionPolicy" => {
+            "resource_id" => "String",
+            "body" => "RestrictionPolicyUpdateRequest",
+    },
+    "v2.AggregateRUMEvents" => {
+            "body" => "RUMAggregateRequest",
+    },
+    "v2.CreateRUMApplication" => {
+            "body" => "RUMApplicationCreateRequest",
+    },
+    "v2.DeleteRUMApplication" => {
+            "id" => "String",
+    },
+    "v2.GetRUMApplication" => {
+            "id" => "String",
+    },
+    "v2.UpdateRUMApplication" => {
+            "id" => "String",
+            "body" => "RUMApplicationUpdateRequest",
+    },
+    "v2.ListRUMEvents" => {
+            "filter_query" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "sort" => "RUMSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchRUMEvents" => {
+            "body" => "RUMSearchEventsRequest",
+    },
+    "v2.UploadIdPMetadata" => {
+            "idp_file" => "File",
+    },
+    "v2.CreateCloudWorkloadSecurityAgentRule" => {
+            "body" => "CloudWorkloadSecurityAgentRuleCreateRequest",
+    },
+    "v2.DeleteCloudWorkloadSecurityAgentRule" => {
+            "agent_rule_id" => "String",
+    },
+    "v2.GetCloudWorkloadSecurityAgentRule" => {
+            "agent_rule_id" => "String",
+    },
+    "v2.UpdateCloudWorkloadSecurityAgentRule" => {
+            "agent_rule_id" => "String",
+            "body" => "CloudWorkloadSecurityAgentRuleUpdateRequest",
+    },
+    "v2.CreateSecurityFilter" => {
+            "body" => "SecurityFilterCreateRequest",
+    },
+    "v2.DeleteSecurityFilter" => {
+            "security_filter_id" => "String",
+    },
+    "v2.GetSecurityFilter" => {
+            "security_filter_id" => "String",
+    },
+    "v2.UpdateSecurityFilter" => {
+            "security_filter_id" => "String",
+            "body" => "SecurityFilterUpdateRequest",
+    },
+    "v2.ListSecurityMonitoringRules" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+    },
+    "v2.CreateSecurityMonitoringRule" => {
+            "body" => "SecurityMonitoringRuleCreatePayload",
+    },
+    "v2.DeleteSecurityMonitoringRule" => {
+            "rule_id" => "String",
+    },
+    "v2.GetSecurityMonitoringRule" => {
+            "rule_id" => "String",
+    },
+    "v2.UpdateSecurityMonitoringRule" => {
+            "rule_id" => "String",
+            "body" => "SecurityMonitoringRuleUpdatePayload",
+    },
+    "v2.ListSecurityMonitoringSignals" => {
+            "filter_query" => "String",
+            "filter_from" => "Time",
+            "filter_to" => "Time",
+            "sort" => "SecurityMonitoringSignalsSort",
+            "page_cursor" => "String",
+            "page_limit" => "Integer",
+    },
+    "v2.SearchSecurityMonitoringSignals" => {
+            "body" => "SecurityMonitoringSignalListRequest",
+    },
+    "v2.GetSecurityMonitoringSignal" => {
+            "signal_id" => "String",
+    },
+    "v2.EditSecurityMonitoringSignalAssignee" => {
+            "signal_id" => "String",
+            "body" => "SecurityMonitoringSignalAssigneeUpdateRequest",
+    },
+    "v2.EditSecurityMonitoringSignalIncidents" => {
+            "signal_id" => "String",
+            "body" => "SecurityMonitoringSignalIncidentsUpdateRequest",
+    },
+    "v2.EditSecurityMonitoringSignalState" => {
+            "signal_id" => "String",
+            "body" => "SecurityMonitoringSignalStateUpdateRequest",
+    },
+    "v2.ReorderScanningGroups" => {
+            "body" => "SensitiveDataScannerConfigRequest",
+    },
+    "v2.CreateScanningGroup" => {
+            "body" => "SensitiveDataScannerGroupCreateRequest",
+    },
+    "v2.DeleteScanningGroup" => {
+            "group_id" => "String",
+            "body" => "SensitiveDataScannerGroupDeleteRequest",
+    },
+    "v2.UpdateScanningGroup" => {
+            "group_id" => "String",
+            "body" => "SensitiveDataScannerGroupUpdateRequest",
+    },
+    "v2.CreateScanningRule" => {
+            "body" => "SensitiveDataScannerRuleCreateRequest",
+    },
+    "v2.DeleteScanningRule" => {
+            "rule_id" => "String",
+            "body" => "SensitiveDataScannerRuleDeleteRequest",
+    },
+    "v2.UpdateScanningRule" => {
+            "rule_id" => "String",
+            "body" => "SensitiveDataScannerRuleUpdateRequest",
+    },
+    "v2.CreateServiceAccount" => {
+            "body" => "ServiceAccountCreateRequest",
+    },
+    "v2.ListServiceAccountApplicationKeys" => {
+            "service_account_id" => "String",
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "ApplicationKeysSort",
+            "filter" => "String",
+            "filter_created_at_start" => "String",
+            "filter_created_at_end" => "String",
+    },
+    "v2.CreateServiceAccountApplicationKey" => {
+            "service_account_id" => "String",
+            "body" => "ApplicationKeyCreateRequest",
+    },
+    "v2.DeleteServiceAccountApplicationKey" => {
+            "service_account_id" => "String",
+            "app_key_id" => "String",
+    },
+    "v2.GetServiceAccountApplicationKey" => {
+            "service_account_id" => "String",
+            "app_key_id" => "String",
+    },
+    "v2.UpdateServiceAccountApplicationKey" => {
+            "service_account_id" => "String",
+            "app_key_id" => "String",
+            "body" => "ApplicationKeyUpdateRequest",
+    },
+    "v2.ListIncidentServices" => {
+            "include" => "IncidentRelatedObject",
+            "page_size" => "Integer",
+            "page_offset" => "Integer",
+            "filter" => "String",
+    },
+    "v2.CreateIncidentService" => {
+            "body" => "IncidentServiceCreateRequest",
+    },
+    "v2.DeleteIncidentService" => {
+            "service_id" => "String",
+    },
+    "v2.GetIncidentService" => {
+            "service_id" => "String",
+            "include" => "IncidentRelatedObject",
+    },
+    "v2.UpdateIncidentService" => {
+            "service_id" => "String",
+            "body" => "IncidentServiceUpdateRequest",
+    },
+    "v2.CreateOrUpdateServiceDefinitions" => {
+            "body" => "ServiceDefinitionsCreateRequest",
+    },
+    "v2.DeleteServiceDefinition" => {
+            "service_name" => "String",
+    },
+    "v2.GetServiceDefinition" => {
+            "service_name" => "String",
+    },
+    "v2.SetOnDemandConcurrencyCap" => {
+            "body" => "OnDemandConcurrencyCapAttributes",
+    },
+    "v2.ListIncidentTeams" => {
+            "include" => "IncidentRelatedObject",
+            "page_size" => "Integer",
+            "page_offset" => "Integer",
+            "filter" => "String",
+    },
+    "v2.CreateIncidentTeam" => {
+            "body" => "IncidentTeamCreateRequest",
+    },
+    "v2.DeleteIncidentTeam" => {
+            "team_id" => "String",
+    },
+    "v2.GetIncidentTeam" => {
+            "team_id" => "String",
+            "include" => "IncidentRelatedObject",
+    },
+    "v2.UpdateIncidentTeam" => {
+            "team_id" => "String",
+            "body" => "IncidentTeamUpdateRequest",
+    },
+    "v2.GetUsageApplicationSecurityMonitoring" => {
+            "start_hr" => "Time",
+            "end_hr" => "Time",
+    },
+    "v2.GetCostByOrg" => {
+            "start_month" => "Time",
+            "end_month" => "Time",
+    },
+    "v2.GetEstimatedCostByOrg" => {
+            "view" => "String",
+            "start_month" => "Time",
+            "end_month" => "Time",
+            "start_date" => "Time",
+            "end_date" => "Time",
+    },
+    "v2.GetHistoricalCostByOrg" => {
+            "view" => "String",
+            "start_month" => "Time",
+            "end_month" => "Time",
+    },
+    "v2.GetHourlyUsage" => {
+            "filter_timestamp_start" => "Time",
+            "filter_timestamp_end" => "Time",
+            "filter_product_families" => "String",
+            "filter_include_descendants" => "Boolean",
+            "filter_versions" => "String",
+            "page_limit" => "Integer",
+            "page_next_record_id" => "String",
+    },
+    "v2.GetUsageLambdaTracedInvocations" => {
+            "start_hr" => "Time",
+            "end_hr" => "Time",
+    },
+    "v2.GetUsageObservabilityPipelines" => {
+            "start_hr" => "Time",
+            "end_hr" => "Time",
+    },
+    "v2.SendInvitations" => {
+            "body" => "UserInvitationsRequest",
+    },
+    "v2.GetInvitation" => {
+            "user_invitation_uuid" => "String",
+    },
+    "v2.ListUsers" => {
+            "page_size" => "Integer",
+            "page_number" => "Integer",
+            "sort" => "String",
+            "sort_dir" => "QuerySortOrder",
+            "filter" => "String",
+            "filter_status" => "String",
+    },
+    "v2.CreateUser" => {
+            "body" => "UserCreateRequest",
+    },
+    "v2.DisableUser" => {
+            "user_id" => "String",
+    },
+    "v2.GetUser" => {
+            "user_id" => "String",
+    },
+    "v2.UpdateUser" => {
+            "user_id" => "String",
+            "body" => "UserUpdateRequest",
+    },
+    "v2.ListUserOrganizations" => {
+            "user_id" => "String",
+    },
+    "v2.ListUserPermissions" => {
+            "user_id" => "String",
+    },
+}
