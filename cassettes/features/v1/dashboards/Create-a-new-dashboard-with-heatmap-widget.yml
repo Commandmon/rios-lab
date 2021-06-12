@@ -1,0 +1,12 @@
+http_interactions:
+- recorded_at: Thu, 06 Jan 2022 00:50:33 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"description":null,"is_read_only":false,"layout_type":"free","notify_list":[],"template_variables":[],"title":"Test-Create_a_new_dashboard_with_heatmap_widget-1641430233","widgets":[{"definition":{"requests":[{"q":"avg:system.cpu.user{*}
+        by {service}","style":{"palette":"dog_classic"}}],"time":{},"title":"","title_align":"left","title_size":"16","type":"heatmap"},"layout":{"height":15,"width":47,"x":0,"y":0}}]}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/js
