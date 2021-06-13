@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,34 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Response data related to the creation of a rule.
-  class SensitiveDataScannerRuleResponse
+  # The attributes of the user who last updated the Agent rule.
+  class CloudWorkloadSecurityAgentRuleUpdaterAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Attributes of the Sensitive Data Scanner rule.
-    attr_accessor :attributes
+    # The handle of the user.
+    attr_accessor :handle
 
-    # ID of the rule.
-    attr_accessor :id
-
-    # Relationships of a scanning rule.
-    attr_accessor :relationships
-
-    # Sensitive Data Scanner rule type.
-    attr_accessor :type
+    # The name of the user.
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'attributes' => :'attributes',
-        :'id' => :'id',
-        :'relationships' => :'relationships',
-        :'type' => :'type'
+        :'handle' => :'handle',
+        :'name' => :'name'
       }
     end
 
@@ -52,10 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'attributes' => :'SensitiveDataScannerRuleAttributes',
-        :'id' => :'String',
-        :'relationships' => :'SensitiveDataScannerRuleRelationships',
-        :'type' => :'SensitiveDataScannerRuleType'
+        :'handle' => :'String',
+        :'name' => :'String'
       }
     end
 
@@ -64,31 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerRuleResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CloudWorkloadSecurityAgentRuleUpdaterAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerRuleResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CloudWorkloadSecurityAgentRuleUpdaterAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'attributes')
-        self.attributes = attributes[:'attributes']
+      if attributes.key?(:'handle')
+        self.handle = attributes[:'handle']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'relationships')
-        self.relationships = attributes[:'relationships']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
     end
 
@@ -105,17 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          attributes == o.attributes &&
-          id == o.id &&
-          relationships == o.relationships &&
-          type == o.type
+          handle == o.handle &&
+          name == o.name
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [attributes, id, relationships, type].hash
+      [handle, name].hash
     end
   end
 end
