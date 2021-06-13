@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,26 +18,23 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Object for a single Agent rule.
-  class CloudWorkloadSecurityAgentRuleCreateData
+  # Pagination attributes.
+  class EventsResponseMetadataPage
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Create a new Cloud Workload Security Agent rule.
-    attr_reader :attributes
-
-    # The type of the resource. The value should always be `agent_rule`.
-    attr_reader :type
+    # The cursor to use to get the next results, if any. To make the next request, use the same
+    # parameters with the addition of the `page[cursor]`.
+    attr_accessor :after
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'attributes' => :'attributes',
-        :'type' => :'type'
+        :'after' => :'after'
       }
     end
 
@@ -44,8 +42,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'attributes' => :'CloudWorkloadSecurityAgentRuleCreateAttributes',
-        :'type' => :'CloudWorkloadSecurityAgentRuleType'
+        :'after' => :'String'
       }
     end
 
@@ -54,23 +51,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CloudWorkloadSecurityAgentRuleCreateData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::EventsResponseMetadataPage` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CloudWorkloadSecurityAgentRuleCreateData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::EventsResponseMetadataPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'attributes')
-        self.attributes = attributes[:'attributes']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'after')
+        self.after = attributes[:'after']
       end
     end
 
@@ -78,29 +71,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @attributes.nil?
-      return false if @type.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param attributes [Object] Object to be assigned
-    # @!visibility private
-    def attributes=(attributes)
-      if attributes.nil?
-        fail ArgumentError, 'invalid value for "attributes", attributes cannot be nil.'
-      end
-      @attributes = attributes
-    end
-
-    # Custom attribute writer method with validation
-    # @param type [Object] Object to be assigned
-    # @!visibility private
-    def type=(type)
-      if type.nil?
-        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -109,15 +80,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          attributes == o.attributes &&
-          type == o.type
+          after == o.after
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [attributes, type].hash
+      [after].hash
     end
   end
 end
