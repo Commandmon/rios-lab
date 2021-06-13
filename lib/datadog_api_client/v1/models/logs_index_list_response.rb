@@ -52,4 +52,42 @@ module DatadogAPIClient::V1
         fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::LogsIndexListResponse` initialize method"
       end
 
-      # check t
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::LogsIndexListResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'indexes')
+        if (value = attributes[:'indexes']).is_a?(Array)
+          self.indexes = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          indexes == o.indexes
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [indexes].hash
+    end
+  end
+end
