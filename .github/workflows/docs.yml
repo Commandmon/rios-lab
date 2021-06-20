@@ -1,0 +1,78 @@
+name: docs
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DD_PROFILING_NO_EXTENSION: true
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Fetch all history for applying timestamps to every page
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+          bundler-cache: true
+          # modify repository secret when there are problems with installing gems
+          cache-version: ${{ secrets.CACHE_VERSION }}
+
+      - name: Cache yardoc
+        uses: actions/cache@v3
+        with:
+          path: |
+            .yardoc
+            doc
+          key: yardoc
+
+      - name: Install
+        run: bundler install
+
+      - name: Build documentation
+        run: bundler exec rake docs
+
+      - name: Compress docs
+        run: tar czf doc.tar.gz doc
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: doc.tar.gz
+
+  publish:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs:
+      - build
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: documentation
+          path: doc
+
+      - name: Uncompress docs
+        run: tar xzf doc/doc.tar.gz && rm doc/doc.tar.gz
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc
+          commit_message: ${{ github.event.head_commit.message }}
+          # Write .nojekyll at the root, see:
+          # https://help.github.com/en/github/working-with-github-pages/about-github-pages#static-site-generators
+          enable_jekyll: false
+          # Only deploy if there were changes
+          allow_empty_commit: false
