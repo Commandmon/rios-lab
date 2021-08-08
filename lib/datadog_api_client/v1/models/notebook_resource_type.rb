@@ -17,10 +17,10 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Widget response format.
-  class ListStreamResponseFormat
+  # Type of the Notebook resource.
+  class NotebookResourceType
     include BaseEnumModel
 
-    EVENT_LIST = "event_list".freeze
+    NOTEBOOKS = "notebooks".freeze
   end
 end
