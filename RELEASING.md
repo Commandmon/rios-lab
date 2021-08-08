@@ -39,4 +39,5 @@ The release process is controlled and run by GitHub Actions.
 
 ### Publish
 
-1. A github action will kick off that builds and publishes this tag to Ruby Gem. Check that
+1. A github action will kick off that builds and publishes this tag to Ruby Gem. Check that the [Ruby Gem is published](https://rubygems.org/gems/datadog_api_client).
+1. Review and merge generated `Post release` pull-request with `dev` version bump.
