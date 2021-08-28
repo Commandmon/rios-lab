@@ -1,0 +1,10 @@
+http_interactions:
+- recorded_at: Fri, 26 Aug 2022 21:57:23 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"attributes":{"name":"Test-Update_a_role_returns_Bad_Role_ID_response-1661551043"},"type":"roles"}}'
+    headers:
+      Accept:
+      - application/json
+  
