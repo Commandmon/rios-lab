@@ -171,4 +171,33 @@ http_interactions:
         Service Ingest Read","description":"Access service ingestion pages. A user
         with this permission can view the service ingestion page, list of root services,
         their statistics, and creation info.","created":"2020-11-23T20:55:57.768261+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"4e3f02b4-2dce-11eb-84c0-2fca946a6efc","attributes":{"name":"apm_service_ingest_write","display_name":"APM
-        Se
+        Service Ingest Write","description":"Edit service ingestion pages'' root services.
+        A user with this permission can edit the root service ingestion and generate
+        a code snippet to increase ingestion per service.","created":"2020-11-23T20:56:06.419518+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"53950c54-2dce-11eb-84c0-a79ae108f6f8","attributes":{"name":"apm_apdex_manage_write","display_name":"APM
+        Apdex Manage Write","description":"Set Apdex T value on any service. A user
+        with this permission can set the T value from the Apdex graph on the service
+        page.","created":"2020-11-23T20:56:15.371926+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"5cbe5f9c-2dce-11eb-84c0-872d3e9f1076","attributes":{"name":"apm_tag_management_write","display_name":"APM
+        Tag Management Write","description":"Edit second primary tag selection. A
+        user with this permission can modify the second primary tag dropdown in the
+        APM settings page.","created":"2020-11-23T20:56:30.742299+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"61765026-2dce-11eb-84c0-833e230d1b8f","attributes":{"name":"apm_primary_operation_write","display_name":"APM
+        Primary Operation Write","description":"Edit the operation name value selection.
+        A user with this permission can modify the operation name list in the APM
+        settings page and the operation name controller on the service page.","created":"2020-11-23T20:56:38.658649+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"04bc1cf2-340a-11eb-873a-43b973c760dd","attributes":{"name":"audit_logs_write","display_name":"Audit
+        Trail Write","description":"Configure Audit Trail in your organization.","created":"2020-12-01T19:18:39.866516+00:00","group_name":"Compliance","display_type":"write","restricted":false}},{"type":"permissions","id":"8106300a-54f7-11eb-8cbc-7781a434a67b","attributes":{"name":"rum_apps_write","display_name":"RUM
+        Apps Write","description":"Create, edit, and delete RUM Applications.","created":"2021-01-12T16:59:16.324480+00:00","group_name":"Real
+        User Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"edfd5e74-801f-11eb-96d8-da7ad0900002","attributes":{"name":"debugger_write","display_name":"Live
+        Debugger Write Configuration","description":"Edit Live Debugger configuration.","created":"2021-03-08T15:06:59.006815+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"edfd5e75-801f-11eb-96d8-da7ad0900002","attributes":{"name":"debugger_read","display_name":"Live
+        Debugger Read Configuration","description":"View Live Debugger configuration.","created":"2021-03-08T15:06:59.010517+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"bf0dcf7c-90af-11eb-9b82-da7ad0900002","attributes":{"name":"data_scanner_read","display_name":"Data
+        Scanner Read","description":"View Data Scanner configurations.","created":"2021-03-29T16:56:46.394971+00:00","group_name":"Compliance","display_type":"read","restricted":false}},{"type":"permissions","id":"bf0dcf7d-90af-11eb-9b82-da7ad0900002","attributes":{"name":"data_scanner_write","display_name":"Data
+        Scanner Write","description":"Edit Data Scanner configurations.","created":"2021-03-29T16:56:46.398584+00:00","group_name":"Compliance","display_type":"write","restricted":false}},{"type":"permissions","id":"7df222b6-a45c-11eb-a0af-da7ad0900002","attributes":{"name":"org_management","display_name":"Org
+        Management","description":"Edit org configurations, including authentication
+        and certain security preferences such as configuring SAML, renaming an org,
+        configuring allowed login methods, creating child orgs, subscribing & unsubscribing
+        from apps in the marketplace.","created":"2021-04-23T17:51:12.187340+00:00","group_name":"Access
+        Management","display_type":"write","restricted":false}},{"type":"permissions","id":"98b984f4-b16d-11eb-a2c6-da7ad0900002","attributes":{"name":"security_monitoring_filters_read","display_name":"Security
+        Filters Read","description":"Read Security Filters.","created":"2021-05-10T08:56:23.676833+00:00","group_name":"Cloud
+        Security Platform","display_type":"read","restricted":false}},{"type":"permissions","id":"98b984f5-b16d-11eb-a2c6-da7ad0900002","attributes":{"name":"security_monitoring_filters_write","display_name":"Security
+        Filters Write","description":"Create, edit, and delete Security Filters.","created":"2021-05-10T08:56:23.680551+00:00","group_name":"Cloud
+        Security Platform","display_type":"write","restricted":false}},{"type":"permissions","id":"12efc20e-d36c-11eb-a9b8-da7ad0900002","attributes":{"name":"incident_read","display_name":"Incident
+        Read","description":"View incidents in Datadog.","created":"2021-06-22T15:11:09.255499+00:00","group_name":"Incidents","display_type":"read","restricted":true}},{"type":"permissions","id":"12efc211-d36c-11eb-a9b8-da7ad0900002","attributes":{"name":"incident_write","display_name":"Incident
+        Write","description":"Create, view, and manage incidents in Datadog.","created":"2021-06-22
