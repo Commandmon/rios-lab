@@ -228,4 +228,79 @@ http_interactions:
         Incidents Global Access","description":"Access all private incidents in Datadog,
         even when not added as a responder.","created":"2022-02-11T18:36:08.531989+00:00","group_name":"Incidents","display_type":"other","restricted":false}},{"type":"permissions","id":"b6bf9ac6-9a59-11ec-8480-da7ad0900002","attributes":{"name":"notebooks_read","display_name":"Notebooks
         Read","description":"View notebooks.","created":"2022-03-02T18:51:05.040950+00:00","group_name":"Notebooks","display_type":"read","restricted":true}},{"type":"permissions","id":"b6bf9ac7-9a59-11ec-8480-da7ad0900002","attributes":{"name":"notebooks_write","display_name":"Notebooks
-        Write","description":"Create and change notebooks.","created":"2022-03-02T18:51:05.044683+00:00","group_name":"Notebooks","display_type":"write","restr
+        Write","description":"Create and change notebooks.","created":"2022-03-02T18:51:05.044683+00:00","group_name":"Notebooks","display_type":"write","restricted":false}},{"type":"permissions","id":"2108215e-b9b4-11ec-958e-da7ad0900002","attributes":{"name":"rum_generate_metrics","display_name":"RUM
+        Generate Metrics","description":"Create custom metrics from RUM events.","created":"2022-04-11T16:26:24.106645+00:00","group_name":"Real
+        User Monitoring","display_type":"write","restricted":false}},{"type":"permissions","id":"1afff448-d5e9-11ec-ae37-da7ad0900002","attributes":{"name":"usage_notifications_read","display_name":"Usage
+        Notifications Read","description":"Receive notifications and view currently
+        configured notification settings.","created":"2022-05-17T13:56:09.870985+00:00","group_name":"Billing
+        and Usage","display_type":"read","restricted":false}},{"type":"permissions","id":"1afff449-d5e9-11ec-ae37-da7ad0900002","attributes":{"name":"usage_notifications_write","display_name":"Usage
+        Notifications Write","description":"Receive notifications and configure notification
+        settings.","created":"2022-05-17T13:56:09.876124+00:00","group_name":"Billing
+        and Usage","display_type":"write","restricted":false}},{"type":"permissions","id":"6c87d3da-e5c5-11ec-b1d6-da7ad0900002","attributes":{"name":"generate_dashboard_reports","display_name":"Dashboards
+        Report Write","description":"Schedule custom reports from a dashboard. These
+        reports will display any viewable data regardless of any granular restrictions
+        (restriction queries, scoped indexes) applied to the report''s creator.","created":"2022-06-06T18:21:03.378896+00:00","group_name":"Dashboards","display_type":"write","restricted":false}},{"type":"permissions","id":"f8e941cf-e746-11ec-b22d-da7ad0900002","attributes":{"name":"slos_read","display_name":"SLOs
+        Read","description":"View SLOs and status corrections.","created":"2022-06-08T16:20:55.142591+00:00","group_name":"Service
+        Level Objectives","display_type":"read","restricted":true}},{"type":"permissions","id":"f8e941d0-e746-11ec-b22d-da7ad0900002","attributes":{"name":"slos_write","display_name":"SLOs
+        Write","description":"Create, edit, and delete SLOs.","created":"2022-06-08T16:20:55.143869+00:00","group_name":"Service
+        Level Objectives","display_type":"write","restricted":false}},{"type":"permissions","id":"f8e941ce-e746-11ec-b22d-da7ad0900002","attributes":{"name":"slos_corrections","display_name":"SLOs
+        Status Corrections","description":"Apply, edit, and delete SLO status corrections.
+        A user with this permission can make status corrections, even if they do not
+        have permission to edit those SLOs.","created":"2022-06-08T16:20:55.139410+00:00","group_name":"Service
+        Level Objectives","display_type":"other","restricted":false}},{"type":"permissions","id":"ee68fba9-173a-11ed-b00b-da7ad0900002","attributes":{"name":"apm_service_catalog_write","display_name":"Service
+        Catalog Write","description":"Add, modify, and delete service catalog definitions
+        when those definitions are maintained by Datadog.","created":"2022-08-08T16:55:39.377188+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"ee68fba8-173a-11ed-b00b-da7ad0900002","attributes":{"name":"apm_service_catalog_read","display_name":"Service
+        Catalog Read","description":"View service catalog and service definitions.","created":"2022-08-08T16:55:39.374377+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"6be119a6-1cd8-11ed-b185-da7ad0900002","attributes":{"name":"watchdog_insights_read","display_name":"Watchdog
+        Insights Read","description":"View Watchdog Insights.","created":"2022-08-15T20:25:36.677197+00:00","group_name":"Watchdog","display_type":"read","restricted":false}}]}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+- recorded_at: Fri, 26 Aug 2022 21:57:23 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"attributes":{"name":"Test-Update_a_role_returns_Bad_Role_ID_response-1661551043-updated"},"id":"00000000-dead-beef-dead-ffffffffffff","relationships":{"permissions":{"data":[{"id":"984a2bd4-d3b4-11e8-a1ff-a7f660d43029","type":"permissions"}]}},"type":"roles"}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: PATCH
+    uri: https://api.datadoghq.com/api/v2/roles/10f8f24c-258a-11ed-b455-da7ad0900002
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"errors":["The id attribute in the request body does not match the
+        role_id in the URL"]}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 422
+      message: Unprocessable Entity
+- recorded_at: Fri, 26 Aug 2022 21:57:23 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/roles/10f8f24c-258a-11ed-b455-da7ad0900002
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
