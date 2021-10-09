@@ -72,4 +72,24 @@ http_interactions:
   request:
     body:
       encoding: UTF-8
-      string: '
+      string: '{"meta":{}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/sensitive-data-scanner/config/groups/ul6sS3enQvCwJZsxsDGYDg
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"version":1310}}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
