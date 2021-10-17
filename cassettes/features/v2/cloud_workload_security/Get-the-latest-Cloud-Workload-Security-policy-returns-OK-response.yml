@@ -1,0 +1,36 @@
+http_interactions:
+- recorded_at: Thu, 12 May 2022 09:51:26 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/yaml, application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/security/cloud_workload/policy/download
+  response:
+    body:
+      encoding: UTF-8
+      string: "# IMPORTANT: Edits to this file will not be reflected in the Datadog\
+        \ App and will be overwritten with new policy file downloads. Please modify\
+        \ rules in the Datadog App for full functionality.\nversion: '1652349086649'\n\
+        rules:\n- id: apparmor_modified_tty\n  version: a7f3b5c2\n  description: AppArmor\
+        \ Profile Modified\n  expression: exec.file.name in [\"aa-disable\", \"aa-complain\"\
+        , \"aa-audit\"] && exec.tty_name\n    !=\"\"\n- id: aws_metadata_service\n\
+        \  version: 4601e52e\n  description: EC2 Instance Metadata Service Accessed\
+        \ via Network Utility\n  expression: exec.file.path in [\"/usr/bin/wget\"\
+        , \"/usr/bin/curl\"] && exec.args in\n    [~\"*169.254.169.254*\"]\n- id:\
+        \ common_net_intrusion_util\n  version: c7198131\n  description: Nmap Execution\
+        \ Detected\n  expression: exec.file.path == \"/usr/bin/nmap\"\n- id: compiler_in_container\n\
+        \  version: 441a7e85\n  description: Compiler Executed in Container\n  expression:\
+        \ (exec.file.name in [\"javac\", \"clang\", \"gcc\",\"bcc\"] || (exec.file.name\n\
+        \    == \"go\" && exec.args in [~\"*build*\", ~\"*run*\"])) && container.id\
+        \ !=\"\" && process.ancestors.file.path\n    != \"/usr/bin/cilium-agent\"\n\
+        - id: credential_modified_chmod\n  version: 7e14d921\n  description: Either\
+        \ /etc/shadow/ or /etc/gshadow was modified by a non-standard\n    tool\n\
+        \  expression: \"(\\n    (chmod.file.path in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\
+        \" ])\\n\\\n    \\    && process.file.path not in [ \\\"/sbin/vipw\\\", \\\
+        \"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\n    , \\\"/usr/sbin/vigr\\\" ]\\\
+        n    && process.ancestors.file.path not in [\\\"/usr/bin/apt\\\"\\\n    ,\
+        \ \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n) && chmod.mode != chmod.file.mode

@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,34 +18,25 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # A compute rule to compute metrics or timeseries.
-  class RUMCompute
+  # Service definition data.
+  class ServiceDefinitionData
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # An aggregation function.
-    attr_reader :aggregation
+    # Service definition attributes.
+    attr_accessor :attributes
 
-    # The time buckets' size (only used for type=timeseries)
-    # Defaults to a resolution of 150 points.
-    attr_accessor :interval
-
-    # The metric to use.
-    attr_accessor :metric
-
-    # The type of compute.
+    # Service definition type.
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'aggregation' => :'aggregation',
-        :'interval' => :'interval',
-        :'metric' => :'metric',
+        :'attributes' => :'attributes',
         :'type' => :'type'
       }
     end
@@ -53,10 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'aggregation' => :'RUMAggregationFunction',
-        :'interval' => :'String',
-        :'metric' => :'String',
-        :'type' => :'RUMComputeType'
+        :'attributes' => :'ServiceDefinitionDataAttributes',
+        :'type' => :'String'
       }
     end
 
@@ -65,27 +55,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMCompute` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::ServiceDefinitionData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMCompute`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ServiceDefinitionData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'aggregation')
-        self.aggregation = attributes[:'aggregation']
-      end
-
-      if attributes.key?(:'interval')
-        self.interval = attributes[:'interval']
-      end
-
-      if attributes.key?(:'metric')
-        self.metric = attributes[:'metric']
+      if attributes.key?(:'attributes')
+        self.attributes = attributes[:'attributes']
       end
 
       if attributes.key?(:'type')
@@ -97,18 +79,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @aggregation.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param aggregation [Object] Object to be assigned
-    # @!visibility private
-    def aggregation=(aggregation)
-      if aggregation.nil?
-        fail ArgumentError, 'invalid value for "aggregation", aggregation cannot be nil.'
-      end
-      @aggregation = aggregation
     end
 
     # Checks equality by comparing each attribute.
@@ -117,9 +88,7 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregation == o.aggregation &&
-          interval == o.interval &&
-          metric == o.metric &&
+          attributes == o.attributes &&
           type == o.type
     end
 
@@ -127,7 +96,7 @@ module DatadogAPIClient::V2
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [aggregation, interval, metric, type].hash
+      [attributes, type].hash
     end
   end
 end

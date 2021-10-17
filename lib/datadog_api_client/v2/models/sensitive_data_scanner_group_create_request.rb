@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,35 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # A compute rule to compute metrics or timeseries.
-  class RUMCompute
+  # Create group request.
+  class SensitiveDataScannerGroupCreateRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # An aggregation function.
-    attr_reader :aggregation
+    # Data related to the creation of a group.
+    attr_accessor :data
 
-    # The time buckets' size (only used for type=timeseries)
-    # Defaults to a resolution of 150 points.
-    attr_accessor :interval
-
-    # The metric to use.
-    attr_accessor :metric
-
-    # The type of compute.
-    attr_accessor :type
+    # Meta payload containing information about the API.
+    attr_accessor :meta
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'aggregation' => :'aggregation',
-        :'interval' => :'interval',
-        :'metric' => :'metric',
-        :'type' => :'type'
+        :'data' => :'data',
+        :'meta' => :'meta'
       }
     end
 
@@ -53,10 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'aggregation' => :'RUMAggregationFunction',
-        :'interval' => :'String',
-        :'metric' => :'String',
-        :'type' => :'RUMComputeType'
+        :'data' => :'SensitiveDataScannerGroupCreate',
+        :'meta' => :'SensitiveDataScannerMetaVersionOnly'
       }
     end
 
@@ -65,31 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMCompute` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerGroupCreateRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMCompute`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerGroupCreateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'aggregation')
-        self.aggregation = attributes[:'aggregation']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
 
-      if attributes.key?(:'interval')
-        self.interval = attributes[:'interval']
-      end
-
-      if attributes.key?(:'metric')
-        self.metric = attributes[:'metric']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
       end
     end
 
@@ -97,18 +79,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @aggregation.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param aggregation [Object] Object to be assigned
-    # @!visibility private
-    def aggregation=(aggregation)
-      if aggregation.nil?
-        fail ArgumentError, 'invalid value for "aggregation", aggregation cannot be nil.'
-      end
-      @aggregation = aggregation
     end
 
     # Checks equality by comparing each attribute.
@@ -117,17 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregation == o.aggregation &&
-          interval == o.interval &&
-          metric == o.metric &&
-          type == o.type
+          data == o.data &&
+          meta == o.meta
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [aggregation, interval, metric, type].hash
+      [data, meta].hash
     end
   end
 end
