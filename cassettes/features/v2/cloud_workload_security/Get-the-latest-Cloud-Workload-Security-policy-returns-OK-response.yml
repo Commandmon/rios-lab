@@ -33,4 +33,64 @@ http_interactions:
         n    && process.ancestors.file.path not in [\\\"/usr/bin/apt\\\"\\\n    ,\
         \ \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
         \", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
-        \"]\\n) && chmod.mode != chmod.file.mode
+        \"]\\n) && chmod.mode != chmod.file.mode\"\n- id: credential_modified_chown\n\
+        \  version: 3731e0d5\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    (chown.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n\\\n    \\    && process.file.path\
+        \ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\
+        \n    , \\\"/usr/sbin/vigr\\\" ]\\n    && process.ancestors.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n) && (chown.uid !=\
+        \ chown.file.uid\\\n    \\ || chown.gid != chown.file.gid)\"\n- id: credential_modified_link\n\
+        \  version: 7594ec54\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    (link.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ]\\n \\\n    \\   || link.file.destination.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n\\\n    \\    && process.file.path\
+        \ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\
+        \n    , \\\"/usr/sbin/vigr\\\" ]\\n    && process.ancestors.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: credential_modified_open\n\
+        \  version: 2d65e37f\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    open.flags\
+        \ & ((O_CREAT|O_RDWR|O_WRONLY|O_TRUNC)) > 0 &&\\n  \\\n    \\  (open.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n    && process.file.path\\\
+        \n    \\ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\
+        \", \\\"/usr/sbin/vigr\\\"\\\n    \\ ]\\n    && process.ancestors.file.path\
+        \ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: credential_modified_rename\n\
+        \  version: 8bb8242b\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    (rename.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ]\\n\\\n    \\    || rename.file.destination.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n\\\n    \\    && process.file.path\
+        \ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\
+        \n    , \\\"/usr/sbin/vigr\\\" ]\\n    && process.ancestors.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: credential_modified_unlink\n\
+        \  version: 5af577d\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    (unlink.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n\\\n    \\    && process.file.path\
+        \ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\
+        \n    , \\\"/usr/sbin/vigr\\\" ]\\n    && process.ancestors.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: credential_modified_utimes\n\
+        \  version: 1c101338\n  description: Either /etc/shadow/ or /etc/gshadow was\
+        \ modified by a non-standard\n    tool\n  expression: \"(\\n    (utimes.file.path\
+        \ in [ \\\"/etc/shadow\\\", \\\"/etc/gshadow\\\" ])\\n\\\n    \\    && process.file.path\
+        \ not in [ \\\"/sbin/vipw\\\", \\\"/usr/sbin/vipw\\\", \\\"/sbin/vigr\\\"\\\
+        \n    , \\\"/usr/sbin/vigr\\\" ]\\n    && process.ancestors.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: cron_at_job_creation_chmod\n\
+        \  version: 13512ebc\n  description: Cron AT Job Creation\n  expression: \"\
+        (\\n    (chmod.file.path in [ ~\\\"/var/spool/cron/*\\\" ])\\n    && process.file.path\\\
+        \n    \\ not in [ \\\"/usr/bin/at\\\", \\\"/usr/bin/crontab\\\" ]\\n) && chmod.mode\
+        \ != chmod.file.mode\"\n- id: cron_at_job_creation_chown\n  version: ee7b306c\n\
+        \  description: Cron AT Job Creation\n  expression: \"(\\n    (chown.file.path\
+        \ in [ ~\\\"/var/spool/cron/*\\\" ])\\n    && process.file.path\\\n    \\\
+        \ not in [ \\\"/usr/bin/at\\\", \\\"/usr/bin/crontab\\\" ]\\n) && (chown.uid\
+        \
