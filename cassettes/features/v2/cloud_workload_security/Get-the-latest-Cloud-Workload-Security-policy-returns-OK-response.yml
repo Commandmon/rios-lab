@@ -216,4 +216,63 @@ http_interactions:
         \  version: 82c61c82\n  description: A kernel module was added to /lib/modules/\n\
         \  expression: \"(\\n    (chmod.file.path in [ ~\\\"/lib/modules/*\\\", ~\\\
         \"/usr/lib/modules/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\
-        \"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\
+        \"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"]\\n    && process.ancestors.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ] && process.ancestors.file.path\
+        \ != \\\"/usr/bin/kmod\\\"\\n) && chmod.mode != chmod.file.mode\"\n- id: kernel_module_chown\n\
+        \  version: ca2cf124\n  description: A kernel module was added to /lib/modules/\n\
+        \  expression: \"(\\n    (chown.file.path in [ ~\\\"/lib/modules/*\\\", ~\\\
+        \"/usr/lib/modules/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\
+        \"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"]\\n    && process.ancestors.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ] && process.ancestors.file.path\
+        \ != \\\"/usr/bin/kmod\\\"\\n) && (chown.uid != chown.file.uid\\\n    \\ ||\
+        \ chown.gid != chown.file.gid)\"\n- id: kernel_module_link\n  version: a18ca197\n\
+        \  description: A kernel module was added to /lib/modules/\n  expression:\
+        \ \"(\\n    (link.file.path in [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\
+        \"\\\n    \\ ]\\n    || link.file.destination.path in [ ~\\\"/lib/modules/*\\\
+        \", ~\\\"/usr/lib/modules/*\\\"\\\n    \\ ])\\n    && process.file.path not\
+        \ in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"]\\n    && process.ancestors.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ] && process.ancestors.file.path\
+        \ != \\\"/usr/bin/kmod\\\"\\n)\"\n- id: kernel_module_load\n  version: 904592b4\n\
+        \  description: A kernel module was loaded\n  expression: load_module.name\
+        \ != \"\"\n- id: kernel_module_load_container\n  version: 139b666a\n  description:\
+        \ A container loaded a new kernel module\n  expression: load_module.name !=\
+        \ \"\" && container.id !=\"\"\n- id: kernel_module_load_from_memory\n  version:\
+        \ 78122acd\n  description: A kernel module was loaded from memory\n  expression:\
+        \ load_module.loaded_from_memory == true\n- id: kernel_module_load_from_memory_container\n\
+        \  version: a277c753\n  description: A kernel module was loaded from memory\
+        \ inside a container\n  expression: load_module.loaded_from_memory == true\
+        \ && container.id !=\"\"\n- id: kernel_module_open\n  version: 55f9569\n \
+        \ description: A kernel module was added to /lib/modules/\n  expression: \"\
+        (\\n    open.flags & (O_CREAT|O_TRUNC|O_RDWR|O_WRONLY) > 0 &&\\n    (open.file.path\\\
+        \n    \\ in [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\" ])\\n \
+        \   && process.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\
+        \", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\
+        \", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n\
+        \    && process.ancestors.file.path not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\
+        \"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\
+        \", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"] &&\
+        \ process.ancestors.file.path\\\n    \\ != \\\"/usr/bin/kmod\\\"\\n)\"\n-\
+        \ id: kernel_module_rename\n  version: 9d8cb7d8\n  description: A kernel module\
+        \ was added to /lib/modules/\n  expression: \"(\\n    (rename.file.path in\
+        \ [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\"\\\n    \\ ]\\n  \
+        \  || rename.file.destination.path in [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\
+        \"\\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\", \\\
+        \"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ] && process.ancestors.file.path != \\\"/usr/bin/kmod\\\"\\n)\"\n\
+        - id: kernel_module_unlink\n  version: 652391be\n  description: A kerne
