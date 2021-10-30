@@ -275,4 +275,63 @@ http_interactions:
         \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
         \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
         \"\\\n    ] && process.ancestors.file.path != \\\"/usr/bin/kmod\\\"\\n)\"\n\
-        - id: kernel_module_unlink\n  version: 652391be\n  description: A kerne
+        - id: kernel_module_unlink\n  version: 652391be\n  description: A kernel module\
+        \ was added to /lib/modules/\n  expression: \"(\\n    (unlink.file.path in\
+        \ [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\"\\\n    \\ ])\\n \
+        \   && process.file.path not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\
+        \"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\
+        \", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n\
+        \    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\"\
+        , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ] && process.ancestors.file.path != \\\"/usr/bin/kmod\\\"\\n)\"\n\
+        - id: kernel_module_utimes\n  version: 405d45e7\n  description: A kernel module\
+        \ was added to /lib/modules/\n  expression: \"(\\n    (utimes.file.path in\
+        \ [ ~\\\"/lib/modules/*\\\", ~\\\"/usr/lib/modules/*\\\"\\\n    \\ ])\\n \
+        \   && process.file.path not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\
+        \"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\
+        \", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n\
+        \    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\"\
+        , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ] && process.ancestors.file.path != \\\"/usr/bin/kmod\\\"\\n)\"\n\
+        - id: net_util\n  version: fc362090\n  description: A network utility was\
+        \ executed from a suspicious location\n  expression: \"(exec.file.path in\
+        \ [\\\"/usr/bin/socat\\\", \\\"/usr/bin/dig\\\", \\\"/usr/bin/nslookup\\\"\
+        \\\n    , \\\"/usr/bin/netcat\\\", \\\"/usr/bin/nc\\\"] ||\\n exec.file.path\
+        \ in [\\\"/usr/bin/wget\\\"\\\n    , \\\"/usr/bin/curl\\\"]) &&\\ncontainer.id\
+        \ == \\\"\\\" && (exec.args not in [ ~\\\"*localhost*\\\"\\\n    , ~\\\"*127.0.0.1*\\\
+        \", ~\\\"*motd.ubuntu.com*\\\" ] || process.ancestors.comm != \\\"50-motd-news\\\
+        \"\\\n    ) && process.ancestors.file.path in [ ~\\\"/tmp/**\\\", ~\\\"/var/tmp/**\\\
+        \", ~\\\"/home/**\\\"\\\n    , ~\\\"/run/user/**\\\" ]\"\n- id: net_util_in_container\n\
+        \  version: 69e03ac1\n  description: A network utility was executed from a\
+        \ suspicious location in a container\n  expression: \"(exec.file.path in [\\\
+        \"/usr/bin/socat\\\", \\\"/usr/bin/dig\\\", \\\"/usr/bin/nslookup\\\"\\\n\
+        \    , \\\"/usr/bin/netcat\\\", \\\"/usr/bin/nc\\\"] ||\\n exec.file.path\
+        \ in [\\\"/usr/bin/wget\\\"\\\n    , \\\"/usr/bin/curl\\\"]) &&\\ncontainer.id\
+        \ != \\\"\\\" && (exec.args not in [ ~\\\"*localhost*\\\"\\\n    , ~\\\"*127.0.0.1*\\\
+        \", ~\\\"*motd.ubuntu.com*\\\" ] || process.ancestors.comm != \\\"50-motd-news\\\
+        \"\\\n    ) && process.ancestors.file.path in [ ~\\\"/tmp/**\\\", ~\\\"/var/tmp/**\\\
+        \", ~\\\"/home/**\\\"\\\n    , ~\\\"/run/user/**\\\" ]\"\n- id: new_binary_execution_in_container\n\
+        \  version: 9dc42e1d\n  description: A container executed a new a binary not\
+        \ found in the container image\n  expression: container.id !=\"\" && !process.file.in_upper_layer\
+        \ && process.file.modification_time\n    < 30s && exec.file.name !=\"\"\n\
+        - id: new_kernel_module_audit\n  version: 904592b4\n  description: A kernel\
+        \ module was loaded\n  expression: load_module.name != \"\"\n- id: new_kernel_module_audit_container\n\
+        \  version: 139b666a\n  description: A kernel module was loaded\n  expression:\
+        \ load_module.name != \"\" && container.id !=\"\"\n- id: nsswitch_conf_mod_chmod\n\
+        \  version: d301aedf\n  description: Nsswitch Configuration Modified\n  expression:\
+        \ \"(\\n    (chmod.file.path in [ \\\"/etc/nsswitch.conf\\\" ])\\n) && chmod.mode\\\
+        \n    \\ != chmod.file.mode\"\n- id: nsswitch_conf_mod_chown\n  version: '69383592'\n\
+        \  description: Nsswitch Configuration Modified\n  expression: \"(\\n    (chown.file.path\
+        \ in [ \\\"/etc/nsswitch.conf\\\" ])\\n) && (chown.uid\\\n    \\ != chown.file.uid\
+        \ || chown.gid != chown.file.gid)\"\n- id: nsswitch_conf_mod_link\n  version:\
+        \ e0565b29\n  description: Nsswitch Configuration Modified\n  expression:\
+        \ \"(\\n    (link.file.path in [ \\\"/etc/nsswitch.conf\\\" ]\\n    || link.file.destination.path\\\
+        \n    \\ in [ \\\"/etc/nsswitch.conf\\\" ])\\n)\"\n- id: nsswitch_conf_mod_open\n\
+        \  version: b5602c6f\n  description: Nsswitch Configuration Modified\n  expression:\
+        \ \"(\\n    open.flags & ((O_RDWR|O_WRONLY|O_CREAT)) > 0 &&\\n    (open.file.path\\\
+        \n    \\ in [ \\\"/etc/nsswitch.conf\\\" ])\\n)\"\n- id: nsswitch_conf_mod_rename\n\
+        \  version: aad34176\n  description: Nsswitch Configuration Modified\n  expression:\
+        \ \"(\\n    (rename.file.path in [ \\\"/etc/nsswitch.conf\\\" ]\\n    || rename.file.destination.path\\\
+        \n    \\ in 
