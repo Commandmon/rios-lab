@@ -334,4 +334,63 @@ http_interactions:
         \n    \\ in [ \\\"/etc/nsswitch.conf\\\" ])\\n)\"\n- id: nsswitch_conf_mod_rename\n\
         \  version: aad34176\n  description: Nsswitch Configuration Modified\n  expression:\
         \ \"(\\n    (rename.file.path in [ \\\"/etc/nsswitch.conf\\\" ]\\n    || rename.file.destination.path\\\
-        \n    \\ in 
+        \n    \\ in [ \\\"/etc/nsswitch.conf\\\" ])\\n)\"\n- id: nsswitch_conf_mod_unlink\n\
+        \  version: 8a3e2fbb\n  description: Nsswitch Configuration Modified\n  expression:\
+        \ \"(\\n    (unlink.file.path in [ \\\"/etc/nsswitch.conf\\\" ])\\n)\"\n-\
+        \ id: nsswitch_conf_mod_utimes\n  version: 902597c0\n  description: Nsswitch\
+        \ Configuration Modified\n  expression: \"(\\n    (utimes.file.path in [ \\\
+        \"/etc/nsswitch.conf\\\" ])\\n)\"\n- id: package_management_in_container\n\
+        \  version: c152fcaf\n  description: Package management in container\n  expression:\
+        \ exec.file.path in [\"/usr/bin/apt\", \"/usr/bin/apt-get\", \"/usr/bin/apt-config\"\
+        ,\n    \"/usr/bin/dpkg\", \"/usr/bin/aptitude-curses\", \"/usr/bin/rpm\",\
+        \ \"/usr/bin/unattended-upgrade\"]\n    && container.id != \"\"\n- id: pam_modification_chmod\n\
+        \  version: 974a676e\n  description: PAM Configuration Files Modification\n\
+        \  expression: \"(\\n    (chmod.file.path in [ ~\\\"/etc/pam.d/*\\\", \\\"\
+        /etc/pam.conf\\\" ])\\n\\\n    ) && chmod.mode != chmod.file.mode\"\n- id:\
+        \ pam_modification_chown\n  version: ca22d0ab\n  description: PAM Configuration\
+        \ Files Modification\n  expression: \"(\\n    (chown.file.path in [ ~\\\"\
+        /etc/pam.d/*\\\", \\\"/etc/pam.conf\\\" ])\\n\\\n    ) && (chown.uid != chown.file.uid\
+        \ || chown.gid != chown.file.gid)\"\n- id: pam_modification_link\n  version:\
+        \ 3d5d6b31\n  description: PAM Configuration Files Modification\n  expression:\
+        \ \"(\\n    (link.file.path in [ ~\\\"/etc/pam.d/*\\\", \\\"/etc/pam.conf\\\
+        \" ]\\n\\\n    \\    || link.file.destination.path in [ ~\\\"/etc/pam.d/*\\\
+        \", \\\"/etc/pam.conf\\\" ])\\n\\\n    )\"\n- id: pam_modification_open\n\
+        \  version: 9440f452\n  description: PAM Configuration Files Modification\n\
+        \  expression: \"(\\n    open.flags & (O_CREAT|O_TRUNC|O_RDWR|O_WRONLY) >\
+        \ 0 &&\\n    (open.file.path\\\n    \\ in [ ~\\\"/etc/pam.d/*\\\", \\\"/etc/pam.conf\\\
+        \" ])\\n)\"\n- id: pam_modification_rename\n  version: bd1d257a\n  description:\
+        \ PAM Configuration Files Modification\n  expression: \"(\\n    (rename.file.path\
+        \ in [ ~\\\"/etc/pam.d/*\\\", \\\"/etc/pam.conf\\\"\\\n    \\ ]\\n    || rename.file.destination.path\
+        \ in [ ~\\\"/etc/pam.d/*\\\", \\\"/etc/pam.conf\\\"\\\n    \\ ])\\n)\"\n-\
+        \ id: pam_modification_unlink\n  version: c3dc53e1\n  description: PAM Configuration\
+        \ Files Modification\n  expression: \"(\\n    (unlink.file.path in [ ~\\\"\
+        /etc/pam.d/*\\\", \\\"/etc/pam.conf\\\"\\\n    \\ ])\\n)\"\n- id: pam_modification_utimes\n\
+        \  version: d377b599\n  description: PAM Configuration Files Modification\n\
+        \  expression: \"(\\n    (utimes.file.path in [ ~\\\"/etc/pam.d/*\\\", \\\"\
+        /etc/pam.conf\\\"\\\n    \\ ])\\n)\"\n- id: passwd_execution\n  version: e1d41f5e\n\
+        \  description: Passwd utility executed\n  expression: exec.file.path == \"\
+        /usr/bin/passwd\"\n- id: pci_11_5_critical_binaries_chmod\n  version: 1945831d\n\
+        \  description: Critical System Binaries\n  expression: \"(\\n    (chmod.file.path\
+        \ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\
+        \"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\",\
+        \ ~\\\"/boot/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n) && chmod.mode != chmod.file.mode\"\n- id: pci_11_5_critical_binaries_chown\n\
+        \  version: 21da2189\n  description: Critical System Binaries\n  expression:\
+        \ \"(\\n    (chown.file.path in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"\
+        /usr/bin/*\\\"\\\n    , ~\\\"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\
+        \"/usr/local/sbin/*\\\", ~\\\"/boot/*\\\"\\\n    \\ ])\\n    && process.file.path\
+        \ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"]\\n    && process.ancestors.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n) && (chown.uid\
+        \ != chown.file.uid || chown.gid != chown.file.gid)\"\n- id: pci_11_5_critical_binaries_link\n\
+        \  version: a7ac587c\n  description: Critical System Binaries\n  expression:\
+        \ \"(\\n    (link.file.path in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"\
+        /usr/bin/*\\\"\\\n    , ~\\\"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*
