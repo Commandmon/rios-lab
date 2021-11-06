@@ -393,4 +393,63 @@ http_interactions:
         \ != chown.file.uid || chown.gid != chown.file.gid)\"\n- id: pci_11_5_critical_binaries_link\n\
         \  version: a7ac587c\n  description: Critical System Binaries\n  expression:\
         \ \"(\\n    (link.file.path in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"\
-        /usr/bin/*\\\"\\\n    , ~\\\"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*
+        /usr/bin/*\\\"\\\n    , ~\\\"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\
+        \"/usr/local/sbin/*\\\", ~\\\"/boot/*\\\"\\\n    \\ ]\\n    || link.file.destination.path\
+        \ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\
+        \"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\",\
+        \ ~\\\"/boot/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n)\"\n- id: pci_11_5_critical_binaries_open\n  version: f583ba7c\n\
+        \  description: Critical System Binaries\n  expression: \"(\\n    open.flags\
+        \ & (O_CREAT|O_TRUNC|O_RDWR|O_WRONLY) > 0 &&\\n    (open.file.path\\\n   \
+        \ \\ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\", ~\\\"/usr/sbin/*\\\
+        \", ~\\\"/usr/local/bin/*\\\"\\\n    , ~\\\"/usr/local/sbin/*\\\", ~\\\"/boot/*\\\
+        \" ])\\n    && process.file.path not in [\\\"\\\n    /usr/bin/apt\\\", \\\"\
+        /usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\"\\\
+        \n    , \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n    && process.ancestors.file.path not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n)\"\n- id: pci_11_5_critical_binaries_rename\n  version: e0bc0857\n\
+        \  description: Critical System Binaries\n  expression: \"(\\n    (rename.file.path\
+        \ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\
+        \"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\",\
+        \ ~\\\"/boot/*\\\"\\\n    \\ ]\\n    || rename.file.destination.path in [\
+        \ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\"/usr/sbin/*\\\
+        \", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\", ~\\\"/boot/*\\\"\
+        \\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\", \\\"\
+        /usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n)\"\n- id: pci_11_5_critical_binaries_unlink\n  version: 3bb086ca\n\
+        \  description: Critical System Binaries\n  expression: \"(\\n    (unlink.file.path\
+        \ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\
+        \"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\",\
+        \ ~\\\"/boot/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n)\"\n- id: pci_11_5_critical_binaries_utimes\n  version: 6d979630\n\
+        \  description: Critical System Binaries\n  expression: \"(\\n    (utimes.file.path\
+        \ in [ ~\\\"/bin/*\\\", ~\\\"/sbin/*\\\", ~\\\"/usr/bin/*\\\"\\\n    , ~\\\
+        \"/usr/sbin/*\\\", ~\\\"/usr/local/bin/*\\\", ~\\\"/usr/local/sbin/*\\\",\
+        \ ~\\\"/boot/*\\\"\\\n    \\ ])\\n    && process.file.path not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"]\\n    && process.ancestors.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\
+        \", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n)\"\n- id: potential_web_shell\n  version: dcaa6f4d\n  description:\
+        \ A webapp process (language engine or webserver) spawned a shell, shell\n\
+        \    utility, or HTTP utility\n  expression: \"(exec.file.path in [ \\\"/bin/dash\\\
+        \", \\\"/usr/bin/dash\\\",\\n  \\\"/bin/sh\\\"\\\n    , \\\"/bin/static-sh\\\
+        \", \\\"/usr/bin/sh\\\",\\n  \\\"/usr/bin/bash\\\",\\n  \\\"/bin/bash-static\\\
+        \"\\\n    ,\\n  \\\"/usr/bin/zsh\\\",\\n  \\\"/usr/bin/ash\\\",\\n  \\\"/usr/bin/csh
