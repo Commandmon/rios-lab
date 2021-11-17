@@ -452,4 +452,65 @@ http_interactions:
         \    utility, or HTTP utility\n  expression: \"(exec.file.path in [ \\\"/bin/dash\\\
         \", \\\"/usr/bin/dash\\\",\\n  \\\"/bin/sh\\\"\\\n    , \\\"/bin/static-sh\\\
         \", \\\"/usr/bin/sh\\\",\\n  \\\"/usr/bin/bash\\\",\\n  \\\"/bin/bash-static\\\
-        \"\\\n    ,\\n  \\\"/usr/bin/zsh\\\",\\n  \\\"/usr/bin/ash\\\",\\n  \\\"/usr/bin/csh
+        \"\\\n    ,\\n  \\\"/usr/bin/zsh\\\",\\n  \\\"/usr/bin/ash\\\",\\n  \\\"/usr/bin/csh\\\
+        \",\\n  \\\"/usr/bin/ksh\\\"\\\n    ,\\n  \\\"/usr/bin/tcsh\\\",\\n  \\\"\
+        /usr/lib/initramfs-tools/bin/busybox\\\",\\n  \\\"/bin/busybox\\\"\\\n   \
+        \ ,\\n  \\\"/usr/bin/fish\\\",\\n  \\\"/bin/ksh93\\\",\\n  \\\"/bin/rksh\\\
+        \", \\\"/bin/rksh93\\\",\\n\\\n    \\  \\\"/bin/lksh\\\",\\n  \\\"/bin/mksh\\\
+        \", \\\"/bin/mksh-static\\\",\\n  \\\"/usr/bin/csharp\\\"\\\n    ,\\n  \\\"\
+        /bin/posh\\\",\\n  \\\"/usr/bin/rc\\\",\\n  \\\"/bin/sash\\\",\\n  \\\"/usr/bin/yash\\\
+        \"\\\n    ,\\n  \\\"/bin/zsh5\\\", \\\"/bin/zsh5-static\\\" ] || exec.file.path\
+        \ in [\\\"/usr/bin/wget\\\"\\\n    , \\\"/usr/bin/curl\\\"] || exec.file.path\
+        \ in [\\\"/bin/cat\\\",\\\"/bin/chgrp\\\",\\\"/bin/chmod\\\"\\\n    ,\\\"\
+        /bin/chown\\\",\\\"/bin/cp\\\",\\\"/bin/date\\\",\\\"/bin/dd\\\",\\\"/bin/df\\\
+        \",\\\"/bin/dir\\\"\\\n    ,\\\"/bin/echo\\\",\\\"/bin/ln\\\",\\\"/bin/ls\\\
+        \",\\\"/bin/mkdir\\\",\\\"/bin/mknod\\\",\\\"/bin/mktemp\\\"\\\n    ,\\\"\
+        /bin/mv\\\",\\\"/bin/pwd\\\",\\\"/bin/readlink\\\",\\\"/bin/rm\\\",\\\"/bin/rmdir\\\
+        \",\\\"/bin/sleep\\\"\\\n    ,\\\"/bin/stty\\\",\\\"/bin/sync\\\",\\\"/bin/touch\\\
+        \",\\\"/bin/uname\\\",\\\"/bin/vdir\\\",\\\"/usr/bin/arch\\\"\\\n    ,\\\"\
+        /usr/bin/b2sum\\\",\\\"/usr/bin/base32\\\",\\\"/usr/bin/base64\\\",\\\"/usr/bin/basename\\\
+        \"\\\n    ,\\\"/usr/bin/chcon\\\",\\\"/usr/bin/cksum\\\",\\\"/usr/bin/comm\\\
+        \",\\\"/usr/bin/csplit\\\",\\\"\\\n    /usr/bin/cut\\\",\\\"/usr/bin/dircolors\\\
+        \",\\\"/usr/bin/dirname\\\",\\\"/usr/bin/du\\\",\\\"\\\n    /usr/bin/env\\\
+        \",\\\"/usr/bin/expand\\\",\\\"/usr/bin/expr\\\",\\\"/usr/bin/factor\\\",\\\
+        \"/usr/bin/fmt\\\"\\\n    ,\\\"/usr/bin/fold\\\",\\\"/usr/bin/groups\\\",\\\
+        \"/usr/bin/head\\\",\\\"/usr/bin/hostid\\\",\\\"\\\n    /usr/bin/id\\\",\\\
+        \"/usr/bin/install\\\",\\\"/usr/bin/join\\\",\\\"/usr/bin/link\\\",\\\"/usr/bin/logname\\\
+        \"\\\n    ,\\\"/usr/bin/md5sum\\\",\\\"/usr/bin/md5sum.textutils\\\",\\\"\
+        /usr/bin/mkfifo\\\",\\\"/usr/bin/nice\\\"\\\n    ,\\\"/usr/bin/nl\\\",\\\"\
+        /usr/bin/nohup\\\",\\\"/usr/bin/nproc\\\",\\\"/usr/bin/numfmt\\\",\\\"\\\n\
+        \    /usr/bin/od\\\",\\\"/usr/bin/paste\\\",\\\"/usr/bin/pathchk\\\",\\\"\
+        /usr/bin/pinky\\\",\\\"/usr/bin/pr\\\"\\\n    ,\\\"/usr/bin/printenv\\\",\\\
+        \"/usr/bin/printf\\\",\\\"/usr/bin/ptx\\\",\\\"/usr/bin/realpath\\\"\\\n \
+        \   ,\\\"/usr/bin/runcon\\\",\\\"/usr/bin/seq\\\",\\\"/usr/bin/sha1sum\\\"\
+        ,\\\"/usr/bin/sha224sum\\\"\\\n    ,\\\"/usr/bin/sha256sum\\\",\\\"/usr/bin/sha384sum\\\
+        \",\\\"/usr/bin/sha512sum\\\",\\\"/usr/bin/shred\\\"\\\n    ,\\\"/usr/bin/shuf\\\
+        \",\\\"/usr/bin/sort\\\",\\\"/usr/bin/split\\\",\\\"/usr/bin/stat\\\",\\\"\
+        /usr/bin/stdbuf\\\"\\\n    ,\\\"/usr/bin/sum\\\",\\\"/usr/bin/tac\\\",\\\"\
+        /usr/bin/tail\\\",\\\"/usr/bin/tee\\\",\\\"/usr/bin/test\\\"\\\n    ,\\\"\
+        /usr/bin/timeout\\\",\\\"/usr/bin/tr\\\",\\\"/usr/bin/truncate\\\",\\\"/usr/bin/tsort\\\
+        \"\\\n    ,\\\"/usr/bin/tty\\\",\\\"/usr/bin/unexpand\\\",\\\"/usr/bin/uniq\\\
+        \",\\\"/usr/bin/unlink\\\"\\\n    ,\\\"/usr/bin/users\\\",\\\"/usr/bin/wc\\\
+        \",\\\"/usr/bin/who\\\",\\\"/usr/bin/whoami\\\",\\\"/usr/sbin/chroot\\\"\\\
+        \n    ]) &&\\n(process.ancestors.file.name in [~\\\"python2*\\\", ~\\\"python3*\\\
+        \", \\\"node\\\"\\\n    , \\\"apache2\\\", \\\"nginx\\\", ~\\\"tomcat*\\\"\
+        ] || process.ancestors.file.name =~ \\\"php*\\\"\\\n    ) &&\\nprocess.ancestors.comm\
+        \ not in [\\\"pip3\\\", \\\"pip\\\", \\\"npm\\\"]\"\n- id: ptrace_antidebug\n\
+        \  version: a6289ff7\n  description: A process uses an anti-debugging technique\
+        \ to block debuggers\n  expression: ptrace.request == PTRACE_TRACEME\n- id:\
+        \ ptrace_injection\n  version: 6d290a43\n  description: A process attempted\
+        \ to inject code into another process\n  expression: ptrace.request == PTRACE_POKETEXT\
+        \ || ptrace.request == PTRACE_POKEDATA\n    || ptrace.request == PTRACE_POKEUSR\n\
+        - id: pwnkit_privilege_escalation\n  version: c83bbabc\n  description: A process\
+        \ was spawned with indicators of exploitation of CVE-2021-4034\n  expression:\
+        \ (exec.file.path == \"/usr/bin/pkexec\" && exec.envs in [~\"*SHELL*\", ~\"\
+        *PATH*\"]\n    && exec.uid != 0)\n- id: runc_modification\n  version: c7144439\n\
+        \  description: Runc Binary Modified\n  expression: 'open.file.path in [\"\
+        /usr/bin/runc\", \"/usr/sbin/runc\", \"/usr/bin/docker-runc\"]\n\n    && open.flags\
+        \ & O_CREAT|O_TRUNC|O_RDWR|O_WRONLY > 0\n\n    && process.file.path not in\
+        \ [\"/usr/bin/apt\", \"/usr/bin/apt-get\", \"/usr/bin/apt-config\",\n    \"\
+        /usr/bin/dpkg\", \"/usr/bin/aptitude-curses\", \"/usr/bin/rpm\", \"/usr/bin/unattended-upgrade\"\
+        ]\n\n    && process.ancestors.file.path not in [\"/usr/bin/apt\", \"/usr/bin/apt-get\"\
+        , \"/usr/bin/apt-config\",\n    \"/usr/bin/dpkg\", \"/usr/bin/aptitude-curses\"\
+        , \"/usr/bin/rpm\", \"/usr/bin/unattended-upgrade\"]'\n- id: selinux_disable_enforcement\n\
+        \  version: afa9a8ba\n  description: SELinux enforcem
