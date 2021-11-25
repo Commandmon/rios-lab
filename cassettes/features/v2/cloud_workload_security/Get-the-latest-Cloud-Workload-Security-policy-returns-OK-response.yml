@@ -513,4 +513,63 @@ http_interactions:
         ]\n\n    && process.ancestors.file.path not in [\"/usr/bin/apt\", \"/usr/bin/apt-get\"\
         , \"/usr/bin/apt-config\",\n    \"/usr/bin/dpkg\", \"/usr/bin/aptitude-curses\"\
         , \"/usr/bin/rpm\", \"/usr/bin/unattended-upgrade\"]'\n- id: selinux_disable_enforcement\n\
-        \  version: afa9a8ba\n  description: SELinux enforcem
+        \  version: afa9a8ba\n  description: SELinux enforcement status was disabled\n\
+        \  expression: selinux.enforce.status in [\"permissive\", \"disabled\"]\n\
+        - id: ssh_authorized_keys_chmod\n  version: e4096f79\n  description: SSH Authorized\
+        \ Keys Modified\n  expression: \"(\\n    chmod.file.name == \\\"authorized_keys\\\
+        \" && (chmod.file.path in\\\n    \\ [ ~\\\"*/.ssh/*\\\" ])\\n) && chmod.mode\
+        \ != chmod.file.mode\"\n- id: ssh_authorized_keys_chown\n  version: 9639bf6\n\
+        \  description: SSH Authorized Keys Modified\n  expression: \"(\\n    chown.file.name\
+        \ == \\\"authorized_keys\\\" && (chown.file.path in\\\n    \\ [ ~\\\"*/.ssh/*\\\
+        \" ])\\n) && (chown.uid != chown.file.uid || chown.gid != chown.file.gid)\"\
+        \n- id: ssh_authorized_keys_link\n  version: 81382bdd\n  description: SSH\
+        \ Authorized Keys Modified\n  expression: \"(\\n    link.file.name == \\\"\
+        authorized_keys\\\" && (link.file.path in\\\n    \\ [ ~\\\"*/.ssh/*\\\" ]\\\
+        n    || link.file.destination.path in [ ~\\\"*/.ssh/*\\\" ])\\n\\\n    )\"\
+        \n- id: ssh_authorized_keys_open\n  version: 1ae8f7d6\n  description: SSH\
+        \ Authorized Keys Modified\n  expression: \"(\\n    open.flags & (O_CREAT|O_TRUNC|O_RDWR|O_WRONLY)\
+        \ > 0 &&\\n    open.file.name\\\n    \\ == \\\"authorized_keys\\\" && (open.file.path\
+        \ in [ ~\\\"*/.ssh/*\\\" ])\\n)\"\n- id: ssh_authorized_keys_rename\n  version:\
+        \ fd3bdabf\n  description: SSH Authorized Keys Modified\n  expression: \"\
+        (\\n    rename.file.name == \\\"authorized_keys\\\" && (rename.file.path\\\
+        \n    \\ in [ ~\\\"*/.ssh/*\\\" ]\\n    || rename.file.destination.path in\
+        \ [ ~\\\"*/.ssh/*\\\"\\\n    \\ ])\\n)\"\n- id: ssh_authorized_keys_unlink\n\
+        \  version: 54cf4a88\n  description: SSH Authorized Keys Modified\n  expression:\
+        \ \"(\\n    unlink.file.name == \\\"authorized_keys\\\" && (unlink.file.path\\\
+        \n    \\ in [ ~\\\"*/.ssh/*\\\" ])\\n)\"\n- id: ssh_authorized_keys_utimes\n\
+        \  version: 59377e61\n  description: SSH Authorized Keys Modified\n  expression:\
+        \ \"(\\n    utimes.file.name == \\\"authorized_keys\\\" && (utimes.file.path\\\
+        \n    \\ in [ ~\\\"*/.ssh/*\\\" ])\\n)\"\n- id: ssl_certificate_tampering_chmod\n\
+        \  version: d8ac6517\n  description: SSL Certificate Tampering\n  expression:\
+        \ \"(\\n    (chmod.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n) && chmod.mode\
+        \ != chmod.file.mode\"\n- id: ssl_certificate_tampering_chown\n  version:\
+        \ 3d04895f\n  description: SSL Certificate Tampering\n  expression: \"(\\\
+        n    (chown.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n) && (chown.uid\
+        \ != chown.file.uid || chown.gid != chown.file.gid)\"\n- id: ssl_certificate_tampering_link\n\
+        \  version: eb594616\n  description: SSL Certificate Tampering\n  expression:\
+        \ \"(\\n    (link.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ]\\n    || link.file.destination.path\\\
+        \n    \\ in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: ssl_certificate_tampering_open\n\
+        \  version: 59d94d53\n  description: SSL Certificate Tampering\n  expression:\
+        \ \"(\\n    open.flags & (O_CREAT|O_RDWR|O_WRONLY) > 0 &&\\n    (open.file.path\\\
+        \n    \\ in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: ssl_certificate_tampering_rename\n\
+        \  version: e42eefb4\n  description: SSL Certificate Tampering\n  expression:\
+        \ \"(\\n    (rename.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ]\\n    || rename.file.destination.path\\\
+        \n    \\ in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: ssl_certificate_tampering_unlink\n\
+        \  version: 37c40311\n  description: SSL Certificate Tampering\n  expression:\
+        \ \"(\\n    (unlink.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path\\\
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"
