@@ -572,4 +572,65 @@ http_interactions:
         /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: ssl_certificate_tampering_unlink\n\
         \  version: 37c40311\n  description: SSL Certificate Tampering\n  expression:\
         \ \"(\\n    (unlink.file.path in [ ~\\\"/etc/ssl/certs/*\\\" ])\\n    && process.file.path\\\
-        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"
+        \n    \\ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n)\"\n- id:\
+        \ ssl_certificate_tampering_utimes\n  version: de3d3032\n  description: SSL\
+        \ Certificate Tampering\n  expression: \"(\\n    (utimes.file.path in [ ~\\\
+        \"/etc/ssl/certs/*\\\" ])\\n    && process.file.path\\\n    \\ not in [\\\"\
+        /usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\
+        \"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\
+        \", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n)\"\n- id: suspicious_container_client\n\
+        \  version: 8b9461f4\n  description: A container management utility was executed\
+        \ in a container\n  expression: exec.file.name in [\"docker\", \"kubectl\"\
+        ] && container.id != \"\"\n- id: systemd_modification_chmod\n  version: b0643139\n\
+        \  description: Systemd Modification\n  expression: \"(\\n    (chmod.file.path\
+        \ in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"/usr/lib/systemd/system/*\\\"\\\
+        \n    , ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path not in\
+        \ [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n) && chmod.mode !=\
+        \ chmod.file.mode\"\n- id: systemd_modification_chown\n  version: 380d501\n\
+        \  description: Systemd Modification\n  expression: \"(\\n    (chown.file.path\
+        \ in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"/usr/lib/systemd/system/*\\\"\\\
+        \n    , ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path not in\
+        \ [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n) && (chown.uid !=\
+        \ chown.file.uid\\\n    \\ || chown.gid != chown.file.gid)\"\n- id: systemd_modification_link\n\
+        \  version: cbd89cec\n  description: Systemd Modification\n  expression: \"\
+        (\\n    (link.file.path in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"/usr/lib/systemd/system/*\\\
+        \"\\\n    , ~\\\"/etc/systemd/system/*\\\" ]\\n    || link.file.destination.path\
+        \ in [ ~\\\"/lib/systemd/system/*\\\"\\\n    , ~\\\"/usr/lib/systemd/system/*\\\
+        \", ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path\\\n    \\\
+        \ not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"\\\n    /usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\", \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"\\\n    ]\\n)\"\n- id:\
+        \ systemd_modification_open\n  version: b6dce303\n  description: Systemd Modification\n\
+        \  expression: \"(\\n    open.flags & (O_CREAT|O_RDWR|O_WRONLY) > 0 &&\\n\
+        \    (open.file.path\\\n    \\ in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"\
+        /usr/lib/systemd/system/*\\\", ~\\\"/etc/systemd/system/*\\\"\\\n    \\ ])\\\
+        n    && process.file.path not in [\\\"/usr/bin/apt\\\", \\\"/usr/bin/apt-get\\\
+        \"\\\n    , \\\"/usr/bin/apt-config\\\", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\
+        \", \\\"\\\n    /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\
+        \n- id: systemd_modification_rename\n  version: 1e723c46\n  description: Systemd\
+        \ Modification\n  expression: \"(\\n    (rename.file.path in [ ~\\\"/lib/systemd/system/*\\\
+        \", ~\\\"/usr/lib/systemd/system/*\\\"\\\n    , ~\\\"/etc/systemd/system/*\\\
+        \" ]\\n    || rename.file.destination.path in [ ~\\\"/lib/systemd/system/*\\\
+        \"\\\n    , ~\\\"/usr/lib/systemd/system/*\\\", ~\\\"/etc/systemd/system/*\\\
+        \" ])\\n    && process.file.path\\\n    \\ not in [\\\"/usr/bin/apt\\\", \\\
+        \"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\", \\\"\\\n    /usr/bin/dpkg\\\
+        \", \\\"/usr/bin/aptitude-curses\\\", \\\"/usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\
+        \"\\\n    ]\\n)\"\n- id: systemd_modification_unlink\n  version: dcb17382\n\
+        \  description: Systemd Modification\n  expression: \"(\\n    (unlink.file.path\
+        \ in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"/usr/lib/systemd/system/*\\\"\\\
+        \n    , ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path not in\
+        \ [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: systemd_modification_utimes\n\
+        \  version: 6b596fc5\n  description: Systemd Modification\n  expression: \"\
+        (\\n    (utimes.file.path in [ ~\\\"/lib/systemd/system/*\\\", ~\\\"/usr/lib/systemd/system/*\\\
+        \"\\\n    , ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path not\
+        \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
+        \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)
