@@ -633,4 +633,58 @@ http_interactions:
         \"\\\n    , ~\\\"/etc/systemd/system/*\\\" ])\\n    && process.file.path not\
         \ in [\\\"/usr/bin/apt\\\"\\\n    , \\\"/usr/bin/apt-get\\\", \\\"/usr/bin/apt-config\\\
         \", \\\"/usr/bin/dpkg\\\", \\\"/usr/bin/aptitude-curses\\\"\\\n    , \\\"\
-        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)
+        /usr/bin/rpm\\\", \\\"/usr/bin/unattended-upgrade\\\"]\\n)\"\n- id: testtypescriptcreateacloudworkloadsecurityagentrulereturnsokresponse1651997883\n\
+        \  version: f43786f8\n  description: Test Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptdeleteacloudworkloadsecurityagentrulereturnsokresponse1651997884\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetacloudworkloadsecurityagentrulereturnsokresponse1651997885\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1651867149\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1651912469\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1651915814\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1651943471\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1651997885\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptgetallcloudworkloadsecurityagentrulesreturnsokresponse1652008845\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptupdateacloudworkloadsecurityagentrulereturnsbadrequestresponse1651997886\n\
+        \  version: f43786f8\n  description: My Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: testtypescriptupdateacloudworkloadsecurityagentrulereturnsokresponse1651997887\n\
+        \  version: f43786f8\n  description: Test Agent rule\n  expression: exec.file.name\
+        \ == \"sh\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386657\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386695\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386742\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386809\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386858\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643386909\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387039\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387090\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387148\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387484\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387531\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643387579\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388161\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388208\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388257\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388666\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388726\n\
