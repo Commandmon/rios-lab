@@ -688,3 +688,61 @@ http_interactions:
         \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388666\n\
         \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
         \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388726\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388847\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388890\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643388939\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389111\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389165\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389210\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389339\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389389\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389484\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389530\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389627\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389685\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389756\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389931\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643389977\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643390108\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643390130\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643390151\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643391687\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643391707\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643391729\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643391983\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392003\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392026\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392419\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392438\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392458\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRule_local_1643392885\n\
+        \  version: 28ba1078\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"java\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAg
