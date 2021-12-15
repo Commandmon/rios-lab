@@ -801,4 +801,25 @@ http_interactions:
         \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
         \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643389507\n\
         \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
-       
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643389553\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643389911\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643389955\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643390389\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643390410\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: tf_TestAccDatadogCloudWorkloadSecurityAgentRulesDatasource_local_1643390432\n\
+        \  version: 2dd188de\n  description: an agent rule\n  expression: exec.file.name\
+        \ == \"go\"\n- id: user_created_tty\n  version: 5b5f4a52\n  description: User\
+        \ Created Interactively\n  expression: exec.file.name in [\"useradd\", \"\
+        newusers\"] && exec.tty_name !=\"\"\n"
+    headers:
+      Content-Type:
+      - application/yaml
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
