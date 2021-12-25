@@ -81,4 +81,75 @@ module DatadogAPIClient::V1
     # Initializes the object
     # @param attributes [Hash] Model attributes in the form of hash
     # @!visibility private
-    def initiali
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::MonthlyUsageAttributionBody` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MonthlyUsageAttributionBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'month')
+        self.month = attributes[:'month']
+      end
+
+      if attributes.key?(:'org_name')
+        self.org_name = attributes[:'org_name']
+      end
+
+      if attributes.key?(:'public_id')
+        self.public_id = attributes[:'public_id']
+      end
+
+      if attributes.key?(:'tag_config_source')
+        self.tag_config_source = attributes[:'tag_config_source']
+      end
+
+      if attributes.key?(:'tags')
+        self.tags = attributes[:'tags']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.key?(:'values')
+        self.values = attributes[:'values']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          month == o.month &&
+          org_name == o.org_name &&
+          public_id == o.public_id &&
+          tag_config_source == o.tag_config_source &&
+          tags == o.tags &&
+          updated_at == o.updated_at &&
+          values == o.values
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [month, org_name, public_id, tag_config_source, tags, updated_at, values].hash
+    end
+  end
+end
