@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,27 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Global query options that are used during the query.
-  # Only supply timezone or time offset, not both. Otherwise, the query fails.
-  class CIAppQueryOptions
+  # Object for a single metric tag configuration.
+  class Metric
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The time offset (in seconds) to apply to the query.
-    attr_accessor :time_offset
+    # The metric name for this resource.
+    attr_accessor :id
 
-    # The timezone can be specified as GMT, UTC, an offset from UTC (like UTC+1), or as a Timezone Database identifier (like America/New_York).
-    attr_accessor :timezone
+    # The metric resource type.
+    attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'time_offset' => :'time_offset',
-        :'timezone' => :'timezone'
+        :'id' => :'id',
+        :'type' => :'type'
       }
     end
 
@@ -45,8 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'time_offset' => :'Integer',
-        :'timezone' => :'String'
+        :'id' => :'String',
+        :'type' => :'MetricType'
       }
     end
 
@@ -55,23 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppQueryOptions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::Metric` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppQueryOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::Metric`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'time_offset')
-        self.time_offset = attributes[:'time_offset']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'timezone')
-        self.timezone = attributes[:'timezone']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -88,15 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          time_offset == o.time_offset &&
-          timezone == o.timezone
+          id == o.id &&
+          type == o.type
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [time_offset, timezone].hash
+      [id, type].hash
     end
   end
 end
