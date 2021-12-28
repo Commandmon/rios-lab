@@ -19,4 +19,4 @@ body = DatadogAPIClient::V2::CIAppPipelineEventsRequest.new({
 opts = {
   body: body,
 }
-api_instance.search_ci_app_pipeline_events_with_pagination(op
+api_instance.search_ci_app_pipeline_events_with_pagination(opts) { |item| puts item }
