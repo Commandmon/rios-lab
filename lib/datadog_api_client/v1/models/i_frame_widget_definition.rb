@@ -17,30 +17,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Define a request certificate.
-  class SyntheticsTestRequestCertificateItem
+  # The iframe widget allows you to embed a portion of any other web page on your dashboard. Only available on FREE layout dashboards.
+  class IFrameWidgetDefinition
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Content of the certificate or key.
-    attr_accessor :content
+    # Type of the iframe widget.
+    attr_reader :type
 
-    # File name for the certificate or key.
-    attr_accessor :filename
-
-    # Date of update of the certificate or key, ISO format.
-    attr_accessor :updated_at
+    # URL of the iframe.
+    attr_reader :url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'content' => :'content',
-        :'filename' => :'filename',
-        :'updated_at' => :'updatedAt'
+        :'type' => :'type',
+        :'url' => :'url'
       }
     end
 
@@ -48,9 +44,8 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'content' => :'String',
-        :'filename' => :'String',
-        :'updated_at' => :'String'
+        :'type' => :'IFrameWidgetDefinitionType',
+        :'url' => :'String'
       }
     end
 
@@ -59,27 +54,23 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SyntheticsTestRequestCertificateItem` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::IFrameWidgetDefinition` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SyntheticsTestRequestCertificateItem`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::IFrameWidgetDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'content')
-        self.content = attributes[:'content']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'filename')
-        self.filename = attributes[:'filename']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
       end
     end
 
@@ -87,7 +78,29 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @type.nil?
+      return false if @url.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param url [Object] Object to be assigned
+    # @!visibility private
+    def url=(url)
+      if url.nil?
+        fail ArgumentError, 'invalid value for "url", url cannot be nil.'
+      end
+      @url = url
     end
 
     # Checks equality by comparing each attribute.
@@ -96,16 +109,8 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          content == o.content &&
-          filename == o.filename &&
-          updated_at == o.updated_at
+          type == o.type &&
+          url == o.url
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    # @!visibility private
-    def hash
-      [content, filename, updated_at].hash
-    end
-  end
-end
+    # Calculates hash code accor
