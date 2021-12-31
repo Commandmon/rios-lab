@@ -113,4 +113,11 @@ module DatadogAPIClient::V1
           url == o.url
     end
 
-    # Calculates hash code accor
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [type, url].hash
+    end
+  end
+end
