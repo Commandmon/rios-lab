@@ -17,4 +17,13 @@ body = DatadogAPIClient::V1::Dashboard.new({
       definition: DatadogAPIClient::V1::ImageWidgetDefinition.new({
         type: DatadogAPIClient::V1::ImageWidgetDefinitionType::IMAGE,
         url: "https://example.com/image.png",
-        sizing: DatadogAPICl
+        sizing: DatadogAPIClient::V1::WidgetImageSizing::COVER,
+      }),
+    }),
+  ],
+  template_variables: [],
+  layout_type: DatadogAPIClient::V1::DashboardLayoutType::FREE,
+  is_read_only: false,
+  notify_list: [],
+})
+p api_instance.create_dashboard(body)
