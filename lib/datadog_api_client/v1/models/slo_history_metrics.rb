@@ -182,4 +182,63 @@ module DatadogAPIClient::V1
     # @param query [Object] Object to be assigned
     # @!visibility private
     def query=(query)
-    
+      if query.nil?
+        fail ArgumentError, 'invalid value for "query", query cannot be nil.'
+      end
+      @query = query
+    end
+
+    # Custom attribute writer method with validation
+    # @param res_type [Object] Object to be assigned
+    # @!visibility private
+    def res_type=(res_type)
+      if res_type.nil?
+        fail ArgumentError, 'invalid value for "res_type", res_type cannot be nil.'
+      end
+      @res_type = res_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param resp_version [Object] Object to be assigned
+    # @!visibility private
+    def resp_version=(resp_version)
+      if resp_version.nil?
+        fail ArgumentError, 'invalid value for "resp_version", resp_version cannot be nil.'
+      end
+      @resp_version = resp_version
+    end
+
+    # Custom attribute writer method with validation
+    # @param times [Object] Object to be assigned
+    # @!visibility private
+    def times=(times)
+      if times.nil?
+        fail ArgumentError, 'invalid value for "times", times cannot be nil.'
+      end
+      @times = times
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          denominator == o.denominator &&
+          interval == o.interval &&
+          message == o.message &&
+          numerator == o.numerator &&
+          query == o.query &&
+          res_type == o.res_type &&
+          resp_version == o.resp_version &&
+          times == o.times
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [denominator, interval, message, numerator, query, res_type, resp_version, times].hash
+    end
+  end
+end
