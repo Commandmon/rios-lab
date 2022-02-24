@@ -115,4 +115,9 @@ module DatadogAPIClient::V1
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
-    # @
+    # @!visibility private
+    def hash
+      [field, width].hash
+    end
+  end
+end
