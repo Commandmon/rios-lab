@@ -1,0 +1,7 @@
+http_interactions:
+- recorded_at: Thu, 12 May 2022 09:52:28 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"attributes":{"compute":{"aggregation_type":"count"},"filter":{"query":"source:Test-Update_a_log_based_metric_returns_OK_response-1652349148"}},"id":"Test-Update_a_log_based_metric_returns_OK_response-1652349148","type":"logs_metrics"}}'
+  
