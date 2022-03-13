@@ -17,10 +17,27 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # The type of authentication to use when performing the test.
-  class SyntheticsBasicAuthSigv4Type
-    include BaseEnumModel
+  # Request definition of sunburst widget.
+  class SunburstWidgetRequest
+    include BaseGenericModel
 
-    SIGV4 = "sigv4".freeze
-  end
-end
+    # Whether the object has unparsed attributes
+    # @!visibility private
+    attr_accessor :_unparsed
+
+    # The log query.
+    attr_accessor :apm_query
+
+    # The log query.
+    attr_accessor :audit_query
+
+    # The log query.
+    attr_accessor :event_query
+
+    # List of formulas that operate on queries.
+    attr_accessor :formulas
+
+    # The log query.
+    attr_accessor :log_query
+
+ 
