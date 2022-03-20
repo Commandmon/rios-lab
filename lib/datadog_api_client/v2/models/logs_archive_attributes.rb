@@ -161,4 +161,25 @@ module DatadogAPIClient::V2
     end
 
     # Checks equality by comparing each attribute.
-  
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          destination == o.destination &&
+          include_tags == o.include_tags &&
+          name == o.name &&
+          query == o.query &&
+          rehydration_max_scan_size_in_gb == o.rehydration_max_scan_size_in_gb &&
+          rehydration_tags == o.rehydration_tags &&
+          state == o.state
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [destination, include_tags, name, query, rehydration_max_scan_size_in_gb, rehydration_tags, state].hash
+    end
+  end
+end
