@@ -153,4 +153,32 @@ module DatadogAPIClient::V1
     # Custom attribute writer method with validation
     # @param until_occurrences [Object] Object to be assigned
     # @!visibility private
-    def until
+    def until_occurrences=(until_occurrences)
+      if !until_occurrences.nil? && until_occurrences > 2147483647
+        fail ArgumentError, 'invalid value for "until_occurrences", must be smaller than or equal to 2147483647.'
+      end
+      @until_occurrences = until_occurrences
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          period == o.period &&
+          rrule == o.rrule &&
+          type == o.type &&
+          until_date == o.until_date &&
+          until_occurrences == o.until_occurrences &&
+          week_days == o.week_days
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [period, rrule, type, until_date, until_occurrences, week_days].hash
+    end
+  end
+end
