@@ -27,4 +27,35 @@ body = DatadogAPIClient::V1::Dashboard.new({
           min: "auto",
         }),
         requests: [
-          DatadogAPIClient::V1::DistributionWid
+          DatadogAPIClient::V1::DistributionWidgetRequest.new({
+            query: DatadogAPIClient::V1::FormulaAndFunctionApmResourceStatsQueryDefinition.new({
+              primary_tag_value: "*",
+              stat: DatadogAPIClient::V1::FormulaAndFunctionApmResourceStatName::LATENCY_DISTRIBUTION,
+              data_source: DatadogAPIClient::V1::FormulaAndFunctionApmResourceStatsDataSource::APM_RESOURCE_STATS,
+              name: "query1",
+              service: "azure-bill-import",
+              group_by: [
+                "resource_name",
+              ],
+              env: "staging",
+              primary_tag_name: "datacenter",
+              operation_name: "universal.http.client",
+            }),
+            request_type: DatadogAPIClient::V1::DistributionWidgetHistogramRequestType::HISTOGRAM,
+            style: DatadogAPIClient::V1::WidgetStyle.new({
+              palette: "dog_classic",
+            }),
+          }),
+        ],
+      }),
+      layout: DatadogAPIClient::V1::WidgetLayout.new({
+        x: 8,
+        y: 0,
+        width: 4,
+        height: 2,
+      }),
+    }),
+  ],
+  layout_type: DatadogAPIClient::V1::DashboardLayoutType::ORDERED,
+})
+p api_instance.create_dashboard(body)
