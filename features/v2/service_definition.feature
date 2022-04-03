@@ -42,4 +42,50 @@ Feature: Service Definition
     Given new "DeleteServiceDefinition" request
     And request contains "service_name" parameter with value "not-a-service"
     When the request is sent
-    Then the response status is 404 Not
+    Then the response status is 404 Not Found
+    And the response "errors[0]" is equal to "Not Found"
+
+  @replay-only @team:DataDog/apm-insights
+  Scenario: Delete a single service definition returns "OK" response
+    Given new "DeleteServiceDefinition" request
+    And request contains "service_name" parameter with value "service-definition-test"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @generated @skip @team:DataDog/apm-insights
+  Scenario: Get a single service definition returns "Bad Request" response
+    Given new "GetServiceDefinition" request
+    And request contains "service_name" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/apm-insights
+  Scenario: Get a single service definition returns "Conflict" response
+    Given new "GetServiceDefinition" request
+    And request contains "service_name" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 409 Conflict
+
+  @team:DataDog/apm-insights
+  Scenario: Get a single service definition returns "Not Found" response
+    Given new "GetServiceDefinition" request
+    And request contains "service_name" parameter with value "not-a-service"
+    When the request is sent
+    Then the response status is 404 Not Found
+    And the response "errors[0]" is equal to "Not Found"
+
+  @team:DataDog/apm-insights
+  Scenario: Get a single service definition returns "OK" response
+    Given new "GetServiceDefinition" request
+    And request contains "service_name" parameter with value "service-definition-test"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.attributes.meta.ingested-schema-version" is equal to "v2"
+    And the response "data.attributes.schema.dd-service" is equal to "service-definition-test"
+
+  @team:DataDog/apm-insights
+  Scenario: Get all service definitions returns "OK" response
+    Given new "ListServiceDefinitions" request
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data[0].attributes.meta.ingested-schema-version" is equal to "v2"
