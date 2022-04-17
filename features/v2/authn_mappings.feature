@@ -97,4 +97,30 @@ Feature: AuthN Mappings
     Then the response status is 422 Unprocessable Entity
 
   @generated @skip @team:DataDog/team-aaa
-  Scenario: Get an AuthN 
+  Scenario: Get an AuthN Mapping by UUID returns "Not Found" response
+    Given new "GetAuthNMapping" request
+    And request contains "authn_mapping_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:DataDog/team-aaa
+  Scenario: Get an AuthN Mapping by UUID returns "OK" response
+    Given there is a valid "role" in the system
+    And there is a valid "authn_mapping" in the system
+    And new "GetAuthNMapping" request
+    And request contains "authn_mapping_id" parameter from "authn_mapping.data.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.id" is equal to "{{ authn_mapping.data.id }}"
+    And the response "data.attributes.attribute_key" is equal to "{{ unique_lower_alnum }}"
+    And the response "data.attributes.attribute_value" is equal to "{{ unique }}"
+    And the response "data.relationships.role.data.id" is equal to "{{ role.data.id }}"
+
+  @team:DataDog/team-aaa
+  Scenario: List all AuthN Mappings returns "OK" response
+    Given there is a valid "role" in the system
+    And there is a valid "authn_mapping" in the system
+    And new "ListAuthNMappings" request
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data[0].type" is equal to "authn_mappings"
