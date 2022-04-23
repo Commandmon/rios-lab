@@ -94,4 +94,185 @@ module DatadogAPIClient::V2
       {
         :'aggregation_key' => :'aggregation_key',
         :'date_happened' => :'date_happened',
-        :'d
+        :'device_name' => :'device_name',
+        :'duration' => :'duration',
+        :'event_object' => :'event_object',
+        :'evt' => :'evt',
+        :'hostname' => :'hostname',
+        :'monitor' => :'monitor',
+        :'monitor_groups' => :'monitor_groups',
+        :'monitor_id' => :'monitor_id',
+        :'priority' => :'priority',
+        :'related_event_id' => :'related_event_id',
+        :'service' => :'service',
+        :'source_type_name' => :'source_type_name',
+        :'sourcecategory' => :'sourcecategory',
+        :'status' => :'status',
+        :'tags' => :'tags',
+        :'timestamp' => :'timestamp',
+        :'title' => :'title'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'aggregation_key' => :'String',
+        :'date_happened' => :'Integer',
+        :'device_name' => :'String',
+        :'duration' => :'Integer',
+        :'event_object' => :'String',
+        :'evt' => :'Event',
+        :'hostname' => :'String',
+        :'monitor' => :'MonitorType',
+        :'monitor_groups' => :'Array<String>',
+        :'monitor_id' => :'Integer',
+        :'priority' => :'EventPriority',
+        :'related_event_id' => :'Integer',
+        :'service' => :'String',
+        :'source_type_name' => :'String',
+        :'sourcecategory' => :'String',
+        :'status' => :'EventStatusType',
+        :'tags' => :'Array<String>',
+        :'timestamp' => :'Integer',
+        :'title' => :'String'
+      }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'monitor',
+        :'monitor_groups',
+        :'monitor_id',
+        :'priority',
+      ])
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::EventAttributes` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::EventAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'aggregation_key')
+        self.aggregation_key = attributes[:'aggregation_key']
+      end
+
+      if attributes.key?(:'date_happened')
+        self.date_happened = attributes[:'date_happened']
+      end
+
+      if attributes.key?(:'device_name')
+        self.device_name = attributes[:'device_name']
+      end
+
+      if attributes.key?(:'duration')
+        self.duration = attributes[:'duration']
+      end
+
+      if attributes.key?(:'event_object')
+        self.event_object = attributes[:'event_object']
+      end
+
+      if attributes.key?(:'evt')
+        self.evt = attributes[:'evt']
+      end
+
+      if attributes.key?(:'hostname')
+        self.hostname = attributes[:'hostname']
+      end
+
+      if attributes.key?(:'monitor')
+        self.monitor = attributes[:'monitor']
+      end
+
+      if attributes.key?(:'monitor_groups')
+        if (value = attributes[:'monitor_groups']).is_a?(Array)
+          self.monitor_groups = value
+        end
+      end
+
+      if attributes.key?(:'monitor_id')
+        self.monitor_id = attributes[:'monitor_id']
+      end
+
+      if attributes.key?(:'priority')
+        self.priority = attributes[:'priority']
+      end
+
+      if attributes.key?(:'related_event_id')
+        self.related_event_id = attributes[:'related_event_id']
+      end
+
+      if attributes.key?(:'service')
+        self.service = attributes[:'service']
+      end
+
+      if attributes.key?(:'source_type_name')
+        self.source_type_name = attributes[:'source_type_name']
+      end
+
+      if attributes.key?(:'sourcecategory')
+        self.sourcecategory = attributes[:'sourcecategory']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          aggregation_key == o.aggregation_key &&
+          date_happened == o.date_happened &&
+          device_name == o.device_name &&
+          duration == o.duration &&
+          event_object == o.event_object &&
+          evt == o.evt &&
+          hostname == o.hostname &&
+          monitor == o.monitor &&
+          monitor_groups == o.monitor_groups &&
+          monitor_id == o.monitor_id &&
+          priority == o.priority &&
+          related_event_id == o.related_event_id &&
+          service == o.service &&
+          source_type_name == o.source_type_name &&
+          sourcecategory == o
