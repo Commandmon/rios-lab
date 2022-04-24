@@ -275,4 +275,18 @@ module DatadogAPIClient::V2
           related_event_id == o.related_event_id &&
           service == o.service &&
           source_type_name == o.source_type_name &&
-          sourcecategory == o
+          sourcecategory == o.sourcecategory &&
+          status == o.status &&
+          tags == o.tags &&
+          timestamp == o.timestamp &&
+          title == o.title
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [aggregation_key, date_happened, device_name, duration, event_object, evt, hostname, monitor, monitor_groups, monitor_id, priority, related_event_id, service, source_type_name, sourcecategory, status, tags, timestamp, title].hash
+    end
+  end
+end
