@@ -81,4 +81,73 @@ module DatadogAPIClient::V2
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppPipelinesGroupBy`. Please check the name to make sure it's valid. List of attributes: " + self.
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppPipelinesGroupBy`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'facet')
+        self.facet = attributes[:'facet']
+      end
+
+      if attributes.key?(:'histogram')
+        self.histogram = attributes[:'histogram']
+      end
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'missing')
+        self.missing = attributes[:'missing']
+      end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
+      end
+
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @facet.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param facet [Object] Object to be assigned
+    # @!visibility private
+    def facet=(facet)
+      if facet.nil?
+        fail ArgumentError, 'invalid value for "facet", facet cannot be nil.'
+      end
+      @facet = facet
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          facet == o.facet &&
+          histogram == o.histogram &&
+          limit == o.limit &&
+          missing == o.missing &&
+          sort == o.sort &&
+          total == o.total
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [facet, histogram, limit, missing, sort, total].hash
+    end
+  end
+end
