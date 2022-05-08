@@ -65,4 +65,22 @@ module DatadogAPIClient::V1
       # auth_names
       auth_names = opts[:debug_auth_names] || []
 
-      new_options = op
+      new_options = opts.merge(
+        :operation => :get_ip_ranges,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IPRangesAPI#get_ip_ranges\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+  end
+end
