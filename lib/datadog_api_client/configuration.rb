@@ -187,4 +187,178 @@ module DatadogAPIClient
             "v2.get_incident_integration": false,
             "v2.get_incident_todo": false,
             "v2.list_incident_attachments": false,
-            "v2.list_in
+            "v2.list_incident_integrations": false,
+            "v2.list_incidents": false,
+            "v2.list_incident_todos": false,
+            "v2.search_incidents": false,
+            "v2.update_incident": false,
+            "v2.update_incident_attachments": false,
+            "v2.update_incident_integration": false,
+            "v2.update_incident_todo": false,
+            "v2.query_scalar_data": false,
+            "v2.query_timeseries_data": false,
+            "v2.create_incident_service": false,
+            "v2.delete_incident_service": false,
+            "v2.get_incident_service": false,
+            "v2.list_incident_services": false,
+            "v2.update_incident_service": false,
+            "v2.create_incident_team": false,
+            "v2.delete_incident_team": false,
+            "v2.get_incident_team": false,
+            "v2.list_incident_teams": false,
+            "v2.update_incident_team": false,
+      }
+      @server_variables[:site] = ENV['DD_SITE'] if ENV.key? 'DD_SITE'
+      @api_key['apiKeyAuth'] = ENV['DD_API_KEY'] if ENV.key? 'DD_API_KEY'
+      @api_key['appKeyAuth'] = ENV['DD_APP_KEY'] if ENV.key? 'DD_APP_KEY'
+
+      yield(self) if block_given?
+    end
+
+    # The default Configuration object.
+    def self.default
+      @@default ||= Configuration.new
+    end
+
+    def configure
+      yield(self) if block_given?
+    end
+
+    def scheme=(scheme)
+      # remove :// from scheme
+      @scheme = scheme.sub(/:\/\//, '')
+    end
+
+    def host=(host)
+      # remove http(s):// and anything after a slash
+      @host = host.sub(/https?:\/\//, '').split('/').first
+    end
+
+    def base_path=(base_path)
+      # Add leading and trailing slashes to base_path
+      @base_path = "/#{base_path}".gsub(/\/+/, '/')
+      @base_path = '' if @base_path == '/'
+    end
+
+    # Returns base URL for specified operation based on server settings
+    def base_url(operation = nil)
+      index = server_operation_index.fetch(operation.to_sym, server_index)
+      return "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '') if index == nil
+
+      server_url(index, server_operation_variables.fetch(operation.to_sym, server_variables), operation_server_settings[operation.to_sym])
+    end
+
+    # Gets API key (with prefix if set).
+    # @param [String] param_name the parameter name of API key auth
+    def api_key_with_prefix(param_name, param_alias = nil)
+      key = @api_key[param_name]
+      key = @api_key.fetch(param_alias, key) unless param_alias.nil?
+      if @api_key_prefix[param_name]
+        "#{@api_key_prefix[param_name]} #{key}"
+      else
+        key
+      end
+    end
+
+    # Sets API key.
+    def api_key=(api_key)
+      @api_key['apiKeyAuth'] = api_key
+    end
+
+    # Sets application key.
+    def application_key=(app_key)
+      @api_key['appKeyAuth'] = app_key
+    end
+
+    # Gets Basic Auth token string
+    def basic_auth_token
+      'Basic ' + ["#{username}:#{password}"].pack('m').delete("\r\n")
+    end
+
+    # Returns Auth Settings hash for api client.
+    def auth_settings
+      {
+        AuthZ:
+          {
+            type: 'oauth2',
+            in: 'header',
+            key: 'Authorization',
+            value: "Bearer #{access_token}"
+          },
+        apiKeyAuth:
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'DD-API-KEY',
+            value: api_key_with_prefix('apiKeyAuth')
+          },
+        appKeyAuth:
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'DD-APPLICATION-KEY',
+            value: api_key_with_prefix('appKeyAuth')
+          },
+      }
+    end
+
+    # Returns an array of Server setting
+    def server_settings
+      [
+        {
+          url: "https://{subdomain}.{site}",
+          description: "No description provided",
+          variables: {
+            site: {
+              description: "The regional site for Datadog customers.",
+              default_value: "datadoghq.com",
+              enum_values: [
+                "datadoghq.com",
+                "us3.datadoghq.com",
+                "us5.datadoghq.com",
+                "datadoghq.eu",
+                "ddog-gov.com"
+              ]
+            },
+            subdomain: {
+              description: "The subdomain where the API is deployed.",
+              default_value: "api",
+            }
+          }
+        },
+        {
+          url: "{protocol}://{name}",
+          description: "No description provided",
+          variables: {
+            name: {
+              description: "Full site DNS name.",
+              default_value: "api.datadoghq.com",
+            },
+            protocol: {
+              description: "The protocol for accessing the API.",
+              default_value: "https",
+            }
+          }
+        },
+        {
+          url: "https://{subdomain}.{site}",
+          description: "No description provided",
+          variables: {
+            site: {
+              description: "Any Datadog deployment.",
+              default_value: "datadoghq.com",
+            },
+            subdomain: {
+              description: "The subdomain where the API is deployed.",
+              default_value: "api",
+            }
+          }
+        }
+      ]
+    end
+
+    def operation_server_settings
+      {
+        "v1.get_ip_ranges": [
+          {
+    
