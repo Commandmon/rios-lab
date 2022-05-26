@@ -522,4 +522,92 @@ module DatadogAPIClient
                   "us5.datadoghq.com",
                   "datadoghq.eu",
                   "ddog-gov.com"
-             
+                ]
+              },
+              subdomain: {
+                description: "The subdomain where the API is deployed.",
+                default_value: "http-intake.logs",
+              }
+            }
+          },
+          {
+            url: "{protocol}://{name}",
+            description: "No description provided",
+            variables: {
+              name: {
+                description: "Full site DNS name.",
+                default_value: "http-intake.logs.datadoghq.com",
+              },
+              protocol: {
+                description: "The protocol for accessing the API.",
+                default_value: "https",
+              }
+            }
+          },
+          {
+            url: "https://{subdomain}.{site}",
+            description: "No description provided",
+            variables: {
+              site: {
+                description: "Any Datadog deployment.",
+                default_value: "datadoghq.com",
+              },
+              subdomain: {
+                description: "The subdomain where the API is deployed.",
+                default_value: "http-intake.logs",
+              }
+            }
+          }  
+        ],
+      }
+    end
+
+    # Returns URL based on server settings
+    #
+    # @param index array index of the server settings
+    # @param variables hash of variable and the corresponding value
+    def server_url(index, variables = {}, servers = nil)
+      servers = server_settings if servers == nil
+
+      # check array index out of bound
+      if (index < 0 || index >= servers.size)
+        fail ArgumentError, "Invalid index #{index} when selecting the server. Must be less than #{servers.size}"
+      end
+
+      server = servers[index]
+      url = server[:url]
+
+      return url unless server.key? :variables
+
+      # go through variable and assign a value
+      server[:variables].each do |name, variable|
+        if variables.key?(name)
+          if (!server[:variables][name].key?(:enum_values) || server[:variables][name][:enum_values].include?(variables[name]))
+            url.gsub! "{" + name.to_s + "}", variables[name]
+          else
+            fail ArgumentError, "The variable `#{name}` in the server URL has invalid value #{variables[name]}. Must be #{server[:variables][name][:enum_values]}."
+          end
+        else
+          # use default value
+          url.gsub! "{" + name.to_s + "}", server[:variables][name][:default_value]
+        end
+      end
+
+      url
+    end
+  end
+
+  class UnparsedObject
+    # Defines unparsed object
+    attr_accessor :data
+
+    def initialize(data)
+      @data = data
+    end
+
+    def to_hash
+      self.data
+    end
+  end
+
+end
