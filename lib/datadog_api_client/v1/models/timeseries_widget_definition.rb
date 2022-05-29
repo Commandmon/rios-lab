@@ -173,4 +173,95 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'show_legend')
-        self.show_legend = attributes[:'s
+        self.show_legend = attributes[:'show_legend']
+      end
+
+      if attributes.key?(:'time')
+        self.time = attributes[:'time']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'title_align')
+        self.title_align = attributes[:'title_align']
+      end
+
+      if attributes.key?(:'title_size')
+        self.title_size = attributes[:'title_size']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'yaxis')
+        self.yaxis = attributes[:'yaxis']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @requests.nil?
+      return false if @requests.length < 1
+      return false if @type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param requests [Object] Object to be assigned
+    # @!visibility private
+    def requests=(requests)
+      if requests.nil?
+        fail ArgumentError, 'invalid value for "requests", requests cannot be nil.'
+      end
+      if requests.length < 1
+        fail ArgumentError, 'invalid value for "requests", number of items must be greater than or equal to 1.'
+      end
+      @requests = requests
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          custom_links == o.custom_links &&
+          events == o.events &&
+          legend_columns == o.legend_columns &&
+          legend_layout == o.legend_layout &&
+          legend_size == o.legend_size &&
+          markers == o.markers &&
+          requests == o.requests &&
+          right_yaxis == o.right_yaxis &&
+          show_legend == o.show_legend &&
+          time == o.time &&
+          title == o.title &&
+          title_align == o.title_align &&
+          title_size == o.title_size &&
+          type == o.type &&
+          yaxis == o.yaxis
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [custom_links, events, legend_columns, legend_layout, legend_size, markers, requests, right_yaxis, show_legend, time, title, title_align, title_size, type, yaxis].hash
+    end
+  end
+end
