@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,26 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # A group by rule.
-  class LogsMetricGroupBy
+  # The JSON:API request for updating a Confluent resource.
+  class ConfluentResourceRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The path to the value the log-based metric will be aggregated over.
-    attr_reader :path
-
-    # Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.
-    attr_accessor :tag_name
+    # JSON:API request for updating a Confluent resource.
+    attr_reader :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'path' => :'path',
-        :'tag_name' => :'tag_name'
+        :'data' => :'data'
       }
     end
 
@@ -44,8 +41,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'path' => :'String',
-        :'tag_name' => :'String'
+        :'data' => :'ConfluentResourceRequestData'
       }
     end
 
@@ -54,23 +50,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::LogsMetricGroupBy` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::ConfluentResourceRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::LogsMetricGroupBy`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ConfluentResourceRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'path')
-        self.path = attributes[:'path']
-      end
-
-      if attributes.key?(:'tag_name')
-        self.tag_name = attributes[:'tag_name']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -78,18 +70,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @path.nil?
+      return false if @data.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param path [Object] Object to be assigned
+    # @param data [Object] Object to be assigned
     # @!visibility private
-    def path=(path)
-      if path.nil?
-        fail ArgumentError, 'invalid value for "path", path cannot be nil.'
+    def data=(data)
+      if data.nil?
+        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
       end
-      @path = path
+      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -98,15 +90,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          path == o.path &&
-          tag_name == o.tag_name
+          data == o.data
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [path, tag_name].hash
+      [data].hash
     end
   end
 end
