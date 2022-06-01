@@ -92,4 +92,137 @@ module DatadogAPIClient::V1
 
       data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#check_aws_logs_lambda_async\nData: #{data.inspect}\nStatus code: #{status_code}
+        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#check_aws_logs_lambda_async\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Check permissions for log services.
+    #
+    # @see #check_aws_logs_services_async_with_http_info
+    def check_aws_logs_services_async(body, opts = {})
+      data, _status_code, _headers = check_aws_logs_services_async_with_http_info(body, opts)
+      data
+    end
+
+    # Check permissions for log services.
+    #
+    # Test if permissions are present to add log-forwarding triggers for the
+    # given services and AWS account. Input is the same as for `EnableAWSLogServices`.
+    # Done async, so can be repeatedly polled in a non-blocking fashion until
+    # the async request completes.
+    #
+    # - Returns a status of `created` when it's checking if the permissions exists
+    #   in the AWS account.
+    # - Returns a status of `waiting` while checking.
+    # - Returns a status of `checked and ok` if the Lambda exists.
+    # - Returns a status of `error` if the Lambda does not exist.
+    #
+    # @param body [AWSLogsServicesRequest] Check AWS Logs Async Services request body.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(AWSLogsAsyncResponse, Integer, Hash)>] AWSLogsAsyncResponse data, response status code and response headers
+    def check_aws_logs_services_async_with_http_info(body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AWSLogsIntegrationAPI.check_aws_logs_services_async ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AWSLogsIntegrationAPI.check_aws_logs_services_async"
+      end
+      # resource path
+      local_var_path = '/api/v1/integration/aws/logs/services_async'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AWSLogsAsyncResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :check_aws_logs_services_async,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#check_aws_logs_services_async\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Add AWS Log Lambda ARN.
+    #
+    # @see #create_aws_lambda_arn_with_http_info
+    def create_aws_lambda_arn(body, opts = {})
+      data, _status_code, _headers = create_aws_lambda_arn_with_http_info(body, opts)
+      data
+    end
+
+    # Add AWS Log Lambda ARN.
+    #
+    # Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.
+    #
+    # @param body [AWSAccountAndLambdaRequest] AWS Log Lambda Async request body.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+    def create_aws_lambda_arn_with_http_info(body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AWSLogsIntegrationAPI.create_aws_lambda_arn ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AWSLogsIntegrationAPI.create_aws_lambda_arn"
+      end
+      # resource path
+      local_var_path = '/api/v1/integration/aws/logs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Object'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :create_aws_lambda_arn,
+        :header_params => header_params,
+        :query_params => query_param
