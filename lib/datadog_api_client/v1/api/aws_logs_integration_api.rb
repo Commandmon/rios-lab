@@ -361,4 +361,137 @@ module DatadogAPIClient::V1
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
-  
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Post, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#enable_aws_log_services\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List all AWS Logs integrations.
+    #
+    # @see #list_aws_logs_integrations_with_http_info
+    def list_aws_logs_integrations(opts = {})
+      data, _status_code, _headers = list_aws_logs_integrations_with_http_info(opts)
+      data
+    end
+
+    # List all AWS Logs integrations.
+    #
+    # List all Datadog-AWS Logs integrations configured in your Datadog account.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(Array<AWSLogsListResponse>, Integer, Hash)>] Array<AWSLogsListResponse> data, response status code and response headers
+    def list_aws_logs_integrations_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AWSLogsIntegrationAPI.list_aws_logs_integrations ...'
+      end
+      # resource path
+      local_var_path = '/api/v1/integration/aws/logs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<AWSLogsListResponse>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :list_aws_logs_integrations,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#list_aws_logs_integrations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get list of AWS log ready services.
+    #
+    # @see #list_aws_logs_services_with_http_info
+    def list_aws_logs_services(opts = {})
+      data, _status_code, _headers = list_aws_logs_services_with_http_info(opts)
+      data
+    end
+
+    # Get list of AWS log ready services.
+    #
+    # Get the list of current AWS services that Datadog offers automatic log collection. Use returned service IDs with the services parameter for the Enable an AWS service log collection API endpoint.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(Array<AWSLogsListServicesResponse>, Integer, Hash)>] Array<AWSLogsListServicesResponse> data, response status code and response headers
+    def list_aws_logs_services_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AWSLogsIntegrationAPI.list_aws_logs_services ...'
+      end
+      # resource path
+      local_var_path = '/api/v1/integration/aws/logs/services'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<AWSLogsListServicesResponse>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :list_aws_logs_services,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V1"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AWSLogsIntegrationAPI#list_aws_logs_services\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+  end
+end
