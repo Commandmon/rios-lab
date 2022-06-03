@@ -13,4 +13,10 @@ http_interactions:
       string: '{"data":[]}
 
         '
-    
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
