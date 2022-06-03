@@ -90,4 +90,150 @@ module DatadogAPIClient::V1
       {
         :'custom_links' => :'Array<WidgetCustomLink>',
         :'group' => :'Array<String>',
-        :'no_group_hos
+        :'no_group_hosts' => :'Boolean',
+        :'no_metric_hosts' => :'Boolean',
+        :'node_type' => :'WidgetNodeType',
+        :'notes' => :'String',
+        :'requests' => :'HostMapWidgetDefinitionRequests',
+        :'scope' => :'Array<String>',
+        :'style' => :'HostMapWidgetDefinitionStyle',
+        :'title' => :'String',
+        :'title_align' => :'WidgetTextAlign',
+        :'title_size' => :'String',
+        :'type' => :'HostMapWidgetDefinitionType'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::HostMapWidgetDefinition` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::HostMapWidgetDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'custom_links')
+        if (value = attributes[:'custom_links']).is_a?(Array)
+          self.custom_links = value
+        end
+      end
+
+      if attributes.key?(:'group')
+        if (value = attributes[:'group']).is_a?(Array)
+          self.group = value
+        end
+      end
+
+      if attributes.key?(:'no_group_hosts')
+        self.no_group_hosts = attributes[:'no_group_hosts']
+      end
+
+      if attributes.key?(:'no_metric_hosts')
+        self.no_metric_hosts = attributes[:'no_metric_hosts']
+      end
+
+      if attributes.key?(:'node_type')
+        self.node_type = attributes[:'node_type']
+      end
+
+      if attributes.key?(:'notes')
+        self.notes = attributes[:'notes']
+      end
+
+      if attributes.key?(:'requests')
+        self.requests = attributes[:'requests']
+      end
+
+      if attributes.key?(:'scope')
+        if (value = attributes[:'scope']).is_a?(Array)
+          self.scope = value
+        end
+      end
+
+      if attributes.key?(:'style')
+        self.style = attributes[:'style']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'title_align')
+        self.title_align = attributes[:'title_align']
+      end
+
+      if attributes.key?(:'title_size')
+        self.title_size = attributes[:'title_size']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @requests.nil?
+      return false if @type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param requests [Object] Object to be assigned
+    # @!visibility private
+    def requests=(requests)
+      if requests.nil?
+        fail ArgumentError, 'invalid value for "requests", requests cannot be nil.'
+      end
+      @requests = requests
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          custom_links == o.custom_links &&
+          group == o.group &&
+          no_group_hosts == o.no_group_hosts &&
+          no_metric_hosts == o.no_metric_hosts &&
+          node_type == o.node_type &&
+          notes == o.notes &&
+          requests == o.requests &&
+          scope == o.scope &&
+          style == o.style &&
+          title == o.title &&
+          title_align == o.title_align &&
+          title_size == o.title_size &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [custom_links, group, no_group_hosts, no_metric_hosts, node_type, notes, requests, scope, style, title, title_align, title_size, type].hash
+    end
+  end
+end
