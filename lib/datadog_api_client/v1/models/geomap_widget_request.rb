@@ -62,4 +62,94 @@ module DatadogAPIClient::V1
 
     # Attribute type mapping.
     # @!visibility private
- 
+    def self.openapi_types
+      {
+        :'formulas' => :'Array<WidgetFormula>',
+        :'log_query' => :'LogQueryDefinition',
+        :'q' => :'String',
+        :'queries' => :'Array<FormulaAndFunctionQueryDefinition>',
+        :'response_format' => :'FormulaAndFunctionResponseFormat',
+        :'rum_query' => :'LogQueryDefinition',
+        :'security_query' => :'LogQueryDefinition'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::GeomapWidgetRequest` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::GeomapWidgetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'formulas')
+        if (value = attributes[:'formulas']).is_a?(Array)
+          self.formulas = value
+        end
+      end
+
+      if attributes.key?(:'log_query')
+        self.log_query = attributes[:'log_query']
+      end
+
+      if attributes.key?(:'q')
+        self.q = attributes[:'q']
+      end
+
+      if attributes.key?(:'queries')
+        if (value = attributes[:'queries']).is_a?(Array)
+          self.queries = value
+        end
+      end
+
+      if attributes.key?(:'response_format')
+        self.response_format = attributes[:'response_format']
+      end
+
+      if attributes.key?(:'rum_query')
+        self.rum_query = attributes[:'rum_query']
+      end
+
+      if attributes.key?(:'security_query')
+        self.security_query = attributes[:'security_query']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          formulas == o.formulas &&
+          log_query == o.log_query &&
+          q == o.q &&
+          queries == o.queries &&
+          response_format == o.response_format &&
+          rum_query == o.rum_query &&
+          security_query == o.security_query
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [formulas, log_query, q, queries, response_format, rum_query, security_query].hash
+    end
+  end
+end
