@@ -23,4 +23,6 @@ module DatadogAPIClient::V1
     include BaseEnumModel
 
     LIVE = "live".freeze
-    PAUSE
+    PAUSED = "paused".freeze
+  end
+end
