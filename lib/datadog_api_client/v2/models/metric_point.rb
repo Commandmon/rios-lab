@@ -17,23 +17,27 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Links attributes.
-  class RUMResponseLinks
+  # A point object is of the form `{POSIX_timestamp, numeric_value}`.
+  class MetricPoint
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Link for the next set of results. Note that the request can also be made using the
-    # POST endpoint.
-    attr_accessor :_next
+    # The timestamp should be in seconds and current.
+    # Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
+    attr_accessor :timestamp
+
+    # The numeric value format should be a 64bit float gauge-type value.
+    attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'_next' => :'next'
+        :'timestamp' => :'timestamp',
+        :'value' => :'value'
       }
     end
 
@@ -41,7 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'_next' => :'String'
+        :'timestamp' => :'Integer',
+        :'value' => :'Float'
       }
     end
 
@@ -50,19 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RUMResponseLinks` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::MetricPoint` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RUMResponseLinks`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::MetricPoint`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'_next')
-        self._next = attributes[:'_next']
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
+      end
+
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
     end
 
@@ -79,14 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _next == o._next
+          timestamp == o.timestamp &&
+          value == o.value
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [_next].hash
+      [timestamp, value].hash
     end
   end
 end
