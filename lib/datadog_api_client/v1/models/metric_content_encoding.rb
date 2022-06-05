@@ -17,12 +17,11 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # HTTP version to use for a Synthetic test.
-  class SyntheticsTestOptionsHTTPVersion
+  # HTTP header used to compress the media-type.
+  class MetricContentEncoding
     include BaseEnumModel
 
-    HTTP1 = "http1".freeze
-    HTTP2 = "http2".freeze
-    ANY = "any".freeze
+    DEFLATE = "deflate".freeze
+    GZIP = "gzip".freeze
   end
 end
