@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,42 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Object describing the issuer of a SSL certificate.
-  class SyntheticsSSLCertificateIssuer
+  # Response containing hourly usage of timeseries.
+  class UsageTimeseriesResponse
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Country Name that issued the certificate.
-    attr_accessor :c
-
-    # Common Name that issued certificate.
-    attr_accessor :cn
-
-    # Locality that issued the certificate.
-    attr_accessor :l
-
-    # Organization that issued the certificate.
-    attr_accessor :o
-
-    # Organizational Unit that issued the certificate.
-    attr_accessor :ou
-
-    # State Or Province Name that issued the certificate.
-    attr_accessor :st
+    # An array of objects regarding hourly usage of timeseries.
+    attr_accessor :usage
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'c' => :'C',
-        :'cn' => :'CN',
-        :'l' => :'L',
-        :'o' => :'O',
-        :'ou' => :'OU',
-        :'st' => :'ST'
+        :'usage' => :'usage'
       }
     end
 
@@ -60,12 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'c' => :'String',
-        :'cn' => :'String',
-        :'l' => :'String',
-        :'o' => :'String',
-        :'ou' => :'String',
-        :'st' => :'String'
+        :'usage' => :'Array<UsageTimeseriesHour>'
       }
     end
 
@@ -74,39 +50,21 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SyntheticsSSLCertificateIssuer` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageTimeseriesResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SyntheticsSSLCertificateIssuer`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageTimeseriesResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'c')
-        self.c = attributes[:'c']
-      end
-
-      if attributes.key?(:'cn')
-        self.cn = attributes[:'cn']
-      end
-
-      if attributes.key?(:'l')
-        self.l = attributes[:'l']
-      end
-
-      if attributes.key?(:'o')
-        self.o = attributes[:'o']
-      end
-
-      if attributes.key?(:'ou')
-        self.ou = attributes[:'ou']
-      end
-
-      if attributes.key?(:'st')
-        self.st = attributes[:'st']
+      if attributes.key?(:'usage')
+        if (value = attributes[:'usage']).is_a?(Array)
+          self.usage = value
+        end
       end
     end
 
@@ -123,19 +81,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          c == o.c &&
-          cn == o.cn &&
-          l == o.l &&
-          o == o.o &&
-          ou == o.ou &&
-          st == o.st
+          usage == o.usage
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [c, cn, l, o, ou, st].hash
+      [usage].hash
     end
   end
 end
