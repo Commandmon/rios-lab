@@ -17,35 +17,39 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Case when signal is generated.
-  class SecurityMonitoringRuleCaseCreate
+  # The metadata associated with a request.
+  class CIAppResponseMetadataWithPagination
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated
-    # based on the event counts in the previously defined queries.
-    attr_accessor :condition
+    # The time elapsed in milliseconds.
+    attr_accessor :elapsed
 
-    # Name of the case.
-    attr_accessor :name
+    # Paging attributes.
+    attr_accessor :page
 
-    # Notification targets for each rule case.
-    attr_accessor :notifications
+    # The identifier of the request.
+    attr_accessor :request_id
 
-    # Severity of the Security Signal.
-    attr_reader :status
+    # The status of the response.
+    attr_accessor :status
+
+    # A list of warnings (non-fatal errors) encountered. Partial results may return if
+    # warnings are present in the response.
+    attr_accessor :warnings
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'condition' => :'condition',
-        :'name' => :'name',
-        :'notifications' => :'notifications',
-        :'status' => :'status'
+        :'elapsed' => :'elapsed',
+        :'page' => :'page',
+        :'request_id' => :'request_id',
+        :'status' => :'status',
+        :'warnings' => :'warnings'
       }
     end
 
@@ -53,10 +57,11 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'condition' => :'String',
-        :'name' => :'String',
-        :'notifications' => :'Array<String>',
-        :'status' => :'SecurityMonitoringRuleSeverity'
+        :'elapsed' => :'Integer',
+        :'page' => :'CIAppResponsePage',
+        :'request_id' => :'String',
+        :'status' => :'CIAppResponseStatus',
+        :'warnings' => :'Array<CIAppWarning>'
       }
     end
 
@@ -65,33 +70,37 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SecurityMonitoringRuleCaseCreate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppResponseMetadataWithPagination` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SecurityMonitoringRuleCaseCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppResponseMetadataWithPagination`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'condition')
-        self.condition = attributes[:'condition']
+      if attributes.key?(:'elapsed')
+        self.elapsed = attributes[:'elapsed']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
       end
 
-      if attributes.key?(:'notifications')
-        if (value = attributes[:'notifications']).is_a?(Array)
-          self.notifications = value
-        end
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'warnings')
+        if (value = attributes[:'warnings']).is_a?(Array)
+          self.warnings = value
+        end
       end
     end
 
@@ -99,18 +108,7 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @status.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param status [Object] Object to be assigned
-    # @!visibility private
-    def status=(status)
-      if status.nil?
-        fail ArgumentError, 'invalid value for "status", status cannot be nil.'
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -119,17 +117,18 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          condition == o.condition &&
-          name == o.name &&
-          notifications == o.notifications &&
-          status == o.status
+          elapsed == o.elapsed &&
+          page == o.page &&
+          request_id == o.request_id &&
+          status == o.status &&
+          warnings == o.warnings
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [condition, name, notifications, status].hash
+      [elapsed, page, request_id, status, warnings].hash
     end
   end
 end
