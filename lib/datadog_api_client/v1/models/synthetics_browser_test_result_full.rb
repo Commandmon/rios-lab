@@ -101,4 +101,54 @@ module DatadogAPIClient::V1
         self.check_time = attributes[:'check_time']
       end
 
-      if attributes.key?(:'check_v
+      if attributes.key?(:'check_version')
+        self.check_version = attributes[:'check_version']
+      end
+
+      if attributes.key?(:'probe_dc')
+        self.probe_dc = attributes[:'probe_dc']
+      end
+
+      if attributes.key?(:'result')
+        self.result = attributes[:'result']
+      end
+
+      if attributes.key?(:'result_id')
+        self.result_id = attributes[:'result_id']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          check == o.check &&
+          check_time == o.check_time &&
+          check_version == o.check_version &&
+          probe_dc == o.probe_dc &&
+          result == o.result &&
+          result_id == o.result_id &&
+          status == o.status
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [check, check_time, check_version, probe_dc, result, result_id, status].hash
+    end
+  end
+end
