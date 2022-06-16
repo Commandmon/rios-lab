@@ -58,4 +58,139 @@ module DatadogAPIClient::V1
         :'layout_type' => :'layout_type',
         :'show_title' => :'show_title',
         :'title' => :'title',
-        :'title_align' => 
+        :'title_align' => :'title_align',
+        :'type' => :'type',
+        :'widgets' => :'widgets'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'background_color' => :'String',
+        :'banner_img' => :'String',
+        :'layout_type' => :'WidgetLayoutType',
+        :'show_title' => :'Boolean',
+        :'title' => :'String',
+        :'title_align' => :'WidgetTextAlign',
+        :'type' => :'GroupWidgetDefinitionType',
+        :'widgets' => :'Array<Widget>'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::GroupWidgetDefinition` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::GroupWidgetDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'background_color')
+        self.background_color = attributes[:'background_color']
+      end
+
+      if attributes.key?(:'banner_img')
+        self.banner_img = attributes[:'banner_img']
+      end
+
+      if attributes.key?(:'layout_type')
+        self.layout_type = attributes[:'layout_type']
+      end
+
+      if attributes.key?(:'show_title')
+        self.show_title = attributes[:'show_title']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'title_align')
+        self.title_align = attributes[:'title_align']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'widgets')
+        if (value = attributes[:'widgets']).is_a?(Array)
+          self.widgets = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @layout_type.nil?
+      return false if @type.nil?
+      return false if @widgets.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param layout_type [Object] Object to be assigned
+    # @!visibility private
+    def layout_type=(layout_type)
+      if layout_type.nil?
+        fail ArgumentError, 'invalid value for "layout_type", layout_type cannot be nil.'
+      end
+      @layout_type = layout_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param widgets [Object] Object to be assigned
+    # @!visibility private
+    def widgets=(widgets)
+      if widgets.nil?
+        fail ArgumentError, 'invalid value for "widgets", widgets cannot be nil.'
+      end
+      @widgets = widgets
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          background_color == o.background_color &&
+          banner_img == o.banner_img &&
+          layout_type == o.layout_type &&
+          show_title == o.show_title &&
+          title == o.title &&
+          title_align == o.title_align &&
+          type == o.type &&
+          widgets == o.widgets
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [background_color, banner_img, layout_type, show_title, title, title_align, type, widgets].hash
+    end
+  end
+end
