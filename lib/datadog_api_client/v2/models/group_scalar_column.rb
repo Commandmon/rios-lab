@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,26 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Attributes used to update an application Key.
-  class ApplicationKeyUpdateAttributes
+  # A column containing the tag keys and values in a group.
+  class GroupScalarColumn
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Name of the application key.
+    # The name of the tag key or group.
     attr_accessor :name
 
-    # Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.
-    attr_accessor :scopes
+    # The type of column present.
+    attr_accessor :type
+
+    # The array of tag values for each group found for the results of the formulas or queries.
+    attr_accessor :values
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
         :'name' => :'name',
-        :'scopes' => :'scopes'
+        :'type' => :'type',
+        :'values' => :'values'
       }
     end
 
@@ -45,16 +50,9 @@ module DatadogAPIClient::V2
     def self.openapi_types
       {
         :'name' => :'String',
-        :'scopes' => :'Array<String>'
+        :'type' => :'String',
+        :'values' => :'Array<Array<String>>'
       }
-    end
-
-    # List of attributes with nullable: true
-    # @!visibility private
-    def self.openapi_nullable
-      Set.new([
-        :'scopes',
-      ])
     end
 
     # Initializes the object
@@ -62,13 +60,13 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::ApplicationKeyUpdateAttributes` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::GroupScalarColumn` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ApplicationKeyUpdateAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::GroupScalarColumn`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -77,9 +75,13 @@ module DatadogAPIClient::V2
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'scopes')
-        if (value = attributes[:'scopes']).is_a?(Array)
-          self.scopes = value
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'values')
+        if (value = attributes[:'values']).is_a?(Array)
+          self.values = value
         end
       end
     end
@@ -98,14 +100,15 @@ module DatadogAPIClient::V2
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          scopes == o.scopes
+          type == o.type &&
+          values == o.values
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [name, scopes].hash
+      [name, type, values].hash
     end
   end
 end
