@@ -1,0 +1,41 @@
+http_interactions:
+- recorded_at: Mon, 21 Mar 2022 19:16:42 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test-Add_custom_screenboard_dashboard_to_an_existing_dashboard_list_returns_OK_response-1647890202"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/dashboard/lists/manual
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"is_favorite":false,"name":"Test-Add_custom_screenboard_dashboard_to_an_existing_dashboard_list_returns_OK_response-1647890202","dashboard_count":0,"author":{"handle":"frog@datadoghq.com","name":null},"created":"2022-03-21T19:16:43.096523+00:00","type":"manual_dashboard_list","dashboards":null,"modified":"2022-03-21T19:16:43.096538+00:00","id":284061}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+- recorded_at: Mon, 21 Mar 2022 19:16:42 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"layout_type":"free","title":"Test-Add_custom_screenboard_dashboard_to_an_existing_dashboard_list_returns_OK_response-1647890202
+        with Profile Metrics Query","widgets":[{"definition":{"requests":[{"profile_metrics_query":{"compute":{"aggregation":"sum","facet":"@prof_core_cpu_cores"},"group_by":[{"facet":"service","limit":10,"sort":{"aggregation":"sum","facet":"@prof_core_cpu_cores","order":"desc"}}],"search":{"query":"runtime:jvm"}}}],"type":"timeseries"},"layout":{"height":10,"width":10,"x":10,"y":10}}]}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/dashboard
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"notify_list":null,"description":null,"restricted_roles":[],"author_name":null,"template_variables":null,"is_read_only":false,"id":"sza-uj6-6p4","title":"Test-Add_custom_screenboard_dashboard_to_an_existing_dashboard_list_returns_OK_response-1647890202
+        with Profile Metrics Query","url":"/dashboard/sza-uj6-6p4/test-addcustomscreenboardda
