@@ -54,4 +54,16 @@ http_interactions:
       - application/json
     method: DELETE
     uri: https://api.datadoghq.com/api/v1/dashboard/npw-6di-usv
-  
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"deleted_dashboard_id":"npw-6di-usv"}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
