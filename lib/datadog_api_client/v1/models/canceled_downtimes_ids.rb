@@ -17,26 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # A list of  SLO correction objects.
-  class SLOCorrectionListResponse
+  # Object containing array of IDs of canceled downtimes.
+  class CanceledDowntimesIds
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The list of of SLO corrections objects.
-    attr_accessor :data
-
-    # Object describing meta attributes of response.
-    attr_accessor :meta
+    # ID of downtimes that were canceled.
+    attr_accessor :cancelled_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'meta' => :'meta'
+        :'cancelled_ids' => :'cancelled_ids'
       }
     end
 
@@ -44,8 +40,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<SLOCorrection>',
-        :'meta' => :'ResponseMetaAttributes'
+        :'cancelled_ids' => :'Array<Integer>'
       }
     end
 
@@ -54,25 +49,21 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SLOCorrectionListResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::CanceledDowntimesIds` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SLOCorrectionListResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::CanceledDowntimesIds`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
+      if attributes.key?(:'cancelled_ids')
+        if (value = attributes[:'cancelled_ids']).is_a?(Array)
+          self.cancelled_ids = value
         end
-      end
-
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
       end
     end
 
@@ -80,24 +71,4 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param o [Object] Object to be compared
-    # @!visibility private
-    def ==(o)
-      return true if self.equal?(o)
-      self.class == o.class &&
-          data == o.data &&
-          meta == o.meta
-    end
-
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    # @!visibility private
-    def hash
-      [data, meta].hash
-    end
-  end
-end
+     
