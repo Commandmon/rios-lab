@@ -1,0 +1,15 @@
+{
+  "config": {
+    "assertions": [
+      {
+        "operator": "isInMoreThan",
+        "target": 10,
+        "type": "certificate"
+      }
+    ],
+    "request": {
+      "host": "datadoghq.com",
+      "port": 443
+    }
+  },
+ 
