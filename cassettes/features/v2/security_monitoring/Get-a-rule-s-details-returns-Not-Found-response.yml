@@ -34,4 +34,59 @@ http_interactions:
         \ {\n    .error_page {\n      flex-wrap: wrap;\n      flex-direction: column-reverse;\n\
         \      align-items: center;\n    }\n    .error_page .error_img,\n    .error_page\
         \ .error_msg {\n      width: 80%;\n      flex: none;\n      text-align: left;\n\
-        \    }\n  }\n</style>\n\n<div class=\"error_page clearfix\">\n  <div clas
+        \    }\n  }\n</style>\n\n<div class=\"error_page clearfix\">\n  <div class=\"\
+        error_img\">\n    <picture class=\"mako_picture\">\n      <img alt=\"Sad Datadog\
+        \ Logo\" class=\"mako_picture_light\" src=\"https://static.datadoghq.com/static/v/35.10682645/js/sad-bits.svg\"\
+        \ width=\"276\" height=\"295\" />\n      <img alt=\"Sad Datadog Logo\" class=\"\
+        mako_picture_dark\" src=\"https://static.datadoghq.com/static/v/35.10682645/js/sad-bits_reversed.svg\"\
+        \ width=\"276\" height=\"295\" />\n    </picture>\n  </div>\n  <div class=\"\
+        error_msg\">\n    <p class=\"text-contrast-80 text-displayface\" style=\"\
+        margin: 0 0 0; font-size: 96px; font-weight: bold; line-height: 1;\">Arf.</p>\n\
+        \    <h1 style=\"font-size: 48px; line-height: 1;\">404 NOT FOUND</h1>\n \
+        \   <ul>\n      <li class=\"live-status\" id=\"error-status\"></li>\n    \
+        \  <li><a href=\"/\">Datadog Homepage &rarr;</a></li>\n      <li><a href=\"\
+        https://docs.datadoghq.com/help/\">Datadog Help &rarr;</a></li>\n      <li><a\
+        \ href=\"/account/settings\">Datadog Setup Basics &rarr;</a></li>\n    </ul>\n\
+        \  </div>\n</div>\n\n<!--page--></div>\n\n\n\n\n\n        <script>\n     \
+        \       window.DD_version=\"35.10682645\";\n        </script>\n\n        \n\
+        \n<!-- DD JS -->\n\n<div style=\"display: none;\"><input id=\"config-init\"\
+        \ name=\"config-init\" type=\"hidden\" value=\"{&#34;browser_email.domain&#34;:\
+        \ &#34;synthetics.dtdg.co&#34;, &#34;watchdog.default_shadow_pipeline&#34;:\
+        \ null, &#34;alerting.count_over_count_validation_min_id&#34;: 22196000, &#34;backoff&#34;:\
+        \ {&#34;active&#34;: false}, &#34;intercom_app_id&#34;: &#34;x9u0q6k2&#34;,\
+        \ &#34;browser_sdk&#34;: {&#34;logs&#34;: {&#34;bundle_url&#34;: &#34;https://www.datadoghq-browser-agent.com/datadog-logs-canary.js&#34;,\
+        \ &#34;init_config&#34;: {&#34;datacenter&#34;: &#34;us1.prod.dog&#34;, &#34;forwardErrorsToLogs&#34;:\
+        \ &#34;true&#34;, &#34;service&#34;: &#34;web-ui&#34;, &#34;telemetrySampleRate&#34;:\
+        \ 100.0, &#34;forwardConsoleLogs&#34;: &#34;all&#34;, &#34;site&#34;: &#34;datadoghq.com&#34;,\
+        \ &#34;version&#34;: &#34;35.10682645&#34;, &#34;env&#34;: &#34;prod&#34;,\
+        \ &#34;clientToken&#34;: &#34;pub3e5e24089275ff420f7fdb9d41f28bcd&#34;, &#34;sampleRate&#34;:\
+        \ 100.0, &#34;replica&#34;: null}}, &#34;rum&#34;: {&#34;bundle_url&#34;:\
+        \ &#34;https://www.datadoghq-browser-agent.com/datadog-rum-canary.js&#34;,\
+        \ &#34;init_config&#34;: {&#34;trackViewsManually&#34;: true, &#34;datacenter&#34;:\
+        \ &#34;us1.prod.dog&#34;, &#34;defaultPrivacyLevel&#34;: &#34;mask&#34;, &#34;telemetrySampleRate&#34;:\
+        \ 100.0, &#34;trackInteractions&#34;: true, &#34;applicationId&#34;: &#34;ac8218cf-498b-4d33-bd44-151095959547&#34;,\
+        \ &#34;version&#34;: &#34;35.10682645&#34;, &#34;site&#34;: &#34;datadoghq.com&#34;,\
+        \ &#34;trackLongTasks&#34;: true, &#34;replica&#34;: null, &#34;trackResources&#34;:\
+        \ true, &#34;sessionReplaySampleRate&#34;: 99.0, &#34;clientToken&#34;: &#34;pubb490f4bd3db4d2950e88db2aa5bda352&#34;,\
+        \ &#34;manualSessionReplayRecordingStart&#34;: true, &#34;sampleRate&#34;:\
+        \ 100.0, &#34;trackFrustrations&#34;: true, &#34;service&#34;: &#34;web-ui&#34;,\
+        \ &#34;env&#34;: &#34;prod&#34;}}}, &#34;visualizations.forecast_series_query_limit&#34;:\
+        \ null, &#34;telemetry.tag_by_dash_id&#34;: false, &#34;http2.max_num_requests&#34;:\
+        \ 100, &#34;site.logs_live_tail_subdomain&#34;: &#34;live.logs&#34;, &#34;downtimes.manage_downtimes_poll_interval&#34;:\
+        \ 60, &#34;dash.fast_search_delay_limit&#34;: 250, &#34;app_url&#34;: &#34;https://app.datadoghq.com&#34;,\
+        \ &#34;dash.max_picker_months_ago&#34;: 15, &#34;monitor-state-manager.group_retention&#34;:\
+        \ 86400, &#34;visualizations.line_series_query_limit&#34;: 6000, &#34;recaptcha_key&#34;:\
+        \ &#34;6LdkLSITAAAAAIdsAVWStCWxAQnn8mt6cGTdy370&#34;, &#34;screen.inactivity_timeout_ms&#34;:\
+        \ 900000, &#34;dash.query_resp_fmt_version&#34;: 2, &#34;visualizations.area_series_query_limit&#34;:\
+        \ 5000, &#34;datacenter.name&#34;: &#34;us1.prod.dog&#34;, &#34;browser_extension.unpacked_id&#34;:\
+        \ &#34;kagpdlocgomcgdogdpnjncacedobnmec&#34;, &#34;visualizations.heatmap_series_query_limit&#34;:\
+        \ null, &#34;browser_extension.current_id&#34;: &#34;kkbncfpddhdmkfmalecgnphegacgejoa&#34;,\
+        \ &#34;infrastructure.update_period_sec&#34;: 60, &#34;site.default_subdomain&#34;:\
+        \ &#34;app&#34;, &#34;visualizations.bars_series_query_limit&#34;: 15000,\
+        \ &#34;saml_configured_and_enabled&#34;: false, &#34;dash.min_polling_interval&#34;:\
+        \ 20000, &#34;visualizations.scatterplot_series_query_limit&#34;: null, &#34;dash.default_legend_entries&#34;:\
+        \ 100, &#34;site.domain&#34;: &#34;datadoghq.com&#34;, &#34;queries.blocked_metrics&#34;:\
+        \ &#34;&#34;, &#34;process.ws_proxy_url&#34;: &#34;wss://process.datadoghq.com&#34;,\
+        \ &#34;dash.hard_reload_after&#34;: 350, &#34;dash.overall_update_factor&#34;:\
+        \ 1.0, &#34;telemetry.sample_rate&#34;: 1.0, &#34;visualizations.distribution_series_query_limit&#34;:\
+        \ null, &#34;dash.backoff_fracti
