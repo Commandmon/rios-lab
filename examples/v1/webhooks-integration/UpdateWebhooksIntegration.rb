@@ -9,4 +9,4 @@ WEBHOOK_NAME = ENV["WEBHOOK_NAME"]
 body = DatadogAPIClient::V1::WebhooksIntegrationUpdateRequest.new({
   url: "https://example.com/webhook-updated",
 })
-p ap
+p api_instance.update_webhooks_integration(WEBHOOK_NAME, body)

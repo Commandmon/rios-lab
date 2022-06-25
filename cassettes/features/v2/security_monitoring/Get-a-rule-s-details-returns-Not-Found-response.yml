@@ -1,0 +1,37 @@
+http_interactions:
+- recorded_at: Mon, 24 Oct 2022 20:38:11 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/security_monitoring/rules/abcde-12345
+  response:
+    body:
+      encoding: UTF-8
+      string: "\n\n\n<!DOCTYPE html>\n<!--\n______  _______ _______ _______ ______\
+        \   _____   ______\n|     \\ |_____|    |    |_____| |     \\ |     | |  ____\n\
+        |_____/ |     |    |    |     | |_____/ |_____| |_____|\n\n\nuLjzVvY8CN9PrxlMBZPtdndqOxqx1wB6SOCFpJR2vNqOMC77A63iJn4UBlZHkAcAAZ+ZHhFtC7iHw4NC5+HDsO2HFfD3jBXH7P290xNwhNAKsnf6gJYln2m55ddEkn1sZ/eGOn0Yac9TDtGzLZ2UDaU0PS0uAvGhznE+ueOxQU9JqvJITXkkc2/1uDVsJVYFfQ9iNlgyQccr9QDL9UoGP+zALcknwy93DBflPF3mJ38j7rFXdGQ7rHBvQxp6xQV7velrcs17slGw7ITBBgK7YmoPpz7dZQ6CKJoGv+ZV9FY8jlZtmdMMl1RhUQc9Y7eJLSlgrN6lSJHmdeZ5ynaNevUPwzkrhFhgXCkdbxu7cmaxy7bxslJ3VHCn73hipfaWQfmSrRqcTYBnrmXWJ79m7hIoe0Ds6qQULWsRtOq0e4KW5/jK/gNGL1YAJr4xx/5BGRCuDWoAzD8y9XnPquVT/ASuJ3dz2khe32dc+gVfgUnkWdJQH2qhzReeWqoAVWcGlxKiFUzQy/bw8azOHGh2NszbeKHLvHB9pvbnkRuYtFxPhiWDCOJdUWg+3lY84tM/pDpbkLzuTnvBWIZ1Bq5VReh285phN/qNj+CZQMOnH1SPWypDdXscS6yjr9Rp9XN9gwkLLBm9l3d6I0ZKhyvMUOwKto5Eow8ZIZvUxwlCpgbMFQXsR/kwq6Atd1DQPgMfqh3HCTqsoEsaw1U3foWzFE4Vt80vhHR5YMoOOU9Xgr2kEHEMLGRn5+IFRTivVZIly4lDbUYfiP0be2NQh9jbWCAyqMWGZ3TVhIcA6Jmcg/tUNamIiHzei4GLHZQNV538FvShEm3++i0ginWyi/jB9u0SDCEXb9Vr+ugbPOuWlbIDawrdk7wdChbFyTS+m6qY0Hap5LOnsVESWACLYshy+DoJoZ6lTAIryAjOUNP+/Gf7necaD6BO7+WbjadRtuTP4K4C366uQOFhZb15DpEi7ay7WXv1PdFkzBp4wqTNg1S+QGW+kgZxnNqE3oEOgljPSAGkA4EwDEhIKHKkhvgYZs0SK2+JzN43TVZZqTu1oosWDVWImmZWRHBReOXg5893gPlXDWIvpDo0Yu1DxDA9M6HoVZh7pGRvIp+0KQ1r5Y0KYueCBRQnNr1t7ieGPTYYDswOOdcEUhltYfWav/tDC1fAJFLA7CxgGx6nYqo6kVti+w8LqDXtYTBwT8Sdn6cn9VcY5pNWw6H8nCypAtl01BhH9TBuSQoZoC5jsDfYBDvItO/e6hpHEJ15vkX+NVS4S5r/sBZjq/TrGTb2ueTlKJQlLDxUQNt6L7AiVo/saGYglGuqbbWhTYYNmbSqB8c7YJo2/xJKoW6fArtrIHJGF0wx5YmtKO4oTzlYaUAyzlOqFVxqsX1u9HsfqRGNU9x5p2tDcaOPO//JK5IrWdOCLIPHSDLDLmRQ7Wg6zgb/j6A=\n\
+        \n\n-->\n<html>\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width,\
+        \ initial-scale=1\">\n        <style>\n            @viewport {\n         \
+        \       width: device-width;\n                initial-scale: 1;\n        \
+        \    }\n            body { padding: 1px; }\n\n            body.dark-mode picture.mako_picture\
+        \ img.mako_picture_light {\n                display: none;\n            }\n\
+        \            body:not(.dark-mode) picture.mako_picture img.mako_picture_dark\
+        \ {\n                display: none;\n            }\n\n            img.mako_picture_dark\
+        \ {\n                filter: brightness(76%);\n            }\n        </style>\n\
+        \        <title>\n          \n  Error 404 | Datadog\n |\n        Datadog\n\
+        \        </title>\n        <link crossorigin=\"anonymous\" href=\"https://static.datadoghq.com/static/v/35.10682645/js/react-core.min.css\"\
+        \ media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n        \n   \
+        \     \n        \n        \n    </head>\n    <body class=\"\n\">\n       \
+        \ \n\n\n\n<style type=\"text/css\">\n  .error_page {\n    display: flex;\n\
+        \    align-items: center;\n    justify-content: center;\n    min-height: calc(100vh\
+        \ - var(--footer-height));\n  }\n  .error_page .error_img {\n    padding:\
+        \ 0 32px;\n    flex: 1 1 40%;\n    text-align: right;\n  }\n  .error_page\
+        \ .error_msg {\n    flex: 1 1 60%;\n  }\n  .error_page .error_msg .live-status:empty\
+        \ {\n    visibility: hidden;\n  }\n  @media screen and (max-width: 750px)\
+        \ {\n    .error_page {\n      flex-wrap: wrap;\n      flex-direction: column-reverse;\n\
+        \      align-items: center;\n    }\n    .error_page .error_img,\n    .error_page\
+        \ .error_msg {\n      width: 80%;\n      flex: none;\n      text-align: left;\n\
+        \    }\n  }\n</style>\n\n<div class=\"error_page clearfix\">\n  <div clas
