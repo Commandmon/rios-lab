@@ -89,4 +89,61 @@ http_interactions:
         \ &#34;&#34;, &#34;process.ws_proxy_url&#34;: &#34;wss://process.datadoghq.com&#34;,\
         \ &#34;dash.hard_reload_after&#34;: 350, &#34;dash.overall_update_factor&#34;:\
         \ 1.0, &#34;telemetry.sample_rate&#34;: 1.0, &#34;visualizations.distribution_series_query_limit&#34;:\
-        \ null, &#34;dash.backoff_fracti
+        \ null, &#34;dash.backoff_fraction&#34;: 0.25, &#34;monitors.evaluation_graph_v2_cutoff_days&#34;:\
+        \ 7, &#34;permissions&#34;: {&#34;org_app_keys_read&#34;: &#34;46a301db-ec5c-11ea-aa9f-2fe72193d60e&#34;,\
+        \ &#34;connections_resolve&#34;: &#34;36e2a22e-248a-11ed-b405-da7ad0900002&#34;,\
+        \ &#34;usage_notifications_write&#34;: &#34;1afff449-d5e9-11ec-ae37-da7ad0900002&#34;,\
+        \ &#34;synthetics_read&#34;: &#34;5025ee24-f923-11ea-adbc-576ea241df8d&#34;,\
+        \ &#34;logs_live_tail&#34;: &#34;6f66600e-dd12-11e8-9e55-7f30fbb45e73&#34;,\
+        \ &#34;metrics_read&#34;: &#34;df71ef13-d5c6-11eb-aa97-da7ad0900002&#34;,\
+        \ &#34;monitors_write&#34;: &#34;48ef71ea-d8b1-11e9-a77a-93f408470ad0&#34;,\
+        \ &#34;incident_settings_write&#34;: &#34;12efc210-d36c-11eb-a9b8-da7ad0900002&#34;,\
+        \ &#34;apm_tag_management_write&#34;: &#34;5cbe5f9c-2dce-11eb-84c0-872d3e9f1076&#34;,\
+        \ &#34;usage_edit&#34;: &#34;46a301e2-ec5c-11ea-aa9f-1f511b7305fd&#34;, &#34;appsec_event_rule_write&#34;:\
+        \ &#34;97971c1d-e895-11eb-b13c-da7ad0900002&#34;, &#34;security_monitoring_signals_read&#34;:\
+        \ &#34;80de1ec0-aa58-11ea-95e2-aff381626d5d&#34;, &#34;appsec_event_rule_read&#34;:\
+        \ &#34;97971c1c-e895-11eb-b13c-da7ad0900002&#34;, &#34;logs_write_exclusion_filters&#34;:\
+        \ &#34;7d7c98ac-dd12-11e8-9e56-93700598622d&#34;, &#34;service_account_read&#34;:\
+        \ &#34;a079963c-1476-11eb-bd08-2f2ff8a22b91&#34;, &#34;logs_read_data&#34;:\
+        \ &#34;1af86ce4-7823-11ea-93dc-d7cad1b1c6cb&#34;, &#34;manage_gcp_integrations&#34;:\
+        \ &#34;7b1f5088-c59e-11ec-aa32-da7ad0900002&#34;, &#34;timeseries_query&#34;:\
+        \ &#34;df71ef14-d5c6-11eb-aa97-da7ad0900002&#34;, &#34;apm_retention_filter_read&#34;:\
+        \ &#34;43fa188e-2dce-11eb-84c0-835ad1fd6287&#34;, &#34;incident_read&#34;:\
+        \ &#34;12efc20e-d36c-11eb-a9b8-da7ad0900002&#34;, &#34;data_scanner_read&#34;:\
+        \ &#34;bf0dcf7c-90af-11eb-9b82-da7ad0900002&#34;, &#34;manage_aws_integrations&#34;:\
+        \ &#34;7b1f5086-c59e-11ec-aa32-da7ad0900002&#34;, &#34;generate_reports&#34;:\
+        \ &#34;dc491a84-7ebf-11ec-bc2c-da7ad0900002&#34;, &#34;usage_notifications_read&#34;:\
+        \ &#34;1afff448-d5e9-11ec-ae37-da7ad0900002&#34;, &#34;service_account_write&#34;:\
+        \ &#34;a42e94b2-1476-11eb-bd08-efda28c04248&#34;, &#34;synthetics_private_location_write&#34;:\
+        \ &#34;46a301de-ec5c-11ea-aa9f-a73252c24806&#34;, &#34;generate_dashboard_reports&#34;:\
+        \ &#34;6c87d3da-e5c5-11ec-b1d6-da7ad0900002&#34;, &#34;logs_generate_metrics&#34;:\
+        \ &#34;979df720-aed7-11e9-99c6-a7eb8373165a&#34;, &#34;workflows_write&#34;:\
+        \ &#34;f6e917aa-8502-11ec-bf20-da7ad0900002&#34;, &#34;workflows_read&#34;:\
+        \ &#34;f6e917a8-8502-11ec-bf20-da7ad0900002&#34;, &#34;watchdog_insights_read&#34;:\
+        \ &#34;6be119a6-1cd8-11ed-b185-da7ad0900002&#34;, &#34;appsec_vm_library_read&#34;:\
+        \ &#34;930087f2-d533-11ec-ae05-da7ad0900002&#34;, &#34;late_metrics_config_write&#34;:\
+        \ &#34;d92bfb3a-0e81-11ed-adac-da7ad0900002&#34;, &#34;synthetics_global_variable_write&#34;:\
+        \ &#34;4ada6e36-f923-11ea-adbc-0788e5c5e3cf&#34;, &#34;incident_settings_read&#34;:\
+        \ &#34;12efc20f-d36c-11eb-a9b8-da7ad0900002&#34;, &#34;security_monitoring_cws_agent_rules_write&#34;:\
+        \ &#34;f4473c61-4792-11ec-a27b-da7ad0900002&#34;, &#34;apm_primary_operation_write&#34;:\
+        \ &#34;61765026-2dce-11eb-84c0-833e230d1b8f&#34;, &#34;logs_write_pipelines&#34;:\
+        \ &#34;811ac4ca-dd12-11e8-9e57-676a7f0beef9&#34;, &#34;connections_read&#34;:\
+        \ &#34;f6e917a6-8502-11ec-bf20-da7ad0900002&#34;, &#34;synthetics_private_location_read&#34;:\
+        \ &#34;46a301dd-ec5c-11ea-aa9f-97edfb345bc9&#34;, &#34;fleet_management_read&#34;:\
+        \ &#34;72cf0aac-0677-11ec-beb8-da7ad0900002&#34;, &#34;apm_service_ingest_read&#34;:\
+        \ &#34;4916eebe-2dce-11eb-84c0-271cb2c672e8&#34;, &#34;usage_read&#34;: &#34;46a301e1-ec5c-11ea-aa9f-afa39f6f3e36&#34;,\
+        \ &#34;org_apps_read&#34;: &#34;dcf32acc-1bb6-11ec-88b1-da7ad0900002&#34;,\
+        \ &#34;apm_read&#34;: &#34;417ba636-2dce-11eb-84c0-6bce5b0d9de0&#34;, &#34;security_monitoring_notification_profiles_read&#34;:\
+        \ &#34;c95412b8-16c7-11ec-85c0-da7ad0900002&#34;, &#34;dashboards_read&#34;:\
+        \ &#34;d90f6830-d3d8-11e9-a77a-b3404e5e9ee2&#34;, &#34;apm_service_catalog_write&#34;:\
+        \ &#34;ee68fba9-173a-11ed-b00b-da7ad0900002&#34;, &#34;apm_pipelines_read&#34;:\
+        \ &#34;8e4d6b6e-5750-11ec-a9f4-da7ad0900002&#34;, &#34;integrations_api&#34;:\
+        \ &#34;fcac2ad8-2843-11eb-8315-0fe47949d625&#34;, &#34;dashboards_public_share&#34;:\
+        \ &#34;d90f6832-d3d8-11e9-a77a-bf8a2607f864&#34;, &#34;org_authorized_apps_write&#34;:\
+        \ &#34;49d8505f-1fcc-11ec-8a6d-da7ad0900002&#34;, &#34;org_authorized_apps_read&#34;:\
+        \ &#34;49d8505e-1fcc-11ec-8a6d-da7ad0900002&#34;, &#34;standard&#34;: &#34;984d2f00-d3b4-11e8-a200-bb47109e9987&#34;,\
+        \ &#34;synthetics_default_settings_write&#34;: &#34;642eebe6-f923-11ea-adbc-eb617674ea04&#34;,\
+        \ &#34;logs_modify_indexes&#34;: &#34;62cc036c-dd12-11e8-9e54-db9995643092&#34;,\
+        \ &#34;logs_write_archives&#34;: &#34;87b00304-dd12-11e8-9e59-cbeb5f71f72f&#34;,\
+        \ &#34;security_monitoring_signals_write&#34;: &#34;58b412cc-ff6d-11eb-bc9c-da7ad0900002&#34;,\
+  
