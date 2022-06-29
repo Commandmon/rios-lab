@@ -146,4 +146,62 @@ http_interactions:
         \ &#34;logs_modify_indexes&#34;: &#34;62cc036c-dd12-11e8-9e54-db9995643092&#34;,\
         \ &#34;logs_write_archives&#34;: &#34;87b00304-dd12-11e8-9e59-cbeb5f71f72f&#34;,\
         \ &#34;security_monitoring_signals_write&#34;: &#34;58b412cc-ff6d-11eb-bc9c-da7ad0900002&#34;,\
-  
+        \ &#34;workflows_run&#34;: &#34;f6e917a9-8502-11ec-bf20-da7ad0900002&#34;,\
+        \ &#34;monitors_read&#34;: &#34;4441648c-d8b1-11e9-a77a-1b899a04b304&#34;,\
+        \ &#34;admin&#34;: &#34;984a2bd4-d3b4-11e8-a1ff-a7f660d43029&#34;, &#34;monitors_downtime&#34;:\
+        \ &#34;4d87d5f8-d8b1-11e9-a77a-eb9c8350d04f&#34;, &#34;dashboards_write&#34;:\
+        \ &#34;d90f6831-d3d8-11e9-a77a-4fd230ddbc6a&#34;, &#34;user_devices_read&#34;:\
+        \ &#34;06c3ed94-e932-11eb-b16c-da7ad0900002&#34;, &#34;fleet_management_write&#34;:\
+        \ &#34;72cf0aad-0677-11ec-beb8-da7ad0900002&#34;, &#34;metric_tags_write&#34;:\
+        \ &#34;46a301e4-ec5c-11ea-aa9f-87282b3a50cc&#34;, &#34;user_access_read&#34;:\
+        \ &#34;68d1ed9e-33ad-11ed-8a72-da7ad0900002&#34;, &#34;first_party_access&#34;:\
+        \ &#34;2545957c-c8ff-11eb-a64e-da7ad0900002&#34;, &#34;logs_public_config_api&#34;:\
+        \ &#34;1a92ede2-6cb2-11e9-99c6-2b3a4a0cdf0a&#34;, &#34;synthetics_default_settings_read&#34;:\
+        \ &#34;5c6b88e2-f923-11ea-adbc-abf57d079420&#34;, &#34;security_monitoring_filters_write&#34;:\
+        \ &#34;98b984f5-b16d-11eb-a2c6-da7ad0900002&#34;, &#34;org_apps_write&#34;:\
+        \ &#34;dcf32acd-1bb6-11ec-88b1-da7ad0900002&#34;, &#34;observability_pipelines_read&#34;:\
+        \ &#34;945b3bb4-5884-11ec-aa6d-da7ad0900002&#34;, &#34;apm_retention_filter_write&#34;:\
+        \ &#34;465cfe66-2dce-11eb-84c0-6baa888239fa&#34;, &#34;security_monitoring_rules_read&#34;:\
+        \ &#34;7314eb20-aa58-11ea-95e2-6fb6e4a451d5&#34;, &#34;debugger_write&#34;:\
+        \ &#34;edfd5e74-801f-11eb-96d8-da7ad0900002&#34;, &#34;user_access_invite&#34;:\
+        \ &#34;9ac1d8cc-e707-11ea-aa2d-73d37e989a9d&#34;, &#34;notebooks_read&#34;:\
+        \ &#34;b6bf9ac6-9a59-11ec-8480-da7ad0900002&#34;, &#34;logs_write_forwarding_rules&#34;:\
+        \ &#34;5b2c3e28-1761-11ed-b018-da7ad0900002&#34;, &#34;org_app_keys_write&#34;:\
+        \ &#34;46a301dc-ec5c-11ea-aa9f-13b33f8f46ea&#34;, &#34;rum_apps_read&#34;:\
+        \ &#34;7605ef24-f376-11eb-b90b-da7ad0900002&#34;, &#34;security_monitoring_cws_agent_rules_read&#34;:\
+        \ &#34;f4473c60-4792-11ec-a27b-da7ad0900002&#34;, &#34;incidents_private_global_access&#34;:\
+        \ &#34;7a89ec40-8b69-11ec-812d-da7ad0900002&#34;, &#34;apm_generate_metrics&#34;:\
+        \ &#34;26c79920-1703-11ec-85d2-da7ad0900002&#34;, &#34;security_monitoring_fleet_management_policies_push&#34;:\
+        \ &#34;110c8852-152d-11ec-84aa-da7ad0900002&#34;, &#34;logs_read_archives&#34;:\
+        \ &#34;b382b982-8535-11ea-93de-2bf1bdf20798&#34;, &#34;connections_write&#34;:\
+        \ &#34;f6e917a7-8502-11ec-bf20-da7ad0900002&#34;, &#34;incident_write&#34;:\
+        \ &#34;12efc211-d36c-11eb-a9b8-da7ad0900002&#34;, &#34;apm_service_catalog_read&#34;:\
+        \ &#34;ee68fba8-173a-11ed-b00b-da7ad0900002&#34;, &#34;logs_delete_data&#34;:\
+        \ &#34;e35c06b0-966b-11ec-83c9-da7ad0900002&#34;, &#34;edit_login_methods&#34;:\
+        \ &#34;7f3b260e-f9cb-11ea-ae1d-674bb0cde36a&#34;, &#34;user_devices_write&#34;:\
+        \ &#34;06c3ed95-e932-11eb-b16c-da7ad0900002&#34;, &#34;logs_write_facets&#34;:\
+        \ &#34;6ba32d22-0e1a-11eb-ba44-bf9a5aafaa39&#34;, &#34;user_app_keys&#34;:\
+        \ &#34;46a301da-ec5c-11ea-aa9f-73bedeab67ee&#34;, &#34;api_keys_read&#34;:\
+        \ &#34;372896c4-f923-11ea-adbc-4fecd107156d&#34;, &#34;slos_read&#34;: &#34;f8e941cf-e746-11ec-b22d-da7ad0900002&#34;,\
+        \ &#34;rum_apps_write&#34;: &#34;8106300a-54f7-11eb-8cbc-7781a434a67b&#34;,\
+        \ &#34;events_read&#34;: &#34;df71ef12-d5c6-11eb-aa97-da7ad0900002&#34;, &#34;notebooks_write&#34;:\
+        \ &#34;b6bf9ac7-9a59-11ec-8480-da7ad0900002&#34;, &#34;api_keys_write&#34;:\
+        \ &#34;3e4d4d28-f923-11ea-adbc-e3565938c12e&#34;, &#34;user_access_manage&#34;:\
+        \ &#34;9de604d8-e707-11ea-aa2d-93f1a783b3a3&#34;, &#34;audit_logs_write&#34;:\
+        \ &#34;04bc1cf2-340a-11eb-873a-43b973c760dd&#34;, &#34;rum_session_replay_read&#34;:\
+        \ &#34;7605ef25-f376-11eb-b90b-da7ad0900002&#34;, &#34;apm_apdex_manage_write&#34;:\
+        \ &#34;53950c54-2dce-11eb-84c0-a79ae108f6f8&#34;, &#34;manage_integrations&#34;:\
+        \ &#34;7b1f5089-c59e-11ec-aa32-da7ad0900002&#34;, &#34;security_monitoring_rules_write&#34;:\
+        \ &#34;7b516476-aa58-11ea-95e2-93718cd56369&#34;, &#34;billing_read&#34;:\
+        \ &#34;46a301df-ec5c-11ea-aa9f-970a9ae645e5&#34;, &#34;security_monitoring_cws_profile_tree_read&#34;:\
+        \ &#34;64460010-d6ad-11ec-ae6a-da7ad0900002&#34;, &#34;logs_write_processors&#34;:\
+        \ &#34;84aa3ae4-dd12-11e8-9e58-a373a514ccd0&#34;, &#34;logs_write_historical_view&#34;:\
+        \ &#34;07c3c146-f7f8-11ea-acf6-0bd62b9ae60e&#34;, &#34;monitor_config_policy_write&#34;:\
+        \ &#34;4784b11c-f311-11ec-a5f5-da7ad0900002&#34;, &#34;debugger_read&#34;:\
+        \ &#34;edfd5e75-801f-11eb-96d8-da7ad0900002&#34;, &#34;observability_pipelines_write&#34;:\
+        \ &#34;945b3bb5-5884-11ec-aa6d-da7ad0900002&#34;, &#34;billing_edit&#34;:\
+        \ &#34;46a301e0-ec5c-11ea-aa9f-6ba6cc675d8c&#34;, &#34;slos_write&#34;: &#34;f8e941d0-e746-11ec-b22d-da7ad0900002&#34;,\
+        \ &#34;security_monitoring_filters_read&#34;: &#34;98b984f4-b16d-11eb-a2c6-da7ad0900002&#34;,\
+        \ &#34;apm_service_ingest_write&#34;: &#34;4e3f02b4-2dce-11eb-84c0-2fca946a6efc&#34;,\
+        \ &#34;synthetics_write&#34;: &#34;55f4b5ec-f923-11ea-adbc-1bfa2334a755&#34;,\
+        \ &#34;manage_azure_in
