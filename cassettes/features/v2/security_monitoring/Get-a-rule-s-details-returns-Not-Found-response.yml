@@ -363,4 +363,57 @@ http_interactions:
         \ &#34;amazon_elb&#34;, &#34;display-tile-amazon-privatelink&#34;, &#34;monitor_downtime_search&#34;,\
         \ &#34;amazon_ses&#34;, &#34;display-tile-amazon-mediastore&#34;, &#34;logzio&#34;,\
         \ &#34;aws_tile_metric_streams&#34;, &#34;k9_display_events_timeline_cws_side_panel&#34;,\
-        \ &#34;correlations_error_traces&#34;
+        \ &#34;correlations_error_traces&#34;, &#34;sci_linktogit_python&#34;, &#34;new_dashboards_list_onboarding&#34;,\
+        \ &#34;usm_service_auto_extraction&#34;, &#34;amazon_storage_gateway&#34;,\
+        \ &#34;et-pci_banner&#34;, &#34;jira_new_config_tab&#34;, &#34;opsgenie_service_api_via_service_repository&#34;,\
+        \ &#34;notebooks_table_cell&#34;, &#34;profiling_dashboard_show_metrics_nodejs&#34;,\
+        \ &#34;trace_service_page_next&#34;, &#34;amazon_billing&#34;, &#34;trace_version_stats_from_metrics&#34;,\
+        \ &#34;databases_query_data_on_dashboards&#34;, &#34;network_popular_tags_default_map_aggregation&#34;,\
+        \ &#34;funnel_dashboard_widget&#34;, &#34;normalize_device_name&#34;, &#34;monitors_summary_ok_link&#34;,\
+        \ &#34;amazon_shield&#34;, &#34;trace_show_breakdown_profiling_for_go&#34;,\
+        \ &#34;watchdog_show_rca_service_stories&#34;, &#34;trace_resource_span_map&#34;,\
+        \ &#34;audit_events_explorer&#34;, &#34;mute_first_recovery_notification_checkbox&#34;,\
+        \ &#34;compatibility_check&#34;, &#34;amazon_workspaces&#34;, &#34;amazon_mediaconnect&#34;,\
+        \ &#34;rum_2_metrics_v2&#34;, &#34;network_autogroups&#34;, &#34;display-tile-amazon-dynamodb-accelerator&#34;,\
+        \ &#34;outages_mode&#34;, &#34;incidents_automated_communications&#34;, &#34;trace_outliers_multi_indexes&#34;,\
+        \ &#34;watchdog_show_impacts_section&#34;, &#34;ci_app_pipelines_monitor&#34;,\
+        \ &#34;serverless_error_tracking_tab&#34;, &#34;dashboard_allow_metric_boolean_filter&#34;,\
+        \ &#34;logs_group_by_selector_v2&#34;, &#34;amazon_rekognition&#34;, &#34;spa_help&#34;,\
+        \ &#34;amazon_sagemaker&#34;, &#34;trust-and-safety_rewrite-url-for-proxy&#34;,\
+        \ &#34;k9_cspm_available&#34;, &#34;amazon_health&#34;, &#34;agent_versions_csv_export&#34;,\
+        \ &#34;logs_pattern_anomalies&#34;, &#34;dataviz_fullscreen_graph_save_to&#34;,\
+        \ &#34;crawler_k8s_card_tag&#34;, &#34;azure_cspm_configuration&#34;, &#34;pagerduty_schedules&#34;,\
+        \ &#34;k9_cspm_azure_portal_link&#34;, &#34;cloud_cost_management_anomalies&#34;,\
+        \ &#34;monitor_reports&#34;, &#34;rum_waterfall_v2&#34;, &#34;appsec_identify&#34;,\
+        \ &#34;watchdog_show_aws_elb_stories&#34;, &#34;notebooks_favorites&#34;,\
+        \ &#34;serverless_getting_started&#34;, &#34;graph_editor_query_table_default_sort&#34;,\
+        \ &#34;workflow_automation_hide_panel_action_catalog&#34;, &#34;notebooks_export_as_pdf&#34;,\
+        \ &#34;rum_replay_pricing&#34;, &#34;trace_use_metrics_for_resource_list&#34;,\
+        \ &#34;serverless-app-frontend-metrics&#34;, &#34;network_devices_netflow_overview&#34;,\
+        \ &#34;container_orchestration_monitors&#34;, &#34;amazon_kinesis&#34;, &#34;logs_maximum_archives_size&#34;,\
+        \ &#34;k9_cspm_aws_console_link&#34;, &#34;metrics_query_use_arbitrary_pct_aggr_fe&#34;,\
+        \ &#34;watchdog_enable_feed_refetch_interval&#34;, &#34;watchdog_show_full_disk_forecast_stories&#34;,\
+        \ &#34;amazon_ec2_spot&#34;, &#34;customer_extend_trial&#34;, &#34;amazon_athena&#34;,\
+        \ &#34;azure_liftr_ui&#34;, &#34;ci_app_test_runs_history_tab&#34;, &#34;log_multi_monitors_release&#34;,\
+        \ &#34;notebook_template_vars&#34;, &#34;rum_webviews&#34;, &#34;dataviz_safe_convert_to_csv&#34;,\
+        \ &#34;incidents_use_impact_analytics&#34;, &#34;apm_asm_backend_waf_for_apm&#34;,\
+        \ &#34;in_app_commit_bundles&#34;, &#34;logs_pattern_anomalies_insights_api&#34;,\
+        \ &#34;ui-apps-backend-features-validation&#34;, &#34;amazon_mediatailor&#34;,\
+        \ &#34;as_count_validation&#34;, &#34;rum_mobile_vitals&#34;, &#34;limit_monitor_graph_series&#34;,\
+        \ &#34;ci_app_test_suite_visibility_test_level_dashboards_notebooks&#34;,\
+        \ &#34;amazon_firehose&#34;, &#34;process_list_in_apm&#34;, &#34;designops_input-escape-blur&#34;,\
+        \ &#34;trace_saved_views_migration&#34;, &#34;watchdog_show_nginx_plus_stories&#34;,\
+        \ &#34;gearmand&#34;, &#34;appsec_public_beta&#34;, &#34;watchdog_enable_infra_stories&#34;,\
+        \ &#34;logs_insights&#34;, &#34;error_tracking_session_timeline&#34;, &#34;opsgenie_react_tile&#34;,\
+        \ &#34;metrics_query_use_count_if_aggr_fe&#34;, &#34;enable_distribution&#34;,\
+        \ &#34;monitors_forms_v2&#34;, &#34;parse_timeshift_monitor_view&#34;, &#34;appsec_homepage&#34;,\
+        \ &#34;incidents_editable_overview&#34;, &#34;container_orchestration_topologymap&#34;,\
+        \ &#34;amazon_nat_gateway&#34;, &#34;profiling_dashboard_show_metrics_ruby&#34;,\
+        \ &#34;profiling_endpoint_apm_link&#34;, &#34;k9_notification_rules_redesign&#34;,\
+        \ &#34;amazon_codebuild&#34;, &#34;network_devices_metrics_enrichment_ui&#34;,\
+        \ &#34;notebooks_table_of_contents&#34;, &#34;k9_runtime_homepage&#34;, &#34;watchdog_faulty_deployments_branding&#34;,\
+        \ &#34;compliance_page_nav&#34;, &#34;k9_cspm_resource_timeline&#34;, &#34;aws_integration_api_v2&#34;,\
+        \ &#34;amazon_documentdb&#34;, &#34;sci_generic_stacktrace_go&#34;, &#34;limit_queried_timeseries&#34;,\
+        \ &#34;jumpcloud_common_account_react_tile&#34;, &#34;multiple_oauth_clients&#34;,\
+        \ &#34;amazon_mediaconvert&#34;, &#34;network_devices_netflow_sidepanel&#34;,\
+        \ &#34;trace_deployment_analysis&#34;, &#34;
