@@ -469,4 +469,32 @@ http_interactions:
         \ &#34;opsgenie_account_ui&#34;, &#34;trace_use_latency_breakdown_post&#34;,\
         \ &#34;amazon_cloudtrail&#34;, &#34;service_map&#34;, &#34;amazon_security_hub&#34;,\
         \ &#34;logs_generic_saved_views&#34;, &#34;ci_app_ci_webhooks_processor_github_support&#34;,\
-        \ &#34;metadata_api_migration&#34;, &#34;github
+        \ &#34;metadata_api_migration&#34;, &#34;github_code_scan_crawler&#34;, &#34;rbac_app_keys&#34;,\
+        \ &#34;prefer_esbuild_pipeline&#34;, &#34;downtime_recurrence_rrule&#34;,\
+        \ &#34;k9_siem_homepage_v2&#34;, &#34;appsec_send_instructions_modal&#34;,\
+        \ &#34;trace_runtime_dashboard_jvm&#34;, &#34;proc_queries&#34;, &#34;dashboard_multi_step_queries&#34;,\
+        \ &#34;slo_summary_group_mode_single_group&#34;, &#34;slo_widget_global_time&#34;,\
+        \ &#34;metrics_summary_use_distribution_metric_type&#34;, &#34;signup_region_select&#34;,\
+        \ &#34;recovery_thresholds&#34;, &#34;service_catalog_security_lens&#34;,\
+        \ &#34;k9_saved_views&#34;, &#34;databases_db_host_monitors&#34;, &#34;trace_use_metrics_for_histogram&#34;,\
+        \ &#34;plan_is_upgradable&#34;, &#34;oracle&#34;, &#34;amazon_appsync&#34;,\
+        \ &#34;amazon_api_gateway&#34;, &#34;ci_app_test_custom_config&#34;], &#34;watchdog.default_feed.end&#34;:\
+        \ null, &#34;visualizations.anomalies_series_query_limit&#34;: null, &#34;statuspageio_page_url&#34;:\
+        \ &#34;https://status.datadoghq.com&#34;, &#34;synthetics.multistep.max_step_count&#34;:\
+        \ 10, &#34;dash.hidden_update_factor&#34;: 30.0, &#34;watchdog.default_feed.start&#34;:\
+        \ null, &#34;rum.rum_snippet_url&#34;: &#34;https://www.datadoghq-browser-agent.com/datadog-rum-us.js&#34;,\
+        \ &#34;braintree_publishable_key&#34;: &#34;production_3rh5ps24_9mgt93ty97qj6hbt&#34;,\
+        \ &#34;zendesk_app_key&#34;: &#34;a71b5eae-e154-460b-a2da-836e2ee271bb&#34;,\
+        \ &#34;statuspageio_pageid&#34;: &#34;1k6wzpspjf99&#34;, &#34;templeton.retain_deleted_groups_threshold&#34;:\
+        \ 86400}\" /></div>\n<div style=\"display: none;\"><input id=\"public-path\"\
+        \ name=\"public-path\" type=\"hidden\" value=\"&#34;https://static.datadoghq.com&#34;\"\
+        \ /></div>\n\n    <script crossorigin=\"anonymous\" src=\"https://static.datadoghq.com/static/v/35.10682645/js/react-core.min.js\"\
+        \ type=\"text/javascript\"></script>\n\n\n    <script>DD.initApp();</script>\n\
+        \n        \n\n    </body>\n</html>\n"
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+    status:
+      code: 404
+      message: Not Found
+recorded_with: VCR 6.0.0
