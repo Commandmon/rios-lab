@@ -17,26 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Contact information about the service.
-  class ServiceDefinitionV1Contact
+  # A standard pattern.
+  class SensitiveDataScannerStandardPatternData
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Service owner’s email.
-    attr_accessor :email
-
-    # Service owner’s Slack channel.
-    attr_accessor :slack
+    # Data containing the standard pattern id.
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'email' => :'email',
-        :'slack' => :'slack'
+        :'data' => :'data'
       }
     end
 
@@ -44,8 +40,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'email' => :'String',
-        :'slack' => :'String'
+        :'data' => :'SensitiveDataScannerStandardPattern'
       }
     end
 
@@ -54,23 +49,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::ServiceDefinitionV1Contact` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerStandardPatternData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ServiceDefinitionV1Contact`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerStandardPatternData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'slack')
-        self.slack = attributes[:'slack']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -87,15 +78,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          email == o.email &&
-          slack == o.slack
+          data == o.data
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [email, slack].hash
+      [data].hash
     end
   end
 end
