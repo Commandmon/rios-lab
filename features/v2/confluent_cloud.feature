@@ -40,4 +40,116 @@ Feature: Confluent Cloud
   @generated @skip @team:Datadog/web-integrations
   Scenario: Add resource to Confluent account returns "Not Found" response
     Given new "CreateConfluentResource" request
-    And request contains "account_id" parame
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And body with value {"data": {"attributes": {"resource_type": "kafka", "tags": ["myTag", "myTag2:myValue"]}, "id": "resource-id-123", "type": "confluent-cloud-resources"}}
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:Datadog/web-integrations
+  Scenario: Add resource to Confluent account returns "OK" response
+    Given there is a valid "confluent_account" in the system
+    And new "CreateConfluentResource" request
+    And request contains "account_id" parameter from "confluent_account.data.id"
+    And body with value {"data": {"attributes": {"resource_type": "kafka", "tags": ["myTag", "myTag2:myValue"]}, "id": "{{ unique_lower_alnum }}", "type": "confluent-cloud-resources"}}
+    When the request is sent
+    Then the response status is 201 OK
+    And the response "data.id" is equal to "{{ unique_lower_alnum }}"
+    And the response "data.attributes.resource_type" is equal to "kafka"
+    And the response "data.attributes.tags[0]" is equal to "myTag"
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Delete Confluent account returns "Bad Request" response
+    Given new "DeleteConfluentAccount" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Delete Confluent account returns "Not Found" response
+    Given new "DeleteConfluentAccount" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Delete Confluent account returns "OK" response
+    Given new "DeleteConfluentAccount" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Delete resource from Confluent account returns "Bad Request" response
+    Given new "DeleteConfluentResource" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And request contains "resource_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Delete resource from Confluent account returns "Not Found" response
+    Given new "DeleteConfluentResource" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And request contains "resource_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:Datadog/web-integrations
+  Scenario: Delete resource from Confluent account returns "OK" response
+    Given there is a valid "confluent_account" in the system
+    And new "DeleteConfluentAccount" request
+    And request contains "account_id" parameter from "confluent_account.data.id"
+    When the request is sent
+    Then the response status is 204 OK
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Get Confluent account returns "Bad Request" response
+    Given new "GetConfluentAccount" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Get Confluent account returns "Not Found" response
+    Given new "GetConfluentAccount" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @team:Datadog/web-integrations
+  Scenario: Get Confluent account returns "OK" response
+    Given there is a valid "confluent_account" in the system
+    And new "GetConfluentAccount" request
+    And request contains "account_id" parameter from "confluent_account.data.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "data.type" is equal to "confluent-cloud-accounts"
+    And the response "data.attributes.api_key" is equal to "{{ unique_alnum }}"
+    And the response "data.attributes.resources[0].resource_type" is equal to "kafka"
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Get resource from Confluent account returns "Bad Request" response
+    Given new "GetConfluentResource" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And request contains "resource_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Get resource from Confluent account returns "Not Found" response
+    Given new "GetConfluentResource" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And request contains "resource_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @generated @skip @team:Datadog/web-integrations
+  Scenario: Get resource from Confluent account returns "OK" response
+    Given new "GetConfluentResource" request
+    And request contains "account_id" parameter from "REPLACE.ME"
+    And request contains "resource_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip @team:Datadog/web-integrations
+ 
