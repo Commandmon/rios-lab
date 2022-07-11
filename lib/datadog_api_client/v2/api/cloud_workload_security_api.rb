@@ -143,4 +143,135 @@ module DatadogAPIClient::V2
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names =
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Delete, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CloudWorkloadSecurityAPI#delete_cloud_workload_security_agent_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get the latest Cloud Workload Security policy.
+    #
+    # @see #download_cloud_workload_policy_file_with_http_info
+    def download_cloud_workload_policy_file(opts = {})
+      data, _status_code, _headers = download_cloud_workload_policy_file_with_http_info(opts)
+      data
+    end
+
+    # Get the latest Cloud Workload Security policy.
+    #
+    # The download endpoint generates a Cloud Workload Security policy file from your currently active
+    # Cloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to
+    # your Agents to update the policy running in your environment.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
+    def download_cloud_workload_policy_file_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CloudWorkloadSecurityAPI.download_cloud_workload_policy_file ...'
+      end
+      # resource path
+      local_var_path = '/api/v2/security/cloud_workload/policy/download'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/yaml', 'application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'File'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :download_cloud_workload_policy_file,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CloudWorkloadSecurityAPI#download_cloud_workload_policy_file\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a Cloud Workload Security Agent rule.
+    #
+    # @see #get_cloud_workload_security_agent_rule_with_http_info
+    def get_cloud_workload_security_agent_rule(agent_rule_id, opts = {})
+      data, _status_code, _headers = get_cloud_workload_security_agent_rule_with_http_info(agent_rule_id, opts)
+      data
+    end
+
+    # Get a Cloud Workload Security Agent rule.
+    #
+    # Get the details of a specific Agent rule.
+    #
+    # @param agent_rule_id [String] The ID of the Agent rule.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(CloudWorkloadSecurityAgentRuleResponse, Integer, Hash)>] CloudWorkloadSecurityAgentRuleResponse data, response status code and response headers
+    def get_cloud_workload_security_agent_rule_with_http_info(agent_rule_id, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CloudWorkloadSecurityAPI.get_cloud_workload_security_agent_rule ...'
+      end
+      # verify the required parameter 'agent_rule_id' is set
+      if @api_client.config.client_side_validation && agent_rule_id.nil?
+        fail ArgumentError, "Missing the required parameter 'agent_rule_id' when calling CloudWorkloadSecurityAPI.get_cloud_workload_security_agent_rule"
+      end
+      # resource path
+      local_var_path = '/api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}'.sub('{agent_rule_id}', CGI.escape(agent_rule_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CloudWorkloadSecurityAgentRuleResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :get_cloud_workload_security_agent_rule,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
