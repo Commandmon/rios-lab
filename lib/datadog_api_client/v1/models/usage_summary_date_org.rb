@@ -79,4 +79,104 @@ module DatadogAPIClient::V1
     # Shows the sum of all CI test indexed spans over all hours in the current date for the given org.
     attr_accessor :ci_test_indexed_spans_sum
 
-    # Shows the high-water ma
+    # Shows the high-water mark of all CI visibility pipeline committers over all hours in the current date for the given org.
+    attr_accessor :ci_visibility_pipeline_committers_hwm
+
+    # Shows the high-water mark of all CI visibility test committers over all hours in the current date for the given org.
+    attr_accessor :ci_visibility_test_committers_hwm
+
+    # Host count average of Cloud Cost Management for the given date and given org.
+    attr_accessor :cloud_cost_management_host_count_avg
+
+    # Shows the average of all distinct containers over all hours in the current date for the given org.
+    attr_accessor :container_avg
+
+    # Shows the average of containers without the Datadog Agent over all hours in the current date for the given organization.
+    attr_accessor :container_excl_agent_avg
+
+    # Shows the high-water mark of all distinct containers over all hours in the current date for the given org.
+    attr_accessor :container_hwm
+
+    # Shows the 99th percentile of all Cloud Security Posture Management Azure app services hosts over all hours in the current date for the given org.
+    attr_accessor :cspm_aas_host_top99p
+
+    # Shows the 99th percentile of all Cloud Security Posture Management AWS hosts over all hours in the current date for the given org.
+    attr_accessor :cspm_aws_host_top99p
+
+    # Shows the 99th percentile of all Cloud Security Posture Management Azure hosts over all hours in the current date for the given org.
+    attr_accessor :cspm_azure_host_top99p
+
+    # Shows the average number of Cloud Security Posture Management containers over all hours in the current date for the given org.
+    attr_accessor :cspm_container_avg
+
+    # Shows the high-water mark of Cloud Security Posture Management containers over all hours in the current date for the given org.
+    attr_accessor :cspm_container_hwm
+
+    # Shows the 99th percentile of all Cloud Security Posture Management GCP hosts over all hours in the current date for the given org.
+    attr_accessor :cspm_gcp_host_top99p
+
+    # Shows the 99th percentile of all Cloud Security Posture Management hosts over all hours in the current date for the given org.
+    attr_accessor :cspm_host_top99p
+
+    # Shows the average number of distinct custom metrics over all hours in the current date for the given org.
+    attr_accessor :custom_ts_avg
+
+    # Shows the average of all distinct Cloud Workload Security containers over all hours in the current date for the given org.
+    attr_accessor :cws_container_count_avg
+
+    # Shows the 99th percentile of all Cloud Workload Security hosts over all hours in the current date for the given org.
+    attr_accessor :cws_host_top99p
+
+    # Shows the 99th percentile of all Database Monitoring hosts over all hours in the current month for the given org.
+    attr_accessor :dbm_host_top99p_sum
+
+    # Shows the average of all distinct Database Monitoring normalized queries over all hours in the current month for the given org.
+    attr_accessor :dbm_queries_avg_sum
+
+    # The average task count for Fargate.
+    attr_accessor :fargate_tasks_count_avg
+
+    # Shows the high-water mark of all Fargate tasks over all hours in the current date for the given org.
+    attr_accessor :fargate_tasks_count_hwm
+
+    # Shows the 99th percentile of all GCP hosts over all hours in the current date for the given org.
+    attr_accessor :gcp_host_top99p
+
+    # Shows the 99th percentile of all Heroku dynos over all hours in the current date for the given org.
+    attr_accessor :heroku_host_top99p
+
+    # The organization id.
+    attr_accessor :id
+
+    # Shows the high-water mark of incident management monthly active users over all hours in the current date for the given org.
+    attr_accessor :incident_management_monthly_active_users_hwm
+
+    # Shows the sum of all log events indexed over all hours in the current date for the given org.
+    attr_accessor :indexed_events_count_sum
+
+    # Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for the given org.
+    attr_accessor :infra_host_top99p
+
+    # Shows the sum of all log bytes ingested over all hours in the current date for the given org.
+    attr_accessor :ingested_events_bytes_sum
+
+    # Shows the sum of all IoT devices over all hours in the current date for the given org.
+    attr_accessor :iot_device_agg_sum
+
+    # Shows the 99th percentile of all IoT devices over all hours in the current date for the given org.
+    attr_accessor :iot_device_top99p_sum
+
+    # Shows the sum of all mobile lite sessions over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_lite_session_count_sum
+
+    # Shows the sum of all mobile RUM Sessions on Android over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_session_count_android_sum
+
+    # Shows the sum of all mobile RUM Sessions on Flutter over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_session_count_flutter_sum
+
+    # Shows the sum of all mobile RUM Sessions on iOS over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_session_count_ios_sum
+
+    # Shows the sum of all mobile RUM Sessions on React Native over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_session_count_reactnative
