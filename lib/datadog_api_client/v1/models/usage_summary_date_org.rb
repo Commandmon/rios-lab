@@ -179,4 +179,105 @@ module DatadogAPIClient::V1
     attr_accessor :mobile_rum_session_count_ios_sum
 
     # Shows the sum of all mobile RUM Sessions on React Native over all hours in the current date for the given org.
-    attr_accessor :mobile_rum_session_count_reactnative
+    attr_accessor :mobile_rum_session_count_reactnative_sum
+
+    # Shows the sum of all mobile RUM Sessions over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_session_count_sum
+
+    # Shows the sum of all mobile RUM units over all hours in the current date for the given org.
+    attr_accessor :mobile_rum_units_sum
+
+    # The organization name.
+    attr_accessor :name
+
+    # Shows the sum of all Network flows indexed over all hours in the current date for the given org.
+    attr_accessor :netflow_indexed_events_count_sum
+
+    # Shows the 99th percentile of all distinct Networks hosts over all hours in the current date for the given org.
+    attr_accessor :npm_host_top99p
+
+    # Sum of all observability pipelines bytes processed over all hours in the current date for the given org.
+    attr_accessor :observability_pipelines_bytes_processed_sum
+
+    # Sum of all online archived events over all hours in the current date for the given org.
+    attr_accessor :online_archive_events_count_sum
+
+    # Shows the 99th percentile of APM hosts reported by the Datadog exporter for the OpenTelemetry Collector over all hours in the current date for the given org.
+    attr_accessor :opentelemetry_apm_host_top99p
+
+    # Shows the 99th percentile of all hosts reported by the Datadog exporter for the OpenTelemetry Collector over all hours in the current date for the given org.
+    attr_accessor :opentelemetry_host_top99p
+
+    # Shows the 99th percentile of all profiled hosts over all hours in the current date for the given org.
+    attr_accessor :profiling_host_top99p
+
+    # The organization public id.
+    attr_accessor :public_id
+
+    # The region of the organization.
+    attr_accessor :region
+
+    # Shows the sum of all mobile sessions and all browser lite and legacy sessions over all hours in the current date for the given org.
+    attr_accessor :rum_browser_and_mobile_session_count
+
+    # Shows the sum of all browser RUM Lite Sessions over all hours in the current date for the given org.
+    attr_accessor :rum_session_count_sum
+
+    # Shows the sum of RUM Sessions (browser and mobile) over all hours in the current date for the given org.
+    attr_accessor :rum_total_session_count_sum
+
+    # Shows the sum of all browser and mobile RUM units over all hours in the current date for the given org.
+    attr_accessor :rum_units_sum
+
+    # Sum of all APM bytes scanned with sensitive data scanner over all hours in the current date for the given org.
+    attr_accessor :sds_apm_scanned_bytes_sum
+
+    # Sum of all event stream events bytes scanned with sensitive data scanner over all hours in the current date for the given org.
+    attr_accessor :sds_events_scanned_bytes_sum
+
+    # Shows the sum of all bytes scanned of logs usage by the Sensitive Data Scanner over all hours in the current month for the given org.
+    attr_accessor :sds_logs_scanned_bytes_sum
+
+    # Sum of all RUM bytes scanned with sensitive data scanner over all hours in the current date for the given org.
+    attr_accessor :sds_rum_scanned_bytes_sum
+
+    # Shows the sum of all bytes scanned across all usage types by the Sensitive Data Scanner over all hours in the current month for the given org.
+    attr_accessor :sds_total_scanned_bytes_sum
+
+    # Shows the sum of all Synthetic browser tests over all hours in the current date for the given org.
+    attr_accessor :synthetics_browser_check_calls_count_sum
+
+    # Shows the sum of all Synthetic API tests over all hours in the current date for the given org.
+    attr_accessor :synthetics_check_calls_count_sum
+
+    # Shows the high-water mark of used synthetics parallel testing slots over all hours in the current date for the given org.
+    attr_accessor :synthetics_parallel_testing_max_slots_hwm
+
+    # Shows the sum of all Indexed Spans indexed over all hours in the current date for the given org.
+    attr_accessor :trace_search_indexed_events_count_sum
+
+    # Shows the sum of all ingested APM span bytes over all hours in the current date for the given org.
+    attr_accessor :twol_ingested_events_bytes_sum
+
+    # Shows the 99th percentile of all vSphere hosts over all hours in the current date for the given org.
+    attr_accessor :vsphere_host_top99p
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'agent_host_top99p' => :'agent_host_top99p',
+        :'apm_azure_app_service_host_top99p' => :'apm_azure_app_service_host_top99p',
+        :'apm_fargate_count_avg' => :'apm_fargate_count_avg',
+        :'apm_host_top99p' => :'apm_host_top99p',
+        :'appsec_fargate_count_avg' => :'appsec_fargate_count_avg',
+        :'audit_logs_lines_indexed_sum' => :'audit_logs_lines_indexed_sum',
+        :'audit_trail_enabled_hwm' => :'audit_trail_enabled_hwm',
+        :'avg_profiled_fargate_tasks' => :'avg_profiled_fargate_tasks',
+        :'aws_host_top99p' => :'aws_host_top99p',
+        :'aws_lambda_func_count' => :'aws_lambda_func_count',
+        :'aws_lambda_invocations_sum' => :'aws_lambda_invocations_sum',
+        :'azure_app_service_top99p' => :'azure_app_service_top99p',
+        :'billable_ingested_bytes_sum' => :'billable_ingested_bytes_sum',
+        :'browser_rum_lite_session_count_sum' => :'browser_rum_lite_session_count_sum',
+        :'browser_rum_
