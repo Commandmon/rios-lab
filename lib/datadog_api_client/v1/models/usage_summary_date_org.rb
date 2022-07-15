@@ -368,4 +368,122 @@ module DatadogAPIClient::V1
         :'browser_rum_lite_session_count_sum' => :'Integer',
         :'browser_rum_replay_session_count_sum' => :'Integer',
         :'browser_rum_units_sum' => :'Integer',
-        :'ci_pip
+        :'ci_pipeline_indexed_spans_sum' => :'Integer',
+        :'ci_test_indexed_spans_sum' => :'Integer',
+        :'ci_visibility_pipeline_committers_hwm' => :'Integer',
+        :'ci_visibility_test_committers_hwm' => :'Integer',
+        :'cloud_cost_management_host_count_avg' => :'Integer',
+        :'container_avg' => :'Integer',
+        :'container_excl_agent_avg' => :'Integer',
+        :'container_hwm' => :'Integer',
+        :'cspm_aas_host_top99p' => :'Integer',
+        :'cspm_aws_host_top99p' => :'Integer',
+        :'cspm_azure_host_top99p' => :'Integer',
+        :'cspm_container_avg' => :'Integer',
+        :'cspm_container_hwm' => :'Integer',
+        :'cspm_gcp_host_top99p' => :'Integer',
+        :'cspm_host_top99p' => :'Integer',
+        :'custom_ts_avg' => :'Integer',
+        :'cws_container_count_avg' => :'Integer',
+        :'cws_host_top99p' => :'Integer',
+        :'dbm_host_top99p_sum' => :'Integer',
+        :'dbm_queries_avg_sum' => :'Integer',
+        :'fargate_tasks_count_avg' => :'Integer',
+        :'fargate_tasks_count_hwm' => :'Integer',
+        :'gcp_host_top99p' => :'Integer',
+        :'heroku_host_top99p' => :'Integer',
+        :'id' => :'String',
+        :'incident_management_monthly_active_users_hwm' => :'Integer',
+        :'indexed_events_count_sum' => :'Integer',
+        :'infra_host_top99p' => :'Integer',
+        :'ingested_events_bytes_sum' => :'Integer',
+        :'iot_device_agg_sum' => :'Integer',
+        :'iot_device_top99p_sum' => :'Integer',
+        :'mobile_rum_lite_session_count_sum' => :'Integer',
+        :'mobile_rum_session_count_android_sum' => :'Integer',
+        :'mobile_rum_session_count_flutter_sum' => :'Integer',
+        :'mobile_rum_session_count_ios_sum' => :'Integer',
+        :'mobile_rum_session_count_reactnative_sum' => :'Integer',
+        :'mobile_rum_session_count_sum' => :'Integer',
+        :'mobile_rum_units_sum' => :'Integer',
+        :'name' => :'String',
+        :'netflow_indexed_events_count_sum' => :'Integer',
+        :'npm_host_top99p' => :'Integer',
+        :'observability_pipelines_bytes_processed_sum' => :'Integer',
+        :'online_archive_events_count_sum' => :'Integer',
+        :'opentelemetry_apm_host_top99p' => :'Integer',
+        :'opentelemetry_host_top99p' => :'Integer',
+        :'profiling_host_top99p' => :'Integer',
+        :'public_id' => :'String',
+        :'region' => :'String',
+        :'rum_browser_and_mobile_session_count' => :'Integer',
+        :'rum_session_count_sum' => :'Integer',
+        :'rum_total_session_count_sum' => :'Integer',
+        :'rum_units_sum' => :'Integer',
+        :'sds_apm_scanned_bytes_sum' => :'Integer',
+        :'sds_events_scanned_bytes_sum' => :'Integer',
+        :'sds_logs_scanned_bytes_sum' => :'Integer',
+        :'sds_rum_scanned_bytes_sum' => :'Integer',
+        :'sds_total_scanned_bytes_sum' => :'Integer',
+        :'synthetics_browser_check_calls_count_sum' => :'Integer',
+        :'synthetics_check_calls_count_sum' => :'Integer',
+        :'synthetics_parallel_testing_max_slots_hwm' => :'Integer',
+        :'trace_search_indexed_events_count_sum' => :'Integer',
+        :'twol_ingested_events_bytes_sum' => :'Integer',
+        :'vsphere_host_top99p' => :'Integer'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageSummaryDateOrg` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageSummaryDateOrg`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'agent_host_top99p')
+        self.agent_host_top99p = attributes[:'agent_host_top99p']
+      end
+
+      if attributes.key?(:'apm_azure_app_service_host_top99p')
+        self.apm_azure_app_service_host_top99p = attributes[:'apm_azure_app_service_host_top99p']
+      end
+
+      if attributes.key?(:'apm_fargate_count_avg')
+        self.apm_fargate_count_avg = attributes[:'apm_fargate_count_avg']
+      end
+
+      if attributes.key?(:'apm_host_top99p')
+        self.apm_host_top99p = attributes[:'apm_host_top99p']
+      end
+
+      if attributes.key?(:'appsec_fargate_count_avg')
+        self.appsec_fargate_count_avg = attributes[:'appsec_fargate_count_avg']
+      end
+
+      if attributes.key?(:'audit_logs_lines_indexed_sum')
+        self.audit_logs_lines_indexed_sum = attributes[:'audit_logs_lines_indexed_sum']
+      end
+
+      if attributes.key?(:'audit_trail_enabled_hwm')
+        self.audit_trail_enabled_hwm = attributes[:'audit_trail_enabled_hwm']
+      end
+
+      if attributes.key?(:'avg_profiled_fargate_tasks')
+        self.avg_profiled_fargate_tasks = attributes[:'avg_profiled_fargate_tasks']
+      end
+
+      if attributes.key?(:'aws_host_top99p')
+        self.aws_host_top99p = attributes[:'aws_host_top99p']
+      end
+
+     
