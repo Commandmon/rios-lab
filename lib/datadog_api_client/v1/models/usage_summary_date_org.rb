@@ -486,4 +486,157 @@ module DatadogAPIClient::V1
         self.aws_host_top99p = attributes[:'aws_host_top99p']
       end
 
-     
+      if attributes.key?(:'aws_lambda_func_count')
+        self.aws_lambda_func_count = attributes[:'aws_lambda_func_count']
+      end
+
+      if attributes.key?(:'aws_lambda_invocations_sum')
+        self.aws_lambda_invocations_sum = attributes[:'aws_lambda_invocations_sum']
+      end
+
+      if attributes.key?(:'azure_app_service_top99p')
+        self.azure_app_service_top99p = attributes[:'azure_app_service_top99p']
+      end
+
+      if attributes.key?(:'billable_ingested_bytes_sum')
+        self.billable_ingested_bytes_sum = attributes[:'billable_ingested_bytes_sum']
+      end
+
+      if attributes.key?(:'browser_rum_lite_session_count_sum')
+        self.browser_rum_lite_session_count_sum = attributes[:'browser_rum_lite_session_count_sum']
+      end
+
+      if attributes.key?(:'browser_rum_replay_session_count_sum')
+        self.browser_rum_replay_session_count_sum = attributes[:'browser_rum_replay_session_count_sum']
+      end
+
+      if attributes.key?(:'browser_rum_units_sum')
+        self.browser_rum_units_sum = attributes[:'browser_rum_units_sum']
+      end
+
+      if attributes.key?(:'ci_pipeline_indexed_spans_sum')
+        self.ci_pipeline_indexed_spans_sum = attributes[:'ci_pipeline_indexed_spans_sum']
+      end
+
+      if attributes.key?(:'ci_test_indexed_spans_sum')
+        self.ci_test_indexed_spans_sum = attributes[:'ci_test_indexed_spans_sum']
+      end
+
+      if attributes.key?(:'ci_visibility_pipeline_committers_hwm')
+        self.ci_visibility_pipeline_committers_hwm = attributes[:'ci_visibility_pipeline_committers_hwm']
+      end
+
+      if attributes.key?(:'ci_visibility_test_committers_hwm')
+        self.ci_visibility_test_committers_hwm = attributes[:'ci_visibility_test_committers_hwm']
+      end
+
+      if attributes.key?(:'cloud_cost_management_host_count_avg')
+        self.cloud_cost_management_host_count_avg = attributes[:'cloud_cost_management_host_count_avg']
+      end
+
+      if attributes.key?(:'container_avg')
+        self.container_avg = attributes[:'container_avg']
+      end
+
+      if attributes.key?(:'container_excl_agent_avg')
+        self.container_excl_agent_avg = attributes[:'container_excl_agent_avg']
+      end
+
+      if attributes.key?(:'container_hwm')
+        self.container_hwm = attributes[:'container_hwm']
+      end
+
+      if attributes.key?(:'cspm_aas_host_top99p')
+        self.cspm_aas_host_top99p = attributes[:'cspm_aas_host_top99p']
+      end
+
+      if attributes.key?(:'cspm_aws_host_top99p')
+        self.cspm_aws_host_top99p = attributes[:'cspm_aws_host_top99p']
+      end
+
+      if attributes.key?(:'cspm_azure_host_top99p')
+        self.cspm_azure_host_top99p = attributes[:'cspm_azure_host_top99p']
+      end
+
+      if attributes.key?(:'cspm_container_avg')
+        self.cspm_container_avg = attributes[:'cspm_container_avg']
+      end
+
+      if attributes.key?(:'cspm_container_hwm')
+        self.cspm_container_hwm = attributes[:'cspm_container_hwm']
+      end
+
+      if attributes.key?(:'cspm_gcp_host_top99p')
+        self.cspm_gcp_host_top99p = attributes[:'cspm_gcp_host_top99p']
+      end
+
+      if attributes.key?(:'cspm_host_top99p')
+        self.cspm_host_top99p = attributes[:'cspm_host_top99p']
+      end
+
+      if attributes.key?(:'custom_ts_avg')
+        self.custom_ts_avg = attributes[:'custom_ts_avg']
+      end
+
+      if attributes.key?(:'cws_container_count_avg')
+        self.cws_container_count_avg = attributes[:'cws_container_count_avg']
+      end
+
+      if attributes.key?(:'cws_host_top99p')
+        self.cws_host_top99p = attributes[:'cws_host_top99p']
+      end
+
+      if attributes.key?(:'dbm_host_top99p_sum')
+        self.dbm_host_top99p_sum = attributes[:'dbm_host_top99p_sum']
+      end
+
+      if attributes.key?(:'dbm_queries_avg_sum')
+        self.dbm_queries_avg_sum = attributes[:'dbm_queries_avg_sum']
+      end
+
+      if attributes.key?(:'fargate_tasks_count_avg')
+        self.fargate_tasks_count_avg = attributes[:'fargate_tasks_count_avg']
+      end
+
+      if attributes.key?(:'fargate_tasks_count_hwm')
+        self.fargate_tasks_count_hwm = attributes[:'fargate_tasks_count_hwm']
+      end
+
+      if attributes.key?(:'gcp_host_top99p')
+        self.gcp_host_top99p = attributes[:'gcp_host_top99p']
+      end
+
+      if attributes.key?(:'heroku_host_top99p')
+        self.heroku_host_top99p = attributes[:'heroku_host_top99p']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'incident_management_monthly_active_users_hwm')
+        self.incident_management_monthly_active_users_hwm = attributes[:'incident_management_monthly_active_users_hwm']
+      end
+
+      if attributes.key?(:'indexed_events_count_sum')
+        self.indexed_events_count_sum = attributes[:'indexed_events_count_sum']
+      end
+
+      if attributes.key?(:'infra_host_top99p')
+        self.infra_host_top99p = attributes[:'infra_host_top99p']
+      end
+
+      if attributes.key?(:'ingested_events_bytes_sum')
+        self.ingested_events_bytes_sum = attributes[:'ingested_events_bytes_sum']
+      end
+
+      if attributes.key?(:'iot_device_agg_sum')
+        self.iot_device_agg_sum = attributes[:'iot_device_agg_sum']
+      end
+
+      if attributes.key?(:'iot_device_top99p_sum')
+        self.iot_device_top99p_sum = attributes[:'iot_device_top99p_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_lite_session_count_sum')
+        self.mobile_rum_lite_session_count_sum = attributes[:'m
