@@ -639,4 +639,147 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'mobile_rum_lite_session_count_sum')
-        self.mobile_rum_lite_session_count_sum = attributes[:'m
+        self.mobile_rum_lite_session_count_sum = attributes[:'mobile_rum_lite_session_count_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_session_count_android_sum')
+        self.mobile_rum_session_count_android_sum = attributes[:'mobile_rum_session_count_android_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_session_count_flutter_sum')
+        self.mobile_rum_session_count_flutter_sum = attributes[:'mobile_rum_session_count_flutter_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_session_count_ios_sum')
+        self.mobile_rum_session_count_ios_sum = attributes[:'mobile_rum_session_count_ios_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_session_count_reactnative_sum')
+        self.mobile_rum_session_count_reactnative_sum = attributes[:'mobile_rum_session_count_reactnative_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_session_count_sum')
+        self.mobile_rum_session_count_sum = attributes[:'mobile_rum_session_count_sum']
+      end
+
+      if attributes.key?(:'mobile_rum_units_sum')
+        self.mobile_rum_units_sum = attributes[:'mobile_rum_units_sum']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'netflow_indexed_events_count_sum')
+        self.netflow_indexed_events_count_sum = attributes[:'netflow_indexed_events_count_sum']
+      end
+
+      if attributes.key?(:'npm_host_top99p')
+        self.npm_host_top99p = attributes[:'npm_host_top99p']
+      end
+
+      if attributes.key?(:'observability_pipelines_bytes_processed_sum')
+        self.observability_pipelines_bytes_processed_sum = attributes[:'observability_pipelines_bytes_processed_sum']
+      end
+
+      if attributes.key?(:'online_archive_events_count_sum')
+        self.online_archive_events_count_sum = attributes[:'online_archive_events_count_sum']
+      end
+
+      if attributes.key?(:'opentelemetry_apm_host_top99p')
+        self.opentelemetry_apm_host_top99p = attributes[:'opentelemetry_apm_host_top99p']
+      end
+
+      if attributes.key?(:'opentelemetry_host_top99p')
+        self.opentelemetry_host_top99p = attributes[:'opentelemetry_host_top99p']
+      end
+
+      if attributes.key?(:'profiling_host_top99p')
+        self.profiling_host_top99p = attributes[:'profiling_host_top99p']
+      end
+
+      if attributes.key?(:'public_id')
+        self.public_id = attributes[:'public_id']
+      end
+
+      if attributes.key?(:'region')
+        self.region = attributes[:'region']
+      end
+
+      if attributes.key?(:'rum_browser_and_mobile_session_count')
+        self.rum_browser_and_mobile_session_count = attributes[:'rum_browser_and_mobile_session_count']
+      end
+
+      if attributes.key?(:'rum_session_count_sum')
+        self.rum_session_count_sum = attributes[:'rum_session_count_sum']
+      end
+
+      if attributes.key?(:'rum_total_session_count_sum')
+        self.rum_total_session_count_sum = attributes[:'rum_total_session_count_sum']
+      end
+
+      if attributes.key?(:'rum_units_sum')
+        self.rum_units_sum = attributes[:'rum_units_sum']
+      end
+
+      if attributes.key?(:'sds_apm_scanned_bytes_sum')
+        self.sds_apm_scanned_bytes_sum = attributes[:'sds_apm_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_events_scanned_bytes_sum')
+        self.sds_events_scanned_bytes_sum = attributes[:'sds_events_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_logs_scanned_bytes_sum')
+        self.sds_logs_scanned_bytes_sum = attributes[:'sds_logs_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_rum_scanned_bytes_sum')
+        self.sds_rum_scanned_bytes_sum = attributes[:'sds_rum_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'sds_total_scanned_bytes_sum')
+        self.sds_total_scanned_bytes_sum = attributes[:'sds_total_scanned_bytes_sum']
+      end
+
+      if attributes.key?(:'synthetics_browser_check_calls_count_sum')
+        self.synthetics_browser_check_calls_count_sum = attributes[:'synthetics_browser_check_calls_count_sum']
+      end
+
+      if attributes.key?(:'synthetics_check_calls_count_sum')
+        self.synthetics_check_calls_count_sum = attributes[:'synthetics_check_calls_count_sum']
+      end
+
+      if attributes.key?(:'synthetics_parallel_testing_max_slots_hwm')
+        self.synthetics_parallel_testing_max_slots_hwm = attributes[:'synthetics_parallel_testing_max_slots_hwm']
+      end
+
+      if attributes.key?(:'trace_search_indexed_events_count_sum')
+        self.trace_search_indexed_events_count_sum = attributes[:'trace_search_indexed_events_count_sum']
+      end
+
+      if attributes.key?(:'twol_ingested_events_bytes_sum')
+        self.twol_ingested_events_bytes_sum = attributes[:'twol_ingested_events_bytes_sum']
+      end
+
+      if attributes.key?(:'vsphere_host_top99p')
+        self.vsphere_host_top99p = attributes[:'vsphere_host_top99p']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          agent_host_top99p == o.agent_host_top99p &&
+          apm_azure_app_service_host_top99p == o.apm_azure_app_service_host_top99p &&
+          apm_far
