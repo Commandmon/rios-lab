@@ -56,4 +56,25 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":{"type":"metrics","id":"TestListtagsbymetricnamereturnsSuccessresponse1652354618","attributes":{"tags":[]}}}'
     headers:
-      Conten
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+- recorded_at: Thu, 12 May 2022 11:23:38 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/metrics/TestListtagsbymetricnamereturnsSuccessresponse1652354618/tags
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
