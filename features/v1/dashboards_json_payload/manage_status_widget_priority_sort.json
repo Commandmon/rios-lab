@@ -1,0 +1,11 @@
+{
+   "title":"{{ unique }}",
+   "description":"",
+   "widgets":[
+      {
+         "layout":{
+            "x":0,
+            "y":0,
+            "width":50,
+            "height":25
+     
