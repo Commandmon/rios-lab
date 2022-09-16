@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,35 +18,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # The object sent with the request to retrieve aggregation buckets of test events from your organization.
-  class CIAppTestsAggregateRequest
+  # A scanning group.
+  class SensitiveDataScannerGroup
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The list of metrics or timeseries to compute for the retrieved buckets.
-    attr_accessor :compute
+    # ID of the group.
+    attr_accessor :id
 
-    # The search and filter query settings.
-    attr_accessor :filter
-
-    # The rules for the group-by.
-    attr_accessor :group_by
-
-    # Global query options that are used during the query.
-    # Only supply timezone or time offset, not both. Otherwise, the query fails.
-    attr_accessor :options
+    # Sensitive Data Scanner group type.
+    attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'compute' => :'compute',
-        :'filter' => :'filter',
-        :'group_by' => :'group_by',
-        :'options' => :'options'
+        :'id' => :'id',
+        :'type' => :'type'
       }
     end
 
@@ -53,10 +45,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'compute' => :'Array<CIAppCompute>',
-        :'filter' => :'CIAppTestsQueryFilter',
-        :'group_by' => :'Array<CIAppTestsGroupBy>',
-        :'options' => :'CIAppQueryOptions'
+        :'id' => :'String',
+        :'type' => :'SensitiveDataScannerGroupType'
       }
     end
 
@@ -65,35 +55,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppTestsAggregateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SensitiveDataScannerGroup` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppTestsAggregateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SensitiveDataScannerGroup`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'compute')
-        if (value = attributes[:'compute']).is_a?(Array)
-          self.compute = value
-        end
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'filter')
-        self.filter = attributes[:'filter']
-      end
-
-      if attributes.key?(:'group_by')
-        if (value = attributes[:'group_by']).is_a?(Array)
-          self.group_by = value
-        end
-      end
-
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -110,17 +88,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          compute == o.compute &&
-          filter == o.filter &&
-          group_by == o.group_by &&
-          options == o.options
+          id == o.id &&
+          type == o.type
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [compute, filter, group_by, options].hash
+      [id, type].hash
     end
   end
 end
