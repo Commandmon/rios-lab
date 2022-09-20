@@ -66,4 +66,38 @@ http_interactions:
         Read","description":"View dashboards.","created":"2019-09-10T14:39:51.955175+00:00","group_name":"Dashboards","display_type":"read","restricted":true}},{"type":"permissions","id":"d90f6831-d3d8-11e9-a77a-4fd230ddbc6a","attributes":{"name":"dashboards_write","display_name":"Dashboards
         Write","description":"Create and change dashboards.","created":"2019-09-10T14:39:51.962944+00:00","group_name":"Dashboards","display_type":"write","restricted":false}},{"type":"permissions","id":"d90f6832-d3d8-11e9-a77a-bf8a2607f864","attributes":{"name":"dashboards_public_share","display_name":"Dashboards
         Public Share","description":"Share dashboards externally.","created":"2019-09-10T14:39:51.967094+00:00","group_name":"Dashboards","display_type":"other","restricted":false}},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304","attributes":{"name":"monitors_read","display_name":"Monitors
-        Read","description":"View monitors.","created":"2019-09-16T18:39:07.744297+00:00","group_name":"Monitors
+        Read","description":"View monitors.","created":"2019-09-16T18:39:07.744297+00:00","group_name":"Monitors","display_type":"read","restricted":true}},{"type":"permissions","id":"48ef71ea-d8b1-11e9-a77a-93f408470ad0","attributes":{"name":"monitors_write","display_name":"Monitors
+        Write","description":"Edit, mute, and delete individual monitors.","created":"2019-09-16T18:39:15.597109+00:00","group_name":"Monitors","display_type":"write","restricted":false}},{"type":"permissions","id":"4d87d5f8-d8b1-11e9-a77a-eb9c8350d04f","attributes":{"name":"monitors_downtime","display_name":"Monitors
+        Manage Downtime","description":"Set downtimes to suppress alerts from any
+        monitor in an organization. The ability to write monitors is not required
+        to set downtimes.","created":"2019-09-16T18:39:23.306702+00:00","group_name":"Monitors","display_type":"other","restricted":false}},{"type":"permissions","id":"1af86ce4-7823-11ea-93dc-d7cad1b1c6cb","attributes":{"name":"logs_read_data","display_name":"Logs
+        Read Data","description":"Read log data. In order to read log data, a user
+        must have both this permission and Logs Read Index Data. This permission can
+        be restricted with restriction queries. Restrictions are limited to the Log
+        Management product.","created":"2020-04-06T16:24:35.989108+00:00","group_name":"Logs","display_type":"read","restricted":false}},{"type":"permissions","id":"b382b982-8535-11ea-93de-2bf1bdf20798","attributes":{"name":"logs_read_archives","display_name":"Logs
+        Read Archives","description":"Read Log Archives location and use it for rehydration.","created":"2020-04-23T07:40:27.966133+00:00","group_name":"Logs","display_type":"read","restricted":false}},{"type":"permissions","id":"7314eb20-aa58-11ea-95e2-6fb6e4a451d5","attributes":{"name":"security_monitoring_rules_read","display_name":"Security
+        Rules Read","description":"Read Detection Rules.","created":"2020-06-09T13:52:25.279909+00:00","group_name":"Cloud
+        Security Platform","display_type":"read","restricted":false}},{"type":"permissions","id":"7b516476-aa58-11ea-95e2-93718cd56369","attributes":{"name":"security_monitoring_rules_write","display_name":"Security
+        Rules Write","description":"Create and edit Detection Rules.","created":"2020-06-09T13:52:39.099413+00:00","group_name":"Cloud
+        Security Platform","display_type":"write","restricted":false}},{"type":"permissions","id":"80de1ec0-aa58-11ea-95e2-aff381626d5d","attributes":{"name":"security_monitoring_signals_read","display_name":"Security
+        Signals Read","description":"View Security Signals.","created":"2020-06-09T13:52:48.410398+00:00","group_name":"Cloud
+        Security Platform","display_type":"read","restricted":false}},{"type":"permissions","id":"58b412cc-ff6d-11eb-bc9c-da7ad0900002","attributes":{"name":"security_monitoring_signals_write","display_name":"Security
+        Signals Write","description":"Modify Security Signals.","created":"2021-08-17T15:11:06.963503+00:00","group_name":"Cloud
+        Security Platform","display_type":"write","restricted":false}},{"type":"permissions","id":"9ac1d8cc-e707-11ea-aa2d-73d37e989a9d","attributes":{"name":"user_access_invite","display_name":"User
+        Access Invite","description":"Invite other users to your organization.","created":"2020-08-25T19:17:23.539701+00:00","group_name":"Access
+        Management","display_type":"other","restricted":false}},{"type":"permissions","id":"9de604d8-e707-11ea-aa2d-93f1a783b3a3","attributes":{"name":"user_access_manage","display_name":"User
+        Access Manage","description":"Disable users, manage user roles, manage SAML-to-role
+        mappings, and configure logs restriction queries.","created":"2020-08-25T19:17:28.810412+00:00","group_name":"Access
+        Management","display_type":"other","restricted":false}},{"type":"permissions","id":"46a301da-ec5c-11ea-aa9f-73bedeab67ee","attributes":{"name":"user_app_keys","display_name":"User
+        App Keys","description":"View and manage Application Keys owned by the user.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
+        and Application Keys","display_type":"other","restricted":false}},{"type":"permissions","id":"46a301db-ec5c-11ea-aa9f-2fe72193d60e","attributes":{"name":"org_app_keys_read","display_name":"Org
+        App Keys Read","description":"View Application Keys owned by all users in
+        the organization.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
+        and Application Keys","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301dc-ec5c-11ea-aa9f-13b33f8f46ea","attributes":{"name":"org_app_keys_write","display_name":"Org
+        App Keys Write","description":"Manage Application Keys owned by all users
+        in the organization.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"API
+        and Application Keys","display_type":"write","restricted":false}},{"type":"permissions","id":"46a301dd-ec5c-11ea-aa9f-97edfb345bc9","attributes":{"name":"synthetics_private_location_read","display_name":"Synthetics
+        Private Location Read","description":"View, search, and use in tests the list
+        of available private locations.","created":"2020-09-01T14:06:05.444705+00:00","group_name":"Synthetic
+        Monitoring","display_type":"read","restricted":false}},{"type":"permissions","id":"46a301de-ec5c-11ea-aa9f-a73252c24806","attributes":{"name":"synthetics_private_location_write","display_name":"Synthetics
+        Private Location Write","description":"Create and del
