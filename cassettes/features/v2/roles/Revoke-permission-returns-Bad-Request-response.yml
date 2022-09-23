@@ -198,4 +198,62 @@ http_interactions:
         Security Platform","display_type":"read","restricted":false}},{"type":"permissions","id":"c95412b9-16c7-11ec-85c0-da7ad0900002","attributes":{"name":"security_monitoring_notification_profiles_write","display_name":"Security
         Notification Rules Write","description":"Create, edit, and delete Notification
         Rules.","created":"2021-09-16T08:26:27.369359+00:00","group_name":"Cloud Security
-        Platform","display_type":"write","restricted":
+        Platform","display_type":"write","restricted":false}},{"type":"permissions","id":"26c79920-1703-11ec-85d2-da7ad0900002","attributes":{"name":"apm_generate_metrics","display_name":"APM
+        Generate Metrics","description":"Create custom metrics from spans.","created":"2021-09-16T15:31:24.458963+00:00","group_name":"APM","display_type":"other","restricted":false}},{"type":"permissions","id":"020a563c-56a4-11ec-a982-da7ad0900002","attributes":{"name":"apm_pipelines_write","display_name":"APM
+        Pipelines Write","description":"Add and change APM pipeline configurations.","created":"2021-12-06T14:51:35.049129+00:00","group_name":"APM","display_type":"write","restricted":false}},{"type":"permissions","id":"8e4d6b6e-5750-11ec-a9f4-da7ad0900002","attributes":{"name":"apm_pipelines_read","display_name":"APM
+        Pipelines Read","description":"View APM pipeline configurations.","created":"2021-12-07T11:26:43.807269+00:00","group_name":"APM","display_type":"read","restricted":false}},{"type":"permissions","id":"945b3bb4-5884-11ec-aa6d-da7ad0900002","attributes":{"name":"observability_pipelines_read","display_name":"Pipeline
+        Configurations Read","description":"View pipeline configurations.","created":"2021-12-09T00:11:38.956827+00:00","group_name":"Observability
+        Pipelines","display_type":"read","restricted":false}},{"type":"permissions","id":"945b3bb5-5884-11ec-aa6d-da7ad0900002","attributes":{"name":"observability_pipelines_write","display_name":"Pipeline
+        Configurations Write","description":"Create, edit, and delete pipeline configurations.","created":"2021-12-09T00:11:38.960833+00:00","group_name":"Observability
+        Pipelines","display_type":"write","restricted":false}},{"type":"permissions","id":"7a89ec40-8b69-11ec-812d-da7ad0900002","attributes":{"name":"incidents_private_global_access","display_name":"Private
+        Incidents Global Access","description":"Access all private incidents in Datadog,
+        even when not added as a responder.","created":"2022-02-11T18:36:08.531989+00:00","group_name":"Incidents","display_type":"other","restricted":false}},{"type":"permissions","id":"b6bf9ac6-9a59-11ec-8480-da7ad0900002","attributes":{"name":"notebooks_read","display_name":"Notebooks
+        Read","description":"View notebooks.","created":"2022-03-02T18:51:05.040950+00:00","group_name":"Notebooks","display_type":"read","restricted":true}},{"type":"permissions","id":"b6bf9ac7-9a59-11ec-8480-da7ad0900002","attributes":{"name":"notebooks_write","display_name":"Notebooks
+        Write","description":"Create and change notebooks.","created":"2022-03-02T18:51:05.044683+00:00","group_name":"Notebooks","display_type":"write","restricted":false}},{"type":"permissions","id":"2108215e-b9b4-11ec-958e-da7ad0900002","attributes":{"name":"rum_generate_metrics","display_name":"RUM
+        Generate Metrics","description":"Create custom metrics from RUM events.","created":"2022-04-11T16:26:24.106645+00:00","group_name":"Real
+        User Monitoring","display_type":"write","restricted":false}}]}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+- recorded_at: Thu, 12 May 2022 09:52:59 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":"11111111-dead-beef-dead-ffffffffffff","type":"permissions"}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/roles/4e9847ba-d1d9-11ec-ad3d-da7ad0900002/permissions
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"errors": ["Invalid permission id: 11111111-dead-beef-dead-ffffffffffff"]}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 400
+      message: Bad Request
+- recorded_at: Thu, 12 May 2022 09:52:59 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+    method: DELETE
+    uri: https://api.datadoghq.com/api/v2/roles/4e9847ba-d1d9-11ec-ad3d-da7ad0900002
+  response:
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+    status:
+      code: 204
+      message: No Content
+recorded_with: VCR 6.0.0
