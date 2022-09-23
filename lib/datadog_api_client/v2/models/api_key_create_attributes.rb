@@ -80,4 +80,23 @@ module DatadogAPIClient::V2
       if name.nil?
         fail ArgumentError, 'invalid value for "name", name cannot be nil.'
       end
-  
+      @name = name
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          name == o.name
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [name].hash
+    end
+  end
+end
