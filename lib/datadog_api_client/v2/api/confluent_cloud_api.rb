@@ -420,3 +420,291 @@ module DatadogAPIClient::V2
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConfluentCloudAPI#get_confluent_resource\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Confluent accounts.
+    #
+    # @see #list_confluent_account_with_http_info
+    def list_confluent_account(opts = {})
+      data, _status_code, _headers = list_confluent_account_with_http_info(opts)
+      data
+    end
+
+    # List Confluent accounts.
+    #
+    # List Confluent accounts.
+    #
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(ConfluentAccountsResponse, Integer, Hash)>] ConfluentAccountsResponse data, response status code and response headers
+    def list_confluent_account_with_http_info(opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConfluentCloudAPI.list_confluent_account ...'
+      end
+      # resource path
+      local_var_path = '/api/v2/integrations/confluent-cloud/accounts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConfluentAccountsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :list_confluent_account,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConfluentCloudAPI#list_confluent_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Confluent Account resources.
+    #
+    # @see #list_confluent_resource_with_http_info
+    def list_confluent_resource(account_id, opts = {})
+      data, _status_code, _headers = list_confluent_resource_with_http_info(account_id, opts)
+      data
+    end
+
+    # List Confluent Account resources.
+    #
+    # Get a Confluent resource for the account associated with the provided ID.
+    #
+    # @param account_id [String] Confluent Account id.
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(ConfluentResourcesResponse, Integer, Hash)>] ConfluentResourcesResponse data, response status code and response headers
+    def list_confluent_resource_with_http_info(account_id, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConfluentCloudAPI.list_confluent_resource ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConfluentCloudAPI.list_confluent_resource"
+      end
+      # resource path
+      local_var_path = '/api/v2/integrations/confluent-cloud/accounts/{account_id}/resources'.sub('{account_id}', CGI.escape(account_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConfluentResourcesResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :list_confluent_resource,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Get, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConfluentCloudAPI#list_confluent_resource\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Confluent account.
+    #
+    # @see #update_confluent_account_with_http_info
+    def update_confluent_account(account_id, body, opts = {})
+      data, _status_code, _headers = update_confluent_account_with_http_info(account_id, body, opts)
+      data
+    end
+
+    # Update Confluent account.
+    #
+    # Update the Confluent account with the provided account ID.
+    #
+    # @param account_id [String] Confluent Account id.
+    # @param body [ConfluentAccountUpdateRequest] Confluent payload
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(ConfluentAccountResponse, Integer, Hash)>] ConfluentAccountResponse data, response status code and response headers
+    def update_confluent_account_with_http_info(account_id, body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConfluentCloudAPI.update_confluent_account ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConfluentCloudAPI.update_confluent_account"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ConfluentCloudAPI.update_confluent_account"
+      end
+      # resource path
+      local_var_path = '/api/v2/integrations/confluent-cloud/accounts/{account_id}'.sub('{account_id}', CGI.escape(account_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConfluentAccountResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :update_confluent_account,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Patch, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConfluentCloudAPI#update_confluent_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update resource in Confluent account.
+    #
+    # @see #update_confluent_resource_with_http_info
+    def update_confluent_resource(account_id, resource_id, body, opts = {})
+      data, _status_code, _headers = update_confluent_resource_with_http_info(account_id, resource_id, body, opts)
+      data
+    end
+
+    # Update resource in Confluent account.
+    #
+    # Update a Confluent resource with the provided resource id for the account associated with the provided account ID.
+    #
+    # @param account_id [String] Confluent Account id.
+    # @param resource_id [String] Confluent Account Resource ID.
+    # @param body [ConfluentResourceRequest] Confluent payload
+    # @param opts [Hash] the optional parameters
+    # @return [Array<(ConfluentResourceResponse, Integer, Hash)>] ConfluentResourceResponse data, response status code and response headers
+    def update_confluent_resource_with_http_info(account_id, resource_id, body, opts = {})
+
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConfluentCloudAPI.update_confluent_resource ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConfluentCloudAPI.update_confluent_resource"
+      end
+      # verify the required parameter 'resource_id' is set
+      if @api_client.config.client_side_validation && resource_id.nil?
+        fail ArgumentError, "Missing the required parameter 'resource_id' when calling ConfluentCloudAPI.update_confluent_resource"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ConfluentCloudAPI.update_confluent_resource"
+      end
+      # resource path
+      local_var_path = '/api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}'.sub('{account_id}', CGI.escape(account_id.to_s).gsub('%2F', '/')).sub('{resource_id}', CGI.escape(resource_id.to_s).gsub('%2F', '/'))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConfluentResourceResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || [:apiKeyAuth, :appKeyAuth]
+
+      new_options = opts.merge(
+        :operation => :update_confluent_resource,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type,
+        :api_version => "V2"
+      )
+
+      data, status_code, headers = @api_client.call_api(Net::HTTP::Patch, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConfluentCloudAPI#update_confluent_resource\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+  end
+end
