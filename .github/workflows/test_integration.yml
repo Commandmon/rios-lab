@@ -1,0 +1,19 @@
+name: Run Integration Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - master
+  schedule:
+    - cron: "0 2 * * *"
+
+concurrency:
+  group: integration-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  test_integration:
+    runs-on: ubuntu-latest
+    if: >
+      (github.event_
