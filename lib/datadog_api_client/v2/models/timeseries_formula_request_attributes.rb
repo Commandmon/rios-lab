@@ -72,4 +72,100 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::TimeseriesFormulaRequestAttributes` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::TimeseriesFormulaRequestAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'formulas')
+        if (value = attributes[:'formulas']).is_a?(Array)
+          self.formulas = value
+        end
+      end
+
+      if attributes.key?(:'from')
+        self.from = attributes[:'from']
+      end
+
+      if attributes.key?(:'interval')
+        self.interval = attributes[:'interval']
+      end
+
+      if attributes.key?(:'queries')
+        if (value = attributes[:'queries']).is_a?(Array)
+          self.queries = value
+        end
+      end
+
+      if attributes.key?(:'to')
+        self.to = attributes[:'to']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @from.nil?
+      return false if @queries.nil?
+      return false if @to.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param from [Object] Object to be assigned
+    # @!visibility private
+    def from=(from)
+      if from.nil?
+        fail ArgumentError, 'invalid value for "from", from cannot be nil.'
+      end
+      @from = from
+    end
+
+    # Custom attribute writer method with validation
+    # @param queries [Object] Object to be assigned
+    # @!visibility private
+    def queries=(queries)
+      if queries.nil?
+        fail ArgumentError, 'invalid value for "queries", queries cannot be nil.'
+      end
+      @queries = queries
+    end
+
+    # Custom attribute writer method with validation
+    # @param to [Object] Object to be assigned
+    # @!visibility private
+    def to=(to)
+      if to.nil?
+        fail ArgumentError, 'invalid value for "to", to cannot be nil.'
+      end
+      @to = to
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          formulas == o.formulas &&
+          from == o.from &&
+          interval == o.interval &&
+          queries == o.queries &&
+          to == o.to
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [formulas, from, interval, queries, to].hash
+    end
+  end
+end
