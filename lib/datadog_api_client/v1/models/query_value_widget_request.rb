@@ -21,4 +21,188 @@ module DatadogAPIClient::V1
   class QueryValueWidgetRequest
     include BaseGenericModel
 
-    # Whether the objec
+    # Whether the object has unparsed attributes
+    # @!visibility private
+    attr_accessor :_unparsed
+
+    # Aggregator used for the request.
+    attr_accessor :aggregator
+
+    # The log query.
+    attr_accessor :apm_query
+
+    # The log query.
+    attr_accessor :audit_query
+
+    # List of conditional formats.
+    attr_accessor :conditional_formats
+
+    # The log query.
+    attr_accessor :event_query
+
+    # List of formulas that operate on queries.
+    attr_accessor :formulas
+
+    # The log query.
+    attr_accessor :log_query
+
+    # The log query.
+    attr_accessor :network_query
+
+    # The process query to use in the widget.
+    attr_accessor :process_query
+
+    # The log query.
+    attr_accessor :profile_metrics_query
+
+    # TODO.
+    attr_accessor :q
+
+    # List of queries that can be returned directly or used in formulas.
+    attr_accessor :queries
+
+    # Timeseries or Scalar response.
+    attr_accessor :response_format
+
+    # The log query.
+    attr_accessor :rum_query
+
+    # The log query.
+    attr_accessor :security_query
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'aggregator' => :'aggregator',
+        :'apm_query' => :'apm_query',
+        :'audit_query' => :'audit_query',
+        :'conditional_formats' => :'conditional_formats',
+        :'event_query' => :'event_query',
+        :'formulas' => :'formulas',
+        :'log_query' => :'log_query',
+        :'network_query' => :'network_query',
+        :'process_query' => :'process_query',
+        :'profile_metrics_query' => :'profile_metrics_query',
+        :'q' => :'q',
+        :'queries' => :'queries',
+        :'response_format' => :'response_format',
+        :'rum_query' => :'rum_query',
+        :'security_query' => :'security_query'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'aggregator' => :'WidgetAggregator',
+        :'apm_query' => :'LogQueryDefinition',
+        :'audit_query' => :'LogQueryDefinition',
+        :'conditional_formats' => :'Array<WidgetConditionalFormat>',
+        :'event_query' => :'LogQueryDefinition',
+        :'formulas' => :'Array<WidgetFormula>',
+        :'log_query' => :'LogQueryDefinition',
+        :'network_query' => :'LogQueryDefinition',
+        :'process_query' => :'ProcessQueryDefinition',
+        :'profile_metrics_query' => :'LogQueryDefinition',
+        :'q' => :'String',
+        :'queries' => :'Array<FormulaAndFunctionQueryDefinition>',
+        :'response_format' => :'FormulaAndFunctionResponseFormat',
+        :'rum_query' => :'LogQueryDefinition',
+        :'security_query' => :'LogQueryDefinition'
+      }
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::QueryValueWidgetRequest` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::QueryValueWidgetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'aggregator')
+        self.aggregator = attributes[:'aggregator']
+      end
+
+      if attributes.key?(:'apm_query')
+        self.apm_query = attributes[:'apm_query']
+      end
+
+      if attributes.key?(:'audit_query')
+        self.audit_query = attributes[:'audit_query']
+      end
+
+      if attributes.key?(:'conditional_formats')
+        if (value = attributes[:'conditional_formats']).is_a?(Array)
+          self.conditional_formats = value
+        end
+      end
+
+      if attributes.key?(:'event_query')
+        self.event_query = attributes[:'event_query']
+      end
+
+      if attributes.key?(:'formulas')
+        if (value = attributes[:'formulas']).is_a?(Array)
+          self.formulas = value
+        end
+      end
+
+      if attributes.key?(:'log_query')
+        self.log_query = attributes[:'log_query']
+      end
+
+      if attributes.key?(:'network_query')
+        self.network_query = attributes[:'network_query']
+      end
+
+      if attributes.key?(:'process_query')
+        self.process_query = attributes[:'process_query']
+      end
+
+      if attributes.key?(:'profile_metrics_query')
+        self.profile_metrics_query = attributes[:'profile_metrics_query']
+      end
+
+      if attributes.key?(:'q')
+        self.q = attributes[:'q']
+      end
+
+      if attributes.key?(:'queries')
+        if (value = attributes[:'queries']).is_a?(Array)
+          self.queries = value
+        end
+      end
+
+      if attributes.key?(:'response_format')
+        self.response_format = attributes[:'response_format']
+      end
+
+      if attributes.key?(:'rum_query')
+        self.rum_query = attributes[:'rum_query']
+      end
+
+      if attributes.key?(:'security_query')
+        self.security_query = attributes[:'security_query']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o 
