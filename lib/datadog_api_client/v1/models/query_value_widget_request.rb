@@ -205,4 +205,33 @@ module DatadogAPIClient::V1
     end
 
     # Checks equality by comparing each attribute.
-    # @param o 
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          aggregator == o.aggregator &&
+          apm_query == o.apm_query &&
+          audit_query == o.audit_query &&
+          conditional_formats == o.conditional_formats &&
+          event_query == o.event_query &&
+          formulas == o.formulas &&
+          log_query == o.log_query &&
+          network_query == o.network_query &&
+          process_query == o.process_query &&
+          profile_metrics_query == o.profile_metrics_query &&
+          q == o.q &&
+          queries == o.queries &&
+          response_format == o.response_format &&
+          rum_query == o.rum_query &&
+          security_query == o.security_query
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [aggregator, apm_query, audit_query, conditional_formats, event_query, formulas, log_query, network_query, process_query, profile_metrics_query, q, queries, response_format, rum_query, security_query].hash
+    end
+  end
+end
