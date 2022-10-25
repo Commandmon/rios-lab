@@ -18,34 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Online Archive usage in a given hour.
-  class UsageOnlineArchiveHour
+  # Description of the Lambdas.
+  class AWSLogsLambda
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The hour for the usage.
-    attr_accessor :hour
-
-    # Total count of online archived events within the hour.
-    attr_accessor :online_archive_events_count
-
-    # The organization name.
-    attr_accessor :org_name
-
-    # The organization public ID.
-    attr_accessor :public_id
+    # Available ARN IDs.
+    attr_accessor :arn
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'hour' => :'hour',
-        :'online_archive_events_count' => :'online_archive_events_count',
-        :'org_name' => :'org_name',
-        :'public_id' => :'public_id'
+        :'arn' => :'arn'
       }
     end
 
@@ -53,10 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'hour' => :'Time',
-        :'online_archive_events_count' => :'Integer',
-        :'org_name' => :'String',
-        :'public_id' => :'String'
+        :'arn' => :'String'
       }
     end
 
@@ -65,31 +50,19 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageOnlineArchiveHour` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::AWSLogsLambda` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageOnlineArchiveHour`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::AWSLogsLambda`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'hour')
-        self.hour = attributes[:'hour']
-      end
-
-      if attributes.key?(:'online_archive_events_count')
-        self.online_archive_events_count = attributes[:'online_archive_events_count']
-      end
-
-      if attributes.key?(:'org_name')
-        self.org_name = attributes[:'org_name']
-      end
-
-      if attributes.key?(:'public_id')
-        self.public_id = attributes[:'public_id']
+      if attributes.key?(:'arn')
+        self.arn = attributes[:'arn']
       end
     end
 
@@ -106,17 +79,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          hour == o.hour &&
-          online_archive_events_count == o.online_archive_events_count &&
-          org_name == o.org_name &&
-          public_id == o.public_id
+          arn == o.arn
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [hour, online_archive_events_count, org_name, public_id].hash
+      [arn].hash
     end
   end
 end
