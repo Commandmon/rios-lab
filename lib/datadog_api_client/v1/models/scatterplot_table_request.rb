@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,26 +18,30 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response containing the Usage Summary by tag(s).
-  class UsageAttributionResponse
+  # Scatterplot request containing formulas and functions.
+  class ScatterplotTableRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The object containing document metadata.
-    attr_accessor :metadata
+    # List of Scatterplot formulas that operate on queries.
+    attr_accessor :formulas
 
-    # Get usage summary by tag(s).
-    attr_accessor :usage
+    # List of queries that can be returned directly or used in formulas.
+    attr_accessor :queries
+
+    # Timeseries or Scalar response.
+    attr_accessor :response_format
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'metadata' => :'metadata',
-        :'usage' => :'usage'
+        :'formulas' => :'formulas',
+        :'queries' => :'queries',
+        :'response_format' => :'response_format'
       }
     end
 
@@ -44,8 +49,9 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'metadata' => :'UsageAttributionMetadata',
-        :'usage' => :'Array<UsageAttributionBody>'
+        :'formulas' => :'Array<ScatterplotWidgetFormula>',
+        :'queries' => :'Array<FormulaAndFunctionQueryDefinition>',
+        :'response_format' => :'FormulaAndFunctionResponseFormat'
       }
     end
 
@@ -54,25 +60,31 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageAttributionResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::ScatterplotTableRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageAttributionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::ScatterplotTableRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.key?(:'formulas')
+        if (value = attributes[:'formulas']).is_a?(Array)
+          self.formulas = value
+        end
       end
 
-      if attributes.key?(:'usage')
-        if (value = attributes[:'usage']).is_a?(Array)
-          self.usage = value
+      if attributes.key?(:'queries')
+        if (value = attributes[:'queries']).is_a?(Array)
+          self.queries = value
         end
+      end
+
+      if attributes.key?(:'response_format')
+        self.response_format = attributes[:'response_format']
       end
     end
 
@@ -89,15 +101,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          metadata == o.metadata &&
-          usage == o.usage
+          formulas == o.formulas &&
+          queries == o.queries &&
+          response_format == o.response_format
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [metadata, usage].hash
+      [formulas, queries, response_format].hash
     end
   end
 end
