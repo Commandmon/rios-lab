@@ -4683,3 +4683,5276 @@ components:
         any of the default attributes\n  and you haven\u2019t defined your own date
         attribute, Datadog timestamps\n  the logs with the date it received them.\n\n
         \ If multiple log date remapper processors can be applied to a given log,\n
+        \ only the first one (according to the pipelines order) is taken into account."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          description: Array of source attributes.
+          example:
+          - web
+          - gateway
+          items:
+            description: Attribute used as a source to define the log associated date.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsDateRemapperType'
+      required:
+      - sources
+      - type
+      type: object
+    LogsDateRemapperType:
+      default: date-remapper
+      description: Type of logs date remapper.
+      enum:
+      - date-remapper
+      example: date-remapper
+      type: string
+      x-enum-varnames:
+      - DATE_REMAPPER
+    LogsExclusion:
+      description: Represents the index exclusion filter object from configuration
+        API.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsExclusionFilter'
+        is_enabled:
+          description: Whether or not the exclusion filter is active.
+          type: boolean
+        name:
+          description: Name of the index exclusion filter.
+          example: payment
+          type: string
+      required:
+      - name
+      type: object
+    LogsExclusionFilter:
+      description: Exclusion filter is defined by a query, a sampling rule, and a
+        active/inactive toggle.
+      properties:
+        query:
+          description: 'Default query is `*`, meaning all logs flowing in the index
+            would be excluded.
+
+            Scope down exclusion filter to only a subset of logs with a log query.'
+          example: '*'
+          type: string
+        sample_rate:
+          description: 'Sample rate to apply to logs going through this exclusion
+            filter,
+
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      required:
+      - sample_rate
+      type: object
+    LogsFilter:
+      description: Filter for logs.
+      properties:
+        query:
+          description: The filter query.
+          example: source:python
+          type: string
+      type: object
+    LogsGeoIPParser:
+      description: 'The GeoIP parser takes an IP address attribute and extracts if
+        available
+
+        the Continent, Country, Subdivision, and City information in the target attribute
+        path.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - network.client.ip
+          description: Array of source attributes.
+          example:
+          - network.client.ip
+          items:
+            description: Attribute to geo-localize the IP from.
+            type: string
+          type: array
+        target:
+          default: network.client.geoip
+          description: Name of the parent attribute that contains all the extracted
+            details from the `sources`.
+          example: network.client.geoip
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsGeoIPParserType'
+      required:
+      - sources
+      - target
+      - type
+      type: object
+    LogsGeoIPParserType:
+      default: geo-ip-parser
+      description: Type of GeoIP parser.
+      enum:
+      - geo-ip-parser
+      example: geo-ip-parser
+      type: string
+      x-enum-varnames:
+      - GEO_IP_PARSER
+    LogsGrokParser:
+      description: 'Create custom grok rules to parse the full message or [a specific
+        attribute of your raw event](https://docs.datadoghq.com/logs/log_configuration/parsing/#advanced-settings).
+
+        For more information, see the [parsing section](https://docs.datadoghq.com/logs/log_configuration/parsing).'
+      properties:
+        grok:
+          $ref: '#/components/schemas/LogsGrokParserRules'
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        samples:
+          description: List of sample logs to test this grok parser.
+          items:
+            description: A log sample that is used to test the grok parser.
+            maxLength: 5000
+            type: string
+          maxItems: 5
+          type: array
+        source:
+          default: message
+          description: Name of the log attribute to parse.
+          example: message
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsGrokParserType'
+      required:
+      - source
+      - grok
+      - type
+      type: object
+    LogsGrokParserRules:
+      description: Set of rules for the grok parser.
+      properties:
+        match_rules:
+          description: List of match rules for the grok parser, separated by a new
+            line.
+          example: 'rule_name_1 foo
+
+            rule_name_2 bar
+
+            '
+          type: string
+        support_rules:
+          default: ''
+          description: List of support rules for the grok parser, separated by a new
+            line.
+          example: 'rule_name_1 foo
+
+            rule_name_2 bar
+
+            '
+          type: string
+      required:
+      - match_rules
+      type: object
+    LogsGrokParserType:
+      default: grok-parser
+      description: Type of logs grok parser.
+      enum:
+      - grok-parser
+      example: grok-parser
+      type: string
+      x-enum-varnames:
+      - GROK_PARSER
+    LogsIndex:
+      description: Object describing a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          example: 300000000
+          format: int64
+          type: integer
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        is_rate_limited:
+          description: 'A boolean stating if the index is rate limited, meaning more
+            logs than the daily limit have been sent.
+
+            Rate limit is reset every-day at 2pm UTC.'
+          example: false
+          readOnly: true
+          type: boolean
+        name:
+          description: The name of the index.
+          example: main
+          type: string
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.'
+          example: 15
+          format: int64
+          type: integer
+      required:
+      - name
+      - filter
+      type: object
+    LogsIndexListResponse:
+      description: Object with all Index configurations for a given organization.
+      properties:
+        indexes:
+          description: Array of Log index configurations.
+          items:
+            $ref: '#/components/schemas/LogsIndex'
+          type: array
+      type: object
+    LogsIndexUpdateRequest:
+      description: Object for updating a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          example: 300000000
+          format: int64
+          type: integer
+        disable_daily_limit:
+          description: 'If true, sets the `daily_limit` value to null and the index
+            is not limited on a daily basis (any
+
+            specified `daily_limit` value in the request is ignored). If false or
+            omitted, the index''s current
+
+            `daily_limit` is maintained.'
+          example: false
+          type: boolean
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all logs
+
+            already in this index. It may also affect billing.'
+          example: 15
+          format: int64
+          type: integer
+      required:
+      - filter
+      type: object
+    LogsIndexesOrder:
+      description: Object containing the ordered list of log index names.
+      properties:
+        index_names:
+          description: 'Array of strings identifying by their name(s) the index(es)
+            of your organization.
+
+            Logs are tested against the query filter of each index one by one, following
+            the order of the array.
+
+            Logs are eventually stored in the first matching index.'
+          example:
+          - main
+          - payments
+          - web
+          items:
+            description: An index name.
+            type: string
+          type: array
+      required:
+      - index_names
+      type: object
+    LogsListRequest:
+      description: Object to send with the request to retrieve a list of logs from
+        your Organization.
+      properties:
+        index:
+          description: 'The log index on which the request is performed. For multi-index
+            organizations,
+
+            the default is all live indexes. Historical indexes of rehydrated logs
+            must be specified.'
+          example: retention-3,retention-15
+          type: string
+        limit:
+          description: Number of logs return in the response.
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+        sort:
+          $ref: '#/components/schemas/LogsSort'
+        startAt:
+          description: 'Hash identifier of the first log to return in the list, available
+            in a log `id` attribute.
+
+            This parameter is used for the pagination feature.
+
+
+            **Note**: This parameter is ignored if the corresponding log
+
+            is out of the scope of the specified time window.'
+          type: string
+        time:
+          $ref: '#/components/schemas/LogsListRequestTime'
+      required:
+      - time
+      type: object
+    LogsListRequestTime:
+      description: Timeframe to retrieve the log from.
+      properties:
+        from:
+          description: Minimum timestamp for requested logs.
+          example: '2020-02-02T02:02:02.202Z'
+          format: date-time
+          type: string
+        timezone:
+          description: 'Timezone can be specified both as an offset (for example "UTC+03:00")
+
+            or a regional zone (for example "Europe/Paris").'
+          type: string
+        to:
+          description: Maximum timestamp for requested logs.
+          example: '2020-02-20T02:02:02.202Z'
+          format: date-time
+          type: string
+      required:
+      - from
+      - to
+      type: object
+    LogsListResponse:
+      description: Response object with all logs matching the request and pagination
+        information.
+      properties:
+        logs:
+          description: Array of logs matching the request and the `nextLogId` if sent.
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+        nextLogId:
+          description: 'Hash identifier of the next log to return in the list.
+
+            This parameter is used for the pagination feature.'
+          type: string
+        status:
+          description: Status of the response.
+          type: string
+      type: object
+    LogsLookupProcessor:
+      description: 'Use the Lookup Processor to define a mapping between a log attribute
+
+        and a human readable value saved in the processors mapping table.
+
+        For example, you can use the Lookup Processor to map an internal service ID
+
+        into a human readable service name. Alternatively, you could also use it to
+        check
+
+        if the MAC address that just attempted to connect to the production
+
+        environment belongs to your list of stolen machines.'
+      properties:
+        default_lookup:
+          description: Value to set the target attribute if the source value is not
+            found in the list.
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        lookup_table:
+          description: 'Mapping table of values for the source attribute and their
+            associated target attribute values,
+
+            formatted as `["source_key1,target_value1", "source_key2,target_value2"]`'
+          example:
+          - source_key1,target_value1
+          - source_key2,target_value2
+          items:
+            description: Mapping between a source and a value, it should follow the
+              format `"<SOURCE>,<VALUE>"`.
+            type: string
+          type: array
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Source attribute used to perform the lookup.
+          example: service_id
+          type: string
+        target:
+          description: 'Name of the attribute that contains the corresponding value
+            in the mapping list
+
+            or the `default_lookup` if not found in the mapping list.'
+          example: service
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsLookupProcessorType'
+      required:
+      - source
+      - target
+      - lookup_table
+      - type
+      type: object
+    LogsLookupProcessorType:
+      default: lookup-processor
+      description: Type of logs lookup processor.
+      enum:
+      - lookup-processor
+      example: lookup-processor
+      type: string
+      x-enum-varnames:
+      - LOOKUP_PROCESSOR
+    LogsMessageRemapper:
+      description: 'The message is a key attribute in Datadog.
+
+        It is displayed in the message column of the Log Explorer and you can do full
+        string search on it.
+
+        Use this Processor to define one or more attributes as the official log message.
+
+
+        **Note:** If multiple log message remapper processors can be applied to a
+        given log,
+
+        only the first one (according to the pipeline order) is taken into account.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - msg
+          description: Array of source attributes.
+          example:
+          - msg
+          items:
+            description: Attribute used as a source to define the log associated message.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsMessageRemapperType'
+      required:
+      - sources
+      - type
+      type: object
+    LogsMessageRemapperType:
+      default: message-remapper
+      description: Type of logs message remapper.
+      enum:
+      - message-remapper
+      example: message-remapper
+      type: string
+      x-enum-varnames:
+      - MESSAGE_REMAPPER
+    LogsPipeline:
+      description: 'Pipelines and processors operate on incoming logs,
+
+        parsing and transforming them into structured attributes for easier querying.
+
+
+        **Note**: These endpoints are only available for admin users.
+
+        Make sure to use an application key created by an admin.'
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        id:
+          description: ID of the pipeline.
+          readOnly: true
+          type: string
+        is_enabled:
+          description: Whether or not the pipeline is enabled.
+          type: boolean
+        is_read_only:
+          description: Whether or not the pipeline can be edited.
+          readOnly: true
+          type: boolean
+        name:
+          description: Name of the pipeline.
+          example: ''
+          type: string
+        processors:
+          description: Ordered list of processors in this pipeline.
+          items:
+            $ref: '#/components/schemas/LogsProcessor'
+          type: array
+        type:
+          description: Type of pipeline.
+          example: pipeline
+          readOnly: true
+          type: string
+      required:
+      - name
+      type: object
+    LogsPipelineList:
+      description: Array of pipeline ID strings.
+      items:
+        $ref: '#/components/schemas/LogsPipeline'
+      type: array
+    LogsPipelineProcessor:
+      description: 'Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines
+        to split the processing into two steps.
+
+        For example, first use a high-level filtering such as team and then a second
+        level of filtering based on the
+
+        integration, service, or any other tag or attribute.
+
+
+        A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline
+        can only contain Processors.'
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        processors:
+          description: Ordered list of processors in this pipeline.
+          items:
+            $ref: '#/components/schemas/LogsProcessor'
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsPipelineProcessorType'
+      required:
+      - type
+      type: object
+    LogsPipelineProcessorType:
+      default: pipeline
+      description: Type of logs pipeline processor.
+      enum:
+      - pipeline
+      example: pipeline
+      type: string
+      x-enum-varnames:
+      - PIPELINE
+    LogsPipelinesOrder:
+      description: Object containing the ordered list of pipeline IDs.
+      properties:
+        pipeline_ids:
+          description: 'Ordered Array of `<PIPELINE_ID>` strings, the order of pipeline
+            IDs in the array
+
+            define the overall Pipelines order for Datadog.'
+          example:
+          - tags
+          - org_ids
+          - products
+          items:
+            description: A given pipeline ID.
+            type: string
+          type: array
+      required:
+      - pipeline_ids
+      type: object
+    LogsProcessor:
+      description: Definition of a logs processor.
+      oneOf:
+      - $ref: '#/components/schemas/LogsGrokParser'
+      - $ref: '#/components/schemas/LogsDateRemapper'
+      - $ref: '#/components/schemas/LogsStatusRemapper'
+      - $ref: '#/components/schemas/LogsServiceRemapper'
+      - $ref: '#/components/schemas/LogsMessageRemapper'
+      - $ref: '#/components/schemas/LogsAttributeRemapper'
+      - $ref: '#/components/schemas/LogsURLParser'
+      - $ref: '#/components/schemas/LogsUserAgentParser'
+      - $ref: '#/components/schemas/LogsCategoryProcessor'
+      - $ref: '#/components/schemas/LogsArithmeticProcessor'
+      - $ref: '#/components/schemas/LogsStringBuilderProcessor'
+      - $ref: '#/components/schemas/LogsPipelineProcessor'
+      - $ref: '#/components/schemas/LogsGeoIPParser'
+      - $ref: '#/components/schemas/LogsLookupProcessor'
+      - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
+      - $ref: '#/components/schemas/LogsTraceRemapper'
+      type: object
+    LogsQueryCompute:
+      description: Define computation for a log query.
+      properties:
+        aggregation:
+          description: The aggregation method.
+          example: avg
+          type: string
+        facet:
+          description: Facet name.
+          example: '@duration'
+          type: string
+        interval:
+          description: Define a time interval in seconds.
+          example: 5000
+          format: int64
+          type: integer
+      required:
+      - aggregation
+      type: object
+    LogsRetentionAggSumUsage:
+      description: Object containing indexed logs usage aggregated across organizations
+        and months for a retention period.
+      properties:
+        logs_indexed_logs_usage_agg_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_agg_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_agg_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
+      type: object
+    LogsRetentionSumUsage:
+      description: Object containing indexed logs usage grouped by retention period
+        and summed.
+      properties:
+        logs_indexed_logs_usage_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
+      type: object
+    LogsServiceRemapper:
+      description: 'Use this processor if you want to assign one or more attributes
+        as the official service.
+
+
+        **Note:** If multiple service remapper processors can be applied to a given
+        log,
+
+        only the first one (according to the pipeline order) is taken into account.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          description: Array of source attributes.
+          example:
+          - web
+          - gateway
+          items:
+            description: Attribute used as a source to define the log associated service.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsServiceRemapperType'
+      required:
+      - sources
+      - type
+      type: object
+    LogsServiceRemapperType:
+      default: service-remapper
+      description: Type of logs service remapper.
+      enum:
+      - service-remapper
+      example: service-remapper
+      type: string
+      x-enum-varnames:
+      - SERVICE_REMAPPER
+    LogsSort:
+      description: Time-ascending `asc` or time-descending `desc` results.
+      enum:
+      - asc
+      - desc
+      type: string
+      x-enum-varnames:
+      - TIME_ASCENDING
+      - TIME_DESCENDING
+    LogsStatusRemapper:
+      description: "Use this Processor if you want to assign some attributes as the
+        official status.\n\nEach incoming status value is mapped as follows.\n\n  -
+        Integers from 0 to 7 map to the Syslog severity standards\n  - Strings beginning
+        with `emerg` or f (case-insensitive) map to `emerg` (0)\n  - Strings beginning
+        with `a` (case-insensitive) map to `alert` (1)\n  - Strings beginning with
+        `c` (case-insensitive) map to `critical` (2)\n  - Strings beginning with `err`
+        (case-insensitive) map to `error` (3)\n  - Strings beginning with `w` (case-insensitive)
+        map to `warning` (4)\n  - Strings beginning with `n` (case-insensitive) map
+        to `notice` (5)\n  - Strings beginning with `i` (case-insensitive) map to
+        `info` (6)\n  - Strings beginning with `d`, `trace` or `verbose` (case-insensitive)
+        map to `debug` (7)\n  - Strings beginning with `o` or matching `OK` or `Success`
+        (case-insensitive) map to OK\n  - All others map to `info` (6)\n\n  **Note:**
+        If multiple log status remapper processors can be applied to a given log,\n
+        \ only the first one (according to the pipelines order) is taken into account."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          description: Array of source attributes.
+          example: []
+          items:
+            description: Attribute used as a source to define the log associated status.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsStatusRemapperType'
+      required:
+      - sources
+      - type
+      type: object
+    LogsStatusRemapperType:
+      default: status-remapper
+      description: Type of logs status remapper.
+      enum:
+      - status-remapper
+      example: status-remapper
+      type: string
+      x-enum-varnames:
+      - STATUS_REMAPPER
+    LogsStringBuilderProcessor:
+      description: "Use the string builder processor to add a new attribute (without
+        spaces or special characters)\nto a log with the result of the provided template.\nThis
+        enables aggregation of different attributes or raw strings into a single attribute.\n\nThe
+        template is defined by both raw text and blocks with the syntax `%{attribute_path}`.\n\n**Notes**:\n\n-
+        The processor only accepts attributes with values or an array of values in
+        the blocks.\n- If an attribute cannot be used (object or array of object),\n
+        \ it is replaced by an empty string or the entire operation is skipped depending
+        on your selection.\n- If the target attribute already exists, it is overwritten
+        by the result of the template.\n- Results of the template cannot exceed 256
+        characters."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        is_replace_missing:
+          default: false
+          description: 'If true, it replaces all missing attributes of `template`
+            by an empty string.
+
+            If `false` (default), skips the operation for missing attributes.'
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        target:
+          description: The name of the attribute that contains the result of the template.
+          example: ''
+          type: string
+        template:
+          description: A formula with one or more attributes and raw text.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsStringBuilderProcessorType'
+      required:
+      - target
+      - template
+      - type
+      type: object
+    LogsStringBuilderProcessorType:
+      default: string-builder-processor
+      description: Type of logs string builder processor.
+      enum:
+      - string-builder-processor
+      example: string-builder-processor
+      type: string
+      x-enum-varnames:
+      - STRING_BUILDER_PROCESSOR
+    LogsTraceRemapper:
+      description: "There are two ways to improve correlation between application
+        traces and logs.\n\n  1. Follow the documentation on [how to inject a trace
+        ID in the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces)\n
+        \ and by default log integrations take care of all the rest of the setup.\n\n
+        \ 2. Use the Trace remapper processor to define a log attribute as its associated
+        trace ID."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - dd.trace_id
+          description: Array of source attributes.
+          items:
+            description: Attribute to extract the Trace ID from.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsTraceRemapperType'
+      required:
+      - type
+      type: object
+    LogsTraceRemapperType:
+      default: trace-id-remapper
+      description: Type of logs trace remapper.
+      enum:
+      - trace-id-remapper
+      example: trace-id-remapper
+      type: string
+      x-enum-varnames:
+      - TRACE_ID_REMAPPER
+    LogsURLParser:
+      description: This processor extracts query parameters and other important parameters
+        from a URL.
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        normalize_ending_slashes:
+          default: false
+          description: Normalize the ending slashes or not.
+          nullable: true
+          type: boolean
+        sources:
+          default:
+          - http.url
+          description: Array of source attributes.
+          example:
+          - http.url
+          items:
+            description: Attribute to extract the URL from.
+            type: string
+          type: array
+        target:
+          default: http.url_details
+          description: Name of the parent attribute that contains all the extracted
+            details from the `sources`.
+          example: http.url_details
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsURLParserType'
+      required:
+      - sources
+      - target
+      - type
+      type: object
+    LogsURLParserType:
+      default: url-parser
+      description: Type of logs URL parser.
+      enum:
+      - url-parser
+      example: url-parser
+      type: string
+      x-enum-varnames:
+      - URL_PARSER
+    LogsUserAgentParser:
+      description: 'The User-Agent parser takes a User-Agent attribute and extracts
+        the OS, browser, device, and other user data.
+
+        It recognizes major bots like the Google Bot, Yahoo Slurp, and Bing.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        is_encoded:
+          default: false
+          description: Define if the source attribute is URL encoded or not.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - http.useragent
+          description: Array of source attributes.
+          example:
+          - http.useragent
+          items:
+            description: Attribute to extract the User-Agent from.
+            type: string
+          type: array
+        target:
+          default: http.useragent_details
+          description: Name of the parent attribute that contains all the extracted
+            details from the `sources`.
+          example: http.useragent_details
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsUserAgentParserType'
+      required:
+      - sources
+      - target
+      - type
+      type: object
+    LogsUserAgentParserType:
+      default: user-agent-parser
+      description: Type of logs User-Agent parser.
+      enum:
+      - user-agent-parser
+      example: user-agent-parser
+      type: string
+      x-enum-varnames:
+      - USER_AGENT_PARSER
+    MetricContentEncoding:
+      default: deflate
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      - gzip
+      example: deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
+      - GZIP
+    MetricMetadata:
+      description: Object with all metric related metadata.
+      properties:
+        description:
+          description: Metric description.
+          type: string
+        integration:
+          description: Name of the integration that sent the metric if applicable.
+          readOnly: true
+          type: string
+        per_unit:
+          description: Per unit of the metric such as `second` in `bytes per second`.
+          example: second
+          type: string
+        short_name:
+          description: A more human-readable and abbreviated version of the metric
+            name.
+          type: string
+        statsd_interval:
+          description: StatsD flush interval of the metric in seconds if applicable.
+          format: int64
+          type: integer
+        type:
+          description: Metric type such as `gauge` or `rate`.
+          example: count
+          type: string
+        unit:
+          description: Primary unit of the metric such as `byte` or `operation`.
+          example: byte
+          type: string
+      type: object
+    MetricSearchResponse:
+      description: Object containing the list of metrics matching the search query.
+      properties:
+        results:
+          $ref: '#/components/schemas/MetricSearchResponseResults'
+      type: object
+    MetricSearchResponseResults:
+      description: Search result.
+      properties:
+        metrics:
+          description: List of metrics that match the search query.
+          items:
+            description: Metric name.
+            type: string
+          type: array
+      type: object
+    MetricsListResponse:
+      description: Object listing all metric names stored by Datadog since a given
+        time.
+      properties:
+        from:
+          description: Time when the metrics were active, seconds since the Unix epoch.
+          type: string
+        metrics:
+          description: List of metric names.
+          items:
+            description: A metric name.
+            type: string
+          type: array
+      type: object
+    MetricsPayload:
+      description: The metrics' payload.
+      properties:
+        series:
+          description: A list of time series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847.0
+              - 0.7
+          items:
+            $ref: '#/components/schemas/Series'
+          type: array
+      required:
+      - series
+      type: object
+    MetricsQueryMetadata:
+      description: Object containing all metric names returned and their associated
+        metadata.
+      properties:
+        aggr:
+          description: Aggregation type.
+          example: avg
+          nullable: true
+          readOnly: true
+          type: string
+        display_name:
+          description: Display name of the metric.
+          example: system.cpu.idle
+          readOnly: true
+          type: string
+        end:
+          description: End of the time window, milliseconds since Unix epoch.
+          format: int64
+          readOnly: true
+          type: integer
+        expression:
+          description: Metric expression.
+          example: system.cpu.idle{host:foo,env:test}
+          readOnly: true
+          type: string
+        interval:
+          description: Number of seconds between data samples.
+          format: int64
+          readOnly: true
+          type: integer
+        length:
+          description: Number of data samples.
+          format: int64
+          readOnly: true
+          type: integer
+        metric:
+          description: Metric name.
+          example: system.cpu.idle
+          readOnly: true
+          type: string
+        pointlist:
+          description: List of points of the time series.
+          example:
+          - - 1575317847.0
+            - 0.5
+          items:
+            $ref: '#/components/schemas/Point'
+          readOnly: true
+          type: array
+        query_index:
+          description: The index of the series' query within the request.
+          format: int64
+          readOnly: true
+          type: integer
+        scope:
+          description: Metric scope, comma separated list of tags.
+          example: host:foo,env:test
+          readOnly: true
+          type: string
+        start:
+          description: Start of the time window, milliseconds since Unix epoch.
+          format: int64
+          readOnly: true
+          type: integer
+        tag_set:
+          description: Unique tags identifying this series.
+          items:
+            description: Unique tags identifying this series.
+            type: string
+          readOnly: true
+          type: array
+        unit:
+          description: 'Detailed information about the metric unit.
+
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
+          items:
+            $ref: '#/components/schemas/MetricsQueryUnit'
+          maxItems: 2
+          minItems: 2
+          readOnly: true
+          type: array
+      type: object
+    MetricsQueryResponse:
+      description: Response Object that includes your query and the list of metrics
+        retrieved.
+      properties:
+        error:
+          description: Message indicating the errors if status is not `ok`.
+          readOnly: true
+          type: string
+        from_date:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          format: int64
+          readOnly: true
+          type: integer
+        group_by:
+          description: List of tag keys on which to group.
+          items:
+            description: Tag key to group by your metric.
+            type: string
+          readOnly: true
+          type: array
+        message:
+          description: Message indicating `success` if status is `ok`.
+          readOnly: true
+          type: string
+        query:
+          description: Query string
+          readOnly: true
+          type: string
+        res_type:
+          description: Type of response.
+          example: time_series
+          readOnly: true
+          type: string
+        series:
+          description: List of timeseries queried.
+          items:
+            $ref: '#/components/schemas/MetricsQueryMetadata'
+          readOnly: true
+          type: array
+        status:
+          description: Status of the query.
+          example: ok
+          readOnly: true
+          type: string
+        to_date:
+          description: End of requested time window, milliseconds since Unix epoch.
+          format: int64
+          readOnly: true
+          type: integer
+      type: object
+    MetricsQueryUnit:
+      description: Object containing the metric unit family, scale factor, name, and
+        short name.
+      nullable: true
+      properties:
+        family:
+          description: Unit family, allows for conversion between units of the same
+            family, for scaling.
+          example: time
+          readOnly: true
+          type: string
+        name:
+          description: Unit name
+          example: minute
+          readOnly: true
+          type: string
+        plural:
+          description: Plural form of the unit name.
+          example: minutes
+          readOnly: true
+          type: string
+        scale_factor:
+          description: Factor for scaling between units of the same family.
+          example: 60.0
+          format: double
+          readOnly: true
+          type: number
+        short_name:
+          description: Abbreviation of the unit.
+          example: min
+          readOnly: true
+          type: string
+      type: object
+    Monitor:
+      description: Object describing a monitor.
+      properties:
+        created:
+          description: Timestamp of the monitor creation.
+          format: date-time
+          readOnly: true
+          type: string
+        creator:
+          $ref: '#/components/schemas/Creator'
+        deleted:
+          description: Whether or not the monitor is deleted. (Always `null`)
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          description: ID of this monitor.
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: A message to include with notifications for this monitor.
+          type: string
+        modified:
+          description: Last timestamp when the monitor was edited.
+          format: date-time
+          readOnly: true
+          type: string
+        multi:
+          description: Whether or not the monitor is broken down on different groups.
+          readOnly: true
+          type: boolean
+        name:
+          description: The monitor name.
+          example: My monitor
+          type: string
+        options:
+          $ref: '#/components/schemas/MonitorOptions'
+        overall_state:
+          $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          nullable: true
+          type: integer
+        query:
+          description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+          type: string
+        restricted_roles:
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+          items:
+            description: A role UUID.
+            type: string
+          nullable: true
+          type: array
+        state:
+          $ref: '#/components/schemas/MonitorState'
+        tags:
+          description: Tags associated to your monitor.
+          items:
+            description: A Datadog tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/MonitorType'
+      required:
+      - type
+      - query
+      type: object
+    MonitorDeviceID:
+      description: ID of the device the Synthetics monitor is running on. Same as
+        `SyntheticsDeviceID`.
+      enum:
+      - laptop_large
+      - tablet
+      - mobile_small
+      - chrome.laptop_large
+      - chrome.tablet
+      - chrome.mobile_small
+      - firefox.laptop_large
+      - firefox.tablet
+      - firefox.mobile_small
+      type: string
+      x-enum-varnames:
+      - LAPTOP_LARGE
+      - TABLET
+      - MOBILE_SMALL
+      - CHROME_LAPTOP_LARGE
+      - CHROME_TABLET
+      - CHROME_MOBILE_SMALL
+      - FIREFOX_LAPTOP_LARGE
+      - FIREFOX_TABLET
+      - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionEventAggregation:
+      description: Aggregation methods for event platform queries.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: avg
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    MonitorFormulaAndFunctionEventQueryDefinition:
+      description: A formula and functions events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionSearch'
+      required:
+      - data_source
+      - compute
+      - name
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionCompute:
+      description: Compute options.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        interval:
+          description: A time interval in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: Measurable attribute to compute.
+          example: '@duration'
+          type: string
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionSearch:
+      description: Search options.
+      properties:
+        query:
+          description: Events search string.
+          example: service:query
+          type: string
+      required:
+      - query
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBy:
+      description: List of objects used to group by.
+      properties:
+        facet:
+          description: Event facet.
+          example: status
+          type: string
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBySort'
+      required:
+      - facet
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBySort:
+      description: Options for sorting group by results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        metric:
+          description: Metric used for sorting group by results.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventsDataSource:
+      description: Data source for event platform-based queries.
+      enum:
+      - rum
+      - ci_pipelines
+      - ci_tests
+      - audit
+      - events
+      - logs
+      - spans
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+      - CI_PIPELINES
+      - CI_TESTS
+      - AUDIT
+      - EVENTS
+      - LOGS
+      - SPANS
+    MonitorFormulaAndFunctionQueryDefinition:
+      description: A formula and function query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      type: object
+    MonitorGroupSearchResponse:
+      description: The response of a monitor group search.
+      example:
+        counts:
+          status:
+          - count: 2
+            name: OK
+          type:
+          - count: 2
+            name: metric
+        groups:
+        - group: '*'
+          group_tags:
+          - '*'
+          last_nodata_ts: 0
+          last_triggered_ts: 1525702966
+          monitor_id: 2738266
+          monitor_name: '[demo] Cassandra disk usage is high on {{host.name}}'
+          status: OK
+        - group: '*'
+          group_tags:
+          - '*'
+          last_nodata_ts: 0
+          last_triggered_ts: 1525703008
+          monitor_id: 1576648
+          monitor_name: '[demo] Disk usage is high on {{host.name}}'
+          status: OK
+        metadata:
+          page: 0
+          page_count: 2
+          per_page: 30
+          total_count: 2
+      properties:
+        counts:
+          $ref: '#/components/schemas/MonitorGroupSearchResponseCounts'
+        groups:
+          description: The list of found monitor groups.
+          items:
+            $ref: '#/components/schemas/MonitorGroupSearchResult'
+          readOnly: true
+          type: array
+        metadata:
+          $ref: '#/components/schemas/MonitorSearchResponseMetadata'
+      type: object
+    MonitorGroupSearchResponseCounts:
+      description: The counts of monitor groups per different criteria.
+      properties:
+        status:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        type:
+          $ref: '#/components/schemas/MonitorSearchCount'
+      readOnly: true
+      type: object
+    MonitorGroupSearchResult:
+      description: A single monitor group search result.
+      properties:
+        group:
+          description: The name of the group.
+          readOnly: true
+          type: string
+        group_tags:
+          description: The list of tags of the monitor group.
+          items:
+            description: One monitor group tag.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
+        last_nodata_ts:
+          description: Latest timestamp the monitor group was in NO_DATA state.
+          format: int64
+          readOnly: true
+          type: integer
+        last_triggered_ts:
+          description: Latest timestamp the monitor group triggered.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        monitor_id:
+          description: The ID of the monitor.
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_name:
+          description: The name of the monitor.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/MonitorOverallStates'
+      type: object
+    MonitorOptions:
+      description: List of options associated with your monitor.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorOptionsAggregation'
+        device_ids:
+          deprecated: true
+          description: IDs of the device the Synthetics monitor is running on.
+          items:
+            $ref: '#/components/schemas/MonitorDeviceID'
+          readOnly: true
+          type: array
+        enable_logs_sample:
+          description: Whether or not to send a log sample when the log monitor triggers.
+          type: boolean
+        enable_samples:
+          description: Whether or not to send a list of samples when the monitor triggers.
+            This is only used by CI Test and Pipeline monitors.
+          type: boolean
+        escalation_message:
+          default: none
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
+
+            block in the original message instead.
+
+            A message to include with a re-notification. Supports the `@username`
+            notification we allow elsewhere.
+
+            Not applicable if `renotify_interval` is `None`.'
+          type: string
+        evaluation_delay:
+          description: 'Time (in seconds) to delay evaluation, as a non-negative integer.
+            For example, if the value is set to `300` (5min),
+
+            the timeframe is set to `last_5m` and the time is 7:00, the monitor evaluates
+            data from 6:50 to 6:55.
+
+            This is useful for AWS CloudWatch and other backfilled metrics to ensure
+            the monitor always has data during evaluation.'
+          format: int64
+          nullable: true
+          type: integer
+        group_retention_duration:
+          description: 'The time span after which groups with missing data are dropped
+            from the monitor state.
+
+            The minimum value is one hour, and the maximum value is 72 hours.
+
+            Example values are: "60m", "1h", and "2d".
+
+            This option is only available for APM Trace Analytics, Audit Trail, CI,
+            Error Tracking, Event, Logs, and RUM monitors.'
+          type: string
+        groupby_simple_monitor:
+          description: Whether the log alert monitor triggers a single alert or multiple
+            alerts when any group breaches a threshold.
+          type: boolean
+        include_tags:
+          default: true
+          description: 'A Boolean indicating whether notifications from this monitor
+            automatically inserts its triggering tags into the title.
+
+
+            **Examples**
+
+            - If `True`, `[Triggered on {host:h1}] Monitor Title`
+
+            - If `False`, `[Triggered] Monitor Title`'
+          type: boolean
+        locked:
+          deprecated: true
+          description: Whether or not the monitor is locked (only editable by creator
+            and admins). Use `restricted_roles` instead.
+          type: boolean
+        min_failure_duration:
+          default: 0
+          description: How long the test should be in failure before alerting (integer,
+            number of seconds, max 7200).
+          format: int64
+          maximum: 7200
+          minimum: 0
+          nullable: true
+          type: integer
+        min_location_failed:
+          default: 1
+          description: 'The minimum number of locations in failure at the same time
+            during
+
+            at least one moment in the `min_failure_duration` period (`min_location_failed`
+            and `min_failure_duration`
+
+            are part of the advanced alerting rules - integer, >= 1).'
+          format: int64
+          nullable: true
+          type: integer
+        new_group_delay:
+          description: 'Time (in seconds) to skip evaluations for new groups.
+
+
+            For example, this option can be used to skip evaluations for new hosts
+            while they initialize.
+
+
+            Must be a non negative integer.'
+          format: int64
+          nullable: true
+          type: integer
+        new_host_delay:
+          default: 300
+          deprecated: true
+          description: 'Time (in seconds) to allow a host to boot and applications
+
+            to fully start before starting the evaluation of monitor results.
+
+            Should be a non negative integer.
+
+
+            Use new_group_delay instead.'
+          format: int64
+          nullable: true
+          type: integer
+        no_data_timeframe:
+          description: 'The number of minutes before a monitor notifies after data
+            stops reporting.
+
+            Datadog recommends at least 2x the monitor timeframe for query alerts
+            or 2 minutes for service checks.
+
+            If omitted, 2x the evaluation timeframe is used for query alerts, and
+            24 hours is used for service checks.'
+          format: int64
+          nullable: true
+          type: integer
+        notification_preset_name:
+          $ref: '#/components/schemas/MonitorOptionsNotificationPresets'
+        notify_audit:
+          default: false
+          description: A Boolean indicating whether tagged users is notified on changes
+            to this monitor.
+          type: boolean
+        notify_by:
+          description: 'Controls what granularity a monitor alerts on. Only available
+            for monitors with groupings.
+
+            For instance, a monitor grouped by `cluster`, `namespace`, and `pod` can
+            be configured to only notify on each
+
+            new `cluster` violating the alert conditions by setting `notify_by` to
+            `["cluster"]`. Tags mentioned
+
+            in `notify_by` must be a subset of the grouping tags in the query.
+
+            For example, a query grouped by `cluster` and `namespace` cannot notify
+            on `region`.
+
+            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+          items:
+            description: A grouping tag.
+            type: string
+          type: array
+        notify_no_data:
+          default: false
+          description: A Boolean indicating whether this monitor notifies when data
+            stops reporting.
+          type: boolean
+        on_missing_data:
+          $ref: '#/components/schemas/OnMissingDataOption'
+        renotify_interval:
+          default: null
+          description: "The number of minutes after the last notification before a
+            monitor re-notifies on the current status.\nIt only re-notifies if it\u2019s
+            not resolved."
+          format: int64
+          nullable: true
+          type: integer
+        renotify_occurrences:
+          description: The number of times re-notification messages should be sent
+            on the current status at the provided re-notification interval.
+          format: int64
+          nullable: true
+          type: integer
+        renotify_statuses:
+          description: The types of monitor statuses for which re-notification messages
+            are sent.
+          items:
+            $ref: '#/components/schemas/MonitorRenotifyStatusType'
+          nullable: true
+          type: array
+        require_full_window:
+          description: "A Boolean indicating whether this monitor needs a full window
+            of data before it\u2019s evaluated.\nWe highly recommend you set this
+            to `false` for sparse metrics,\notherwise some evaluations are skipped.
+            Default is false."
+          type: boolean
+        scheduling_options:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
+        silenced:
+          additionalProperties:
+            description: UTC epoch timestamp in seconds when the downtime for the
+              group expires.
+            format: int64
+            nullable: true
+            type: integer
+          deprecated: true
+          description: Information about the downtime applied to the monitor.
+          type: object
+        synthetics_check_id:
+          deprecated: true
+          description: ID of the corresponding Synthetic check.
+          nullable: true
+          type: string
+        threshold_windows:
+          $ref: '#/components/schemas/MonitorThresholdWindowOptions'
+        thresholds:
+          $ref: '#/components/schemas/MonitorThresholds'
+        timeout_h:
+          default: null
+          description: The number of hours of the monitor not reporting data before
+            it automatically resolves from a triggered state. The minimum allowed
+            value is 0 hours. The maximum allowed value is 24 hours.
+          format: int64
+          nullable: true
+          type: integer
+        variables:
+          description: List of requests that can be used in the monitor query. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionQueryDefinition'
+          type: array
+      type: object
+    MonitorOptionsAggregation:
+      description: Type of aggregation performed in the monitor query.
+      properties:
+        group_by:
+          description: Group to break down the monitor on.
+          example: host
+          type: string
+        metric:
+          description: Metric name used in the monitor.
+          example: metrics.name
+          type: string
+        type:
+          description: Metric type used in the monitor.
+          example: count
+          type: string
+      readOnly: true
+      type: object
+    MonitorOptionsNotificationPresets:
+      default: show_all
+      description: Toggles the display of additional content sent in the monitor notification.
+      enum:
+      - show_all
+      - hide_query
+      - hide_handles
+      - hide_all
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_ALL
+    MonitorOptionsSchedulingOptions:
+      description: Configuration options for scheduling.
+      properties:
+        evaluation_window:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
+      type: object
+    MonitorOptionsSchedulingOptionsEvaluationWindow:
+      description: Configuration options for the evaluation window. If `hour_starts`
+        is set, no other fields may be set. Otherwise, `day_starts` and `month_starts`
+        must be set together.
+      properties:
+        day_starts:
+          description: The time of the day at which a one day cumulative evaluation
+            window starts. Must be defined in UTC time in `HH:mm` format.
+          example: 04:00
+          type: string
+        hour_starts:
+          description: The minute of the hour at which a one hour cumulative evaluation
+            window starts.
+          example: 0
+          format: int32
+          maximum: 59
+          minimum: 0
+          type: integer
+        month_starts:
+          description: The day of the month at which a one month cumulative evaluation
+            window starts.
+          example: 1
+          format: int32
+          maximum: 1
+          minimum: 1
+          type: integer
+      type: object
+    MonitorOverallStates:
+      description: The different states your monitor can be in.
+      enum:
+      - Alert
+      - Ignored
+      - No Data
+      - OK
+      - Skipped
+      - Unknown
+      - Warn
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - IGNORED
+      - NO_DATA
+      - OK
+      - SKIPPED
+      - UNKNOWN
+      - WARN
+    MonitorRenotifyStatusType:
+      description: The different statuses for which renotification is supported.
+      enum:
+      - alert
+      - warn
+      - no data
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - WARN
+      - NO_DATA
+    MonitorSearchCount:
+      description: Search facets.
+      items:
+        description: A facet item.
+        properties:
+          count:
+            description: The number of found monitors with the listed value.
+            format: int64
+            readOnly: true
+            type: integer
+          name:
+            description: The facet value.
+            readOnly: true
+        type: object
+      type: array
+    MonitorSearchResponse:
+      description: The response form a monitor search.
+      example:
+        counts:
+          muted:
+          - count: 3
+            name: false
+          - count: 3
+            name: true
+          status:
+          - count: 4
+            name: No Data
+          - count: 2
+            name: OK
+          tag:
+          - count: 6
+            name: service:cassandra
+          type:
+          - count: 6
+            name: metric
+        metadata:
+          page: 0
+          page_count: 6
+          per_page: 30
+          total_count: 6
+        monitors:
+        - classification: metric
+          creator:
+            handle: john@datadoghq.com
+            name: John Doe
+          id: 2699850
+          last_triggered_ts: null
+          metrics:
+          - system.cpu.user
+          name: Cassandra CPU is high on {{host.name}} in {{availability-zone.name}}
+          notifications:
+          - handle: jane@datadoghq.com
+            name: Jane Doe
+          org_id: 1234
+          scopes:
+          - '!availability-zone:us-east-1c'
+          - name:cassandra
+          status: No Data
+          tags:
+          - service:cassandra
+          type: query alert
+      properties:
+        counts:
+          $ref: '#/components/schemas/MonitorSearchResponseCounts'
+        metadata:
+          $ref: '#/components/schemas/MonitorSearchResponseMetadata'
+        monitors:
+          description: The list of found monitors.
+          items:
+            $ref: '#/components/schemas/MonitorSearchResult'
+          readOnly: true
+          type: array
+      type: object
+    MonitorSearchResponseCounts:
+      description: The counts of monitors per different criteria.
+      properties:
+        muted:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        status:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        tag:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        type:
+          $ref: '#/components/schemas/MonitorSearchCount'
+      readOnly: true
+      type: object
+    MonitorSearchResponseMetadata:
+      description: Metadata about the response.
+      properties:
+        page:
+          description: The page to start paginating from.
+          format: int64
+          readOnly: true
+          type: integer
+        page_count:
+          description: The number of pages.
+          format: int64
+          readOnly: true
+          type: integer
+        per_page:
+          description: The number of monitors to return per page.
+          format: int64
+          readOnly: true
+          type: integer
+        total_count:
+          description: The total number of monitors.
+          format: int64
+          readOnly: true
+          type: integer
+      type: object
+    MonitorSearchResult:
+      description: Holds search results.
+      properties:
+        classification:
+          description: Classification of the monitor.
+          readOnly: true
+          type: string
+        creator:
+          $ref: '#/components/schemas/Creator'
+        id:
+          description: ID of the monitor.
+          format: int64
+          readOnly: true
+          type: integer
+        last_triggered_ts:
+          description: Latest timestamp the monitor triggered.
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        metrics:
+          description: Metrics used by the monitor.
+          items:
+            description: A metric used by the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
+        name:
+          description: The monitor name.
+          readOnly: true
+          type: string
+        notifications:
+          description: The notification triggered by the monitor.
+          items:
+            $ref: '#/components/schemas/MonitorSearchResultNotification'
+          readOnly: true
+          type: array
+        org_id:
+          description: The ID of the organization.
+          format: int64
+          readOnly: true
+          type: integer
+        query:
+          description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+          type: string
+        scopes:
+          description: 'The scope(s) to which the downtime applies, for example `host:app2`.
+
+            Provide multiple scopes as a comma-separated list, for example `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+
+            (that is `env:dev AND env:prod`), NOT any of them.'
+          example:
+          - host:app2
+          - env:dev,env:prod
+          items:
+            description: Scope value(s).
+            readOnly: true
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/MonitorOverallStates'
+        tags:
+          description: Tags associated with the monitor.
+          items:
+            description: A tag associated with the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
+        type:
+          $ref: '#/components/schemas/MonitorType'
+      type: object
+    MonitorSearchResultNotification:
+      description: A notification triggered by the monitor.
+      properties:
+        handle:
+          description: The email address that received the notification.
+          readOnly: true
+          type: string
+        name:
+          description: The username receiving the notification
+          readOnly: true
+          type: string
+      readOnly: true
+      type: object
+    MonitorState:
+      description: Wrapper object with the different monitor states.
+      properties:
+        groups:
+          additionalProperties:
+            $ref: '#/components/schemas/MonitorStateGroup'
+          description: 'Dictionary where the keys are groups (comma separated lists
+            of tags) and the values are
+
+            the list of groups your monitor is broken down on.'
+          type: object
+      readOnly: true
+      type: object
+    MonitorStateGroup:
+      description: Monitor state for a single group.
+      properties:
+        last_nodata_ts:
+          description: Latest timestamp the monitor was in NO_DATA state.
+          format: int64
+          type: integer
+        last_notified_ts:
+          description: Latest timestamp of the notification sent for this monitor
+            group.
+          format: int64
+          type: integer
+        last_resolved_ts:
+          description: Latest timestamp the monitor group was resolved.
+          format: int64
+          type: integer
+        last_triggered_ts:
+          description: Latest timestamp the monitor group triggered.
+          format: int64
+          type: integer
+        name:
+          description: The name of the monitor.
+          type: string
+        status:
+          $ref: '#/components/schemas/MonitorOverallStates'
+      type: object
+    MonitorSummaryWidgetDefinition:
+      description: The monitor summary widget displays a summary view of all your
+        Datadog monitors, or a subset based on a query. Only available on FREE layout
+        dashboards.
+      properties:
+        color_preference:
+          $ref: '#/components/schemas/WidgetColorPreference'
+        count:
+          deprecated: true
+          description: The number of monitors to display.
+          format: int64
+          type: integer
+        display_format:
+          $ref: '#/components/schemas/WidgetMonitorSummaryDisplayFormat'
+        hide_zero_counts:
+          description: Whether to show counts of 0 or not.
+          type: boolean
+        query:
+          description: Query to filter the monitors with.
+          example: ''
+          type: string
+        show_last_triggered:
+          description: Whether to show the time that has elapsed since the monitor/group
+            triggered.
+          type: boolean
+        show_priority:
+          default: false
+          description: Whether to show the priorities column.
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/WidgetMonitorSummarySort'
+        start:
+          deprecated: true
+          description: The start of the list. Typically 0.
+          format: int64
+          type: integer
+        summary_type:
+          $ref: '#/components/schemas/WidgetSummaryType'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorSummaryWidgetDefinitionType'
+      required:
+      - type
+      - query
+      type: object
+    MonitorSummaryWidgetDefinitionType:
+      default: manage_status
+      description: Type of the monitor summary widget.
+      enum:
+      - manage_status
+      example: manage_status
+      type: string
+      x-enum-varnames:
+      - MANAGE_STATUS
+    MonitorThresholdWindowOptions:
+      description: Alerting time window options.
+      properties:
+        recovery_window:
+          description: Describes how long an anomalous metric must be normal before
+            the alert recovers.
+          nullable: true
+          type: string
+        trigger_window:
+          description: Describes how long a metric must be anomalous before an alert
+            triggers.
+          nullable: true
+          type: string
+      type: object
+    MonitorThresholds:
+      description: List of the different monitor threshold available.
+      properties:
+        critical:
+          description: The monitor `CRITICAL` threshold.
+          format: double
+          type: number
+        critical_recovery:
+          description: The monitor `CRITICAL` recovery threshold.
+          format: double
+          nullable: true
+          type: number
+        ok:
+          description: The monitor `OK` threshold.
+          format: double
+          nullable: true
+          type: number
+        unknown:
+          description: The monitor UNKNOWN threshold.
+          format: double
+          nullable: true
+          type: number
+        warning:
+          description: The monitor `WARNING` threshold.
+          format: double
+          nullable: true
+          type: number
+        warning_recovery:
+          description: The monitor `WARNING` recovery threshold.
+          format: double
+          nullable: true
+          type: number
+      type: object
+    MonitorType:
+      description: The type of the monitor. For more information about `type`, see
+        the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options/)
+        docs.
+      enum:
+      - composite
+      - event alert
+      - log alert
+      - metric alert
+      - process alert
+      - query alert
+      - rum alert
+      - service check
+      - synthetics alert
+      - trace-analytics alert
+      - slo alert
+      - event-v2 alert
+      - audit alert
+      - ci-pipelines alert
+      - ci-tests alert
+      - error-tracking alert
+      example: query alert
+      type: string
+      x-enum-varnames:
+      - COMPOSITE
+      - EVENT_ALERT
+      - LOG_ALERT
+      - METRIC_ALERT
+      - PROCESS_ALERT
+      - QUERY_ALERT
+      - RUM_ALERT
+      - SERVICE_CHECK
+      - SYNTHETICS_ALERT
+      - TRACE_ANALYTICS_ALERT
+      - SLO_ALERT
+      - EVENT_V2_ALERT
+      - AUDIT_ALERT
+      - CI_PIPELINES_ALERT
+      - CI_TESTS_ALERT
+      - ERROR_TRACKING_ALERT
+    MonitorUpdateRequest:
+      description: Object describing a monitor update request.
+      properties:
+        created:
+          description: Timestamp of the monitor creation.
+          format: date-time
+          readOnly: true
+          type: string
+        creator:
+          $ref: '#/components/schemas/Creator'
+        deleted:
+          description: Whether or not the monitor is deleted. (Always `null`)
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          description: ID of this monitor.
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: A message to include with notifications for this monitor.
+          type: string
+        modified:
+          description: Last timestamp when the monitor was edited.
+          format: date-time
+          readOnly: true
+          type: string
+        multi:
+          description: Whether or not the monitor is broken down on different groups.
+          readOnly: true
+          type: boolean
+        name:
+          description: The monitor name.
+          type: string
+        options:
+          $ref: '#/components/schemas/MonitorOptions'
+        overall_state:
+          $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
+        query:
+          description: The monitor query.
+          type: string
+        restricted_roles:
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+          items:
+            description: A role UUID.
+            type: string
+          type: array
+        state:
+          $ref: '#/components/schemas/MonitorState'
+        tags:
+          description: Tags associated to your monitor.
+          items:
+            description: A Datadog tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/MonitorType'
+      type: object
+    MonthlyUsageAttributionBody:
+      description: Usage Summary by tag for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        updated_at:
+          description: Datetime of the most recent update to the usage values.
+          format: date-time
+          type: string
+        values:
+          $ref: '#/components/schemas/MonthlyUsageAttributionValues'
+      type: object
+    MonthlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/UsageAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/MonthlyUsageAttributionPagination'
+      type: object
+    MonthlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    MonthlyUsageAttributionResponse:
+      description: Response containing the monthly Usage Summary by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
+        usage:
+          description: Get usage summary by tag(s).
+          items:
+            $ref: '#/components/schemas/MonthlyUsageAttributionBody'
+          type: array
+      type: object
+    MonthlyUsageAttributionSupportedMetrics:
+      description: Supported metrics for monthly usage attribution requests.
+      enum:
+      - api_usage
+      - api_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
+      - apm_host_usage
+      - apm_host_percentage
+      - appsec_usage
+      - appsec_percentage
+      - browser_usage
+      - browser_percentage
+      - container_excl_agent_usage
+      - container_excl_agent_percentage
+      - container_usage
+      - container_percentage
+      - cspm_containers_percentage
+      - cspm_containers_usage
+      - cspm_hosts_percentage
+      - cspm_hosts_usage
+      - custom_timeseries_usage
+      - custom_timeseries_percentage
+      - cws_containers_percentage
+      - cws_containers_usage
+      - cws_hosts_percentage
+      - cws_hosts_usage
+      - dbm_hosts_percentage
+      - dbm_hosts_usage
+      - dbm_queries_percentage
+      - dbm_queries_usage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
+      - fargate_usage
+      - fargate_percentage
+      - functions_usage
+      - functions_percentage
+      - infra_host_usage
+      - infra_host_percentage
+      - invocations_usage
+      - invocations_percentage
+      - npm_host_usage
+      - npm_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - profiled_fargate_usage
+      - profiled_fargate_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - snmp_usage
+      - snmp_percentage
+      - estimated_rum_sessions_usage
+      - estimated_rum_sessions_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - API_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
+      - APM_HOST_USAGE
+      - APM_HOST_PERCENTAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
+      - BROWSER_USAGE
+      - BROWSER_PERCENTAGE
+      - CONTAINER_EXCL_AGENT_USAGE
+      - CONTAINER_EXCL_AGENT_PERCENTAGE
+      - CONTAINER_USAGE
+      - CONTAINER_PERCENTAGE
+      - CSPM_CONTAINERS_PERCENTAGE
+      - CSPM_CONTAINERS_USAGE
+      - CSPM_HOSTS_PERCENTAGE
+      - CSPM_HOSTS_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CWS_CONTAINERS_PERCENTAGE
+      - CWS_CONTAINERS_USAGE
+      - CWS_HOSTS_PERCENTAGE
+      - CWS_HOSTS_USAGE
+      - DBM_HOSTS_PERCENTAGE
+      - DBM_HOSTS_USAGE
+      - DBM_QUERIES_PERCENTAGE
+      - DBM_QUERIES_USAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - FUNCTIONS_USAGE
+      - FUNCTIONS_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - INFRA_HOST_PERCENTAGE
+      - INVOCATIONS_USAGE
+      - INVOCATIONS_PERCENTAGE
+      - NPM_HOST_USAGE
+      - NPM_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - PROFILED_FARGATE_USAGE
+      - PROFILED_FARGATE_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - SNMP_PERCENTAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - ALL
+    MonthlyUsageAttributionValues:
+      description: Fields in Usage Summary by tag(s).
+      properties:
+        api_percentage:
+          description: The percentage of synthetic API test usage by tag(s).
+          format: double
+          type: number
+        api_usage:
+          description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_host_percentage:
+          description: The percentage of APM host usage by tag(s).
+          format: double
+          type: number
+        apm_host_usage:
+          description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        appsec_percentage:
+          description: The percentage of Application Security Monitoring host usage
+            by tag(s).
+          format: double
+          type: number
+        appsec_usage:
+          description: The Application Security Monitoring host usage by tag(s).
+          format: double
+          type: number
+        browser_percentage:
+          description: The percentage of synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        browser_usage:
+          description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        container_excl_agent_percentage:
+          description: The percentage of container usage without the Datadog Agent
+            by tag(s).
+          format: double
+          type: number
+        container_excl_agent_usage:
+          description: The container usage without the Datadog Agent by tag(s).
+          format: double
+          type: number
+        container_percentage:
+          description: The percentage of container usage by tag(s).
+          format: double
+          type: number
+        container_usage:
+          description: The container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_percentage:
+          description: The percentage of custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_usage:
+          description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_spans_percentage:
+          description: The percentage of estimated indexed spans usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_spans_usage:
+          description: The estimated indexed spans usage by tag(s).
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s).
+          format: double
+          type: number
+        estimated_ingested_spans_percentage:
+          description: The percentage of estimated ingested spans usage by tag(s).
+          format: double
+          type: number
+        estimated_ingested_spans_usage:
+          description: The estimated ingested spans usage by tag(s).
+          format: double
+          type: number
+        estimated_rum_sessions_percentage:
+          description: The percentage of estimated rum sessions usage by tag(s).
+          format: double
+          type: number
+        estimated_rum_sessions_usage:
+          description: The estimated rum sessions usage by tag(s).
+          format: double
+          type: number
+        fargate_percentage:
+          description: The percentage of Fargate usage by tags.
+          format: double
+          type: number
+        fargate_usage:
+          description: The Fargate usage by tags.
+          format: double
+          type: number
+        functions_percentage:
+          description: The percentage of Lambda function usage by tag(s).
+          format: double
+          type: number
+        functions_usage:
+          description: The Lambda function usage by tag(s).
+          format: double
+          type: number
+        infra_host_percentage:
+          description: The percentage of infrastructure host usage by tag(s).
+          format: double
+          type: number
+        infra_host_usage:
+          description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        invocations_percentage:
+          description: The percentage of Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        invocations_usage:
+          description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        npm_host_percentage:
+          description: The percentage of network host usage by tag(s).
+          format: double
+          type: number
+        npm_host_usage:
+          description: The network host usage by tag(s).
+          format: double
+          type: number
+        profiled_container_percentage:
+          description: The percentage of profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_container_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_fargate_percentage:
+          description: The percentage of profiled Fargate task usage by tag(s).
+          format: double
+          type: number
+        profiled_fargate_usage:
+          description: The profiled Fargate task usage by tag(s).
+          format: double
+          type: number
+        profiled_host_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_host_usage:
+          description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        snmp_percentage:
+          description: The percentage of network device usage by tag(s).
+          format: double
+          type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
+      type: object
+    NoteWidgetDefinition:
+      description: The notes and links widget is similar to free text widget, but
+        allows for more formatting options.
+      properties:
+        background_color:
+          description: Background color of the note.
+          type: string
+        content:
+          description: Content of the note.
+          example: ''
+          type: string
+        font_size:
+          description: Size of the text.
+          type: string
+        has_padding:
+          default: true
+          description: Whether to add padding or not.
+          type: boolean
+        show_tick:
+          description: Whether to show a tick or not.
+          type: boolean
+        text_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        tick_edge:
+          $ref: '#/components/schemas/WidgetTickEdge'
+        tick_pos:
+          description: Where to position the tick on an edge.
+          type: string
+        type:
+          $ref: '#/components/schemas/NoteWidgetDefinitionType'
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
+      required:
+      - type
+      - content
+      type: object
+    NoteWidgetDefinitionType:
+      default: note
+      description: Type of the note widget.
+      enum:
+      - note
+      example: note
+      type: string
+      x-enum-varnames:
+      - NOTE
+    NotebookAbsoluteTime:
+      description: Absolute timeframe.
+      example:
+        end: '2021-02-24T20:18:28+00:00'
+        start: '2021-02-24T19:18:28+00:00'
+      properties:
+        end:
+          description: The end time.
+          example: '2021-02-24T20:18:28+00:00'
+          format: date-time
+          type: string
+        live:
+          description: Indicates whether the timeframe should be shifted to end at
+            the current time.
+          type: boolean
+        start:
+          description: The start time.
+          example: '2021-02-24T19:18:28+00:00'
+          format: date-time
+          type: string
+      required:
+      - start
+      - end
+      type: object
+    NotebookAuthor:
+      description: Attributes of user object returned by the API.
+      properties:
+        created_at:
+          description: Creation time of the user.
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user is disabled.
+          type: boolean
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          nullable: true
+          type: string
+        status:
+          description: Status of the user.
+          type: string
+        title:
+          description: Title of the user.
+          nullable: true
+          type: string
+        verified:
+          description: Whether the user is verified.
+          type: boolean
+      type: object
+    NotebookCellCreateRequest:
+      additionalProperties: false
+      description: The description of a notebook cell create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    NotebookCellCreateRequestAttributes:
+      description: 'The attributes of a notebook cell in create cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellResourceType:
+      default: notebook_cells
+      description: Type of the Notebook Cell resource.
+      enum:
+      - notebook_cells
+      example: notebook_cells
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK_CELLS
+    NotebookCellResponse:
+      description: The description of a notebook cell response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellResponseAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellResponseAttributes:
+      description: 'The attributes of a notebook cell response. Valid cell types are
+        `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellTime:
+      description: Timeframe for the notebook cell. When 'null', the notebook global
+        time is used.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookCellUpdateRequest:
+      description: The description of a notebook cell update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellUpdateRequestAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellUpdateRequestAttributes:
+      description: 'The attributes of a notebook cell in update cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCreateData:
+      description: The data for a notebook create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCreateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookCreateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellCreateRequest'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookCreateRequest:
+      description: The description of a notebook create request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookCreateData'
+      required:
+      - data
+      type: object
+    NotebookDistributionCellAttributes:
+      description: The attributes of a notebook `distribution` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/DistributionWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookGlobalTime:
+      description: Notebook global timeframe.
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookGraphSize:
+      description: The size of the graph.
+      enum:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      example: m
+      type: string
+      x-enum-varnames:
+      - EXTRA_SMALL
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - EXTRA_LARGE
+    NotebookHeatMapCellAttributes:
+      description: The attributes of a notebook `heatmap` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/HeatMapWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookLogStreamCellAttributes:
+      description: The attributes of a notebook `log_stream` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/LogStreamWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellAttributes:
+      description: The attributes of a notebook `markdown` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellDefinition:
+      description: Text in a notebook is formatted with [Markdown](https://daringfireball.net/projects/markdown/),
+        which enables the use of headings, subheadings, links, images, lists, and
+        code blocks.
+      properties:
+        text:
+          description: The markdown content.
+          example: "# Example Header \nexample content"
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinitionType'
+      required:
+      - type
+      - text
+      type: object
+    NotebookMarkdownCellDefinitionType:
+      default: markdown
+      description: Type of the markdown cell.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
+    NotebookMetadata:
+      description: Metadata associated with the notebook.
+      properties:
+        is_template:
+          default: false
+          description: Whether or not the notebook is a template.
+          example: false
+          type: boolean
+        take_snapshots:
+          default: false
+          description: Whether or not the notebook takes snapshot image backups of
+            the notebook's fixed-time graphs.
+          example: false
+          type: boolean
+        type:
+          $ref: '#/components/schemas/NotebookMetadataType'
+      type: object
+    NotebookMetadataType:
+      description: Metadata type of the notebook.
+      enum:
+      - postmortem
+      - runbook
+      - investigation
+      - documentation
+      - report
+      example: investigation
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+      - RUNBOOK
+      - INVESTIGATION
+      - DOCUMENTATION
+      - REPORT
+    NotebookRelativeTime:
+      description: Relative timeframe.
+      example:
+        live_span: 1h
+      nullable: true
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      required:
+      - live_span
+      type: object
+    NotebookResourceType:
+      default: notebooks
+      description: Type of the Notebook resource.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
+    NotebookResponse:
+      description: The description of a notebook response.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookResponseData'
+      type: object
+    NotebookResponseData:
+      description: The data for a notebook.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookResponseDataAttributes:
+      description: The attributes of a notebook.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - cells
+      - time
+      - name
+      type: object
+    NotebookSplitBy:
+      description: Object describing how to split the graph to display multiple visualizations
+        per request.
+      example:
+        keys: []
+        tags: []
+      properties:
+        keys:
+          description: Keys to split on.
+          items:
+            description: A key to split on.
+            example: environment
+            type: string
+          type: array
+        tags:
+          description: Tags to split on.
+          items:
+            description: A tag to split on.
+            example: environment:staging
+            type: string
+          type: array
+      required:
+      - keys
+      - tags
+      type: object
+    NotebookStatus:
+      default: published
+      description: Publication status of the notebook. For now, always "published".
+      enum:
+      - published
+      example: published
+      type: string
+      x-enum-varnames:
+      - PUBLISHED
+    NotebookTimeseriesCellAttributes:
+      description: The attributes of a notebook `timeseries` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookToplistCellAttributes:
+      description: The attributes of a notebook `toplist` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/ToplistWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookUpdateCell:
+      description: 'Updating a notebook can either insert new cell(s) or update existing
+        cell(s) by including the cell `id`.
+
+        To delete existing cell(s), simply omit it from the list of cells.'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookCellCreateRequest'
+      - $ref: '#/components/schemas/NotebookCellUpdateRequest'
+      type: object
+    NotebookUpdateData:
+      description: The data for a notebook update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookUpdateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookUpdateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookUpdateCell'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookUpdateRequest:
+      description: The description of a notebook update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookUpdateData'
+      required:
+      - data
+      type: object
+    NotebooksResponse:
+      description: Notebooks get all response.
+      properties:
+        data:
+          description: List of notebook definitions.
+          items:
+            $ref: '#/components/schemas/NotebooksResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/NotebooksResponseMeta'
+      type: object
+    NotebooksResponseData:
+      description: The data for a notebook in get all response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebooksResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebooksResponseDataAttributes:
+      description: The attributes of a notebook in get all response.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      type: object
+    NotebooksResponseMeta:
+      description: Searches metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/NotebooksResponsePage'
+      type: object
+    NotebooksResponsePage:
+      description: Pagination metadata returned by the API.
+      properties:
+        total_count:
+          description: The total number of notebooks that would be returned if the
+            request was not filtered by `start` and `count` parameters.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of notebooks returned.
+          format: int64
+          type: integer
+      type: object
+    OnMissingDataOption:
+      description: 'Controls how groups or monitors are treated if an evaluation does
+        not return any data points.
+
+        The default option results in different behavior depending on the monitor
+        query type.
+
+        For monitors using Count queries, an empty monitor evaluation is treated as
+        0 and is compared to the threshold conditions.
+
+        For monitors using any query type other than Count, for example Gauge, Measure,
+        or Rate, the monitor shows the last known status.
+
+        This option is only available for APM Trace Analytics, Audit Trail, CI, Error
+        Tracking, Event, Logs, and RUM monitors.'
+      enum:
+      - default
+      - show_no_data
+      - show_and_notify_no_data
+      - resolve
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - SHOW_NO_DATA
+      - SHOW_AND_NOTIFY_NO_DATA
+      - RESOLVE
+    OrgDowngradedResponse:
+      description: Status of downgrade
+      properties:
+        message:
+          description: Information pertaining to the downgraded child organization.
+          type: string
+      type: object
+    Organization:
+      description: Create, edit, and manage organizations.
+      properties:
+        billing:
+          $ref: '#/components/schemas/OrganizationBilling'
+        created:
+          description: Date of the organization creation.
+          example: '2019-09-26T17:28:28Z'
+          readOnly: true
+          type: string
+        description:
+          description: Description of the organization.
+          example: some description
+          type: string
+        name:
+          description: The name of the new child-organization, limited to 32 characters.
+          example: New child org
+          maxLength: 32
+          type: string
+        public_id:
+          description: The `public_id` of the organization you are operating within.
+          example: abcdef12345
+          type: string
+        settings:
+          $ref: '#/components/schemas/OrganizationSettings'
+        subscription:
+          $ref: '#/components/schemas/OrganizationSubscription'
+        trial:
+          description: Only available for MSP customers. Allows child organizations
+            to be created on a trial plan.
+          example: false
+          type: boolean
+      type: object
+    OrganizationBilling:
+      deprecated: true
+      description: A JSON array of billing type.
+      example:
+        type: parent_billing
+      properties:
+        type:
+          description: The type of billing. Only `parent_billing` is supported.
+          type: string
+      type: object
+    OrganizationCreateBody:
+      description: Object describing an organization to create.
+      properties:
+        billing:
+          $ref: '#/components/schemas/OrganizationBilling'
+        name:
+          description: The name of the new child-organization, limited to 32 characters.
+          example: New child org
+          maxLength: 32
+          type: string
+        subscription:
+          $ref: '#/components/schemas/OrganizationSubscription'
+      required:
+      - name
+      type: object
+    OrganizationCreateResponse:
+      description: Response object for an organization creation.
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKey'
+        application_key:
+          $ref: '#/components/schemas/ApplicationKey'
+        org:
+          $ref: '#/components/schemas/Organization'
+        user:
+          $ref: '#/components/schemas/User'
+      type: object
+    OrganizationListResponse:
+      description: Response with the list of organizations.
+      properties:
+        orgs:
+          description: Array of organization objects.
+          items:
+            $ref: '#/components/schemas/Organization'
+          type: array
+      type: object
+    OrganizationResponse:
+      description: Response with an organization.
+      properties:
+        org:
+          $ref: '#/components/schemas/Organization'
+      type: object
+    OrganizationSettings:
+      description: A JSON array of settings.
+      properties:
+        private_widget_share:
+          description: Whether or not the organization users can share widgets outside
+            of Datadog.
+          example: false
+          type: boolean
+        saml:
+          $ref: '#/components/schemas/OrganizationSettingsSaml'
+        saml_autocreate_access_role:
+          $ref: '#/components/schemas/AccessRole'
+        saml_autocreate_users_domains:
+          $ref: '#/components/schemas/OrganizationSettingsSamlAutocreateUsersDomains'
+        saml_can_be_enabled:
+          description: Whether or not SAML can be enabled for this organization.
+          example: false
+          type: boolean
+        saml_idp_endpoint:
+          description: Identity provider endpoint for SAML authentication.
+          example: https://my.saml.endpoint
+          type: string
+        saml_idp_initiated_login:
+          $ref: '#/components/schemas/OrganizationSettingsSamlIdpInitiatedLogin'
+        saml_idp_metadata_uploaded:
+          description: Whether or not a SAML identity provider metadata file was provided
+            to the Datadog organization.
+          example: false
+          type: boolean
+        saml_login_url:
+          description: URL for SAML logging.
+          example: https://my.saml.login.url
+          type: string
+        saml_strict_mode:
+          $ref: '#/components/schemas/OrganizationSettingsSamlStrictMode'
+      type: object
+    OrganizationSettingsSaml:
+      description: 'Set the boolean property enabled to enable or disable single sign
+        on with SAML.
+
+        See the SAML documentation for more information about all SAML settings.'
+      properties:
+        enabled:
+          description: Whether or not SAML is enabled for this organization.
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlAutocreateUsersDomains:
+      description: Has two properties, `enabled` (boolean) and `domains`, which is
+        a list of domains without the @ symbol.
+      properties:
+        domains:
+          description: List of domains where the SAML automated user creation is enabled.
+          items:
+            description: Domain to automate user creation from.
+            example: example.com
+            type: string
+          type: array
+        enabled:
+          description: Whether or not the automated user creation based on SAML domain
+            is enabled.
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlIdpInitiatedLogin:
+      description: Has one property enabled (boolean).
+      properties:
+        enabled:
+          description: 'Whether SAML IdP initiated login is enabled, learn more
+
+            in the [SAML documentation](https://docs.datadoghq.com/account_management/saml/#idp-initiated-login).'
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlStrictMode:
+      description: Has one property enabled (boolean).
+      properties:
+        enabled:
+          description: 'Whether or not the SAML strict mode is enabled. If true, all
+            users must log in with SAML.
+
+            Learn more on the [SAML Strict documentation](https://docs.datadoghq.com/account_management/saml/#saml-strict).'
+          example: false
+          type: boolean
+      type: object
+    OrganizationSubscription:
+      deprecated: true
+      description: Subscription definition.
+      example:
+        type: pro
+      properties:
+        type:
+          description: The subscription type. Types available are `trial`, `free`,
+            and `pro`.
+          type: string
+      type: object
+    PagerDutyService:
+      description: The PagerDuty service that is available for integration with Datadog.
+      properties:
+        service_key:
+          description: Your service key in PagerDuty.
+          example: ''
+          type: string
+        service_name:
+          description: Your service name associated with a service key in PagerDuty.
+          example: ''
+          type: string
+      required:
+      - service_name
+      - service_key
+      type: object
+    PagerDutyServiceKey:
+      description: PagerDuty service object key.
+      properties:
+        service_key:
+          description: Your service key in PagerDuty.
+          example: ''
+          type: string
+      required:
+      - service_key
+      type: object
+    PagerDutyServiceName:
+      description: PagerDuty service object name.
+      properties:
+        service_name:
+          description: Your service name associated service key in PagerDuty.
+          example: ''
+          type: string
+      required:
+      - service_name
+      type: object
+    Pagination:
+      description: Pagination object.
+      properties:
+        total_count:
+          description: Total count.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
+    Point:
+      description: Array of timeseries points.
+      example:
+      - 1575317847.0
+      - 0.5
+      items:
+        description: 'Each point is of the form `[POSIX_timestamp, numeric_value]`.
+
+          The timestamp should be in seconds and current.
+
+          The numeric value format should be a 32bit float gauge-type value.
+
+          Current is defined as not more than 10 minutes in the future or more than
+          1 hour in the past.'
+        format: double
+        nullable: true
+        type: number
+      maxItems: 2
+      minItems: 2
+      type: array
+    ProcessQueryDefinition:
+      description: The process query to use in the widget.
+      properties:
+        filter_by:
+          description: List of processes.
+          items:
+            description: Process name.
+            type: string
+          type: array
+        limit:
+          description: Max number of items in the filter list.
+          format: int64
+          minimum: 0
+          type: integer
+        metric:
+          description: Your chosen metric.
+          example: system.load.1
+          type: string
+        search_by:
+          description: Your chosen search term.
+          type: string
+      required:
+      - metric
+      type: object
+    QuerySortOrder:
+      default: desc
+      description: Direction of sort.
+      enum:
+      - asc
+      - desc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
+    QueryValueWidgetDefinition:
+      description: Query values display the current value of a given metric, APM,
+        or log query.
+      properties:
+        autoscale:
+          description: Whether to use auto-scaling or not.
+          type: boolean
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        custom_unit:
+          description: Display a unit of your choice on the widget.
+          type: string
+        precision:
+          description: Number of decimals to show. If not defined, the widget uses
+            the raw value.
+          format: int64
+          type: integer
+        requests:
+          description: Widget definition.
+          example:
+          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/QueryValueWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        text_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        timeseries_background:
+          $ref: '#/components/schemas/TimeseriesBackground'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryValueWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    QueryValueWidgetDefinitionType:
+      default: query_value
+      description: Type of the query value widget.
+      enum:
+      - query_value
+      example: query_value
+      type: string
+      x-enum-varnames:
+      - QUERY_VALUE
+    QueryValueWidgetRequest:
+      description: Updated query value widget.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/WidgetAggregator'
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        conditional_formats:
+          description: List of conditional formats.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: TODO.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    ReferenceTableLogsLookupProcessor:
+      description: '**Note**: Reference Tables are in public beta.
+
+        Use the Lookup Processor to define a mapping between a log attribute
+
+        and a human readable value saved in a Reference Table.
+
+        For example, you can use the Lookup Processor to map an internal service ID
+
+        into a human readable service name. Alternatively, you could also use it to
+        check
+
+        if the MAC address that just attempted to connect to the production
+
+        environment belongs to your list of stolen machines.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        lookup_enrichment_table:
+          description: Name of the Reference Table for the source attribute and their
+            associated target attribute values.
+          example: service_id_to_service_name_table
+          type: string
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Source attribute used to perform the lookup.
+          example: service_id
+          type: string
+        target:
+          description: Name of the attribute that contains the corresponding value
+            in the mapping list.
+          example: service
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsLookupProcessorType'
+      required:
+      - source
+      - target
+      - lookup_enrichment_table
+      - type
+      type: object
+    ResponseMetaAttributes:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/Pagination'
+      type: object
+    RunWorkflowWidgetDefinition:
+      description: Run workflow is widget that allows you to run a workflow from a
+        dashboard.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        inputs:
+          description: Array of workflow inputs to map to dashboard template variables.
+          items:
+            $ref: '#/components/schemas/RunWorkflowWidgetInput'
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/RunWorkflowWidgetDefinitionType'
+        workflow_id:
+          description: Workflow id.
+          example: <workflow_id>
+          type: string
+      required:
+      - type
+      - workflow_id
+      type: object
+    RunWorkflowWidgetDefinitionType:
+      default: run_workflow
+      description: Type of the run workflow widget.
+      enum:
+      - run_workflow
+      example: run_workflow
+      type: string
+      x-enum-varnames:
+      - RUN_WORKFLOW
+    RunWorkflowWidgetInput:
+      description: Object to map a dashboard template variable to a workflow input.
+      properties:
+        name:
+          description: Name of the workflow input.
+          example: Environment
+          type: string
+        value:
+          description: Dashboard template variable. Can be suffixed with '.value'
+            or '.key'.
+          example: $env.value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    SLOBulkDelete:
+      additionalProperties:
+        description: An array of all SLO timeframes.
+        items:
+          $ref: '#/components/schemas/SLOTimeframe'
+        type: array
+      description: 'A map of service level objective object IDs to arrays of timeframes,
+
+        which indicate the thresholds to delete for each ID.'
+      example:
+        id1:
+        - 7d
+        - 30d
+        id2:
+        - 7d
+        - 30d
+      type: object
+    SLOBulkDeleteError:
+      description: Object describing the error.
+      properties:
+        id:
+          description: 'The ID of the service level objective object associated with
+
+            this error.'
+          example: ''
+          type: string
+        message:
+          description: The error message.
+          example: ''
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/SLOErrorTimeframe'
+      required:
+      - id
+      - timeframe
+      - message
+      type: object
+    SLOBulkDeleteResponse:
+      description: 'The bulk partial delete service level objective object endpoint
+
+        response.
+
+
+        This endpoint operates on multiple service level objective objects, so
+
+        it may be partially successful. In such cases, the "data" and "error"
+
+        fields in this response indicate which deletions succeeded and failed.'
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOBulkDeleteResponseData'
+        errors:
+          description: Array of errors object returned.
+          items:
+            $ref: '#/components/schemas/SLOBulkDeleteError'
+          type: array
+      type: object
+    SLOBulkDeleteResponseData:
+      description: An array of service level objective objects.
+      properties:
+        deleted:
+          description: 'An array of service level objective object IDs that indicates
+
+            which objects that were completely deleted.'
+          items:
+            description: A deleted SLO ID.
+            type: string
+          type: array
+        updated:
+          description: 'An array of service level objective object IDs that indicates
+
+            which objects that were modified (objects for which at least one
+
+            threshold was deleted, but that were not completely deleted).'
+          items:
+            description: An updated SLO ID.
+            type: string
+          type: array
+      type: object
+    SLOCorrection:
+      description: The response object of a list of SLO corrections.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionResponseAttributes'
+        id:
+          description: The ID of the SLO correction.
+          type: string
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      type: object
+    SLOCorrectionCategory:
+      description: Category the SLO correction belongs to.
+      enum:
+      - Scheduled Maintenance
+      - Outside Business Hours
+      - Deployment
+      - Other
+      example: Scheduled Maintenance
+      type: string
+      x-enum-varnames:
+      - SCHEDULED_MAINTENANCE
+      - OUTSIDE_BUSINESS_HOURS
+      - DEPLOYMENT
+      - OTHER
+    SLOCorrectionCreateData:
+      description: The data object associated with the SLO correction to be created.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      required:
+      - type
+      type: object
+    SLOCorrectionCreateRequest:
+      description: An object that defines a correction to be applied to an SLO.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrectionCreateData'
+      type: object
+    SLOCorrectionCreateRequestAttributes:
+      description: The attribute object associated with the SLO correction to be created.
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        description:
+          description: Description of the correction being made.
+          type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 1600000000
+          format: int64
+          type: integer
+        end:
+          description: Ending time of the correction in epoch seconds.
+          example: 1600000000
+          format: int64
+          type: integer
+        rrule:
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
+        slo_id:
+          description: ID of the SLO that this correction applies to.
+          example: sloId
+          type: string
+        start:
+          description: Starting time of the correction in epoch seconds.
+          example: 1600000000
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC").
+          example: UTC
+          type: string
+      required:
+      - slo_id
+      - start
+      - category
+      type: object
+    SLOCorrectionListResponse:
+      description: A list of  SLO correction objects.
+      properties:
+        data:
+          description: The list of of SLO corrections objects.
+          items:
+            $ref: '#/components/schemas/SLOCorrection'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SLOCorrectionResponse:
+      description: The response object of an SLO correction.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrection'
+      type: object
+    SLOCorrectionResponseAttributes:
+      description: The attribute object associated with the SLO correction.
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        created_at:
+          description: The epoch timestamp of when the correction was created at.
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/Creator'
+        description:
+          description: Description of the correction being made.
+          type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          nullable: true
+          type: integer
+        end:
+          description: Ending time of the correction in epoch seconds.
+          format: int64
+          type: integer
+        modified_at:
+          description: The epoch timestamp of when the correction was modified at.
+          format: int64
+          type: integer
+        modifier:
+          $ref: '#/components/schemas/SLOCorrectionResponseAttributesModifier'
+        rrule:
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          nullable: true
+          type: string
+        slo_id:
+          description: ID of the SLO that this correction applies to.
+          type: string
+        start:
+          description: Starting time of the correction in epoch seconds.
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC").
+          type: string
+      type: object
+    SLOCorrectionResponseAttributesModifier:
+      description: Modifier of the object.
+      nullable: true
+      properties:
+        email:
+          description: Email of the Modifier.
+          type: string
+        handle:
+          description: Handle of the Modifier.
+          type: string
+        name:
+          description: Name of the Modifier.
+          type: string
+      type: object
+    SLOCorrectionType:
+      default: correction
+      description: SLO correction resource type.
+      enum:
+      - correction
+      example: correction
+      type: string
+      x-enum-varnames:
+      - CORRECTION
+    SLOCorrectionUpdateData:
+      description: The data object associated with the SLO correction to be updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      type: object
+    SLOCorrectionUpdateRequest:
+      description: An object that defines a correction to be applied to an SLO.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrectionUpdateData'
+      type: object
+    SLOCorrectionUpdateRequestAttributes:
+      description: The attribute object associated with the SLO correction to be updated.
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        description:
+          description: Description of the correction being made.
+          type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          type: integer
+        end:
+          description: Ending time of the correction in epoch seconds.
+          example: 1600000000
+          format: int64
+          type: integer
+        rrule:
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
+        start:
+          description: Starting time of the correction in epoch seconds.
+          example: 1600000000
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC").
+          example: UTC
+          type: string
+      type: object
+    SLOCreator:
+      description: The creator of the SLO
+      nullable: true
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        id:
+          description: User ID of the creator.
+          format: int64
+          type: integer
+        name:
+          description: Name of the creator.
+          type: string
+      type: object
+    SLODeleteResponse:
+      description: A response list of all service level objective deleted.
+      properties:
+        data:
+          description: An array containing the ID of the deleted service level objective
+            object.
+          items:
+            description: ID of a deleted SLO.
+            type: string
+          type: array
+        errors:
+          additionalProperties:
+            description: Error preventing the SLO deletion.
+            type: string
+          description: An dictionary containing the ID of the SLO as key and a deletion
+            error as value.
+          type: object
+      type: object
+    SLOErrorBudgetRemainingData:
+      additionalProperties:
+        description: Remaining error budget.
+        format: double
+        type: number
+      description: A mapping of threshold `timeframe` to the remaining error budget.
+      example:
+        7d: 100.0
+      type: object
+    SLOErrorTimeframe:
+      description: 'The timeframe of the threshold associated with this error
+
+        or "all" if all thresholds are affected.'
+      enum:
+      - 7d
+      - 30d
+      - 90d
+      - all
+      example: 30d
+      type: string
+      x-enum-varnames:
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - NINETY_DAYS
+      - ALL
+    SLOHistoryMetrics:
+      description: 'A `metric` based SLO history response.
+
+
+        This is not included in responses for `monitor` based SLOs.'
+      properties:
+        denominator:
+          $ref: '#/components/schemas/SLOHistoryMetricsSeries'
+        interval:
+          description: The aggregated query interval for the series data. It's implicit
+            based on the query time window.
+          example: 0
+          format: int64
+          type: integer
+        message:
+          description: Optional message if there are specific query issues/warnings.
+          example: ''
+          type: string
+        numerator:
+          $ref: '#/components/schemas/SLOHistoryMetricsSeries'
+        query:
+          description: The combined numerator and denominator query CSV.
+          example: ''
+          type: string
+        res_type:
+          description: The series result type. This mimics `batch_query` response
+            type.
+          example: ''
+          type: string
+        resp_version:
+          description: The series response version type. This mimics `batch_query`
+            response type.
+          example: 0
+          format: int64
+          type: integer
+        times:
+          description: An array of query timestamps in EPOCH milliseconds.
+          example: []
+          items:
+            description: A timestamp in EPOCH milliseconds.
+            format: double
+            type: number
+          type: array
+      required:
+      - res_type
+      - interval
+      - resp_version
+      - query
+      - times
+      - numerator
+      - denominator
+      type: object
+    SLOHistoryMetricsSeries:
+      description: 'A representation of `metric` based SLO time series for the provided
+        queries.
+
+        This is the same response type from `batch_query` endpoint.'
+      properties:
+        count:
+          description: Count of submitted metrics.
+          example: 0
+          format: int64
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadata'
+        sum:
+          description: Total sum of the query.
+          example: 0.0
+          format: double
+          type: number
+        values:
+          description: The query values for each metric.
+          example: []
+          items:
+            description: A metric name and its value.
+            format: double
+            type: number
+          type: array
+      required:
+      - count
+      - sum
+      - values
+      type: object
+    SLOHistoryMetricsSeriesMetadata:
+      description: Query metadata.
+      example: {}
+      properties:
+        aggr:
+          description: Query aggregator function.
+          type: string
+        expression:
+          description: Query expression.
+          type: string
+        metric:
+          description: Query metric used.
+          type: string
+        query_index:
+          description: Query index from original combined query.
+          format: int64
+          type: integer
+        scope:
+          description: Query scope.
+          type: string
+        unit:
+          description: 'An array of metric units that contains up to two unit objects.
+
+            For example, bytes represents one unit object and bytes per second represents
+            two unit objects.
+
+            If a metric query only has one unit object, the second array element is
+            null.'
+          example:
+          - family: bytes
+            id: 2
+            name: byte
+            plural: bytes
+            scale_factor: 1.0
+            short_name: B
+          - null
+          items:
+            $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
+          nullable: true
+          type: array
+      type: object
+    SLOHistoryMetricsSeriesMetadataUnit:
+      description: An Object of metric units.
+      nullable: true
+      properties:
+        family:
+          description: The family of metric unit, for example `bytes` is the family
+            for `kibibyte`, `byte`, and `bit` units.
+          type: string
+        id:
+          description: The ID of the metric unit.
+          format: int64
+          type: integer
+        name:
+          description: The unit of the metric, for instance `byte`.
+          type: string
+        plural:
+          description: The plural Unit of metric, for instance `bytes`.
+          nullable: true
+          type: string
+        scale_factor:
+          description: The scale factor of metric unit, for instance `1.0`.
+          format: double
+          type: number
+        short_name:
+          description: A shorter and abbreviated version of the metric unit, for instance
+            `B`.
+          nullable: true
+          type: string
+      type: object
+    SLOHistoryMonitor:
+      description: 'An object that holds an SLI value and its associated data. It
+        can represent an SLO''s overall SLI value.
+
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
+      properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          example: name
+          type: string
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: Represents an array time series data.
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A time series data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          example: 1615867200
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
+          type: string
+        name:
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
+          example: string
+          type: string
+        precision:
+          deprecated: true
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp. Use `span_precision` instead.
+          example: 2.0
+          format: double
+          type: number
+        preview:
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
+
+            calculation.'
+          example: true
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Use `sli_value` instead.
+          example: 99.99
+          format: double
+          type: number
+      type: object
+    SLOHistoryResponse:
+      description: A service level objective history response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOHistoryResponseData'
+        errors:
+          description: A list of errors while querying the history data for the service
+            level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseError'
+          type: array
+      type: object
+    SLOHistoryResponseData:
+      description: An array of service level objective objects.
+      properties:
+        from_ts:
+          description: The `from` timestamp in epoch seconds.
+          example: 1615323990
+          format: int64
+          type: integer
+        group_by:
+          description: 'For `metric` based SLOs where the query includes a group-by
+            clause, this represents the list of grouping parameters.
+
+
+            This is not included in responses for `monitor` based SLOs.'
+          items:
+            description: A grouping parameter.
+            type: string
+          type: array
+        groups:
+          description: 'For grouped SLOs, this represents SLI data for specific groups.
+
+
+            This is not included in the responses for `metric` based SLOs.'
+          items:
+            $ref: '#/components/schemas/SLOHistoryMonitor'
+          type: array
+        monitors:
+          description: 'For multi-monitor SLOs, this represents SLI data for specific
+            monitors.
+
+
+            This is not included in the responses for `metric` based SLOs.'
+          items:
+            $ref: '#/components/schemas/SLOHistoryMonitor'
+          type: array
+        overall:
+          $ref: '#/components/schemas/SLOHistorySLIData'
+        series:
+          $ref: '#/components/schemas/SLOHistoryMetrics'
+        thresholds:
+          additionalProperties:
+            $ref: '#/components/schemas/SLOThreshold'
+          description: mapping of string timeframe to the SLO threshold.
+          example:
+            my_service:
+              target: 95
+              timeframe: 7d
+          type: object
+        to_ts:
+          description: The `to` timestamp in epoch seconds.
+          example: 1615928790
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SLOType'
+        type_id:
+          $ref: '#/components/schemas/SLOTypeNumeric'
+      type: object
+    SLOHistoryResponseError:
+      description: A list of errors while querying the history data for the service
+        level objective.
+      properties:
+        error:
+          description: Human readable error.
+          type: string
+      type: object
+    SLOHistoryResponseErrorWithType:
+      description: An object describing the error with error type and error message.
+      properties:
+        error_message:
+          description: A message with more details about the error.
+          example: ''
+          type: string
+        error_type:
+          description: Type of the error.
+          example: ''
+          type: string
+      required:
+      - error_type
+      - error_message
+      type: object
+    SLOHistorySLIData:
+      description: 'An object that holds an SLI value and its associated data. It
+        can represent an SLO''s overall SLI value.
+
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
+      properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          example: name
+          type: string
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: Represents an array time series data.
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A time series data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          example: 1615867200
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
+          type: string
+        name:
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
+          example: string
+          type: string
+        precision:
+          additionalProperties:
+            description: The number of accurate decimals.
+            format: double
+            type: number
+          description: A mapping of threshold `timeframe` to number of accurate decimals,
+            regardless of the from && to timestamp.
+          example:
+            30d: 1
+            7d: 2
+          type: object
+        preview:
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
+
+            calculation.'
+          example: true
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Use `sli_value` instead.
+          example: 99.99
+          format: double
+          type: number
+      type: object
+    SLOListResponse:
+      description: A response with one or more service level objective.
+      properties:
+        data:
+          description: An array of service level objective objects.
+          items:
+            $ref: '#/components/schemas/ServiceLevelObjective'
+          type: array
+        errors:
+          description: 'An array of error messages. Each endpoint documents how/whether
+            this field is
+
+            used.'
+          items:
+            description: The error message.
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/SLOListResponseMetadata'
+      type: object
+    SLOListResponseMetadata:
+      description: The metadata object containing additional information about the
+        list of SLOs.
+      properties:
+        page:
+          $ref: '#/components/schemas/SLOListResponseMetadataPage'
+      type: object
+    SLOListResponseMetadataPage:
+      description: The object containing information about the pages of the list of
+        SLOs.
+      properties:
+        total_count:
+          description: The total number of resources that could be retrieved ignoring
+            the parameters and filters in the request.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of resources that match the parameters and
+            filters in the request. This attribute can be used by a client to determine
+            the total number of pages.
+          format: int64
+          type: integer
+      type: object
+    SLOListWidgetDefinition:
+      description: Use the SLO List widget to track your SLOs (Service Level Objectives)
+        on dashboards.
+      properties:
+        requests:
+          description: Array of one request object to display in the widget.
+          items:
+            $ref: '#/components/schemas/SLOListWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SLOListWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SLOListWidgetDefinitionType:
+      default: slo_list
+      description: Type of the SLO List widget.
+      enum:
+      - slo_list
+      example: slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
+    SLOListWidgetQuery:
+      description: Updated SLO List widget.
+      properties:
+        limit:
+          default: 100
+          description: Maximum number of results to display in the table.
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        query_string:
+          description: Widget query.
+          example: env:prod AND service:my-app
+          type: string
+        sort:
+          description: Options for sorting results.
+          items:
+            $ref: '#/components/schemas/WidgetFieldSort'
+          type: array
+      required:
+      - query_string
+      type: object
+    SLOListWidgetRequest:
+      description: Updated SLO List widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/SLOListWidgetQuery'
+        request_type:
+          $ref: '#/components/schemas/SLOListWidgetRequestType'
+      required:
+      - query
+      - request_type
+      type: object
+    SLOListWidgetRequestType:
+      description: Widget request type.
+      enum:
+      - slo_list
+      example: slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
+    SLOOverallStatuses:
+      description: Overall status of the SLO by timeframes.
+      properties:
+        error:
+          description: Error message if SLO status or error budget could not be calculated.
+          nullable: true
+          type: string
+        error_budget_remaining:
+          description: Remaining error budget of the SLO in percentage.
+          example: 100
+          format: double
+          nullable: true
+          type: number
+        indexed_at:
+          description: 'timestamp (UNIX time in seconds) of when the SLO status and
+            error budget
+
+            were calculated.'
+          example: 1662496260
+          format: int64
+          type: integer
+        raw_error_budget_remaining:
+          $ref: '#/components/schemas/SLORawErrorBudgetRemaining'
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to.
+          example: 2
+          format: int64
+          nullable: true
+          type: integer
+        state:
+          $ref: '#/components/schemas/SLOState'
+        status:
+          description: The status of the SLO.
+          example: 100
+          format: double
+          nullable: true
+          type: number
+        target:
+          description: The target of the SLO.
+          example: 99
+          format: double
+          type: number
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
+      type: object
+    SLORawErrorBudgetRemaining:
+      description: Error budget remaining for an SLO.
+      nullable: true
+      properties:
+        unit:
+          description: Error budget remaining unit.
+          example: requests
+          type: string
+        value:
+          description: Error budget remaining value.
+          example: 60
+          format: double
+          type: number
+      type: object
+    SLOResponse:
+      description: A service level objective response containing a single service
+        level objective.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOResponseData'
+        errors:
+          description: 'An array of error messages. Each endpoint documents how/whether
+            this field is
+
+            used.'
+          items:
+            description: The error message.
+            type: string
+          type: array
+      type: object
+    SLOResponseData:
+      description: 'A service level objective object includes a service level indicator,
+        thresholds
+
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+      properties:
+        configured_alert_ids:
+          description: A list of SLO monitors IDs that reference this SLO. This field
+            is returned only when `with_configured_alert_ids` parameter is true in
+            query.
+          example:
+          - 123
+          - 456
+          - 789
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          type: array
+        created_at:
+          description: 'Creation timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        creator:
+          $ref: '#/components/schemas/Creator'
+        description:
+          description: 'A user-defined description of the service level objective.
+
+
+            Always included in service level objective responses (but may be `null`).
+
+            Optional in create/update requests.'
+          nullable: true
+          type: string
+        groups:
+          description: 'A list of (up to 20) monitor groups that narrow the scope
+            of a monitor service level objective.
+
+
+            Included in service level objective responses if it is not empty. Optional
+            in
+
+            create/update requests for monitor service level objectives, but may only
+            be
+
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
+          items:
+            description: A group name, for instance `env:prod`.
+            type: string
+          type: array
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
+        modified_at:
+          description: 'Modification timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_ids:
+          description: 'A list of monitor ids that defines the scope of a monitor
+            service level
+
+            objective. **Required if type is `monitor`**.'
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          type: array
+        monitor_tags:
+          description: 'The union of monitor tags for all monitors referenced by the
+            `monitor_ids`
+
+            field.
+
+            Always included in service level objective responses for monitor service
+            level
+
+            objectives (but may be empty). Ignored in create/update requests. Does
+            not
+
+            affect which monitors are included in the service level objective (that
+            is
+
+            determined entirely by the `monitor_ids` field).'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        name:
+          description: The name of the service level objective object.
+          example: Custom Metric SLO
+          type: string
+        query:
+          $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        tags:
+          description: 'A list of tags associated with this service level objective.
+
+            Always included in service level objective responses (but may be empty).
+
+            Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
+          items:
+            description: A tag to apply to your SLO.
+            type: string
+          type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
+        thresholds:
+          description: 'The thresholds (timeframes and associated targets) for this
+            service level
+
+            objective object.'
+          example:
+          - target: 95
+            timeframe: 7d
+          - target: 95
+            timeframe: 30d
+            warning: 97
+          items:
+            $ref: '#/components/schemas/SLOThreshold'
+          type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
+        type:
+          $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
