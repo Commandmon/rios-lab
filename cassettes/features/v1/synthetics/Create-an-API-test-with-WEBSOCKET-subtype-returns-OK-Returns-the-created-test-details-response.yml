@@ -30,4 +30,19 @@ http_interactions:
       string: '{"public_ids":["sfv-45x-54e"]}'
     headers:
       Accept:
-     
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v1/synthetics/tests/delete
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"deleted_tests":[{"deleted_at":"2022-08-30T12:59:30.439075+00:00","public_id":"sfv-45x-54e"}]}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0

@@ -1,0 +1,4685 @@
+
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    SignalID:
+      description: The ID of the signal.
+      in: path
+      name: signal_id
+      required: true
+      schema:
+        type: string
+    SlackAccountNamePathParameter:
+      description: Your Slack account name.
+      in: path
+      name: account_name
+      required: true
+      schema:
+        type: string
+    SlackChannelNamePathParameter:
+      description: The name of the Slack channel being operated on.
+      in: path
+      name: channel_name
+      required: true
+      schema:
+        type: string
+  requestBodies: {}
+  responses:
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Too many requests
+  schemas:
+    APIErrorResponse:
+      description: Error response object.
+      properties:
+        errors:
+          description: Array of errors returned by the API.
+          items:
+            description: Error description.
+            example: Bad Request
+            type: string
+          type: array
+      required:
+      - errors
+      type: object
+    AWSAccount:
+      description: Returns the AWS account associated with this integration.
+      properties:
+        access_key_id:
+          description: Your AWS access key ID. Only required if your AWS account is
+            a GovCloud or China account.
+          type: string
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        account_specific_namespace_rules:
+          additionalProperties:
+            description: A list of additional properties.
+            type: boolean
+          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
+
+            that enables or disables metric collection for specific AWS namespaces
+            for this
+
+            AWS account only.'
+          example:
+            auto_scaling: false
+            opswork: false
+          type: object
+        cspm_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account. This includes additional resources not
+            covered under the general `resource_collection`.
+          example: true
+          type: boolean
+        excluded_regions:
+          description: An array of AWS regions to exclude from metrics collection.
+          example:
+          - us-east-1
+          - us-west-2
+          items:
+            description: Regions to exclude.
+            type: string
+          type: array
+        filter_tags:
+          description: 'The array of EC2 tags (in the form `key:value`) defines a
+            filter that Datadog uses when collecting metrics from EC2.
+
+            Wildcards, such as `?` (for single characters) and `*` (for multiple characters)
+            can also be used.
+
+            Only hosts that match one of the defined tags
+
+            will be imported into Datadog. The rest will be ignored.
+
+            Host matching a given tag can also be excluded by adding `!` before the
+            tag.
+
+            For example, `env:production,instance-type:c1.*,!region:us-east-1`'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the filter_tags.
+            type: string
+          type: array
+        host_tags:
+          description: 'Array of tags (in the form `key:value`) to add to all hosts
+
+            and metrics reporting through this integration.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the the host_tags.
+            type: string
+          type: array
+        metrics_collection_enabled:
+          default: true
+          description: Whether Datadog collects metrics for this AWS account.
+          example: false
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects a standard set of resources from your
+            AWS account.
+          example: true
+          type: boolean
+        role_name:
+          description: Your Datadog role delegation name.
+          example: DatadogAWSIntegrationRole
+          type: string
+        secret_access_key:
+          description: Your AWS secret access key. Only required if your AWS account
+            is a GovCloud or China account.
+          type: string
+      type: object
+    AWSAccountAndLambdaRequest:
+      description: AWS account ID and Lambda ARN.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        lambda_arn:
+          description: ARN of the Datadog Lambda created during the Datadog-Amazon
+            Web services Log collection setup.
+          example: arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest
+          type: string
+      required:
+      - account_id
+      - lambda_arn
+      type: object
+    AWSAccountCreateResponse:
+      description: The Response returned by the AWS Create Account call.
+      properties:
+        external_id:
+          description: AWS external_id.
+          type: string
+      type: object
+    AWSAccountDeleteRequest:
+      description: List of AWS accounts to delete.
+      properties:
+        access_key_id:
+          description: Your AWS access key ID. Only required if your AWS account is
+            a GovCloud or China account.
+          type: string
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        role_name:
+          description: Your Datadog role delegation name.
+          example: DatadogAWSIntegrationRole
+          type: string
+      type: object
+    AWSAccountListResponse:
+      description: List of enabled AWS accounts.
+      properties:
+        accounts:
+          description: List of enabled AWS accounts.
+          items:
+            $ref: '#/components/schemas/AWSAccount'
+          type: array
+      type: object
+    AWSLogsAsyncError:
+      description: Description of errors.
+      properties:
+        code:
+          description: Code properties
+          example: no_such_config
+          type: string
+        message:
+          description: Message content.
+          example: AWS account 12345 has no lambda config to update
+          type: string
+      type: object
+    AWSLogsAsyncResponse:
+      description: A list of all Datadog-AWS logs integrations available in your Datadog
+        organization.
+      properties:
+        errors:
+          description: List of errors.
+          items:
+            $ref: '#/components/schemas/AWSLogsAsyncError'
+          type: array
+        status:
+          description: Status of the properties.
+          example: created
+          type: string
+      type: object
+    AWSLogsLambda:
+      description: Description of the Lambdas.
+      properties:
+        arn:
+          description: Available ARN IDs.
+          type: string
+      type: object
+    AWSLogsListResponse:
+      description: A list of all Datadog-AWS logs integrations available in your Datadog
+        organization.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        lambdas:
+          description: List of ARNs configured in your Datadog account.
+          example:
+          - arn: arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest
+          items:
+            $ref: '#/components/schemas/AWSLogsLambda'
+          type: array
+        services:
+          description: Array of services IDs.
+          example:
+          - s3
+          - elb
+          - elbv2
+          - cloudfront
+          - redshift
+          - lambda
+          items:
+            description: Description of the services.
+            type: string
+          type: array
+      type: object
+    AWSLogsListServicesResponse:
+      description: The list of current AWS services for which Datadog offers automatic
+        log collection.
+      properties:
+        id:
+          description: Key value in returned object.
+          example: s3
+          type: string
+        label:
+          description: Name of service available for configuration with Datadog logs.
+          example: S3 Access Logs
+          type: string
+      type: object
+    AWSLogsServicesRequest:
+      description: A list of current AWS services for which Datadog offers automatic
+        log collection.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        services:
+          description: Array of services IDs set to enable automatic log collection.
+            Discover the list of available services with the get list of AWS log ready
+            services API endpoint.
+          example:
+          - s3
+          - elb
+          - elbv2
+          - cloudfront
+          - redshift
+          - lambda
+          items:
+            description: Description of services.
+            type: string
+          type: array
+      required:
+      - account_id
+      - services
+      type: object
+    AWSNamespace:
+      description: The namespace associated with the tag filter entry.
+      enum:
+      - elb
+      - application_elb
+      - sqs
+      - rds
+      - custom
+      - network_elb
+      - lambda
+      type: string
+      x-enum-varnames:
+      - ELB
+      - APPLICATION_ELB
+      - SQS
+      - RDS
+      - CUSTOM
+      - NETWORK_ELB
+      - LAMBDA
+    AWSTagFilter:
+      description: A tag filter.
+      properties:
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+        tag_filter_str:
+          description: The tag filter string.
+          example: prod*
+          type: string
+      type: object
+    AWSTagFilterCreateRequest:
+      description: The objects used to set an AWS tag filter.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+        tag_filter_str:
+          description: The tag filter string.
+          example: prod*
+          type: string
+      type: object
+    AWSTagFilterDeleteRequest:
+      description: The objects used to delete an AWS tag filter entry.
+      properties:
+        account_id:
+          description: The unique identifier of your AWS account.
+          example: FAKEAC0FAKEAC2FAKEAC
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+      type: object
+    AWSTagFilterListResponse:
+      description: An array of tag filter rules by `namespace` and tag filter string.
+      properties:
+        filters:
+          description: An array of tag filters.
+          items:
+            $ref: '#/components/schemas/AWSTagFilter'
+          type: array
+      type: object
+    AccessRole:
+      default: st
+      description: The access role of the user. Options are **st** (standard user),
+        **adm** (admin user), or **ro** (read-only user).
+      enum:
+      - st
+      - adm
+      - ro
+      - ERROR
+      example: st
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - ADMIN
+      - READ_ONLY
+      - ERROR
+    AddSignalToIncidentRequest:
+      description: Attributes describing which incident to add the signal to.
+      properties:
+        add_to_signal_timeline:
+          description: Whether to post the signal on the incident timeline.
+          type: boolean
+        incident_id:
+          description: Public ID attribute of the incident to which the signal will
+            be added.
+          example: 2066
+          format: int64
+          type: integer
+        version:
+          $ref: '#/components/schemas/Version'
+      required:
+      - incident_id
+      type: object
+    AgentCheck:
+      description: Array of strings.
+      example:
+      - ntp
+      - ntp
+      - ntp:d884b5186b651429
+      - OK
+      - ''
+      - ''
+      items:
+        description: Agent check running on the host.
+      type: array
+    AlertGraphWidgetDefinition:
+      description: Alert graphs are timeseries graphs showing the current status of
+        any monitor defined on your system.
+      properties:
+        alert_id:
+          description: ID of the alert to use in the widget.
+          example: ''
+          type: string
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/AlertGraphWidgetDefinitionType'
+        viz_type:
+          $ref: '#/components/schemas/WidgetVizType'
+      required:
+      - type
+      - alert_id
+      - viz_type
+      type: object
+    AlertGraphWidgetDefinitionType:
+      default: alert_graph
+      description: Type of the alert graph widget.
+      enum:
+      - alert_graph
+      example: alert_graph
+      type: string
+      x-enum-varnames:
+      - ALERT_GRAPH
+    AlertValueWidgetDefinition:
+      description: Alert values are query values showing the current value of the
+        metric in any monitor defined on your system.
+      properties:
+        alert_id:
+          description: ID of the alert to use in the widget.
+          example: ''
+          type: string
+        precision:
+          description: Number of decimal to show. If not defined, will use the raw
+            value.
+          format: int64
+          type: integer
+        text_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of value in the widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/AlertValueWidgetDefinitionType'
+        unit:
+          description: Unit to display with the value.
+          type: string
+      required:
+      - type
+      - alert_id
+      type: object
+    AlertValueWidgetDefinitionType:
+      default: alert_value
+      description: Type of the alert value widget.
+      enum:
+      - alert_value
+      example: alert_value
+      type: string
+      x-enum-varnames:
+      - ALERT_VALUE
+    ApiKey:
+      description: Datadog API key.
+      properties:
+        created:
+          description: Date of creation of the API key.
+          example: '2019-08-02 15:31:07'
+          readOnly: true
+          type: string
+        created_by:
+          description: Datadog user handle that created the API key.
+          example: john@example.com
+          readOnly: true
+          type: string
+        key:
+          description: API key.
+          example: 1234512345123456abcabc912349abcd
+          maxLength: 32
+          minLength: 32
+          readOnly: true
+          type: string
+        name:
+          description: Name of your API key.
+          example: example user
+          type: string
+      type: object
+    ApiKeyListResponse:
+      description: List of API and application keys available for a given organization.
+      example:
+        api_keys:
+        - created_by: test_user
+          key: 1234512345123456abcabc912349abcd
+          name: app_key
+      properties:
+        api_keys:
+          description: Array of API keys.
+          items:
+            $ref: '#/components/schemas/ApiKey'
+          type: array
+      type: object
+    ApiKeyResponse:
+      description: An API key with its associated metadata.
+      example:
+        api_key:
+          created_by: test_user
+          key: 1234512345123456abcabc912349abcd
+          name: app_key
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKey'
+      type: object
+    ApmStatsQueryColumnType:
+      description: Column properties.
+      properties:
+        alias:
+          description: A user-assigned alias for the column.
+          example: Requests
+          type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        name:
+          description: Column name.
+          example: Reqs
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - name
+      type: object
+    ApmStatsQueryDefinition:
+      description: The APM stats query for table and distributions widgets.
+      properties:
+        columns:
+          description: Column properties used by the front end for display.
+          items:
+            $ref: '#/components/schemas/ApmStatsQueryColumnType'
+          type: array
+        env:
+          description: Environment name.
+          example: prod
+          type: string
+        name:
+          description: Operation name associated with service.
+          example: rack.request
+          type: string
+        primary_tag:
+          description: The organization's host group name and value.
+          example: datacenter:*
+          type: string
+        resource:
+          description: Resource name.
+          example: CartsController
+          type: string
+        row_type:
+          $ref: '#/components/schemas/ApmStatsQueryRowType'
+        service:
+          description: Service name.
+          example: web-store
+          type: string
+      required:
+      - service
+      - env
+      - name
+      - primary_tag
+      - row_type
+      type: object
+    ApmStatsQueryRowType:
+      description: The level of detail for the request.
+      enum:
+      - service
+      - resource
+      - span
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+      - RESOURCE
+      - SPAN
+    ApplicationKey:
+      description: An application key with its associated metadata.
+      properties:
+        hash:
+          description: Hash of an application key.
+          example: 1234512345123459cda4eb9ced49a3d84fd0138c
+          maxLength: 40
+          minLength: 40
+          readOnly: true
+          type: string
+        name:
+          description: Name of an application key.
+          example: example user
+          type: string
+        owner:
+          description: Owner of an application key.
+          example: example.com
+          readOnly: true
+          type: string
+      type: object
+    ApplicationKeyListResponse:
+      description: An application key response.
+      example:
+        application_keys:
+        - hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+          name: app_key
+          owner: test_user
+      properties:
+        application_keys:
+          description: Array of application keys.
+          items:
+            $ref: '#/components/schemas/ApplicationKey'
+          type: array
+      type: object
+    ApplicationKeyResponse:
+      description: An application key response.
+      example:
+        application_key:
+          hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+          name: app_key
+          owner: test_user
+      properties:
+        application_key:
+          $ref: '#/components/schemas/ApplicationKey'
+      type: object
+    AuthenticationValidationResponse:
+      description: Represent validation endpoint responses.
+      properties:
+        valid:
+          description: Return `true` if the authentication response is valid.
+          example: true
+          readOnly: true
+          type: boolean
+      type: object
+    AzureAccount:
+      description: Datadog-Azure integrations configured for your organization.
+      properties:
+        automute:
+          description: Silence monitors for expected Azure VM shutdowns.
+          example: true
+          type: boolean
+        client_id:
+          description: Your Azure web application ID.
+          example: testc7f6-1234-5678-9101-3fcbf464test
+          type: string
+        client_secret:
+          description: Your Azure web application secret key.
+          example: testingx./Sw*g/Y33t..R1cH+hScMDt
+          type: string
+        errors:
+          description: Errors in your configuration.
+          example:
+          - '*'
+          items:
+            description: List of errors.
+            readOnly: true
+            type: string
+          type: array
+        host_filters:
+          description: 'Limit the Azure instances that are pulled into Datadog by
+            using tags.
+
+            Only hosts that match one of the defined tags are imported into Datadog.'
+          example: key:value,filter:example
+          type: string
+        new_client_id:
+          description: Your New Azure web application ID.
+          example: new1c7f6-1234-5678-9101-3fcbf464test
+          type: string
+        new_tenant_name:
+          description: Your New Azure Active Directory ID.
+          example: new1c44-1234-5678-9101-cc00736ftest
+          type: string
+        tenant_name:
+          description: Your Azure Active Directory ID.
+          example: testc44-1234-5678-9101-cc00736ftest
+          type: string
+      type: object
+    AzureAccountListResponse:
+      description: Accounts configured for your organization.
+      items:
+        $ref: '#/components/schemas/AzureAccount'
+      type: array
+    CancelDowntimesByScopeRequest:
+      description: Cancel downtimes according to scope.
+      properties:
+        scope:
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example: host:myserver
+          type: string
+      required:
+      - scope
+      type: object
+    CanceledDowntimesIds:
+      description: Object containing array of IDs of canceled downtimes.
+      properties:
+        cancelled_ids:
+          description: ID of downtimes that were canceled.
+          example:
+          - 123456789
+          - 123456790
+          items:
+            description: Integer representation of one downtime ID.
+            format: int64
+            type: integer
+          type: array
+      type: object
+    ChangeWidgetDefinition:
+      description: The Change graph shows you the change in a value over the time
+        period chosen.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: "Array of one request object to display in the widget.\n\nSee
+            the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
+            to learn how to build the `REQUEST_SCHEMA`."
+          example:
+          - q: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/ChangeWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    ChangeWidgetDefinitionType:
+      default: change
+      description: Type of the change widget.
+      enum:
+      - change
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+    ChangeWidgetRequest:
+      description: Updated change widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        change_type:
+          $ref: '#/components/schemas/WidgetChangeType'
+        compare_to:
+          $ref: '#/components/schemas/WidgetCompareTo'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        increase_good:
+          description: Whether to show increase as good.
+          type: boolean
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        order_by:
+          $ref: '#/components/schemas/WidgetOrderBy'
+        order_dir:
+          $ref: '#/components/schemas/WidgetSort'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Query definition.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        show_present:
+          description: Whether to show the present value.
+          type: boolean
+      type: object
+    CheckCanDeleteMonitorResponse:
+      description: Response of monitor IDs that can or can't be safely deleted.
+      properties:
+        data:
+          $ref: '#/components/schemas/CheckCanDeleteMonitorResponseData'
+        errors:
+          additionalProperties:
+            description: Strings denoting where a monitor is used.
+            items:
+              description: Asset where a monitor is used.
+              type: string
+            type: array
+          description: A mapping of Monitor ID to strings denoting where it's used.
+          type: object
+      required:
+      - data
+      type: object
+    CheckCanDeleteMonitorResponseData:
+      description: Wrapper object with the list of monitor IDs.
+      example: {}
+      properties:
+        ok:
+          description: An array of of Monitor IDs that can be safely deleted.
+          items:
+            description: ID of a monitor that can be safely deleted.
+            format: int64
+            type: integer
+          type: array
+      type: object
+    CheckCanDeleteSLOResponse:
+      description: A service level objective response containing the requested object.
+      properties:
+        data:
+          $ref: '#/components/schemas/CheckCanDeleteSLOResponseData'
+        errors:
+          additionalProperties:
+            description: Description of the service level objective reference.
+            type: string
+          description: A mapping of SLO id to it's current usages.
+          type: object
+      type: object
+    CheckCanDeleteSLOResponseData:
+      description: An array of service level objective objects.
+      properties:
+        ok:
+          description: An array of of SLO IDs that can be safely deleted.
+          items:
+            description: An SLO ID.
+            type: string
+          type: array
+      type: object
+    CheckStatusWidgetDefinition:
+      description: Check status shows the current status or number of results for
+        any check performed.
+      properties:
+        check:
+          description: Name of the check to use in the widget.
+          example: ''
+          type: string
+        group:
+          description: Group reporting a single check.
+          type: string
+        group_by:
+          description: List of tag prefixes to group by in the case of a cluster check.
+          items:
+            description: Tag prefix.
+            type: string
+          type: array
+        grouping:
+          $ref: '#/components/schemas/WidgetGrouping'
+        tags:
+          description: List of tags used to filter the groups reporting a cluster
+            check.
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/CheckStatusWidgetDefinitionType'
+      required:
+      - type
+      - check
+      - grouping
+      type: object
+    CheckStatusWidgetDefinitionType:
+      default: check_status
+      description: Type of the check status widget.
+      enum:
+      - check_status
+      example: check_status
+      type: string
+      x-enum-varnames:
+      - CHECK_STATUS
+    ContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - gzip
+      - deflate
+      type: string
+      x-enum-varnames:
+      - GZIP
+      - DEFLATE
+    Creator:
+      description: Object describing the creator of the shared element.
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        handle:
+          description: Handle of the creator.
+          type: string
+        name:
+          description: Name of the creator.
+          nullable: true
+          type: string
+      readOnly: true
+      type: object
+    Dashboard:
+      description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,
+        and displaying\nkey performance metrics, which enable you to monitor the health
+        of your infrastructure."
+      properties:
+        author_handle:
+          description: Identifier of the dashboard author.
+          example: test@datadoghq.com
+          readOnly: true
+          type: string
+        author_name:
+          description: Name of the dashboard author.
+          example: John Doe
+          nullable: true
+          readOnly: true
+          type: string
+        created_at:
+          description: Creation date of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the dashboard.
+          nullable: true
+          type: string
+        id:
+          description: ID of the dashboard.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        is_read_only:
+          default: false
+          deprecated: true
+          description: Whether this dashboard is read-only. If True, only the author
+            and admins can make changes to it. Prefer using `restricted_roles` to
+            manage write authorization.
+          example: false
+          type: boolean
+        layout_type:
+          $ref: '#/components/schemas/DashboardLayoutType'
+        modified_at:
+          description: Modification date of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        notify_list:
+          description: List of handles of users to notify when changes are made to
+            this dashboard.
+          items:
+            description: User handles.
+            type: string
+          nullable: true
+          type: array
+        reflow_type:
+          $ref: '#/components/schemas/DashboardReflowType'
+        restricted_roles:
+          description: A list of role identifiers. Only the author and users associated
+            with at least one of these roles can edit this dashboard.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
+        template_variable_presets:
+          description: Array of template variables saved views.
+          items:
+            $ref: '#/components/schemas/DashboardTemplateVariablePreset'
+          nullable: true
+          type: array
+        template_variables:
+          description: List of template variables for this dashboard.
+          items:
+            $ref: '#/components/schemas/DashboardTemplateVariable'
+          nullable: true
+          type: array
+        title:
+          description: Title of the dashboard.
+          example: ''
+          type: string
+        url:
+          description: The URL of the dashboard.
+          example: /dashboard/123-abc-456/example-dashboard-title
+          readOnly: true
+          type: string
+        widgets:
+          description: List of widgets to display on the dashboard.
+          example:
+          - definition:
+              requests:
+                fill:
+                  q: avg:system.cpu.user{*}
+              type: hostmap
+          items:
+            $ref: '#/components/schemas/Widget'
+          type: array
+      required:
+      - title
+      - layout_type
+      - widgets
+      type: object
+    DashboardBulkActionData:
+      description: Dashboard bulk action request data.
+      example:
+        id: 123-abc-456
+        type: dashboard
+      properties:
+        id:
+          $ref: '#/components/schemas/DashboardID'
+        type:
+          $ref: '#/components/schemas/DashboardResourceType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardBulkActionDataList:
+      description: List of dashboard bulk action request data objects.
+      example:
+      - id: 123-abc-456
+        type: dashboard
+      items:
+        $ref: '#/components/schemas/DashboardBulkActionData'
+      type: array
+    DashboardBulkDeleteRequest:
+      description: Dashboard bulk delete request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
+    DashboardDeleteResponse:
+      description: Response from the delete dashboard call.
+      properties:
+        deleted_dashboard_id:
+          description: ID of the deleted dashboard.
+          type: string
+      type: object
+    DashboardID:
+      description: Dashboard resource ID.
+      example: 123-abc-456
+      type: string
+    DashboardLayoutType:
+      description: Layout type of the dashboard.
+      enum:
+      - ordered
+      - free
+      example: ordered
+      type: string
+      x-enum-varnames:
+      - ORDERED
+      - FREE
+    DashboardList:
+      description: Your Datadog Dashboards.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+        created:
+          description: Date of creation of the dashboard list.
+          format: date-time
+          readOnly: true
+          type: string
+        dashboard_count:
+          description: The number of dashboards in the list.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: The ID of the dashboard list.
+          format: int64
+          readOnly: true
+          type: integer
+        is_favorite:
+          description: Whether or not the list is in the favorites.
+          readOnly: true
+          type: boolean
+        modified:
+          description: Date of last edition of the dashboard list.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the dashboard list.
+          example: My Dashboard
+          type: string
+        type:
+          description: The type of dashboard list.
+          example: manual_dashboard_list
+          readOnly: true
+          type: string
+      required:
+      - name
+      type: object
+    DashboardListDeleteResponse:
+      description: Deleted dashboard details.
+      properties:
+        deleted_dashboard_list_id:
+          description: ID of the deleted dashboard list.
+          format: int64
+          type: integer
+      type: object
+    DashboardListListResponse:
+      description: Information on your dashboard lists.
+      properties:
+        dashboard_lists:
+          description: List of all your dashboard lists.
+          items:
+            $ref: '#/components/schemas/DashboardList'
+          type: array
+      type: object
+    DashboardReflowType:
+      description: 'Reflow type for a **new dashboard layout** dashboard. Set this
+        only when layout type is ''ordered''.
+
+        If set to ''fixed'', the dashboard expects all widgets to have a layout, and
+        if it''s set to ''auto'',
+
+        widgets should not have layouts.'
+      enum:
+      - auto
+      - fixed
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - FIXED
+    DashboardResourceType:
+      default: dashboard
+      description: Dashboard resource type.
+      enum:
+      - dashboard
+      example: dashboard
+      type: string
+      x-enum-varnames:
+      - DASHBOARD
+    DashboardRestoreRequest:
+      description: Dashboard restore request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
+    DashboardSummary:
+      description: Dashboard summary response.
+      properties:
+        dashboards:
+          description: List of dashboard definitions.
+          items:
+            $ref: '#/components/schemas/DashboardSummaryDefinition'
+          type: array
+      type: object
+    DashboardSummaryDefinition:
+      description: Dashboard definition.
+      properties:
+        author_handle:
+          description: Identifier of the dashboard author.
+          type: string
+        created_at:
+          description: Creation date of the dashboard.
+          format: date-time
+          type: string
+        description:
+          description: Description of the dashboard.
+          nullable: true
+          type: string
+        id:
+          description: Dashboard identifier.
+          type: string
+        is_read_only:
+          description: Whether this dashboard is read-only. If True, only the author
+            and admins can make changes to it.
+          type: boolean
+        layout_type:
+          $ref: '#/components/schemas/DashboardLayoutType'
+        modified_at:
+          description: Modification date of the dashboard.
+          format: date-time
+          type: string
+        title:
+          description: Title of the dashboard.
+          type: string
+        url:
+          description: URL of the dashboard.
+          type: string
+      type: object
+    DashboardTemplateVariable:
+      description: Template variable.
+      properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
+        default:
+          deprecated: true
+          description: (deprecated) The default value for the template variable on
+            dashboard load. Cannot be used in conjunction with `defaults`.
+          example: my-host
+          nullable: true
+          type: string
+        defaults:
+          description: One or many default values for template variables on load.
+            If more than one default is specified, they will be unioned together with
+            `OR`. Cannot be used in conjunction with `default`.
+          example:
+          - my-host-1
+          - my-host-2
+          items:
+            description: One of many default values for the template variable on dashboard
+              load.
+            minLength: 1
+            type: string
+          type: array
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with
+            this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
+    DashboardTemplateVariablePreset:
+      description: Template variables saved views.
+      properties:
+        name:
+          description: The name of the variable.
+          type: string
+        template_variables:
+          description: List of variables.
+          items:
+            $ref: '#/components/schemas/DashboardTemplateVariablePresetValue'
+          type: array
+      type: object
+    DashboardTemplateVariablePresetValue:
+      description: Template variables saved views.
+      properties:
+        name:
+          description: The name of the variable.
+          type: string
+        value:
+          deprecated: true
+          description: (deprecated) The value of the template variable within the
+            saved view. Cannot be used in conjunction with `values`.
+          type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+            Cannot be used in conjunction with `value`.
+          items:
+            description: One or many values of the template variable within the saved
+              view.
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
+      type: object
+    DeletedMonitor:
+      description: Response from the delete monitor call.
+      properties:
+        deleted_monitor_id:
+          description: ID of the deleted monitor.
+          example: 666486743
+          format: int64
+          type: integer
+      readOnly: true
+      type: object
+    DistributionPoint:
+      description: Array of distribution points.
+      example:
+      - 1575317847.0
+      - - 0.5
+        - 1.0
+      items:
+        description: List of distribution point.
+        oneOf:
+        - $ref: '#/components/schemas/DistributionPointTimestamp'
+        - $ref: '#/components/schemas/DistributionPointData'
+      maxItems: 2
+      minItems: 2
+      type: array
+    DistributionPointData:
+      description: Distribution point data.
+      items:
+        description: List of distribution point data.
+        format: double
+        type: number
+      type: array
+    DistributionPointTimestamp:
+      description: Distribution point timestamp. It should be in seconds and current.
+      format: double
+      type: number
+    DistributionPointsContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
+    DistributionPointsPayload:
+      description: The distribution points payload.
+      properties:
+        series:
+          description: A list of distribution points series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847.0
+              - - 1.0
+                - 2.0
+          items:
+            $ref: '#/components/schemas/DistributionPointsSeries'
+          type: array
+      required:
+      - series
+      type: object
+    DistributionPointsSeries:
+      description: A distribution points metric to submit to Datadog.
+      properties:
+        host:
+          description: The name of the host that produced the distribution point metric.
+          example: test.example.com
+          type: string
+        metric:
+          description: The name of the distribution points metric.
+          example: system.load.1
+          type: string
+        points:
+          description: Points relating to the distribution point metric. All points
+            must be tuples with timestamp and a list of values (cannot be a string).
+            Timestamps should be in POSIX time in seconds.
+          items:
+            $ref: '#/components/schemas/DistributionPoint'
+          type: array
+        tags:
+          description: A list of tags associated with the distribution point metric.
+          example:
+          - environment:test
+          items:
+            description: Individual tags.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DistributionPointsType'
+      required:
+      - metric
+      - points
+      type: object
+    DistributionPointsType:
+      default: distribution
+      description: The type of the distribution point.
+      enum:
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - DISTRIBUTION
+    DistributionWidgetDefinition:
+      description: "The Distribution visualization is another way of showing metrics\naggregated
+        across one or several tags, such as hosts.\nUnlike the heat map, a distribution
+        graph\u2019s x-axis is quantity rather than time."
+      properties:
+        legend_size:
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
+          type: string
+        markers:
+          description: List of markers.
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
+        requests:
+          description: "Array of one request object to display in the widget.\n\nSee
+            the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
+            to learn how to build the `REQUEST_SCHEMA`."
+          example:
+          - q: host:X tags:Y
+          items:
+            $ref: '#/components/schemas/DistributionWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/DistributionWidgetXAxis'
+        yaxis:
+          $ref: '#/components/schemas/DistributionWidgetYAxis'
+      required:
+      - type
+      - requests
+      type: object
+    DistributionWidgetDefinitionType:
+      default: distribution
+      description: Type of the distribution widget.
+      enum:
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - DISTRIBUTION
+    DistributionWidgetHistogramRequestQuery:
+      description: Query definition for Distribution Widget Histogram Request
+      example:
+        data_source: metrics
+        name: query1
+        query: histogram:trace.Load{*}
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      type: object
+    DistributionWidgetHistogramRequestType:
+      description: Request type for the histogram request.
+      enum:
+      - histogram
+      example: histogram
+      type: string
+      x-enum-varnames:
+      - HISTOGRAM
+    DistributionWidgetRequest:
+      description: Updated distribution widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        query:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
+        request_type:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    DistributionWidgetXAxis:
+      description: X Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        max:
+          default: auto
+          description: Specifies maximum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear`.
+          type: string
+      type: object
+    DistributionWidgetYAxis:
+      description: Y Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        label:
+          description: The label of the axis to display on the graph.
+          type: string
+        max:
+          default: auto
+          description: Specifies the maximum value to show on the y-axis. It takes
+            a number, or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the y-axis. It takes a number,
+            or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear` or `log`.
+          type: string
+      type: object
+    Downtime:
+      description: 'Downtiming gives you greater control over monitor notifications
+        by
+
+        allowing you to globally exclude scopes from alerting.
+
+        Downtime settings, which can be scheduled with start and end times,
+
+        prevent all alerting related to specified Datadog tags.'
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        active_child:
+          $ref: '#/components/schemas/DowntimeChild'
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1625
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      type: object
+    DowntimeChild:
+      description: 'The downtime object definition of the active child for the original
+        parent recurring downtime. This
+
+        field will only exist on recurring downtimes.'
+      nullable: true
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1626
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      readOnly: true
+      type: object
+    DowntimeRecurrence:
+      description: An object defining the recurrence of the downtime.
+      nullable: true
+      properties:
+        period:
+          description: 'How often to repeat as an integer.
+
+            For example, to repeat every 3 days, select a type of `days` and a period
+            of `3`.'
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+        rrule:
+          description: 'The `RRULE` standard for defining recurring events (**requires
+            to set "type" to rrule**)
+
+            For example, to have a recurring event on the first day of each month,
+            set the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
+            to `1`.
+
+            Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+            are supported.
+
+
+            **Note**: Attributes specifying the duration in `RRULE` are not supported
+            (for example, `DTSTART`, `DTEND`, `DURATION`).
+
+            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api)'
+          example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+          type: string
+        type:
+          description: The type of recurrence. Choose from `days`, `weeks`, `months`,
+            `years`, `rrule`.
+          example: weeks
+          type: string
+        until_date:
+          description: 'The date at which the recurrence should end as a POSIX timestamp.
+
+            `until_occurences` and `until_date` are mutually exclusive.'
+          example: 1447786293
+          format: int64
+          nullable: true
+          type: integer
+        until_occurrences:
+          description: 'How many times the downtime is rescheduled.
+
+            `until_occurences` and `until_date` are mutually exclusive.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          type: integer
+        week_days:
+          description: 'A list of week days to repeat on. Choose from `Mon`, `Tue`,
+            `Wed`, `Thu`, `Fri`, `Sat` or `Sun`.
+
+            Only applicable when type is weeks. First letter must be capitalized.'
+          example:
+          - Mon
+          - Tue
+          items:
+            description: A day of the week, formatted as `Mon`, `Tue`, `Wed`, `Thu`,
+              `Fri`, `Sat` or `Sun`.
+            type: string
+          nullable: true
+          type: array
+      type: object
+    Event:
+      description: Object representing an event.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
+
+            Limited to events no older than 18 hours.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        id_str:
+          description: 'Handling IDs as large 64-bit numbers can cause loss of accuracy
+            issues with some programming languages.
+
+            Instead, use the string representation of the Event ID to avoid losing
+            accuracy.'
+          readOnly: true
+          type: string
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            The list of standard source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            To use markdown in the event text, start the text block with `%%% \n`
+            and end the text block with `\n %%%`.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title.
+          example: Did you hear the news today?
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
+    EventAlertType:
+      description: 'If an alert event is enabled, set its type.
+
+        For example, `error`, `warning`, `info`, `success`, `user_update`,
+
+        `recommendation`, and `snapshot`.'
+      enum:
+      - error
+      - warning
+      - info
+      - success
+      - user_update
+      - recommendation
+      - snapshot
+      example: info
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+      - USER_UPDATE
+      - RECOMMENDATION
+      - SNAPSHOT
+    EventCreateRequest:
+      description: Object representing an event.
+      properties:
+        aggregation_key:
+          description: 'An arbitrary string to use for aggregation. Limited to 100
+            characters.
+
+            If you specify a key, all events using that key are grouped together in
+            the Event Stream.'
+          maxLength: 100
+          type: string
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
+
+            Limited to events no older than 18 hours'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: ID of the parent event. Must be sent as an integer (that is
+            no quotes).
+          format: int64
+          type: integer
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            To use markdown in the event text, start the text block with `%%% \n`
+            and end the text block with `\n %%%`.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title.
+          example: Did you hear the news today?
+          type: string
+      required:
+      - title
+      - text
+      type: object
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        event:
+          $ref: '#/components/schemas/Event'
+        status:
+          description: A status.
+          type: string
+      type: object
+    EventListResponse:
+      description: An event list response.
+      properties:
+        events:
+          description: An array of events.
+          items:
+            $ref: '#/components/schemas/Event'
+          type: array
+        status:
+          description: A status.
+          type: string
+      type: object
+    EventPriority:
+      description: The priority of the event. For example, `normal` or `low`.
+      enum:
+      - normal
+      - low
+      example: normal
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - NORMAL
+      - LOW
+    EventQueryDefinition:
+      description: The event query.
+      properties:
+        search:
+          description: The query being made on the event.
+          example: ''
+          type: string
+        tags_execution:
+          description: The execution method for multi-value filters. Can be either
+            and or or.
+          example: ''
+          type: string
+      required:
+      - search
+      - tags_execution
+      type: object
+    EventResponse:
+      description: Object containing an event response.
+      properties:
+        event:
+          $ref: '#/components/schemas/Event'
+        status:
+          description: A status.
+          type: string
+      type: object
+    EventStreamWidgetDefinition:
+      description: 'The event stream is a widget version of the stream of events
+
+        on the Event Stream view. Only available on FREE layout dashboards.'
+      properties:
+        event_size:
+          $ref: '#/components/schemas/WidgetEventSize'
+        query:
+          description: Query to filter the event stream with.
+          example: ''
+          type: string
+        tags_execution:
+          description: The execution method for multi-value filters. Can be either
+            and or or.
+          type: string
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/EventStreamWidgetDefinitionType'
+      required:
+      - type
+      - query
+      type: object
+    EventStreamWidgetDefinitionType:
+      default: event_stream
+      description: Type of the event stream widget.
+      enum:
+      - event_stream
+      example: event_stream
+      type: string
+      x-enum-varnames:
+      - EVENT_STREAM
+    EventTimelineWidgetDefinition:
+      description: The event timeline is a widget version of the timeline that appears
+        at the top of the Event Stream view. Only available on FREE layout dashboards.
+      properties:
+        query:
+          description: Query to filter the event timeline with.
+          example: ''
+          type: string
+        tags_execution:
+          description: The execution method for multi-value filters. Can be either
+            and or or.
+          type: string
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/EventTimelineWidgetDefinitionType'
+      required:
+      - type
+      - query
+      type: object
+    EventTimelineWidgetDefinitionType:
+      default: event_timeline
+      description: Type of the event timeline widget.
+      enum:
+      - event_timeline
+      example: event_timeline
+      type: string
+      x-enum-varnames:
+      - EVENT_TIMELINE
+    FormulaAndFunctionApmDependencyStatName:
+      description: APM statistic.
+      enum:
+      - avg_duration
+      - avg_root_duration
+      - avg_spans_per_trace
+      - error_rate
+      - pct_exec_time
+      - pct_of_traces
+      - total_traces_count
+      example: avg_duration
+      type: string
+      x-enum-varnames:
+      - AVG_DURATION
+      - AVG_ROOT_DURATION
+      - AVG_SPANS_PER_TRACE
+      - ERROR_RATE
+      - PCT_EXEC_TIME
+      - PCT_OF_TRACES
+      - TOTAL_TRACES_COUNT
+    FormulaAndFunctionApmDependencyStatsDataSource:
+      description: Data source for APM dependency stats queries.
+      enum:
+      - apm_dependency_stats
+      example: apm_dependency_stats
+      type: string
+      x-enum-varnames:
+      - APM_DEPENDENCY_STATS
+    FormulaAndFunctionApmDependencyStatsQueryDefinition:
+      description: A formula and functions APM dependency stats query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
+        env:
+          description: APM environment.
+          example: staging
+          type: string
+        is_upstream:
+          description: Determines whether stats for upstream or downstream dependencies
+            should be queried.
+          example: false
+          type: boolean
+        name:
+          description: Name of query to use in formulas.
+          example: query_errors
+          type: string
+        operation_name:
+          description: Name of operation on service.
+          example: cassandra.query
+          type: string
+        primary_tag_name:
+          description: The name of the second primary tag used within APM; required
+            when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog.
+          example: datacenter
+          type: string
+        primary_tag_value:
+          description: Filter APM data by the second primary tag. `primary_tag_name`
+            must also be specified.
+          example: staging
+          type: string
+        resource_name:
+          description: APM resource.
+          example: DELETE FROM foo WHERE baz = ?
+          type: string
+        service:
+          description: APM service.
+          example: cassandra
+          type: string
+        stat:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatName'
+      required:
+      - data_source
+      - env
+      - stat
+      - operation_name
+      - resource_name
+      - service
+      - name
+      type: object
+    FormulaAndFunctionApmResourceStatName:
+      description: APM resource stat name.
+      enum:
+      - errors
+      - error_rate
+      - hits
+      - latency_avg
+      - latency_distribution
+      - latency_max
+      - latency_p50
+      - latency_p75
+      - latency_p90
+      - latency_p95
+      - latency_p99
+      example: hits
+      type: string
+      x-enum-varnames:
+      - ERRORS
+      - ERROR_RATE
+      - HITS
+      - LATENCY_AVG
+      - LATENCY_DISTRIBUTION
+      - LATENCY_MAX
+      - LATENCY_P50
+      - LATENCY_P75
+      - LATENCY_P90
+      - LATENCY_P95
+      - LATENCY_P99
+    FormulaAndFunctionApmResourceStatsDataSource:
+      description: Data source for APM resource stats queries.
+      enum:
+      - apm_resource_stats
+      example: apm_resource_stats
+      type: string
+      x-enum-varnames:
+      - APM_RESOURCE_STATS
+    FormulaAndFunctionApmResourceStatsQueryDefinition:
+      description: APM resource stats query using formulas and functions.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsDataSource'
+        env:
+          description: APM environment.
+          example: staging
+          type: string
+        group_by:
+          description: Array of fields to group results by.
+          items:
+            description: Field to group results by.
+            example: resource_name
+            type: string
+          type: array
+        name:
+          description: Name of this query to use in formulas.
+          example: query_errors
+          type: string
+        operation_name:
+          description: Name of operation on service.
+          example: cassandra.query
+          type: string
+        primary_tag_name:
+          description: Name of the second primary tag used within APM. Required when
+            `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+          example: datacenter
+          type: string
+        primary_tag_value:
+          description: Value of the second primary tag by which to filter APM data.
+            `primary_tag_name` must also be specified.
+          example: us-east-az
+          type: string
+        resource_name:
+          description: APM resource name.
+          example: Admin::ProductsController#create
+          type: string
+        service:
+          description: APM service name.
+          example: web-store
+          type: string
+        stat:
+          $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatName'
+      required:
+      - data_source
+      - env
+      - name
+      - service
+      - stat
+      type: object
+    FormulaAndFunctionEventAggregation:
+      description: Aggregation methods for event platform queries.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: avg
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    FormulaAndFunctionEventQueryDefinition:
+      description: A formula and functions events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionCompute'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBy'
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionSearch'
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
+          type: string
+      required:
+      - data_source
+      - compute
+      - name
+      type: object
+    FormulaAndFunctionEventQueryDefinitionCompute:
+      description: Compute options.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+        interval:
+          description: A time interval in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: Measurable attribute to compute.
+          example: '@duration'
+          type: string
+      required:
+      - aggregation
+      type: object
+    FormulaAndFunctionEventQueryDefinitionSearch:
+      description: Search options.
+      properties:
+        query:
+          description: Events search string.
+          example: service:query
+          type: string
+      required:
+      - query
+      type: object
+    FormulaAndFunctionEventQueryGroupBy:
+      description: List of objects used to group by.
+      properties:
+        facet:
+          description: Event facet.
+          example: status.
+          type: string
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBySort'
+      required:
+      - facet
+      type: object
+    FormulaAndFunctionEventQueryGroupBySort:
+      description: Options for sorting group by results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+        metric:
+          description: Metric used for sorting group by results.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - aggregation
+      type: object
+    FormulaAndFunctionEventsDataSource:
+      description: Data source for event platform-based queries.
+      enum:
+      - logs
+      - spans
+      - network
+      - rum
+      - security_signals
+      - profiles
+      - audit
+      - events
+      - ci_tests
+      - ci_pipelines
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - SPANS
+      - NETWORK
+      - RUM
+      - SECURITY_SIGNALS
+      - PROFILES
+      - AUDIT
+      - EVENTS
+      - CI_TESTS
+      - CI_PIPELINES
+    FormulaAndFunctionMetricAggregation:
+      description: The aggregation methods available for metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      - area
+      - l2norm
+      - percentile
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+    FormulaAndFunctionMetricDataSource:
+      description: Data source for metrics queries.
+      enum:
+      - metrics
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+    FormulaAndFunctionMetricQueryDefinition:
+      description: A formula and functions metrics query.
+      example:
+        data_source: metrics
+        name: my_query
+        query: avg:system.cpu.user{*}
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_query
+          type: string
+        query:
+          description: Metrics query definition.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      - name
+      type: object
+    FormulaAndFunctionProcessQueryDataSource:
+      description: Data sources that rely on the process backend.
+      enum:
+      - process
+      - container
+      example: process
+      type: string
+      x-enum-varnames:
+      - PROCESS
+      - CONTAINER
+    FormulaAndFunctionProcessQueryDefinition:
+      description: Process query using formulas and functions.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
+        is_normalized_cpu:
+          description: Whether to normalize the CPU percentages.
+          type: boolean
+        limit:
+          description: Number of hits to return.
+          format: int64
+          type: integer
+        metric:
+          description: Process metric name.
+          example: avg:system.cpu.user{*}
+          type: string
+        name:
+          description: Name of query for use in formulas.
+          example: query_errors
+          type: string
+        sort:
+          $ref: '#/components/schemas/QuerySortOrder'
+        tag_filters:
+          description: An array of tags to filter by.
+          items:
+            description: One of the tags to filter by.
+            type: string
+          type: array
+        text_filter:
+          description: Text to use as filter.
+          type: string
+      required:
+      - data_source
+      - metric
+      - name
+      type: object
+    FormulaAndFunctionQueryDefinition:
+      description: A formula and function query.
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      type: object
+    FormulaAndFunctionResponseFormat:
+      description: Timeseries or Scalar response.
+      enum:
+      - timeseries
+      - scalar
+      example: timeseries
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - SCALAR
+    FreeTextWidgetDefinition:
+      description: Free text is a widget that allows you to add headings to your screenboard.
+        Commonly used to state the overall purpose of the dashboard. Only available
+        on FREE layout dashboards.
+      properties:
+        color:
+          description: Color of the text.
+          type: string
+        font_size:
+          description: Size of the text.
+          type: string
+        text:
+          description: Text to display.
+          example: ''
+          type: string
+        text_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        type:
+          $ref: '#/components/schemas/FreeTextWidgetDefinitionType'
+      required:
+      - type
+      - text
+      type: object
+    FreeTextWidgetDefinitionType:
+      default: free_text
+      description: Type of the free text widget.
+      enum:
+      - free_text
+      example: free_text
+      type: string
+      x-enum-varnames:
+      - FREE_TEXT
+    FunnelQuery:
+      description: Updated funnel widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FunnelSource'
+        query_string:
+          description: The widget query.
+          example: '@browser.name:Chrome'
+          type: string
+        steps:
+          description: List of funnel steps.
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          type: array
+      required:
+      - query_string
+      - data_source
+      - steps
+      type: object
+    FunnelRequestType:
+      description: Widget request type.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelSource:
+      default: rum
+      description: Source from which to query items to display in the funnel.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    FunnelStep:
+      description: The funnel step.
+      properties:
+        facet:
+          description: The facet of the step.
+          example: '@view.name'
+          type: string
+        value:
+          description: The value of the step.
+          example: /apm/home
+          type: string
+      required:
+      - facet
+      - value
+      type: object
+    FunnelWidgetDefinition:
+      description: 'The funnel visualization displays a funnel of user sessions that
+        maps a sequence of view navigation and user interaction in your application.
+
+        '
+      properties:
+        requests:
+          description: Request payload used to query items.
+          example:
+          - query:
+              data_source: rum
+              query_string: '@browser.name:Chrome'
+              steps:
+              - facet: '@view.name'
+                value: /logs
+              - facet: '@view.name'
+                value: /apm/home
+            request_type: funnel
+          items:
+            $ref: '#/components/schemas/FunnelWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    FunnelWidgetDefinitionType:
+      default: funnel
+      description: Type of funnel widget.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelWidgetRequest:
+      description: Updated funnel widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/FunnelQuery'
+        request_type:
+          $ref: '#/components/schemas/FunnelRequestType'
+      required:
+      - query
+      - request_type
+      type: object
+    GCPAccount:
+      description: Your Google Cloud Platform Account.
+      properties:
+        auth_provider_x509_cert_url:
+          description: Should be `https://www.googleapis.com/oauth2/v1/certs`.
+          example: https://www.googleapis.com/oauth2/v1/certs
+          type: string
+        auth_uri:
+          description: Should be `https://accounts.google.com/o/oauth2/auth`.
+          example: https://accounts.google.com/o/oauth2/auth
+          type: string
+        automute:
+          description: Silence monitors for expected GCE instance shutdowns.
+          type: boolean
+        client_email:
+          description: Your email found in your JSON service account key.
+          example: api-dev@datadog-sandbox.iam.gserviceaccount.com
+          type: string
+        client_id:
+          description: Your ID found in your JSON service account key.
+          example: '123456712345671234567'
+          type: string
+        client_x509_cert_url:
+          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL`
+
+            where `$CLIENT_EMAIL` is the email found in your JSON service account
+            key.'
+          example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
+          type: string
+        errors:
+          description: An array of errors.
+          example:
+          - '*'
+          items:
+            description: String representation of one error.
+            readOnly: true
+            type: string
+          type: array
+        host_filters:
+          description: 'Limit the GCE instances that are pulled into Datadog by using
+            tags.
+
+            Only hosts that match one of the defined tags are imported into Datadog.'
+          example: key:value,filter:example
+          type: string
+        is_cspm_enabled:
+          default: false
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          example: true
+          type: boolean
+        private_key:
+          description: Your private key name found in your JSON service account key.
+          example: private_key
+          type: string
+        private_key_id:
+          description: Your private key ID found in your JSON service account key.
+          example: 123456789abcdefghi123456789abcdefghijklm
+          type: string
+        project_id:
+          description: Your Google Cloud project ID found in your JSON service account
+            key.
+          example: datadog-apitest
+          type: string
+        token_uri:
+          description: Should be `https://accounts.google.com/o/oauth2/token`.
+          example: https://accounts.google.com/o/oauth2/token
+          type: string
+        type:
+          description: The value for service_account found in your JSON service account
+            key.
+          example: service_account
+          type: string
+      type: object
+    GCPAccountListResponse:
+      description: Array of GCP account responses.
+      items:
+        $ref: '#/components/schemas/GCPAccount'
+      type: array
+    GeomapWidgetDefinition:
+      description: This visualization displays a series of values by country on a
+        world map.
+      properties:
+        custom_links:
+          description: A list of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: 'Array of one request object to display in the widget. The
+            request must contain a `group-by` tag whose value is a country ISO code.
+
+
+            See the [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)
+
+            for information about building the `REQUEST_SCHEMA`.'
+          example:
+          - rum_query:
+              search:
+                query: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/GeomapWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        style:
+          $ref: '#/components/schemas/GeomapWidgetDefinitionStyle'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: The title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/GeomapWidgetDefinitionType'
+        view:
+          $ref: '#/components/schemas/GeomapWidgetDefinitionView'
+      required:
+      - type
+      - requests
+      - style
+      - view
+      type: object
+    GeomapWidgetDefinitionStyle:
+      description: The style to apply to the widget.
+      example:
+        palette: hostmap_blues
+        palette_flip: false
+      properties:
+        palette:
+          description: The color palette to apply to the widget.
+          example: hostmap_blues
+          type: string
+        palette_flip:
+          description: Whether to flip the palette tones.
+          example: false
+          type: boolean
+      required:
+      - palette
+      - palette_flip
+      type: object
+    GeomapWidgetDefinitionType:
+      default: geomap
+      description: Type of the geomap widget.
+      enum:
+      - geomap
+      example: geomap
+      type: string
+      x-enum-varnames:
+      - GEOMAP
+    GeomapWidgetDefinitionView:
+      description: The view of the world that the map should render.
+      example:
+        focus: WORLD
+      properties:
+        focus:
+          description: The 2-letter ISO code of a country to focus the map on. Or
+            `WORLD`.
+          example: WORLD
+          type: string
+      required:
+      - focus
+      type: object
+    GeomapWidgetRequest:
+      description: An updated geomap widget.
+      properties:
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: The widget metrics query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    GraphSnapshot:
+      description: Object representing a graph snapshot.
+      properties:
+        graph_def:
+          description: 'A JSON document defining the graph. `graph_def` can be used
+            instead of `metric_query`.
+
+            The JSON document uses the [grammar defined here](https://docs.datadoghq.com/graphing/graphing_json/#grammar)
+
+            and should be formatted to a single line then URL encoded.'
+          type: string
+        metric_query:
+          description: The metric query. One of `metric_query` or `graph_def` is required.
+          type: string
+        snapshot_url:
+          description: URL of your [graph snapshot](https://docs.datadoghq.com/metrics/explorer/#snapshot).
+          example: https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc
+          type: string
+      type: object
+    GroupWidgetDefinition:
+      description: The groups widget allows you to keep similar graphs together on
+        your timeboard. Each group has a custom header, can hold one to many graphs,
+        and is collapsible.
+      properties:
+        background_color:
+          description: Background color of the group title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the group.
+          type: string
+        layout_type:
+          $ref: '#/components/schemas/WidgetLayoutType'
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        type:
+          $ref: '#/components/schemas/GroupWidgetDefinitionType'
+        widgets:
+          description: List of widget groups.
+          example:
+          - definition:
+              requests:
+                fill:
+                  q: avg:system.cpu.user{*}
+              type: hostmap
+          items:
+            $ref: '#/components/schemas/Widget'
+          type: array
+      required:
+      - type
+      - layout_type
+      - widgets
+      type: object
+    GroupWidgetDefinitionType:
+      default: group
+      description: Type of the group widget.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    HTTPLog:
+      description: Structured log message.
+      items:
+        $ref: '#/components/schemas/HTTPLogItem'
+      type: array
+    HTTPLogError:
+      description: Invalid query performed.
+      properties:
+        code:
+          description: Error code.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        message:
+          description: Error message.
+          example: Your browser sent an invalid request.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
+      description: Logs that are sent over HTTP.
+      properties:
+        ddsource:
+          description: 'The integration name associated with your log: the technology
+            from which the log originated.
+
+            When it matches an integration name, Datadog automatically installs the
+            corresponding parsers and facets.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your logs.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+            value when you use both products.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: payment
+          type: string
+      required:
+      - message
+      type: object
+    HeatMapWidgetDefinition:
+      description: The heat map visualization shows metrics aggregated across many
+        tags, such as hosts. The more hosts that have a particular value, the darker
+        that square is.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        events:
+          description: List of widget events.
+          items:
+            $ref: '#/components/schemas/WidgetEvent'
+          type: array
+        legend_size:
+          $ref: '#/components/schemas/WidgetLegendSize'
+        requests:
+          description: List of widget types.
+          example:
+          - q: jvm.heap.memory
+          items:
+            $ref: '#/components/schemas/HeatMapWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          description: Whether or not to display the legend on this widget.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/HeatMapWidgetDefinitionType'
+        yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
+      required:
+      - type
+      - requests
+      type: object
+    HeatMapWidgetDefinitionType:
+      default: heatmap
+      description: Type of the heat map widget.
+      enum:
+      - heatmap
+      example: heatmap
+      type: string
+      x-enum-varnames:
+      - HEATMAP
+    HeatMapWidgetRequest:
+      description: Updated heat map widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/EventQueryDefinition'
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    Host:
+      description: Object representing a host.
+      properties:
+        aliases:
+          description: Host aliases collected by Datadog.
+          items:
+            description: A host alias.
+            example: mycoolhost-1
+            type: string
+          type: array
+        apps:
+          description: The Datadog integrations reporting metrics for the host.
+          items:
+            description: Name of an app.
+            example: agent
+            type: string
+          type: array
+        aws_name:
+          description: AWS name of your host.
+          example: mycoolhost-1
+          type: string
+        host_name:
+          description: The host name.
+          example: i-deadbeef
+          type: string
+        id:
+          description: The host ID.
+          example: 123456
+          format: int64
+          type: integer
+        is_muted:
+          description: If a host is muted or unmuted.
+          example: false
+          type: boolean
+        last_reported_time:
+          description: Last time the host reported a metric data point.
+          example: 1565000000
+          format: int64
+          type: integer
+        meta:
+          $ref: '#/components/schemas/HostMeta'
+        metrics:
+          $ref: '#/components/schemas/HostMetrics'
+        mute_timeout:
+          description: Timeout of the mute applied to your host.
+          format: int64
+          type: integer
+        name:
+          description: The host name.
+          example: i-hostname
+          type: string
+        sources:
+          description: Source or cloud provider associated with your host.
+          items:
+            description: A source or cloud provider name.
+            example: aws
+            type: string
+          type: array
+        tags_by_source:
+          additionalProperties:
+            description: Array of tags for a single source.
+            items:
+              description: A tag.
+              example: test.example.com.host
+              type: string
+            type: array
+          description: List of tags for each source (AWS, Datadog Agent, Chef..).
+          type: object
+        up:
+          description: Displays UP when the expected metrics are received and displays
+            `???` if no metrics are received.
+          example: true
+          type: boolean
+      type: object
+    HostListResponse:
+      description: Response with Host information from Datadog.
+      properties:
+        host_list:
+          description: Array of hosts.
+          items:
+            $ref: '#/components/schemas/Host'
+          type: array
+        total_matching:
+          description: Number of host matching the query.
+          example: 1
+          format: int64
+          type: integer
+        total_returned:
+          description: Number of host returned.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    HostMapRequest:
+      description: Updated host map.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Query definition.
+          type: string
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    HostMapWidgetDefinition:
+      description: The host map widget graphs any metric across your hosts using the
+        same visualization available from the main Host Map page.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        group:
+          description: List of tag prefixes to group by.
+          items:
+            description: Tag prefixes.
+            type: string
+          type: array
+        no_group_hosts:
+          description: "Whether to show the hosts that don\u2019t fit in a group."
+          type: boolean
+        no_metric_hosts:
+          description: Whether to show the hosts with no metrics.
+          type: boolean
+        node_type:
+          $ref: '#/components/schemas/WidgetNodeType'
+        notes:
+          description: Notes on the title.
+          type: string
+        requests:
+          $ref: '#/components/schemas/HostMapWidgetDefinitionRequests'
+        scope:
+          description: List of tags used to filter the map.
+          items:
+            description: Tags.
+            type: string
+          type: array
+        style:
+          $ref: '#/components/schemas/HostMapWidgetDefinitionStyle'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/HostMapWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    HostMapWidgetDefinitionRequests:
+      description: List of definitions.
+      example: {}
+      properties:
+        fill:
+          $ref: '#/components/schemas/HostMapRequest'
+        size:
+          $ref: '#/components/schemas/HostMapRequest'
+      type: object
+    HostMapWidgetDefinitionStyle:
+      description: The style to apply to the widget.
+      properties:
+        fill_max:
+          description: Max value to use to color the map.
+          type: string
+        fill_min:
+          description: Min value to use to color the map.
+          type: string
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+        palette_flip:
+          description: Whether to flip the palette tones.
+          type: boolean
+      type: object
+    HostMapWidgetDefinitionType:
+      default: hostmap
+      description: Type of the host map widget.
+      enum:
+      - hostmap
+      example: hostmap
+      type: string
+      x-enum-varnames:
+      - HOSTMAP
+    HostMeta:
+      description: Metadata associated with your host.
+      properties:
+        agent_checks:
+          description: A list of Agent checks running on the host.
+          items:
+            $ref: '#/components/schemas/AgentCheck'
+          type: array
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.32.3
+          type: string
+        cpuCores:
+          description: The number of cores.
+          example: 1
+          format: int64
+          type: integer
+        fbsdV:
+          description: An array of Mac versions.
+          items:
+            description: The version name.
+            example: FreeBSD
+          type: array
+        gohai:
+          description: JSON string containing system information.
+          example: '{"cpu":{"cache_size":"8192 KB","cpu_cores":"1","cpu_logical_processors":"1","family":"6","mhz":"2712.000","model":"142","model_name":"Intel(R)
+            Core(TM) i7-8559U CPU @ 2.70GHz","stepping":"10","vendor_id":"GenuineIntel"},"filesystem":[{"kb_size":"3966896","mounted_on":"/dev","name":"udev"},{"kb_size":"797396","mounted_on":"/run","name":"tmpfs"},{"kb_size":"64800356","mounted_on":"/","name":"/dev/mapper/vagrant--vg-root"},{"kb_size":"3986972","mounted_on":"/dev/shm","name":"tmpfs"},{"kb_size":"5120","mounted_on":"/run/lock","name":"tmpfs"},{"kb_size":"3986972","mounted_on":"/sys/fs/cgroup","name":"tmpfs"},{"kb_size":"488245288","mounted_on":"/vagrant","name":"vagrant"},{"kb_size":"797392","mounted_on":"/run/user/1000","name":"tmpfs"}],"memory":{"swap_total":"1003516kB","total":"7973944kB"},"network":{"interfaces":[{"ipv4":"10.0.2.15","ipv4-network":"10.0.2.0/24","ipv6":"fe80::a00:27ff:fec2:be11","ipv6-network":"fe80::/64","macaddress":"08:00:27:c2:be:11","name":"eth0"},{"ipv4":"192.168.122.1","ipv4-network":"192.168.122.0/24","macaddress":"52:54:00:6f:1c:bf","name":"virbr0"}],"ipaddress":"10.0.2.15","ipaddressv6":"fe80::a00:27ff:fec2:be11","macaddress":"08:00:27:c2:be:11"},"platform":{"GOOARCH":"amd64","GOOS":"linux","goV":"1.16.7","hardware_platform":"x86_64","hostname":"vagrant","kernel_name":"Linux","kernel_release":"4.15.0-29-generic","kernel_version":"#31-Ubuntu
+            SMP Tue Jul 17 15:39:52 UTC 2018","machine":"x86_64","os":"GNU/Linux","processor":"x86_64","pythonV":"2.7.15rc1"}}'
+          type: string
+        install_method:
+          $ref: '#/components/schemas/HostMetaInstallMethod'
+        macV:
+          description: An array of Mac versions.
+          items:
+            description: Version name.
+            example: Mac
+          type: array
+        machine:
+          description: The machine architecture.
+          example: amd64
+          type: string
+        nixV:
+          description: Array of Unix versions.
+          items:
+            description: Version name.
+            example: Ubuntu
+          type: array
+        platform:
+          description: The OS platform.
+          example: linux
+          type: string
+        processor:
+          description: The processor.
+          example: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
+          type: string
+        pythonV:
+          description: The Python version.
+          example: 3.8.11
+          type: string
+        socket-fqdn:
+          description: The socket fqdn.
+          example: vagrant.vm.
+          type: string
+        socket-hostname:
+          description: The socket hostname.
+          example: vagrant
+          type: string
+        winV:
+          description: An array of Windows versions.
+          items:
+            description: Version name.
+            example: Windows
+          type: array
+      type: object
+    HostMetaInstallMethod:
+      description: Agent install method.
+      properties:
+        installer_version:
+          description: The installer version.
+          example: install_script-1.7.1
+          type: string
+        tool:
+          description: Tool used to install the agent.
+          example: install_script
+          type: string
+        tool_version:
+          description: The tool version.
+          example: install_script
+          type: string
+      type: object
+    HostMetrics:
+      description: Host Metrics collected.
+      properties:
+        cpu:
+          description: The percent of CPU used (everything but idle).
+          example: 99.0
+          format: double
+          type: number
+        iowait:
+          description: The percent of CPU spent waiting on the IO (not reported for
+            all platforms).
+          example: 3.2
+          format: double
+          type: number
+        load:
+          description: The system load over the last 15 minutes.
+          example: 0.5
+          format: double
+          type: number
+      type: object
+    HostMuteResponse:
+      description: Response with the list of muted host for your organization.
+      properties:
+        action:
+          description: Action applied to the hosts.
+          example: Muted
+          type: string
+        end:
+          description: POSIX timestamp in seconds when the host is unmuted.
+          example: 1579098130
+          format: int64
+          type: integer
+        hostname:
+          description: The host name.
+          example: test.host
+          type: string
+        message:
+          description: Message associated with the mute.
+          example: Muting this host for a test!
+          type: string
+      type: object
+    HostMuteSettings:
+      description: Combination of settings to mute a host.
+      properties:
+        end:
+          description: POSIX timestamp in seconds when the host is unmuted. If omitted,
+            the host remains muted until explicitly unmuted.
+          example: 1579098130
+          format: int64
+          type: integer
+        message:
+          description: Message to associate with the muting of this host.
+          example: Muting this host for a test!
+          type: string
+        override:
+          description: If true and the host is already muted, replaces existing host
+            mute settings.
+          example: false
+          type: boolean
+      type: object
+    HostTags:
+      description: Set of tags to associate with your host.
+      properties:
+        host:
+          description: Your host name.
+          example: test.host
+          type: string
+        tags:
+          description: A list of tags to apply to the host.
+          items:
+            description: A given tag in a list.
+            example: environment:production
+            type: string
+          type: array
+      type: object
+    HostTotals:
+      description: Total number of host currently monitored by Datadog.
+      properties:
+        total_active:
+          description: Total number of active host (UP and ???) reporting to Datadog.
+          format: int64
+          type: integer
+        total_up:
+          description: Number of host that are UP and reporting to Datadog.
+          format: int64
+          type: integer
+      type: object
+    HourlyUsageAttributionBody:
+      description: The usage for one set of tags for one hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        total_usage_sum:
+          description: Total product usage for the given tags within the hour.
+          format: double
+          type: number
+        updated_at:
+          description: Shows the most recent hour in the current month for all organizations
+            where usages are calculated.
+          type: string
+        usage_type:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      type: object
+    HourlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/HourlyUsageAttributionPagination'
+      type: object
+    HourlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    HourlyUsageAttributionResponse:
+      description: Response containing the hourly usage attribution by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/HourlyUsageAttributionMetadata'
+        usage:
+          description: Get the hourly usage attribution by tag(s).
+          items:
+            $ref: '#/components/schemas/HourlyUsageAttributionBody'
+          type: array
+      type: object
+    HourlyUsageAttributionUsageType:
+      description: Supported products for hourly usage attribution requests.
+      enum:
+      - api_usage
+      - apm_fargate_usage
+      - apm_host_usage
+      - appsec_fargate_usage
+      - appsec_usage
+      - browser_usage
+      - container_excl_agent_usage
+      - container_usage
+      - cspm_containers_usage
+      - cspm_hosts_usage
+      - custom_timeseries_usage
+      - cws_containers_usage
+      - cws_hosts_usage
+      - dbm_hosts_usage
+      - dbm_queries_usage
+      - estimated_indexed_logs_usage
+      - estimated_ingested_logs_usage
+      - estimated_indexed_spans_usage
+      - estimated_ingested_spans_usage
+      - fargate_usage
+      - functions_usage
+      - infra_host_usage
+      - invocations_usage
+      - npm_host_usage
+      - profiled_container_usage
+      - profiled_fargate_usage
+      - profiled_host_usage
+      - snmp_usage
+      - estimated_rum_sessions_usage
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - APM_FARGATE_USAGE
+      - APM_HOST_USAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_USAGE
+      - BROWSER_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
+      - CONTAINER_USAGE
+      - CSPM_CONTAINERS_USAGE
+      - CSPM_HOSTS_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - CWS_CONTAINERS_USAGE
+      - CWS_HOSTS_USAGE
+      - DBM_HOSTS_USAGE
+      - DBM_QUERIES_USAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - FARGATE_USAGE
+      - FUNCTIONS_USAGE
+      - INFRA_HOST_USAGE
+      - INVOCATIONS_USAGE
+      - NPM_HOST_USAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_FARGATE_USAGE
+      - PROFILED_HOST_USAGE
+      - SNMP_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+    IFrameWidgetDefinition:
+      description: The iframe widget allows you to embed a portion of any other web
+        page on your dashboard. Only available on FREE layout dashboards.
+      properties:
+        type:
+          $ref: '#/components/schemas/IFrameWidgetDefinitionType'
+        url:
+          description: URL of the iframe.
+          example: ''
+          type: string
+      required:
+      - type
+      - url
+      type: object
+    IFrameWidgetDefinitionType:
+      default: iframe
+      description: Type of the iframe widget.
+      enum:
+      - iframe
+      example: iframe
+      type: string
+      x-enum-varnames:
+      - IFRAME
+    IPPrefixesAPI:
+      description: Available prefix information for the API endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesAPM:
+      description: Available prefix information for the APM endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesAgents:
+      description: Available prefix information for the Agent endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesLogs:
+      description: Available prefix information for the Logs endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesOrchestrator:
+      description: Available prefix information for the Orchestrator endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesProcess:
+      description: Available prefix information for the Process endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesSynthetics:
+      description: Available prefix information for the Synthetics endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv4_by_location:
+          additionalProperties:
+            description: List of IPv4 prefixes.
+            items:
+              description: IPv4 prefix.
+              type: string
+            type: array
+          description: List of IPv4 prefixes by location.
+          type: object
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+        prefixes_ipv6_by_location:
+          additionalProperties:
+            description: List of IPv6 prefixes.
+            items:
+              description: IPv6 prefix.
+              type: string
+            type: array
+          description: List of IPv6 prefixes by location.
+          type: object
+      type: object
+    IPPrefixesSyntheticsPrivateLocations:
+      description: Available prefix information for the Synthetics Private Locations
+        endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesWebhooks:
+      description: Available prefix information for the Webhook endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPRanges:
+      description: IP ranges.
+      properties:
+        agents:
+          $ref: '#/components/schemas/IPPrefixesAgents'
+        api:
+          $ref: '#/components/schemas/IPPrefixesAPI'
+        apm:
+          $ref: '#/components/schemas/IPPrefixesAPM'
+        logs:
+          $ref: '#/components/schemas/IPPrefixesLogs'
+        modified:
+          description: Date when last updated, in the form `YYYY-MM-DD-hh-mm-ss`.
+          example: 2019-10-31-20-00-00
+          type: string
+        orchestrator:
+          $ref: '#/components/schemas/IPPrefixesOrchestrator'
+        process:
+          $ref: '#/components/schemas/IPPrefixesProcess'
+        synthetics:
+          $ref: '#/components/schemas/IPPrefixesSynthetics'
+        synthetics-private-locations:
+          $ref: '#/components/schemas/IPPrefixesSyntheticsPrivateLocations'
+        version:
+          description: Version of the IP list.
+          example: 11
+          format: int64
+          type: integer
+        webhooks:
+          $ref: '#/components/schemas/IPPrefixesWebhooks'
+      type: object
+    IdpFormData:
+      description: Object describing the IdP configuration.
+      properties:
+        idp_file:
+          description: The path to the XML metadata file you wish to upload.
+          example: ''
+          format: binary
+          type: string
+      required:
+      - idp_file
+      type: object
+    IdpResponse:
+      description: The IdP response object.
+      properties:
+        message:
+          description: Identity provider response.
+          example: IdP metadata successfully uploaded for example org
+          type: string
+      required:
+      - message
+      type: object
+    ImageWidgetDefinition:
+      description: The image widget allows you to embed an image on your dashboard.
+        An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
+        dashboards.
+      properties:
+        has_background:
+          default: true
+          description: Whether to display a background or not.
+          example: true
+          type: boolean
+        has_border:
+          default: true
+          description: Whether to display a border or not.
+          example: true
+          type: boolean
+        horizontal_align:
+          $ref: '#/components/schemas/WidgetHorizontalAlign'
+        margin:
+          $ref: '#/components/schemas/WidgetMargin'
+        sizing:
+          $ref: '#/components/schemas/WidgetImageSizing'
+        type:
+          $ref: '#/components/schemas/ImageWidgetDefinitionType'
+        url:
+          description: URL of the image.
+          example: https://example.com/image.png
+          type: string
+        url_dark_theme:
+          description: URL of the image in dark mode.
+          example: https://example.com/image-dark-mode.png
+          type: string
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
+      required:
+      - type
+      - url
+      type: object
+    ImageWidgetDefinitionType:
+      default: image
+      description: Type of the image widget.
+      enum:
+      - image
+      example: image
+      type: string
+      x-enum-varnames:
+      - IMAGE
+    IntakePayloadAccepted:
+      description: The payload accepted for intake.
+      properties:
+        status:
+          description: The status of the intake payload.
+          example: ok
+          type: string
+      type: object
+    ListStreamColumn:
+      description: Widget column.
+      example:
+        field: timestamp
+        width: auto
+      properties:
+        field:
+          description: Widget column field.
+          example: content
+          type: string
+        width:
+          $ref: '#/components/schemas/ListStreamColumnWidth'
+      required:
+      - width
+      - field
+      type: object
+    ListStreamColumnWidth:
+      description: Widget column width.
+      enum:
+      - auto
+      - compact
+      - full
+      example: compact
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - COMPACT
+      - FULL
+    ListStreamComputeAggregation:
+      description: Aggregation value.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - earliest
+      - latest
+      - most_frequent
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - EARLIEST
+      - LATEST
+      - MOST_FREQUENT
+    ListStreamComputeItems:
+      description: List of facets and aggregations which to compute.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/ListStreamComputeAggregation'
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - aggregation
+      type: object
+    ListStreamGroupByItems:
+      description: List of facets on which to group.
+      properties:
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - facet
+      type: object
+    ListStreamQuery:
+      description: Updated list stream widget.
+      properties:
+        compute:
+          description: Compute configuration for the List Stream Widget. Compute can
+            be used only with the logs_transaction_stream (from 1 to 5 items) list
+            stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamComputeItems'
+          maxItems: 5
+          minItems: 1
+          type: array
+        data_source:
+          $ref: '#/components/schemas/ListStreamSource'
+        event_size:
+          $ref: '#/components/schemas/WidgetEventSize'
+        group_by:
+          description: Group by configuration for the List Stream Widget. Group by
+            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            (one group by item is required) list stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamGroupByItems'
+          maxItems: 3
+          type: array
+        indexes:
+          description: List of indexes.
+          items:
+            description: Index.
+            type: string
+          type: array
+        query_string:
+          description: Widget query.
+          example: '@service:app'
+          type: string
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
+          type: string
+      required:
+      - query_string
+      - data_source
+      type: object
+    ListStreamResponseFormat:
+      description: Widget response format.
+      enum:
+      - event_list
+      example: event_list
+      type: string
+      x-enum-varnames:
+      - EVENT_LIST
+    ListStreamSource:
+      default: apm_issue_stream
+      description: Source from which to query items to display in the stream.
+      enum:
+      - logs_stream
+      - audit_stream
+      - ci_pipeline_stream
+      - ci_test_stream
+      - rum_issue_stream
+      - apm_issue_stream
+      - logs_issue_stream
+      - logs_pattern_stream
+      - logs_transaction_stream
+      - event_stream
+      example: apm_issue_stream
+      type: string
+      x-enum-varnames:
+      - LOGS_STREAM
+      - AUDIT_STREAM
+      - CI_PIPELINE_STREAM
+      - CI_TEST_STREAM
+      - RUM_ISSUE_STREAM
+      - APM_ISSUE_STREAM
+      - LOGS_ISSUE_STREAM
+      - LOGS_PATTERN_STREAM
+      - LOGS_TRANSACTION_STREAM
+      - EVENT_STREAM
+    ListStreamWidgetDefinition:
+      description: 'The list stream visualization displays a table of recent events
+        in your application that
+
+        match a search criteria using user-defined columns.
+
+        '
+      properties:
+        legend_size:
+          $ref: '#/components/schemas/WidgetLegendSize'
+        requests:
+          description: Request payload used to query items.
+          example:
+          - columns:
+            - field: timestamp
+              width: auto
+            query:
+              data_source: apm_issue_stream
+              query_string: '@data_source:APM'
+            response_format: event_list
+          items:
+            $ref: '#/components/schemas/ListStreamWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          description: Whether or not to display the legend on this widget.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/ListStreamWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    ListStreamWidgetDefinitionType:
+      default: list_stream
+      description: Type of the list stream widget.
+      enum:
+      - list_stream
+      example: list_stream
+      type: string
+      x-enum-varnames:
+      - LIST_STREAM
+    ListStreamWidgetRequest:
+      description: Updated list stream widget.
+      properties:
+        columns:
+          description: Widget columns.
+          example:
+          - field: timestamp
+            width: auto
+          - field: content
+            width: full
+          items:
+            $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        query:
+          $ref: '#/components/schemas/ListStreamQuery'
+        response_format:
+          $ref: '#/components/schemas/ListStreamResponseFormat'
+      required:
+      - columns
+      - query
+      - response_format
+      type: object
+    Log:
+      description: Object describing a log after being processed and stored by Datadog.
+      properties:
+        content:
+          $ref: '#/components/schemas/LogContent'
+        id:
+          description: Unique ID of the Log.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      type: object
+    LogContent:
+      description: JSON object containing all log attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from your log.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        host:
+          description: Name of the machine from where the logs are being sent.
+          example: i-0123
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: Host connected to remote
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+
+            value when you use both products.'
+          example: agent
+          type: string
+        tags:
+          description: Array of tags associated with your log.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your log.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp of your log.
+          example: '2020-05-26T13:36:14Z'
+          format: date-time
+          type: string
+      type: object
+    LogQueryDefinition:
+      description: The log query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/LogsQueryCompute'
+        group_by:
+          description: List of tag prefixes to group by in the case of a cluster check.
+          items:
+            $ref: '#/components/schemas/LogQueryDefinitionGroupBy'
+          type: array
+        index:
+          description: A coma separated-list of index names. Use "*" query all indexes
+            at once. [Multiple Indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+          example: days-3,days-7
+          type: string
+        multi_compute:
+          description: This field is mutually exclusive with `compute`.
+          items:
+            $ref: '#/components/schemas/LogsQueryCompute'
+          type: array
+        search:
+          $ref: '#/components/schemas/LogQueryDefinitionSearch'
+      type: object
+    LogQueryDefinitionGroupBy:
+      description: Defined items in the group.
+      properties:
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+        limit:
+          description: Maximum number of items in the group.
+          example: 50
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/LogQueryDefinitionGroupBySort'
+      required:
+      - facet
+      type: object
+    LogQueryDefinitionGroupBySort:
+      description: Define a sorting method.
+      properties:
+        aggregation:
+          description: The aggregation method.
+          example: avg
+          type: string
+        facet:
+          description: Facet name.
+          example: '@string_query.interval'
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - aggregation
+      - order
+      type: object
+    LogQueryDefinitionSearch:
+      description: The query being made on the logs.
+      properties:
+        query:
+          description: Search value to apply.
+          example: ''
+          type: string
+      required:
+      - query
+      type: object
+    LogStreamWidgetDefinition:
+      description: The Log Stream displays a log flow matching the defined query.
+        Only available on FREE layout dashboards.
+      properties:
+        columns:
+          description: Which columns to display on the widget.
+          items:
+            description: Column name.
+            type: string
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Use [] to query
+            all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: One of the log indexes set up for your organization. [Multiple
+              Indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+            type: string
+          type: array
+        logset:
+          deprecated: true
+          description: ID of the log set to use.
+          type: string
+        message_display:
+          $ref: '#/components/schemas/WidgetMessageDisplay'
+        query:
+          description: Query to filter the log stream with.
+          type: string
+        show_date_column:
+          description: Whether to show the date column or not
+          type: boolean
+        show_message_column:
+          description: Whether to show the message column or not
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/WidgetFieldSort'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/LogStreamWidgetDefinitionType'
+      required:
+      - type
+      type: object
+    LogStreamWidgetDefinitionType:
+      default: log_stream
+      description: Type of the log stream widget.
+      enum:
+      - log_stream
+      example: log_stream
+      type: string
+      x-enum-varnames:
+      - LOG_STREAM
+    LogsAPIError:
+      description: Error returned by the Logs API
+      properties:
+        code:
+          description: Code identifying the error
+          type: string
+        details:
+          description: Additional error details
+          items:
+            $ref: '#/components/schemas/LogsAPIError'
+          type: array
+        message:
+          description: Error message
+          type: string
+      type: object
+    LogsAPIErrorResponse:
+      description: Response returned by the Logs API when errors occur.
+      properties:
+        error:
+          $ref: '#/components/schemas/LogsAPIError'
+      type: object
+    LogsArithmeticProcessor:
+      description: "Use the Arithmetic Processor to add a new attribute (without spaces
+        or special characters\nin the new attribute name) to a log with the result
+        of the provided formula.\nThis enables you to remap different time attributes
+        with different units into a single attribute,\nor to compute operations on
+        attributes within the same log.\n\nThe formula can use parentheses and the
+        basic arithmetic operators `-`, `+`, `*`, `/`.\n\nBy default, the calculation
+        is skipped if an attribute is missing.\nSelect \u201CReplace missing attribute
+        by 0\u201D to automatically populate\nmissing attribute values with 0 to ensure
+        that the calculation is done.\nAn attribute is missing if it is not found
+        in the log attributes,\nor if it cannot be converted to a number.\n\n*Notes*:\n\n-
+        The operator `-` needs to be space split in the formula as it can also be
+        contained in attribute names.\n- If the target attribute already exists, it
+        is overwritten by the result of the formula.\n- Results are rounded up to
+        the 9th decimal. For example, if the result of the formula is `0.1234567891`,\n
+        \ the actual value stored for the attribute is `0.123456789`.\n- If you need
+        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/log_configuration/parsing/?tab=filter#matcher-and-filter)."
+      properties:
+        expression:
+          description: Arithmetic operation between one or more log attributes.
+          example: ''
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        is_replace_missing:
+          default: false
+          description: 'If `true`, it replaces all missing attributes of expression
+            by `0`, `false`
+
+            skip the operation if an attribute is missing.'
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        target:
+          description: Name of the attribute that contains the result of the arithmetic
+            operation.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArithmeticProcessorType'
+      required:
+      - target
+      - expression
+      - type
+      type: object
+    LogsArithmeticProcessorType:
+      default: arithmetic-processor
+      description: Type of logs arithmetic processor.
+      enum:
+      - arithmetic-processor
+      example: arithmetic-processor
+      type: string
+      x-enum-varnames:
+      - ARITHMETIC_PROCESSOR
+    LogsAttributeRemapper:
+      description: 'The remapper processor remaps any source attribute(s) or tag to
+        another target attribute or tag.
+
+        Constraints on the tag/attribute name are explained in the [Tag Best Practice
+        documentation](https://docs.datadoghq.com/logs/guide/log-parsing-best-practice).
+
+        Some additional constraints are applied as `:` or `,` are not allowed in the
+        target tag/attribute name.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        override_on_conflict:
+          default: false
+          description: Override or not the target element if already set,
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        source_type:
+          default: attribute
+          description: Defines if the sources are from log `attribute` or `tag`.
+          type: string
+        sources:
+          description: Array of source attributes.
+          example:
+          - web
+          - gateway
+          items:
+            description: Attribute used as a source to remap its value to the target
+              attribute.
+            type: string
+          type: array
+        target:
+          description: Final attribute or tag name to remap the sources to.
+          example: operation_id
+          type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
+        target_type:
+          default: attribute
+          description: Defines if the final attribute or tag name is from log `attribute`
+            or `tag`.
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsAttributeRemapperType'
+      required:
+      - sources
+      - target
+      - type
+      type: object
+    LogsAttributeRemapperType:
+      default: attribute-remapper
+      description: Type of logs attribute remapper.
+      enum:
+      - attribute-remapper
+      example: attribute-remapper
+      type: string
+      x-enum-varnames:
+      - ATTRIBUTE_REMAPPER
+    LogsByRetention:
+      description: Object containing logs usage data broken down by retention period.
+      properties:
+        orgs:
+          $ref: '#/components/schemas/LogsByRetentionOrgs'
+        usage:
+          description: Aggregated index logs usage for each retention period with
+            usage.
+          items:
+            $ref: '#/components/schemas/LogsRetentionAggSumUsage'
+          type: array
+        usage_by_month:
+          $ref: '#/components/schemas/LogsByRetentionMonthlyUsage'
+      type: object
+    LogsByRetentionMonthlyUsage:
+      description: Object containing a summary of indexed logs usage by retention
+        period for a single month.
+      properties:
+        date:
+          description: The month for the usage.
+          format: date-time
+          type: string
+        usage:
+          description: Indexed logs usage for each active retention for the month.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgUsage:
+      description: Indexed logs usage by retention for a single organization.
+      properties:
+        usage:
+          description: Indexed logs usage for each active retention for the organization.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgs:
+      description: Indexed logs usage summary for each organization for each retention
+        period with usage.
+      properties:
+        usage:
+          description: Indexed logs usage summary for each organization.
+          items:
+            $ref: '#/components/schemas/LogsByRetentionOrgUsage'
+          type: array
+      type: object
+    LogsCategoryProcessor:
+      description: "Use the Category Processor to add a new attribute (without spaces
+        or special characters in the new attribute name)\nto a log matching a provided
+        search query. Use categories to create groups for an analytical view.\nFor
+        example, URL groups, machine groups, environments, and response time buckets.\n\n**Notes**:\n\n-
+        The syntax of the query is the one of Logs Explorer search bar.\n  The query
+        can be done on any log attribute or tag, whether it is a facet or not.\n  Wildcards
+        can also be used inside your query.\n- Once the log has matched one of the
+        Processor queries, it stops.\n  Make sure they are properly ordered in case
+        a log could match several queries.\n- The names of the categories must be
+        unique.\n- Once defined in the Category Processor, you can map categories
+        to log status using the Log Status Remapper."
+      properties:
+        categories:
+          description: 'Array of filters to match or not a log and their
+
+            corresponding `name` to assign a custom value to the log.'
+          example: []
+          items:
+            $ref: '#/components/schemas/LogsCategoryProcessorCategory'
+          type: array
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        target:
+          description: Name of the target attribute which value is defined by the
+            matching category.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsCategoryProcessorType'
+      required:
+      - categories
+      - target
+      - type
+      type: object
+    LogsCategoryProcessorCategory:
+      description: Object describing the logs filter.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        name:
+          description: Value to assign to the target attribute.
+          type: string
+      type: object
+    LogsCategoryProcessorType:
+      default: category-processor
+      description: Type of logs category processor.
+      enum:
+      - category-processor
+      example: category-processor
+      type: string
+      x-enum-varnames:
+      - CATEGORY_PROCESSOR
+    LogsDateRemapper:
+      description: "As Datadog receives logs, it timestamps them using the value(s)
+        from any of these default attributes.\n\n  - `timestamp`\n  - `date`\n  -
+        `_timestamp`\n  - `Timestamp`\n  - `eventTime`\n  - `published_date`\n\n  If
+        your logs put their dates in an attribute not in this list,\n  use the log
+        date Remapper Processor to define their date attribute as the official log
+        timestamp.\n  The recognized date formats are ISO8601, UNIX (the milliseconds
+        EPOCH format), and RFC3164.\n\n  **Note:** If your logs don\u2019t contain
+        any of the default attributes\n  and you haven\u2019t defined your own date
+        attribute, Datadog timestamps\n  the logs with the date it received them.\n\n
+        \ If multiple log date remapper processors can be applied to a given log,\n
