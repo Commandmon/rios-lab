@@ -15326,3 +15326,5263 @@ components:
           description: The percentage of network device usage by tag(s).
           format: double
           type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
+      type: object
+    UsageAuditLogsHour:
+      description: Audit logs usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        lines_indexed:
+          description: The total number of audit logs lines indexed during a given
+            hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageAuditLogsResponse:
+      description: Response containing the audit logs usage for each hour for a given
+        organization.
+      properties:
+        usage:
+          description: Get hourly usage for audit logs.
+          items:
+            $ref: '#/components/schemas/UsageAuditLogsHour'
+          type: array
+      type: object
+    UsageBillableSummaryBody:
+      description: Response with properties for each aggregated usage type.
+      properties:
+        account_billable_usage:
+          description: The total account usage.
+          format: int64
+          type: integer
+        elapsed_usage_hours:
+          description: Elapsed usage hours for some billable product.
+          format: int64
+          type: integer
+        first_billable_usage_hour:
+          description: The first billable hour for the org.
+          format: date-time
+          type: string
+        last_billable_usage_hour:
+          description: The last billable hour for the org.
+          format: date-time
+          type: string
+        org_billable_usage:
+          description: The number of units used within the billable timeframe.
+          format: int64
+          type: integer
+        percentage_in_account:
+          description: The percentage of account usage the org represents.
+          format: double
+          type: number
+        usage_unit:
+          description: Units pertaining to the usage.
+          type: string
+      type: object
+    UsageBillableSummaryHour:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        billing_plan:
+          description: The billing plan.
+          type: string
+        end_date:
+          description: Shows the last date of usage.
+          format: date-time
+          type: string
+        num_orgs:
+          description: The number of organizations.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        ratio_in_month:
+          description: Shows usage aggregation for a billing period.
+          format: double
+          type: number
+        region:
+          description: The region of the organization.
+          type: string
+        start_date:
+          description: Shows the first date of usage.
+          format: date-time
+          type: string
+        usage:
+          $ref: '#/components/schemas/UsageBillableSummaryKeys'
+      type: object
+    UsageBillableSummaryKeys:
+      description: Response with aggregated usage types.
+      properties:
+        apm_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_fargate_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_profiler_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_profiler_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_trace_search_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_top99:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_indexed_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_test_indexed_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_testing_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        custom_event_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_normalized_queries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_normalized_queries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_apm_and_profiler_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_apm_and_profiler_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_profiler_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_profiler_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        incident_management_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        incident_management_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_and_apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_and_apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_timeseries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_forwarding_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_15day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_180day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_30day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_360day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_3day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_45day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_60day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_7day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_90day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_custom_retention_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_ingested_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        network_device_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        network_device_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_flow_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        observability_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        online_archive_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_lite_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_replay_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_units_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        sensitive_data_scanner_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_invocation_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        standard_timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+      type: object
+    UsageBillableSummaryResponse:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        usage:
+          description: An array of objects regarding usage of billable summary.
+          items:
+            $ref: '#/components/schemas/UsageBillableSummaryHour'
+          type: array
+      type: object
+    UsageCIVisibilityHour:
+      description: CI visibility usage in a given hour.
+      properties:
+        ci_pipeline_indexed_spans:
+          description: The number of spans for pipelines in the queried hour.
+          format: int64
+          type: integer
+        ci_test_indexed_spans:
+          description: The number of spans for tests in the queried hour.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers:
+          description: Shows the total count of all active Git committers for Pipelines
+            in the current month. A committer is active if they commit at least 3
+            times in a given month.
+          format: int64
+          type: integer
+        ci_visibility_test_committers:
+          description: The total count of all active Git committers for tests in the
+            current month. A committer is active if they commit at least 3 times in
+            a given month.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageCIVisibilityResponse:
+      description: CI visibility usage response
+      properties:
+        usage:
+          description: Response containing CI visibility usage.
+          items:
+            $ref: '#/components/schemas/UsageCIVisibilityHour'
+          type: array
+      type: object
+    UsageCWSHour:
+      description: Cloud Workload Security usage for a given organization for a given
+        hour.
+      properties:
+        cws_container_count:
+          description: "The total number of Cloud Workload Security container hours
+            from the start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        cws_host_count:
+          description: "The total number of Cloud Workload Security host hours from
+            the start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageCWSResponse:
+      description: Response containing the Cloud Workload Security usage for each
+        hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Cloud Workload Security.
+          items:
+            $ref: '#/components/schemas/UsageCWSHour'
+          type: array
+      type: object
+    UsageCloudSecurityPostureManagementHour:
+      description: Cloud Security Posture Management usage for a given organization
+        for a given hour.
+      properties:
+        aas_host_count:
+          description: The number of Cloud Security Posture Management Azure app services
+            hosts during a given hour.
+          format: double
+          nullable: true
+          type: number
+        aws_host_count:
+          description: The number of Cloud Security Posture Management AWS hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
+        azure_host_count:
+          description: The number of Cloud Security Posture Management Azure hosts
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        compliance_host_count:
+          description: The number of Cloud Security Posture Management hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
+        container_count:
+          description: The total number of Cloud Security Posture Management containers
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        gcp_host_count:
+          description: The number of Cloud Security Posture Management GCP hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
+        host_count:
+          description: The total number of Cloud Security Posture Management hosts
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageCloudSecurityPostureManagementResponse:
+      description: The response containing the Cloud Security Posture Management usage
+        for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Cloud Security Posture Management.
+          items:
+            $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
+          type: array
+      type: object
+    UsageCustomReportsAttributes:
+      description: The response containing attributes for custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of custom report.
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of custom report.
+          type: string
+        tags:
+          description: A list of tags to apply to custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageCustomReportsData:
+      description: The response containing the date and type for custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageCustomReportsMeta:
+      description: The object containing document metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageCustomReportsPage'
+      type: object
+    UsageCustomReportsPage:
+      description: The object containing page total count.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageCustomReportsResponse:
+      description: Response containing available custom reports.
+      properties:
+        data:
+          description: An array of available custom reports.
+          items:
+            $ref: '#/components/schemas/UsageCustomReportsData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/UsageCustomReportsMeta'
+      type: object
+    UsageDBMHour:
+      description: Database Monitoring usage for a given organization for a given
+        hour.
+      properties:
+        dbm_host_count:
+          description: "The total number of Database Monitoring host hours from the
+            start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        dbm_queries_count:
+          description: "The total number of normalized Database Monitoring queries
+            from the start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageDBMResponse:
+      description: Response containing the Database Monitoring usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Database Monitoring
+          items:
+            $ref: '#/components/schemas/UsageDBMHour'
+          type: array
+      type: object
+    UsageFargateHour:
+      description: Number of Fargate tasks run and hourly usage.
+      properties:
+        apm_fargate_count:
+          description: The high-water mark of APM ECS Fargate tasks during the given
+            hour.
+          format: int64
+          type: integer
+        appsec_fargate_count:
+          description: The Application Security Monitoring ECS Fargate tasks during
+            the given hour.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tasks_count:
+          description: The number of Fargate tasks run.
+          format: int64
+          type: integer
+      type: object
+    UsageFargateResponse:
+      description: Response containing the number of Fargate tasks run and hourly
+        usage.
+      properties:
+        usage:
+          description: Array with the number of hourly Fargate tasks recorded for
+            a given organization.
+          items:
+            $ref: '#/components/schemas/UsageFargateHour'
+          type: array
+      type: object
+    UsageHostHour:
+      description: Number of hosts/containers recorded for each hour for a given organization.
+      properties:
+        agent_host_count:
+          description: 'Contains the total number of infrastructure hosts reporting
+
+            during a given hour that were running the Datadog Agent.'
+          format: int64
+          type: integer
+        alibaba_host_count:
+          description: 'Contains the total number of hosts that reported through Alibaba
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        apm_azure_app_service_host_count:
+          description: Contains the total number of Azure App Services hosts using
+            APM.
+          format: int64
+          type: integer
+        apm_host_count:
+          description: 'Shows the total number of hosts using APM during the hour,
+
+            these are counted as billable (except during trial periods).'
+          format: int64
+          type: integer
+        aws_host_count:
+          description: 'Contains the total number of hosts that reported through the
+            AWS integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        azure_host_count:
+          description: 'Contains the total number of hosts that reported through Azure
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        container_count:
+          description: Shows the total number of containers reported by the Docker
+            integration during the hour.
+          format: int64
+          type: integer
+        gcp_host_count:
+          description: 'Contains the total number of hosts that reported through the
+            Google Cloud integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        heroku_host_count:
+          description: Contains the total number of Heroku dynos reported by the Datadog
+            Agent.
+          format: int64
+          type: integer
+        host_count:
+          description: 'Contains the total number of billable infrastructure hosts
+            reporting during a given hour.
+
+            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        infra_azure_app_service:
+          description: 'Contains the total number of hosts that reported through the
+            Azure App Services integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        opentelemetry_apm_host_count:
+          description: Contains the total number of hosts using APM reported by Datadog
+            exporter for the OpenTelemetry Collector.
+          format: int64
+          type: integer
+        opentelemetry_host_count:
+          description: Contains the total number of hosts reported by Datadog exporter
+            for the OpenTelemetry Collector.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        vsphere_host_count:
+          description: 'Contains the total number of hosts that reported through vSphere
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+      type: object
+    UsageHostsResponse:
+      description: Host usage response.
+      properties:
+        usage:
+          description: An array of objects related to host usage.
+          items:
+            $ref: '#/components/schemas/UsageHostHour'
+          type: array
+      type: object
+    UsageIncidentManagementHour:
+      description: Incident management usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        monthly_active_users:
+          description: Contains the total number monthly active users from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageIncidentManagementResponse:
+      description: Response containing the incident management usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for incident management.
+          items:
+            $ref: '#/components/schemas/UsageIncidentManagementHour'
+          type: array
+      type: object
+    UsageIndexedSpansHour:
+      description: The hours of indexed spans usage.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        indexed_events_count:
+          description: Contains the number of spans indexed.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageIndexedSpansResponse:
+      description: A response containing indexed spans usage.
+      properties:
+        usage:
+          description: Array with the number of hourly traces indexed for a given
+            organization.
+          items:
+            $ref: '#/components/schemas/UsageIndexedSpansHour'
+          type: array
+      type: object
+    UsageIngestedSpansHour:
+      description: Ingested spans usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageIngestedSpansResponse:
+      description: Response containing the ingested spans usage for each hour for
+        a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for ingested spans.
+          items:
+            $ref: '#/components/schemas/UsageIngestedSpansHour'
+          type: array
+      type: object
+    UsageIoTHour:
+      description: IoT usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        iot_device_count:
+          description: The total number of IoT devices during a given hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageIoTResponse:
+      description: Response containing the IoT usage for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for IoT.
+          items:
+            $ref: '#/components/schemas/UsageIoTHour'
+          type: array
+      type: object
+    UsageLambdaHour:
+      description: 'Number of lambda functions and sum of the invocations of all lambda
+        functions
+
+        for each hour for a given organization.'
+      properties:
+        func_count:
+          description: Contains the number of different functions for each region
+            and AWS account.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        invocations_sum:
+          description: Contains the sum of invocations of all functions.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageLambdaResponse:
+      description: 'Response containing the number of lambda functions and sum of
+        the invocations of all lambda functions
+
+        for each hour for a given organization.'
+      properties:
+        usage:
+          description: Get hourly usage for Lambda.
+          items:
+            $ref: '#/components/schemas/UsageLambdaHour'
+          type: array
+      type: object
+    UsageLogsByIndexHour:
+      description: Number of indexed logs for each hour and index for a given organization.
+      properties:
+        event_count:
+          description: The total number of indexed logs for the queried hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        index_id:
+          description: The index ID for this usage.
+          type: string
+        index_name:
+          description: The user specified name for this index ID.
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        retention:
+          description: The retention period (in days) for this index ID.
+          format: int64
+          type: integer
+      type: object
+    UsageLogsByIndexResponse:
+      description: Response containing the number of indexed logs for each hour and
+        index for a given organization.
+      properties:
+        usage:
+          description: An array of objects regarding hourly usage of logs by index
+            response.
+          items:
+            $ref: '#/components/schemas/UsageLogsByIndexHour'
+          type: array
+      type: object
+    UsageLogsByRetentionHour:
+      description: The number of indexed logs for each hour for a given organization
+        broken down by retention period.
+      properties:
+        indexed_events_count:
+          description: Total logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        live_indexed_events_count:
+          description: Live logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        rehydrated_indexed_events_count:
+          description: Rehydrated logs indexed with this retention period during a
+            given hour.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            usage.
+          type: string
+      type: object
+    UsageLogsByRetentionResponse:
+      description: Response containing the indexed logs usage broken down by retention
+        period for an organization during a given hour.
+      properties:
+        usage:
+          description: Get hourly usage for indexed logs by retention period.
+          items:
+            $ref: '#/components/schemas/UsageLogsByRetentionHour'
+          type: array
+      type: object
+    UsageLogsHour:
+      description: Hour usage for logs.
+      properties:
+        billable_ingested_bytes:
+          description: Contains the number of billable log bytes ingested.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        indexed_events_count:
+          description: Contains the number of log events indexed.
+          format: int64
+          type: integer
+        ingested_events_bytes:
+          description: Contains the number of log bytes ingested.
+          format: int64
+          type: integer
+        logs_live_indexed_count:
+          description: Contains the number of live log events indexed (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_live_ingested_bytes:
+          description: Contains the number of live log bytes ingested (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_count:
+          description: Contains the number of rehydrated log events indexed (data
+            available as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_ingested_bytes:
+          description: Contains the number of rehydrated log bytes ingested (data
+            available as of December 1, 2020).
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageLogsResponse:
+      description: Response containing the number of logs for each hour.
+      properties:
+        usage:
+          description: An array of objects regarding hourly usage of logs.
+          items:
+            $ref: '#/components/schemas/UsageLogsHour'
+          type: array
+      type: object
+    UsageMetricCategory:
+      description: Contains the metric category.
+      enum:
+      - standard
+      - custom
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - CUSTOM
+    UsageNetworkFlowsHour:
+      description: Number of netflow events indexed for each hour for a given organization.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        indexed_events_count:
+          description: Contains the number of netflow events indexed.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageNetworkFlowsResponse:
+      description: Response containing the number of netflow events indexed for each
+        hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Network Flows.
+          items:
+            $ref: '#/components/schemas/UsageNetworkFlowsHour'
+          type: array
+      type: object
+    UsageNetworkHostsHour:
+      description: Number of active NPM hosts for each hour for a given organization.
+      properties:
+        host_count:
+          description: Contains the number of active NPM hosts.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageNetworkHostsResponse:
+      description: Response containing the number of active NPM hosts for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for NPM hosts.
+          items:
+            $ref: '#/components/schemas/UsageNetworkHostsHour'
+          type: array
+      type: object
+    UsageOnlineArchiveHour:
+      description: Online Archive usage in a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        online_archive_events_count:
+          description: Total count of online archived events within the hour.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageOnlineArchiveResponse:
+      description: Online Archive usage response.
+      properties:
+        usage:
+          description: Response containing Online Archive usage.
+          items:
+            $ref: '#/components/schemas/UsageOnlineArchiveHour'
+          type: array
+      type: object
+    UsageProfilingHour:
+      description: The number of profiled hosts for each hour for a given organization.
+      properties:
+        avg_container_agent_count:
+          description: Get average number of container agents for that hour.
+          format: int64
+          type: integer
+        host_count:
+          description: Contains the total number of profiled hosts reporting during
+            a given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageProfilingResponse:
+      description: Response containing the number of profiled hosts for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for profiled hosts.
+          items:
+            $ref: '#/components/schemas/UsageProfilingHour'
+          type: array
+      type: object
+    UsageReportsType:
+      default: reports
+      description: The type of reports.
+      enum:
+      - reports
+      example: reports
+      type: string
+      x-enum-varnames:
+      - REPORTS
+    UsageRumSessionsHour:
+      description: Number of RUM Sessions recorded for each hour for a given organization.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        replay_session_count:
+          description: Contains the number of RUM Replay Sessions (data available
+            beginning November 1, 2021).
+          format: int64
+          type: integer
+        session_count:
+          description: Contains the number of browser RUM Lite Sessions.
+          format: int64
+          nullable: true
+          type: integer
+        session_count_android:
+          description: Contains the number of mobile RUM Sessions on Android (data
+            available beginning December 1, 2020).
+          format: int64
+          nullable: true
+          type: integer
+        session_count_flutter:
+          description: Contains the number of mobile RUM Sessions on Flutter (data
+            available beginning March 1, 2023).
+          format: int64
+          nullable: true
+          type: integer
+        session_count_ios:
+          description: Contains the number of mobile RUM Sessions on iOS (data available
+            beginning December 1, 2020).
+          format: int64
+          nullable: true
+          type: integer
+        session_count_reactnative:
+          description: Contains the number of mobile RUM Sessions on React Native
+            (data available beginning May 1, 2022).
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    UsageRumSessionsResponse:
+      description: Response containing the number of RUM Sessions for each hour for
+        a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for RUM Sessions.
+          items:
+            $ref: '#/components/schemas/UsageRumSessionsHour'
+          type: array
+      type: object
+    UsageRumUnitsHour:
+      description: Number of RUM Units used for each hour for a given organization
+        (data available as of November 1, 2021).
+      properties:
+        browser_rum_units:
+          description: The number of browser RUM units.
+          format: int64
+          type: integer
+        mobile_rum_units:
+          description: The number of mobile RUM units.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        rum_units:
+          description: Total RUM units across mobile and browser RUM.
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    UsageRumUnitsResponse:
+      description: Response containing the number of RUM Units for each hour for a
+        given organization.
+      properties:
+        usage:
+          description: Get hourly usage for RUM Units.
+          items:
+            $ref: '#/components/schemas/UsageRumUnitsHour'
+          type: array
+      type: object
+    UsageSDSHour:
+      description: Sensitive Data Scanner usage for a given organization for a given
+        hour.
+      properties:
+        apm_scanned_bytes:
+          description: "The total number of bytes scanned of APM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        events_scanned_bytes:
+          description: "The total number of bytes scanned of Events usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        logs_scanned_bytes:
+          description: "The total number of bytes scanned of logs usage by the Sensitive
+            Data Scanner from the start of the given hour\u2019s month until the given
+            hour."
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        rum_scanned_bytes:
+          description: "The total number of bytes scanned of RUM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        total_scanned_bytes:
+          description: "The total number of bytes scanned across all usage types by
+            the Sensitive Data Scanner from the start of the given hour\u2019s month
+            until the given hour."
+          format: int64
+          type: integer
+      type: object
+    UsageSDSResponse:
+      description: Response containing the Sensitive Data Scanner usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Sensitive Data Scanner.
+          items:
+            $ref: '#/components/schemas/UsageSDSHour'
+          type: array
+      type: object
+    UsageSNMPHour:
+      description: The number of SNMP devices for each hour for a given organization.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        snmp_devices:
+          description: Contains the number of SNMP devices.
+          format: int64
+          type: integer
+      type: object
+    UsageSNMPResponse:
+      description: Response containing the number of SNMP devices for each hour for
+        a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for SNMP devices.
+          items:
+            $ref: '#/components/schemas/UsageSNMPHour'
+          type: array
+      type: object
+    UsageSort:
+      default: start_date
+      description: The field to sort by.
+      enum:
+      - computed_on
+      - size
+      - start_date
+      - end_date
+      type: string
+      x-enum-varnames:
+      - COMPUTED_ON
+      - SIZE
+      - START_DATE
+      - END_DATE
+    UsageSortDirection:
+      default: desc
+      description: The direction to sort by.
+      enum:
+      - desc
+      - asc
+      type: string
+      x-enum-varnames:
+      - DESC
+      - ASC
+    UsageSpecifiedCustomReportsAttributes:
+      description: The response containing attributes for specified custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of specified custom report.
+          type: string
+        location:
+          description: A downloadable file for the specified custom reporting file.
+          example: https://an-s3-or-gs-bucket.s3.amazonaws.com
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of specified custom report.
+          type: string
+        tags:
+          description: A list of tags to apply to specified custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageSpecifiedCustomReportsData:
+      description: Response containing date and type for specified custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageSpecifiedCustomReportsMeta:
+      description: The object containing document metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsPage'
+      type: object
+    UsageSpecifiedCustomReportsPage:
+      description: The object containing page total count for specified ID.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageSpecifiedCustomReportsResponse:
+      description: Returns available specified custom reports.
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsData'
+        meta:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsMeta'
+      type: object
+    UsageSummaryDate:
+      description: Response with hourly report of all data billed by Datadog all organizations.
+      properties:
+        agent_host_top99p:
+          description: Shows the 99th percentile of all agent hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_host_top99p:
+          description: Shows the 99th percentile of all distinct APM hosts over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of audit logs lines indexed over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm:
+          description: Shows the number of organizations that had Audit Trail enabled
+            in the current date.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
+        aws_host_top99p:
+          description: Shows the 99th percentile of all AWS hosts over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        aws_lambda_func_count:
+          description: Shows the average of the number of functions that executed
+            1 or more times each hour in the current date for all organizations.
+          format: int64
+          type: integer
+        aws_lambda_invocations_sum:
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        billable_ingested_bytes_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_units_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given organization.
+          format: int64
+          type: integer
+        container_avg:
+          description: Shows the average of all distinct containers over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        container_hwm:
+          description: Shows the high-water mark of all distinct containers over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        custom_ts_avg:
+          description: Shows the average number of distinct custom metrics over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cws_container_count_avg:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        date:
+          description: The date for the usage.
+          format: date-time
+          type: string
+        dbm_host_top99p:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_count_avg:
+          description: Shows the average of all normalized Database Monitoring queries
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_tasks_count_avg:
+          description: Shows the high-watermark of all Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_tasks_count_hwm:
+          description: Shows the average of all Fargate tasks over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        gcp_host_top99p:
+          description: Shows the 99th percentile of all GCP hosts over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        heroku_host_top99p:
+          description: Shows the 99th percentile of all Heroku dynos over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        indexed_events_count_sum:
+          description: Shows the sum of all log events indexed over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ingested_events_bytes_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        iot_device_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date all organizations.
+          format: int64
+          type: integer
+        mobile_rum_lite_session_count_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for all organizations
+          format: int64
+          type: integer
+        mobile_rum_units_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        netflow_indexed_events_count_sum:
+          description: Shows the sum of all Network flows indexed over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        npm_host_top99p:
+          description: Shows the 99th percentile of all distinct Networks hosts over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_host_top99p:
+          description: Shows the 99th percentile of all hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        orgs:
+          description: Organizations associated with a user.
+          items:
+            $ref: '#/components/schemas/UsageSummaryDateOrg'
+          type: array
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        rum_session_count_sum:
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current date for all organizations
+          format: int64
+          type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        rum_units_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
+        synthetics_browser_check_calls_count_sum:
+          description: Shows the sum of all Synthetic browser tests over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        synthetics_check_calls_count_sum:
+          description: Shows the sum of all Synthetic API tests over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        trace_search_indexed_events_count_sum:
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+      type: object
+    UsageSummaryDateOrg:
+      description: Global hourly report of all data billed by Datadog for a given
+        organization.
+      properties:
+        agent_host_top99p:
+          description: Shows the 99th percentile of all agent hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for the given org.
+          format: int64
+          type: integer
+        apm_host_top99p:
+          description: Shows the 99th percentile of all distinct APM hosts over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for the given org.
+          format: int64
+          type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm:
+          description: Shows whether Audit Trail is enabled for the current date for
+            the given org.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
+        aws_host_top99p:
+          description: Shows the 99th percentile of all AWS hosts over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        aws_lambda_func_count:
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        aws_lambda_invocations_sum:
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        billable_ingested_bytes_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_units_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given org.
+          format: int64
+          type: integer
+        container_avg:
+          description: Shows the average of all distinct containers over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for the given organization.
+          format: int64
+          type: integer
+        container_hwm:
+          description: Shows the high-water mark of all distinct containers over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_ts_avg:
+          description: Shows the average number of distinct custom metrics over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        cws_container_count_avg:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring normalized
+            queries over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_tasks_count_avg:
+          description: The average task count for Fargate.
+          format: int64
+          type: integer
+        fargate_tasks_count_hwm:
+          description: Shows the high-water mark of all Fargate tasks over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        gcp_host_top99p:
+          description: Shows the 99th percentile of all GCP hosts over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        heroku_host_top99p:
+          description: Shows the 99th percentile of all Heroku dynos over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        id:
+          description: The organization id.
+          type: string
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        indexed_events_count_sum:
+          description: Shows the sum of all log events indexed over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        infra_host_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ingested_events_bytes_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_lite_session_count_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_units_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        name:
+          description: The organization name.
+          type: string
+        netflow_indexed_events_count_sum:
+          description: Shows the sum of all Network flows indexed over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        npm_host_top99p:
+          description: Shows the 99th percentile of all distinct Networks hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        opentelemetry_host_top99p:
+          description: Shows the 99th percentile of all hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        public_id:
+          description: The organization public id.
+          type: string
+        region:
+          description: The region of the organization.
+          type: string
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        rum_session_count_sum:
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        rum_units_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for the
+            given org.
+          format: int64
+          type: integer
+        synthetics_browser_check_calls_count_sum:
+          description: Shows the sum of all Synthetic browser tests over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_check_calls_count_sum:
+          description: Shows the sum of all Synthetic API tests over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        trace_search_indexed_events_count_sum:
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+      type: object
+    UsageSummaryResponse:
+      description: Response summarizing all usage aggregated across the months in
+        the request for all organizations, and broken down by month and by organization.
+      properties:
+        agent_host_top99p_sum:
+          description: Shows the 99th percentile of all agent hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_avg_sum:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_host_top99p_sum:
+          description: Shows the 99th percentile of all distinct APM hosts over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg_sum:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        audit_logs_lines_indexed_agg_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm_sum:
+          description: Shows the total number of organizations that had Audit Trail
+            enabled over a specific number of months.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks_sum:
+          description: Shows the average of all profiled Fargate tasks over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        aws_host_top99p_sum:
+          description: Shows the 99th percentile of all AWS hosts over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        aws_lambda_func_count:
+          description: Shows the average of the number of functions that executed
+            1 or more times each hour in the current months for all organizations.
+          format: int64
+          type: integer
+        aws_lambda_invocations_sum:
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        azure_host_top99p_sum:
+          description: Shows the 99th percentile of all Azure hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        billable_ingested_bytes_agg_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_agg_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_agg_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_units_agg_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_agg_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_agg_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cloud_cost_management_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management.
+          format: int64
+          type: integer
+        container_avg_sum:
+          description: Shows the average of all distinct containers over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg_sum:
+          description: Shows the average of the containers without the Datadog Agent
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        container_hwm_sum:
+          description: Shows the sum of the high-water marks of all distinct containers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current months for all
+            organizations.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_container_avg_sum:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm_sum:
+          description: Shows the sum of the the high-water marks of Cloud Security
+            Posture Management containers over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_ts_sum:
+          description: Shows the average number of distinct custom metrics over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cws_containers_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cws_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring Normalized
+            Queries over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        end_date:
+          description: Shows the last date of usage in the current months for all
+            organizations.
+          format: date-time
+          type: string
+        fargate_tasks_count_avg_sum:
+          description: Shows the average of all Fargate tasks over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        fargate_tasks_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all Fargate tasks
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        gcp_host_top99p_sum:
+          description: Shows the 99th percentile of all GCP hosts over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        heroku_host_top99p_sum:
+          description: Shows the 99th percentile of all Heroku dynos over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm_sum:
+          description: Shows sum of the the high-water marks of incident management
+            monthly active users in the current months for all organizations.
+          format: int64
+          type: integer
+        indexed_events_count_agg_sum:
+          description: Shows the sum of all log events indexed over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        infra_host_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        ingested_events_bytes_agg_sum:
+          description: Shows the sum of all log bytes ingested over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current months of all organizations.
+          format: int64
+          type: integer
+        last_updated:
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
+          format: date-time
+          type: string
+        live_indexed_events_agg_sum:
+          description: Shows the sum of all live logs indexed over all hours in the
+            current months for all organizations (data available as of December 1,
+            2020).
+          format: int64
+          type: integer
+        live_ingested_bytes_agg_sum:
+          description: Shows the sum of all live logs bytes ingested over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
+        logs_by_retention:
+          $ref: '#/components/schemas/LogsByRetention'
+        mobile_rum_lite_session_count_agg_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_units_agg_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        netflow_indexed_events_count_agg_sum:
+          description: Shows the sum of all Network flows indexed over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        npm_host_top99p_sum:
+          description: Shows the 99th percentile of all distinct Networks hosts over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_agg_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        online_archive_events_count_agg_sum:
+          description: Sum of all online archived events over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p_sum:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_host_top99p_sum:
+          description: Shows the 99th percentile of all hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        profiling_container_agent_count_avg:
+          description: Shows the average number of profiled containers over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        profiling_host_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        rehydrated_indexed_events_agg_sum:
+          description: Shows the sum of all rehydrated logs indexed over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
+        rehydrated_ingested_bytes_agg_sum:
+          description: Shows the sum of all rehydrated logs bytes ingested over all
+            hours in the current months for all organizations (data available as of
+            December 1, 2020).
+          format: int64
+          type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        rum_session_count_agg_sum:
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        rum_total_session_count_agg_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        rum_units_agg_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner in the current months for all organizations.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
+        start_date:
+          description: Shows the first date of usage in the current months for all
+            organizations.
+          format: date-time
+          type: string
+        synthetics_browser_check_calls_count_agg_sum:
+          description: Shows the sum of all Synthetic browser tests over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_check_calls_count_agg_sum:
+          description: Shows the sum of all Synthetic API tests over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm_sum:
+          description: Shows the sum of the high-water marks of used synthetics parallel
+            testing slots over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        trace_search_indexed_events_count_agg_sum:
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_agg_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        usage:
+          description: An array of objects regarding hourly usage.
+          items:
+            $ref: '#/components/schemas/UsageSummaryDate'
+          type: array
+        vsphere_host_top99p_sum:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+      type: object
+    UsageSyntheticsAPIHour:
+      description: Number of Synthetics API tests run for each hour for a given organization.
+      properties:
+        check_calls_count:
+          description: Contains the number of Synthetics API tests run.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageSyntheticsAPIResponse:
+      description: Response containing the number of Synthetics API tests run for
+        each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Synthetics API tests.
+          items:
+            $ref: '#/components/schemas/UsageSyntheticsAPIHour'
+          type: array
+      type: object
+    UsageSyntheticsBrowserHour:
+      description: Number of Synthetics Browser tests run for each hour for a given
+        organization.
+      properties:
+        browser_check_calls_count:
+          description: Contains the number of Synthetics Browser tests run.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageSyntheticsBrowserResponse:
+      description: Response containing the number of Synthetics Browser tests run
+        for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Synthetics Browser tests.
+          items:
+            $ref: '#/components/schemas/UsageSyntheticsBrowserHour'
+          type: array
+      type: object
+    UsageSyntheticsHour:
+      description: The number of synthetics tests run for each hour for a given organization.
+      properties:
+        check_calls_count:
+          description: Contains the number of Synthetics API tests run.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageSyntheticsResponse:
+      description: Response containing the number of Synthetics API tests run for
+        each hour for a given organization.
+      properties:
+        usage:
+          description: Array with the number of hourly Synthetics test run for a given
+            organization.
+          items:
+            $ref: '#/components/schemas/UsageSyntheticsHour'
+          type: array
+      type: object
+    UsageTimeseriesHour:
+      description: The hourly usage of timeseries.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        num_custom_input_timeseries:
+          description: Contains the number of custom metrics that are inputs for aggregations
+            (metric configured is custom).
+          format: int64
+          type: integer
+        num_custom_output_timeseries:
+          description: Contains the number of custom metrics that are outputs for
+            aggregations (metric configured is custom).
+          format: int64
+          type: integer
+        num_custom_timeseries:
+          description: Contains sum of non-aggregation custom metrics and custom metrics
+            that are outputs for aggregations.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageTimeseriesResponse:
+      description: Response containing hourly usage of timeseries.
+      properties:
+        usage:
+          description: An array of objects regarding hourly usage of timeseries.
+          items:
+            $ref: '#/components/schemas/UsageTimeseriesHour'
+          type: array
+      type: object
+    UsageTopAvgMetricsHour:
+      description: Number of hourly recorded custom metrics for a given organization.
+      properties:
+        avg_metric_hour:
+          description: Average number of timeseries per hour in which the metric occurs.
+          format: int64
+          type: integer
+        max_metric_hour:
+          description: Maximum number of timeseries per hour in which the metric occurs.
+          format: int64
+          type: integer
+        metric_category:
+          $ref: '#/components/schemas/UsageMetricCategory'
+        metric_name:
+          description: Contains the custom metric name.
+          type: string
+      type: object
+    UsageTopAvgMetricsMetadata:
+      description: The object containing document metadata.
+      properties:
+        day:
+          description: The day value from the user request that contains the returned
+            usage data. (If day was used the request)
+          format: date-time
+          type: string
+        month:
+          description: The month value from the user request that contains the returned
+            usage data. (If month was used the request)
+          format: date-time
+          type: string
+        pagination:
+          $ref: '#/components/schemas/UsageTopAvgMetricsPagination'
+      type: object
+    UsageTopAvgMetricsPagination:
+      description: The metadata for the current pagination.
+      properties:
+        limit:
+          description: Maximum amount of records to be returned.
+          format: int64
+          type: integer
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          nullable: true
+          type: string
+        total_number_of_records:
+          description: Total number of records.
+          format: int64
+          type: integer
+      type: object
+    UsageTopAvgMetricsResponse:
+      description: Response containing the number of hourly recorded custom metrics
+        for a given organization.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/UsageTopAvgMetricsMetadata'
+        usage:
+          description: Number of hourly recorded custom metrics for a given organization.
+          items:
+            $ref: '#/components/schemas/UsageTopAvgMetricsHour'
+          type: array
+      type: object
+    User:
+      description: Create, edit, and disable users.
+      properties:
+        access_role:
+          $ref: '#/components/schemas/AccessRole'
+        disabled:
+          description: The new disabled status of the user.
+          example: false
+          type: boolean
+        email:
+          description: The new email of the user.
+          example: test@datadoghq.com
+          format: email
+          type: string
+        handle:
+          description: The user handle, must be a valid email.
+          example: test@datadoghq.com
+          format: email
+          type: string
+        icon:
+          description: Gravatar icon associated to the user.
+          example: /path/to/matching/gravatar/icon
+          readOnly: true
+          type: string
+        name:
+          description: The name of the user.
+          example: test user
+          type: string
+        verified:
+          description: Whether or not the user logged in Datadog at least once.
+          example: true
+          readOnly: true
+          type: boolean
+      type: object
+    UserDisableResponse:
+      description: Array of user disabled for a given organization.
+      properties:
+        message:
+          description: Information pertaining to a user disabled for a given organization.
+          type: string
+      type: object
+    UserListResponse:
+      description: Array of Datadog users for a given organization.
+      properties:
+        users:
+          description: Array of users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    UserResponse:
+      description: A Datadog User.
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+      type: object
+    Version:
+      description: Version of the updated signal. If server side version is higher,
+        update will be rejected.
+      format: int64
+      type: integer
+    WebhooksIntegration:
+      description: Datadog-Webhooks integration.
+      properties:
+        custom_headers:
+          description: 'If `null`, uses no header.
+
+            If given a JSON payload, these will be headers attached to your webhook.'
+          nullable: true
+          type: string
+        encode_as:
+          $ref: '#/components/schemas/WebhooksIntegrationEncoding'
+        name:
+          description: 'The name of the webhook. It corresponds with `<WEBHOOK_NAME>`.
+
+            Learn more on how to use it in
+
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
+          example: WEBHOOK_NAME
+          type: string
+        payload:
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
+        url:
+          description: URL of the webhook.
+          example: https://example.com/webhook
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    WebhooksIntegrationCustomVariable:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          example: true
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      required:
+      - name
+      - value
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableResponse:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          example: true
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable. It won't be returned if the variable
+            is secret.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      required:
+      - name
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableUpdateRequest:
+      description: 'Update request of a custom variable object.
+
+
+        *All properties are optional.*'
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      type: object
+    WebhooksIntegrationEncoding:
+      default: json
+      description: Encoding type. Can be given either `json` or `form`.
+      enum:
+      - json
+      - form
+      type: string
+      x-enum-varnames:
+      - JSON
+      - FORM
+    WebhooksIntegrationUpdateRequest:
+      description: 'Update request of a Webhooks integration object.
+
+
+        *All properties are optional.*'
+      properties:
+        custom_headers:
+          description: 'If `null`, uses no header.
+
+            If given a JSON payload, these will be headers attached to your webhook.'
+          type: string
+        encode_as:
+          $ref: '#/components/schemas/WebhooksIntegrationEncoding'
+        name:
+          description: 'The name of the webhook. It corresponds with `<WEBHOOK_NAME>`.
+
+            Learn more on how to use it in
+
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
+          example: WEBHOOK_NAME
+          type: string
+        payload:
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
+        url:
+          description: URL of the webhook.
+          example: https://example.com/webhook
+          type: string
+      type: object
+    Widget:
+      description: "Information about widget.\n\n**Note**: The `layout` property is
+        required for widgets in dashboards with `free` `layout_type`.\n      For the
+        **new dashboard layout**, the `layout` property depends on the `reflow_type`
+        of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n
+        \     - If `reflow_type` is `auto`, `layout` should not be set."
+      properties:
+        definition:
+          $ref: '#/components/schemas/WidgetDefinition'
+        id:
+          description: ID of the widget.
+          format: int64
+          type: integer
+        layout:
+          $ref: '#/components/schemas/WidgetLayout'
+      required:
+      - definition
+      type: object
+    WidgetAggregator:
+      description: Aggregator used for the request.
+      enum:
+      - avg
+      - last
+      - max
+      - min
+      - sum
+      - percentile
+      type: string
+      x-enum-varnames:
+      - AVERAGE
+      - LAST
+      - MAXIMUM
+      - MINIMUM
+      - SUM
+      - PERCENTILE
+    WidgetAxis:
+      description: Axis controls for the widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        label:
+          description: The label of the axis to display on the graph.
+          type: string
+        max:
+          default: auto
+          description: Specifies the maximum value to show on the y-axis. It takes
+            a number, or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the y-axis. It takes a number,
+            or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear`, `log`,
+            `sqrt`, `pow##` (for example `pow2`, `pow0.5` etc.).
+          type: string
+      type: object
+    WidgetChangeType:
+      description: Show the absolute or the relative change.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    WidgetColorPreference:
+      description: Which color to use on the widget.
+      enum:
+      - background
+      - text
+      type: string
+      x-enum-varnames:
+      - BACKGROUND
+      - TEXT
+    WidgetComparator:
+      description: Comparator to apply.
+      enum:
+      - '>'
+      - '>='
+      - <
+      - <=
+      example: '>'
+      type: string
+      x-enum-varnames:
+      - GREATER_THAN
+      - GREATER_THAN_OR_EQUAL_TO
+      - LESS_THAN
+      - LESS_THAN_OR_EQUAL_TO
+    WidgetCompareTo:
+      description: Timeframe used for the change comparison.
+      enum:
+      - hour_before
+      - day_before
+      - week_before
+      - month_before
+      type: string
+      x-enum-varnames:
+      - HOUR_BEFORE
+      - DAY_BEFORE
+      - WEEK_BEFORE
+      - MONTH_BEFORE
+    WidgetConditionalFormat:
+      description: Define a conditional format for the widget.
+      properties:
+        comparator:
+          $ref: '#/components/schemas/WidgetComparator'
+        custom_bg_color:
+          description: Color palette to apply to the background, same values available
+            as palette.
+          type: string
+        custom_fg_color:
+          description: Color palette to apply to the foreground, same values available
+            as palette.
+          type: string
+        hide_value:
+          description: True hides values.
+          type: boolean
+        image_url:
+          description: Displays an image as the background.
+          type: string
+        metric:
+          description: Metric from the request to correlate this conditional format
+            with.
+          type: string
+        palette:
+          $ref: '#/components/schemas/WidgetPalette'
+        timeframe:
+          description: Defines the displayed timeframe.
+          type: string
+        value:
+          description: Value for the comparator.
+          example: 0.0
+          format: double
+          type: number
+      required:
+      - comparator
+      - value
+      - palette
+      type: object
+    WidgetCustomLink:
+      description: Custom links help you connect a data value to a URL, like a Datadog
+        page or your AWS console.
+      properties:
+        is_hidden:
+          description: The flag for toggling context menu link visibility.
+          type: boolean
+        label:
+          description: The label for the custom link URL. Keep the label short and
+            descriptive. Use metrics and tags as variables.
+          example: Search logs for {{host}}
+          type: string
+        link:
+          description: The URL of the custom link. URL must include `http` or `https`.
+            A relative URL must start with `/`.
+          example: https://app.datadoghq.com/logs?query={{host}}
+          type: string
+        override_label:
+          description: The label ID that refers to a context menu link. Can be `logs`,
+            `hosts`, `traces`, `profiles`, `processes`, `containers`, or `rum`.
+          example: logs
+          type: string
+      type: object
+    WidgetDefinition:
+      description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
+      oneOf:
+      - $ref: '#/components/schemas/AlertGraphWidgetDefinition'
+      - $ref: '#/components/schemas/AlertValueWidgetDefinition'
+      - $ref: '#/components/schemas/ChangeWidgetDefinition'
+      - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
+      - $ref: '#/components/schemas/DistributionWidgetDefinition'
+      - $ref: '#/components/schemas/EventStreamWidgetDefinition'
+      - $ref: '#/components/schemas/EventTimelineWidgetDefinition'
+      - $ref: '#/components/schemas/FreeTextWidgetDefinition'
+      - $ref: '#/components/schemas/GeomapWidgetDefinition'
+      - $ref: '#/components/schemas/GroupWidgetDefinition'
+      - $ref: '#/components/schemas/HeatMapWidgetDefinition'
+      - $ref: '#/components/schemas/HostMapWidgetDefinition'
+      - $ref: '#/components/schemas/IFrameWidgetDefinition'
+      - $ref: '#/components/schemas/ImageWidgetDefinition'
+      - $ref: '#/components/schemas/LogStreamWidgetDefinition'
+      - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/NoteWidgetDefinition'
+      - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
+      - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/SLOListWidgetDefinition'
+      - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
+      - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
+      - $ref: '#/components/schemas/TableWidgetDefinition'
+      - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+      - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
+      - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
+      type: object
+    WidgetDisplayType:
+      description: Type of display to use for the request.
+      enum:
+      - area
+      - bars
+      - line
+      type: string
+      x-enum-varnames:
+      - AREA
+      - BARS
+      - LINE
+    WidgetEvent:
+      description: 'Event overlay control options.
+
+
+        See the dedicated [Events JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/widget_json/#events-schema)
+
+        to learn how to build the `<EVENTS_SCHEMA>`.'
+      properties:
+        q:
+          description: Query definition.
+          example: ''
+          type: string
+        tags_execution:
+          description: The execution method for multi-value filters.
+          type: string
+      required:
+      - q
+      type: object
+    WidgetEventSize:
+      description: Size to use to display an event.
+      enum:
+      - s
+      - l
+      type: string
+      x-enum-varnames:
+      - SMALL
+      - LARGE
+    WidgetFieldSort:
+      description: Which column and order to sort by
+      properties:
+        column:
+          description: Facet path for the column
+          example: ''
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - column
+      - order
+      type: object
+    WidgetFormula:
+      description: Formula to be used in a widget query.
+      properties:
+        alias:
+          description: Expression alias.
+          type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        conditional_formats:
+          description: List of conditional formats.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: func(a) + b
+          type: string
+        limit:
+          $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
+      required:
+      - formula
+      type: object
+    WidgetFormulaLimit:
+      description: Options for limiting results returned.
+      properties:
+        count:
+          description: Number of results to return.
+          format: int64
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    WidgetGrouping:
+      description: The kind of grouping to use.
+      enum:
+      - check
+      - cluster
+      example: check
+      type: string
+      x-enum-varnames:
+      - CHECK
+      - CLUSTER
+    WidgetHorizontalAlign:
+      description: Horizontal alignment.
+      enum:
+      - center
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - LEFT
+      - RIGHT
+    WidgetImageSizing:
+      description: 'How to size the image on the widget. The values are based on the
+        image `object-fit` CSS properties.
+
+        **Note**: `zoom`, `fit` and `center` values are deprecated.'
+      enum:
+      - fill
+      - contain
+      - cover
+      - none
+      - scale-down
+      - zoom
+      - fit
+      - center
+      type: string
+      x-enum-varnames:
+      - FILL
+      - CONTAIN
+      - COVER
+      - NONE
+      - SCALEDOWN
+      - ZOOM
+      - FIT
+      - CENTER
+    WidgetLayout:
+      description: The layout for a widget on a `free` or **new dashboard layout**
+        dashboard.
+      properties:
+        height:
+          description: The height of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        is_column_break:
+          description: 'Whether the widget should be the first one on the second column
+            in high density or not.
+
+            **Note**: Only for the **new dashboard layout** and only one widget in
+            the dashboard should have this property set to `true`.'
+          type: boolean
+        width:
+          description: The width of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        x:
+          description: The position of the widget on the x (horizontal) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        y:
+          description: The position of the widget on the y (vertical) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - x
+      - y
+      - width
+      - height
+      type: object
+    WidgetLayoutType:
+      description: Layout type of the group.
+      enum:
+      - ordered
+      example: ordered
+      type: string
+      x-enum-varnames:
+      - ORDERED
+    WidgetLegendSize:
+      description: Available legend sizes for a widget. Should be one of "0", "2",
+        "4", "8", "16", or "auto".
+      type: string
+    WidgetLineType:
+      description: Type of lines displayed.
+      enum:
+      - dashed
+      - dotted
+      - solid
+      type: string
+      x-enum-varnames:
+      - DASHED
+      - DOTTED
+      - SOLID
+    WidgetLineWidth:
+      description: Width of line displayed.
+      enum:
+      - normal
+      - thick
+      - thin
+      type: string
+      x-enum-varnames:
+      - NORMAL
+      - THICK
+      - THIN
+    WidgetLiveSpan:
+      description: The available timeframes depend on the widget you are using.
+      enum:
+      - 1m
+      - 5m
+      - 10m
+      - 15m
+      - 30m
+      - 1h
+      - 4h
+      - 1d
+      - 2d
+      - 1w
+      - 1mo
+      - 3mo
+      - 6mo
+      - 1y
+      - alert
+      example: 5m
+      type: string
+      x-enum-varnames:
+      - PAST_ONE_MINUTE
+      - PAST_FIVE_MINUTES
+      - PAST_TEN_MINUTES
+      - PAST_FIFTEEN_MINUTES
+      - PAST_THIRTY_MINUTES
+      - PAST_ONE_HOUR
+      - PAST_FOUR_HOURS
+      - PAST_ONE_DAY
+      - PAST_TWO_DAYS
+      - PAST_ONE_WEEK
+      - PAST_ONE_MONTH
+      - PAST_THREE_MONTHS
+      - PAST_SIX_MONTHS
+      - PAST_ONE_YEAR
+      - ALERT
+    WidgetMargin:
+      description: 'Size of the margins around the image.
+
+        **Note**: `small` and `large` values are deprecated.'
+      enum:
+      - sm
+      - md
+      - lg
+      - small
+      - large
+      type: string
+      x-enum-varnames:
+      - SM
+      - MD
+      - LG
+      - SMALL
+      - LARGE
+    WidgetMarker:
+      description: Markers allow you to add visual conditional formatting for your
+        graphs.
+      properties:
+        display_type:
+          description: "Combination of:\n  - A severity error, warning, ok, or info\n
+            \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
+            widget, this can be set to be `x_axis_percentile`.\n"
+          example: error dashed
+          type: string
+        label:
+          description: Label to display over the marker.
+          example: Error threshold
+          type: string
+        time:
+          description: Timestamp for the widget.
+          type: string
+        value:
+          description: Value to apply. Can be a single value y = 15 or a range of
+            values 0 < y < 10.
+          example: y = 15
+          type: string
+      required:
+      - value
+      type: object
+    WidgetMessageDisplay:
+      description: Amount of log lines to display
+      enum:
+      - inline
+      - expanded-md
+      - expanded-lg
+      type: string
+      x-enum-varnames:
+      - INLINE
+      - EXPANDED_MEDIUM
+      - EXPANDED_LARGE
+    WidgetMonitorSummaryDisplayFormat:
+      description: What to display on the widget.
+      enum:
+      - counts
+      - countsAndList
+      - list
+      type: string
+      x-enum-varnames:
+      - COUNTS
+      - COUNTS_AND_LIST
+      - LIST
+    WidgetMonitorSummarySort:
+      description: Widget sorting methods.
+      enum:
+      - name
+      - group
+      - status
+      - tags
+      - triggered
+      - group,asc
+      - group,desc
+      - name,asc
+      - name,desc
+      - status,asc
+      - status,desc
+      - tags,asc
+      - tags,desc
+      - triggered,asc
+      - triggered,desc
+      - priority,asc
+      - priority,desc
+      example: name,asc
+      type: string
+      x-enum-varnames:
+      - NAME
+      - GROUP
+      - STATUS
+      - TAGS
+      - TRIGGERED
+      - GROUP_ASCENDING
+      - GROUP_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+      - STATUS_ASCENDING
+      - STATUS_DESCENDING
+      - TAGS_ASCENDING
+      - TAGS_DESCENDING
+      - TRIGGERED_ASCENDING
+      - TRIGGERED_DESCENDING
+      - PRIORITY_ASCENDING
+      - PRIORITY_DESCENDING
+    WidgetNodeType:
+      description: Which type of node to use in the map.
+      enum:
+      - host
+      - container
+      type: string
+      x-enum-varnames:
+      - HOST
+      - CONTAINER
+    WidgetOrderBy:
+      description: What to order by.
+      enum:
+      - change
+      - name
+      - present
+      - past
+      type: string
+      x-enum-varnames:
+      - CHANGE
+      - NAME
+      - PRESENT
+      - PAST
+    WidgetPalette:
+      description: Color palette to apply.
+      enum:
+      - blue
+      - custom_bg
+      - custom_image
+      - custom_text
+      - gray_on_white
+      - grey
+      - green
+      - orange
+      - red
+      - red_on_white
+      - white_on_gray
+      - white_on_green
+      - green_on_white
+      - white_on_red
+      - white_on_yellow
+      - yellow_on_white
+      - black_on_light_yellow
+      - black_on_light_green
+      - black_on_light_red
+      example: blue
+      type: string
+      x-enum-varnames:
+      - BLUE
+      - CUSTOM_BACKGROUND
+      - CUSTOM_IMAGE
+      - CUSTOM_TEXT
+      - GRAY_ON_WHITE
+      - GREY
+      - GREEN
+      - ORANGE
+      - RED
+      - RED_ON_WHITE
+      - WHITE_ON_GRAY
+      - WHITE_ON_GREEN
+      - GREEN_ON_WHITE
+      - WHITE_ON_RED
+      - WHITE_ON_YELLOW
+      - YELLOW_ON_WHITE
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - BLACK_ON_LIGHT_RED
+    WidgetRequestStyle:
+      description: Define request widget style.
+      properties:
+        line_type:
+          $ref: '#/components/schemas/WidgetLineType'
+        line_width:
+          $ref: '#/components/schemas/WidgetLineWidth'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
+    WidgetServiceSummaryDisplayFormat:
+      description: Number of columns to display.
+      enum:
+      - one_column
+      - two_column
+      - three_column
+      type: string
+      x-enum-varnames:
+      - ONE_COLUMN
+      - TWO_COLUMN
+      - THREE_COLUMN
+    WidgetSizeFormat:
+      description: Size of the widget.
+      enum:
+      - small
+      - medium
+      - large
+      type: string
+      x-enum-varnames:
+      - SMALL
+      - MEDIUM
+      - LARGE
+    WidgetSort:
+      description: Widget sorting methods.
+      enum:
+      - asc
+      - desc
+      example: desc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
+    WidgetStyle:
+      description: Widget style definition.
+      properties:
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
+    WidgetSummaryType:
+      description: Which summary type should be used.
+      enum:
+      - monitors
+      - groups
+      - combined
+      type: string
+      x-enum-varnames:
+      - MONITORS
+      - GROUPS
+      - COMBINED
+    WidgetTextAlign:
+      description: How to align the text on the widget.
+      enum:
+      - center
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - LEFT
+      - RIGHT
+    WidgetTickEdge:
+      description: Define how you want to align the text on the widget.
+      enum:
+      - bottom
+      - left
+      - right
+      - top
+      type: string
+      x-enum-varnames:
+      - BOTTOM
+      - LEFT
+      - RIGHT
+      - TOP
+    WidgetTime:
+      description: Time setting for the widget.
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      type: object
+    WidgetTimeWindows:
+      description: Define a time window.
+      enum:
+      - 7d
+      - 30d
+      - 90d
+      - week_to_date
+      - previous_week
+      - month_to_date
+      - previous_month
+      - global_time
+      type: string
+      x-enum-varnames:
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - NINETY_DAYS
+      - WEEK_TO_DATE
+      - PREVIOUS_WEEK
+      - MONTH_TO_DATE
+      - PREVIOUS_MONTH
+      - GLOBAL_TIME
+    WidgetVerticalAlign:
+      description: Vertical alignment.
+      enum:
+      - center
+      - top
+      - bottom
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - TOP
+      - BOTTOM
+    WidgetViewMode:
+      description: Define how you want the SLO to be displayed.
+      enum:
+      - overall
+      - component
+      - both
+      type: string
+      x-enum-varnames:
+      - OVERALL
+      - COMPONENT
+      - BOTH
+    WidgetVizType:
+      description: Whether to display the Alert Graph as a timeseries or a top list.
+      enum:
+      - timeseries
+      - toplist
+      example: timeseries
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOPLIST
+  securitySchemes:
+    AuthZ:
+      description: This API uses OAuth 2 with the implicit grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/v1/authorize
+          scopes:
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards externally.
+            dashboards_read: View dashboards.
+            dashboards_write: Create and change dashboards.
+            events_read: Read Events data.
+            metrics_read: View custom metrics.
+            monitors_downtime: Set downtimes to suppress alerts from any monitor in
+              an organization. The ability to write monitors is not required to set
+              downtimes.
+            monitors_read: View monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
+            synthetics_global_variable_read: View, search, and use Synthetics global
+              variables.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use Synthetics private
+              locations.
+            synthetics_private_location_write: Create and delete private locations
+              in addition to having access to the associated installation guidelines.
+            synthetics_read: List and view configured Synthetic tests and test results.
+            synthetics_write: Create, edit, and delete Synthetic tests.
+            timeseries_query: Query Timeseries data.
+            usage_read: View your organization's usage and usage attribution.
+            user_access_invite: Invite other users to your organization.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
+          tokenUrl: /oauth2/v1/token
+      type: oauth2
+    apiKeyAuth:
+      description: Your Datadog API Key.
+      in: header
+      name: DD-API-KEY
+      type: apiKey
+      x-env-name: DD_API_KEY
+    apiKeyAuthQuery:
+      description: Deprecated API Key as query argument.
+      in: query
+      name: api_key
+      type: apiKey
+      x-auth-id-alias: apiKeyAuth
+      x-env-name: DD_API_KEY
+    appKeyAuth:
+      description: Your Datadog APP Key.
+      in: header
+      name: DD-APPLICATION-KEY
+      type: apiKey
+      x-env-name: DD_APP_KEY
+    appKeyAuthQuery:
+      description: Deprecated APP Key as query argument.
+      in: query
+      name: application_key
+      type: apiKey
+      x-auth-id-alias: appKeyAuth
+      x-env-name: DD_APP_KEY
+info:
+  contact:
+    email: support@datadoghq.com
+    name: Datadog Support
+    url: https://www.datadoghq.com/support/
+  description: Collection of all Datadog Public endpoints.
+  title: Datadog API V1 Collection
+  version: '1.0'
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      description: Get information about Datadog IP ranges.
+      operationId: GetIPRanges
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPRanges'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for Datadog customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - datadoghq.eu
+            - ddog-gov.com
+          subdomain:
+            default: ip-ranges
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: ip-ranges.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.datadoghq.com
+        variables:
+          subdomain:
+            default: ip-ranges
+            description: The subdomain where the API is deployed.
+      summary: List IP Ranges
+      tags:
+      - IP Ranges
+  /api/v1/api_key:
+    get:
+      description: Get all API keys available for your account.
+      operationId: ListAPIKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all API keys
+      tags:
+      - Key Management
+    post:
+      description: Creates an API key with a given name.
+      operationId: CreateAPIKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an API key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+  /api/v1/api_key/{key}:
+    delete:
+      description: Delete a given API key.
+      operationId: DeleteAPIKey
+      parameters:
+      - description: The specific API key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an API key
+      tags:
+      - Key Management
+    get:
+      description: Get a given API key.
+      operationId: GetAPIKey
+      parameters:
+      - description: The specific API key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get API key
+      tags:
+      - Key Management
+    put:
+      description: Edit an API key name.
+      operationId: UpdateAPIKey
+      parameters:
+      - description: The specific API key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit an API key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+  /api/v1/application_key:
+    get:
+      description: Get all application keys available for your Datadog account.
+      operationId: ListApplicationKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all application keys
+      tags:
+      - Key Management
+    post:
+      description: Create an application key with a given name.
+      operationId: CreateApplicationKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKey'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+  /api/v1/application_key/{key}:
+    delete:
+      description: Delete a given application key.
+      operationId: DeleteApplicationKey
+      parameters:
+      - description: The specific APP key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an application key
+      tags:
+      - Key Management
+    get:
+      description: Get a given application key.
+      operationId: GetApplicationKey
+      parameters:
+      - description: The specific APP key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an application key
+      tags:
+      - Key Management
+    put:
+      description: Edit an application key name.
+      operationId: UpdateApplicationKey
+      parameters:
+      - description: The specific APP key you are working with.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKey'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+  /api/v1/check_run:
+    post:
+      description: 'Submit a list of Service Checks.
+
+
+        **Notes**:
+
+        - A valid API key is required.
+
+        - Service checks can be submitted up to 10 minutes in the past.'
+      operationId: SubmitServiceCheck
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceChecks'
+        description: Service Check request body.
+        required: true
+      responses:
+        '202':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '408':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit a Service Check
+      tags:
+      - Service Checks
+      x-codegen-request-body-name: body
+  /api/v1/daily_custom_reports:
+    get:
+      deprecated: true
+      description: 'Get daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
+      operationId: GetDailyCustomReports
+      parameters:
+      - description: The number of files to return in the response. `[default=60]`.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The identifier of the first page to return. This parameter is
+          used for the pagination feature `[default=0]`.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: 'The field to sort by: `[computed_on, size, start_date, end_date]`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get the list of available daily custom reports
+      tags:
+      - Usage Metering
+  /api/v1/daily_custom_reports/{report_id}:
+    get:
+      deprecated: true
+      description: 'Get specified daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
+      operationId: GetSpecifiedDailyCustomReports
+      parameters:
+      - description: Date of the report in the format `YYYY-MM-DD`.
+        in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSpecifiedCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '404':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get specified daily custom reports
+      tags:
+      - Usage Metering
+  /api/v1/dashboard:
+    delete:
+      description: Delete dashboards using the specified IDs. If there are any failures,
+        no dashboards will be deleted (partial success is not allowed).
+      operationId: DeleteDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardBulkDeleteRequest'
+        description: Delete dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+    get:
+      description: 'Get all dashboards.
+
+
+        **Note**: This query will only return custom created or cloned dashboards.
+
+        This query will not return preset dashboards.'
+      operationId: ListDashboards
+      parameters:
+      - description: 'When `true`, this query only returns shared custom created
+
+          or cloned dashboards.'
+        in: query
+        name: filter[shared]
+        required: false
+        schema:
+          type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get all dashboards
+      tags:
+      - Dashboards
+    patch:
+      description: Restore dashboards using the specified IDs. If there are any failures,
+        no dashboards will be restored (partial success is not allowed).
+      operationId: RestoreDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardRestoreRequest'
+        description: Restore dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Restore deleted dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+    post:
+      description: 'Create a dashboard using the specified options. When defining
+        queries in your widgets, take note of which queries should have the `as_count()`
+        or `as_rate()` modifiers appended.
+
+        Refer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)
+        for more information on these modifiers.'
+      operationId: CreateDashboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+        description: Create a dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Create a new dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+  /api/v1/dashboard/lists/manual:
+    get:
+      description: Fetch all of your existing dashboard list definitions.
+      operationId: ListDashboardLists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get all dashboard lists
+      tags:
+      - Dashboard Lists
+    post:
+      description: Create an empty dashboard list.
+      operationId: CreateDashboardList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardList'
+        description: Create a dashboard list request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Create a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+  /api/v1/dashboard/lists/manual/{list_id}:
+    delete:
+      description: Delete a dashboard list.
+      operationId: DeleteDashboardList
+      parameters:
+      - description: ID of the dashboard list to delete.
+        in: path
+        name: list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListDeleteResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete a dashboard list
+      tags:
+      - Dashboard Lists
+    get:
+      description: Fetch an existing dashboard list's definition.
+      operationId: GetDashboardList
+      parameters:
+      - description: ID of the dashboard list to fetch.
+        in: path
+        name: list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get a dashboard list
+      tags:
+      - Dashboard Lists
+    put:
+      description: Update the name of a dashboard list.
+      operationId: UpdateDashboardList
+      parameters:
+      - description: ID of the dashboard list to update.
+        in: path
+        name: list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardList'
+        description: Update a dashboard list request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Update a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+  /api/v1/dashboard/{dashboard_id}:
+    delete:
+      description: Delete a dashboard using the specified ID.
+      operationId: DeleteDashboard
+      parameters:
+      - description: The ID of the dashboard.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardDeleteResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete a dashboard
+      tags:
+      - Dashboards
+    get:
+      description: Get a dashboard using the specified ID.
+      operationId: GetDashboard
+      parameters:
+      - description: The ID of the dashboard.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get a dashboard
+      tags:
+      - Dashboards
+    put:
+      description: Update a dashboard using the specified ID.
+      operationId: UpdateDashboard
+      parameters:
+      - description: The ID of the dashboard.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+        description: Update Dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Update a dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+  /api/v1/distribution_points:
+    post:
+      description: "The distribution points end-point allows you to post distribution
+        data that can be graphed on Datadog\u2019s dashboards."
+      operationId: SubmitDistributionPoints
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/DistributionPointsContentEncoding'
+      requestBody:
+        content:
+          text/json:
+            examples:
+              dynamic-points:
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
+                externalValue: examples/metrics/distribution-points.json.sh
+                summary: Dynamic Points
+                x-variables:
+                  NOW: $(date +%s)
+            schema:
+              $ref: '#/components/schemas/DistributionPointsPayload'
+        required: true
+      responses:
+        '202':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '408':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit distribution points
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+  /api/v1/downtime:
+    get:
+      description: Get all scheduled downtimes.
+      operationId: ListDowntimes
+      parameters:
+      - description: Only return downtimes that are active when the request is made.
+        in: query
+        name: current_only
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Downtime'
+                type: array
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all downtimes
+      tags:
+      - Downtimes
+    post:
+      description: Schedule a downtime.
+      operationId: CreateDowntime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Downtime'
+        description: Schedule a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Downtime'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Schedule a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+  /api/v1/downtime/cancel/by_scope:
+    post:
+      description: Delete all downtimes that match the scope of `X`.
+      operationId: CancelDowntimesByScope
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelDowntimesByScopeRequest'
+        description: Scope to cancel downtimes for.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CanceledDowntimesIds'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtimes not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Cancel downtimes by scope
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+  /api/v1/downtime/{downtime_id}:
+    delete:
+      description: Cancel a downtime.
+      operationId: CancelDowntime
+      parameters:
+      - description: ID of the downtime to cancel.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 123456
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Cancel a downtime
+      tags:
+      - Downtimes
+    get:
+      description: Get downtime detail by `downtime_id`.
+      operationId: GetDowntime
+      parameters:
+      - description: ID of the downtime to fetch.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 123456
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Downtime'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a downtime
+      tags:
+      - Downtimes
+    put:
+      description: Update a single downtime by `downtime_id`.
+      operationId: UpdateDowntime
+      parameters:
+      - description: ID of the downtime to update.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 123456
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Downtime'
+        description: Update a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Downtime'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Update a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+  /api/v1/events:
+    get:
+      description: "The event stream can be queried and filtered by time, priority,
+        sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains
