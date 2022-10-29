@@ -26023,3 +26023,4693 @@ paths:
         schema:
           type: string
       - description: Delete the monitor even if it's referenced by other resources
+          (for example SLO, composite monitor).
+        in: query
+        name: force
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLODeleteResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLODeleteResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an SLO
+      tags:
+      - Service Level Objectives
+    get:
+      description: Get a service level objective object.
+      operationId: GetSLO
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      - description: Get the IDs of SLO monitors that reference this SLO.
+        example: true
+        in: query
+        name: with_configured_alert_ids
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an SLO's details
+      tags:
+      - Service Level Objectives
+    put:
+      description: Update the specified service level objective object.
+      operationId: UpdateSLO
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceLevelObjective'
+        description: The edited service level objective request object.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an SLO
+      tags:
+      - Service Level Objectives
+      x-codegen-request-body-name: body
+  /api/v1/slo/{slo_id}/corrections:
+    get:
+      description: Get corrections applied to an SLO
+      operationId: GetSLOCorrections
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Corrections For an SLO
+      tags:
+      - Service Level Objectives
+  /api/v1/slo/{slo_id}/history:
+    get:
+      description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
+        detailed history data is structured according to the source data type.\nFor
+        example, metric data is included for event SLOs that use\nthe metric source,
+        and monitor SLO types include the monitor transition history.\n\n**Note:**
+        There are different response formats for event based and time based SLOs.\nExamples
+        of both are shown."
+      operationId: GetSLOHistory
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      - description: The `from` timestamp for the query window in epoch seconds.
+        in: query
+        name: from_ts
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: The `to` timestamp for the query window in epoch seconds.
+        in: query
+        name: to_ts
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: The SLO target. If `target` is passed in, the response will include
+          the remaining error budget and a timeframe value of `custom`.
+        in: query
+        name: target
+        schema:
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      - description: 'Defaults to `true`. If any SLO corrections are applied and this
+          parameter is set to `false`,
+
+          then the corrections will not be applied and the SLI values will not be
+          affected.'
+        in: query
+        name: apply_correction
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOHistoryResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an SLO's history
+      tags:
+      - Service Level Objectives
+  /api/v1/synthetics/ci/batch/{batch_id}:
+    get:
+      description: Get a batch's updated details.
+      operationId: GetSyntheticsCIBatch
+      parameters:
+      - description: The ID of the batch.
+        in: path
+        name: batch_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBatchDetails'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Batch does not exist.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get details of batch
+      tags:
+      - Synthetics
+  /api/v1/synthetics/locations:
+    get:
+      description: 'Get the list of public and private locations available for Synthetic
+
+        tests. No arguments required.'
+      operationId: ListLocations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsLocations'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_read
+      summary: Get all locations (public and private)
+      tags:
+      - Synthetics
+  /api/v1/synthetics/private-locations:
+    post:
+      description: Create a new Synthetics private location.
+      operationId: CreatePrivateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocationCreationResponse'
+          description: OK
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Quota reached for private locations
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Private locations are not activated for the user
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
+      summary: Create a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/private-locations/{location_id}:
+    delete:
+      description: Delete a Synthetics private location.
+      operationId: DeletePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
+      summary: Delete a private location
+      tags:
+      - Synthetics
+    get:
+      description: Get a Synthetics private location.
+      operationId: GetPrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic private locations are not activated for the user
+
+            - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_read
+      summary: Get a private location
+      tags:
+      - Synthetics
+    put:
+      description: Edit a Synthetics private location.
+      operationId: UpdatePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
+      summary: Edit a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests:
+    get:
+      description: Get the list of all Synthetic tests.
+      operationId: ListTests
+      parameters:
+      - description: Used for pagination. The number of tests returned in the page.
+        in: query
+        name: page_size
+        schema:
+          type: string
+      - description: Used for pagination. Which page you want to retrieve. Starts
+          at zero.
+        in: query
+        name: page_number
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListTestsResponse'
+          description: OK - Returns the list of all Synthetic tests.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Synthetics is not activated for the user.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get the list of all Synthetic tests
+      tags:
+      - Synthetics
+  /api/v1/synthetics/tests/api:
+    post:
+      description: Create a Synthetic API test.
+      operationId: CreateSyntheticsAPITest
+      requestBody:
+        content:
+          application/json:
+            examples:
+              1-simple-api-test:
+                description: Example of an API test.
+                summary: Create an API test.
+                value:
+                  config:
+                    assertions:
+                    - operator: lessThan
+                      target: 1000
+                      type: responseTime
+                    - operator: is
+                      target: 200
+                      type: statusCode
+                    - operator: is
+                      property: content-type
+                      target: text/html; charset=UTF-8
+                      type: header
+                    request:
+                      method: GET
+                      url: https://example.com
+                  locations:
+                  - azure:eastus
+                  - aws:eu-west-3
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    monitor_options:
+                      include_tags: true
+                      locked: false
+                      new_host_delay: 300
+                      notify_audit: false
+                      notify_no_data: false
+                      renotify_interval: 0
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                  - env:production
+                  type: api
+              2-multistep-api-test:
+                description: 'Example of a multistep API test running on a fake furniture
+                  store.
+
+                  It creates a card, select a product and then add the product to
+                  the card.'
+                summary: Create a Multistep API test
+                value:
+                  config:
+                    steps:
+                    - assertions:
+                      - operator: lessThan
+                        target: 30000
+                        type: responseTime
+                      extractedValues:
+                      - field: location
+                        name: CART_ID
+                        parser:
+                          type: regex
+                          value: (?:[^\\/](?!(\\|/)))+$
+                        type: http_header
+                      name: Get a cart
+                      request:
+                        method: POST
+                        timeout: 30
+                        url: https://api.shopist.io/carts
+                      subtype: http
+                    - assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                      extractedValues:
+                      - name: PRODUCT_ID
+                        parser:
+                          type: json_path
+                          value: $[0].id['$oid']
+                        type: http_body
+                      name: Get a product
+                      request:
+                        method: GET
+                        timeout: 30
+                        url: https://api.shopist.io/products.json
+                      subtype: http
+                    - assertions:
+                      - operator: is
+                        target: 201
+                        type: statusCode
+                      name: Add product to cart
+                      request:
+                        body: "{\n  \"cart_item\": {\n    \"product_id\": \"{{ PRODUCT_ID
+                          }}\",\n    \"amount_paid\": 500,\n    \"quantity\": 1\n
+                          \ },\n  \"cart_id\": \"{{ CART_ID }}\"\n}"
+                        headers:
+                          content-type: application/json
+                        method: POST
+                        timeout: 30
+                        url: https://api.shopist.io/add_item.json
+                      subtype: http
+                  locations:
+                  - aws:us-west-2
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
+                  options:
+                    ci:
+                      executionRule: blocking
+                    min_failure_duration: 5400
+                    min_location_failed: 1
+                    monitor_options:
+                      renotify_interval: 0
+                    retry:
+                      count: 3
+                      interval: 300
+                    tick_every: 900
+                  status: live
+                  subtype: multi
+                  tags:
+                  - env:prod
+                  type: api
+            schema:
+              $ref: '#/components/schemas/SyntheticsAPITest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Create an API test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/api/{public_id}:
+    get:
+      description: 'Get the detailed configuration associated with
+
+        a Synthetic API test.'
+      operationId: GetAPITest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get an API test
+      tags:
+      - Synthetics
+    put:
+      description: Edit the configuration of a Synthetic API test.
+      operationId: UpdateAPITest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsAPITest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Edit an API test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/browser:
+    post:
+      description: Create a Synthetic browser test.
+      operationId: CreateSyntheticsBrowserTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsBrowserTest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Create a browser test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/browser/{public_id}:
+    get:
+      description: 'Get the detailed configuration (including steps) associated with
+
+        a Synthetic browser test.'
+      operationId: GetBrowserTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a browser test
+      tags:
+      - Synthetics
+    put:
+      description: Edit the configuration of a Synthetic browser test.
+      operationId: UpdateBrowserTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsBrowserTest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Edit a browser test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/browser/{public_id}/results:
+    get:
+      description: Get the last 50 test results summaries for a given Synthetics Browser
+        test.
+      operationId: GetBrowserTestLatestResults
+      parameters:
+      - description: 'The public ID of the browser test for which to search results
+
+          for.'
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      - description: Timestamp in milliseconds from which to start querying results.
+        in: query
+        name: from_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Timestamp in milliseconds up to which to query results.
+        in: query
+        name: to_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Locations for which to query results.
+        in: query
+        name: probe_dc
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGetBrowserTestLatestResultsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a browser test's latest results summaries
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
+    get:
+      description: Get a specific full result from a given (browser) Synthetic test.
+      operationId: GetBrowserTestResult
+      parameters:
+      - description: 'The public ID of the browser test to which the target result
+
+          belongs.'
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the result to get.
+        in: path
+        name: result_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTestResultFull'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test or result is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a browser test result
+      tags:
+      - Synthetics
+  /api/v1/synthetics/tests/delete:
+    post:
+      description: Delete multiple Synthetic tests by ID.
+      operationId: DeleteTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsDeleteTestsPayload'
+        description: Public ID list of the Synthetic tests to be deleted.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsDeleteTestsResponse'
+          description: OK.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Test cannot be deleted as it''s used elsewhere (as a sub-test or in
+            an uptime widget)
+
+            - Some IDs are not owned by the user'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Tests to be deleted can''t be found
+
+            - Synthetics is not activated for the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Delete tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/trigger:
+    post:
+      description: Trigger a set of Synthetics tests.
+      operationId: TriggerTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsTriggerBody'
+        description: The identifiers of the tests to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Trigger Synthetics tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/trigger/ci:
+    post:
+      description: Trigger a set of Synthetics tests for continuous integration.
+      operationId: TriggerCITests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsCITestBody'
+        description: Details of the test to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Trigger tests from CI/CD pipelines
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/{public_id}:
+    get:
+      description: Get the detailed configuration associated with a Synthetics test.
+      operationId: GetTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a test configuration
+      tags:
+      - Synthetics
+  /api/v1/synthetics/tests/{public_id}/results:
+    get:
+      description: Get the last 50 test results summaries for a given Synthetics API
+        test.
+      operationId: GetAPITestLatestResults
+      parameters:
+      - description: The public ID of the test for which to search results for.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      - description: Timestamp in milliseconds from which to start querying results.
+        in: query
+        name: from_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Timestamp in milliseconds up to which to query results.
+        in: query
+        name: to_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Locations for which to query results.
+        in: query
+        name: probe_dc
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGetAPITestLatestResultsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get an API test's latest results summaries
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/{public_id}/results/{result_id}:
+    get:
+      description: Get a specific full result from a given (API) Synthetic test.
+      operationId: GetAPITestResult
+      parameters:
+      - description: The public ID of the API test to which the target result belongs.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the result to get.
+        in: path
+        name: result_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITestResultFull'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test or result is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get an API test result
+      tags:
+      - Synthetics
+  /api/v1/synthetics/tests/{public_id}/status:
+    put:
+      description: Pause or start a Synthetics test by changing the status.
+      operationId: UpdateTestPauseStatus
+      parameters:
+      - description: The public ID of the Synthetic test to update.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsUpdateTestPauseStatusPayload'
+        description: Status to set the given Synthetic test to.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: OK - Returns a boolean indicating if the update was successful.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Pause or start a test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/variables:
+    get:
+      description: Get the list of all Synthetics global variables.
+      operationId: ListGlobalVariables
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListGlobalVariablesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_read
+      summary: Get all global variables
+      tags:
+      - Synthetics
+    post:
+      description: Create a Synthetics global variable.
+      operationId: CreateGlobalVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        description: Details of the global variable to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
+      summary: Create a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/variables/{variable_id}:
+    delete:
+      description: Delete a Synthetics global variable.
+      operationId: DeleteGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
+      summary: Delete a global variable
+      tags:
+      - Synthetics
+    get:
+      description: Get the detailed configuration of a global variable.
+      operationId: GetGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_read
+      summary: Get a global variable
+      tags:
+      - Synthetics
+    put:
+      description: Edit a Synthetics global variable.
+      operationId: EditGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        description: Details of the global variable to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
+      summary: Edit a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/tags/hosts:
+    get:
+      description: Return a mapping of tags to hosts for your whole infrastructure.
+      operationId: ListHostTags
+      parameters:
+      - description: When specified, filters host list to those tags with the specified
+          source.
+        in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagToHosts'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get Tags
+      tags:
+      - Tags
+  /api/v1/tags/hosts/{host_name}:
+    delete:
+      description: 'This endpoint allows you to remove all user-assigned tags
+
+        for a single host.'
+      operationId: DeleteHostTags
+      parameters:
+      - description: This endpoint allows you to remove all user-assigned tags for
+          a single host.
+        in: path
+        name: host_name
+        required: true
+        schema:
+          type: string
+      - description: 'The source of the tags (for example chef, puppet).
+
+          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+        in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Remove host tags
+      tags:
+      - Tags
+    get:
+      description: Return the list of tags that apply to a given host.
+      operationId: GetHostTags
+      parameters:
+      - description: When specified, filters list of tags to those tags with the specified
+          source.
+        in: path
+        name: host_name
+        required: true
+        schema:
+          type: string
+      - description: Source to filter.
+        in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostTags'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get host tags
+      tags:
+      - Tags
+    post:
+      description: 'This endpoint allows you to add new tags to a host,
+
+        optionally specifying where these tags come from.'
+      operationId: CreateHostTags
+      parameters:
+      - description: This endpoint allows you to add new tags to a host, optionally
+          specifying where the tags came from.
+        in: path
+        name: host_name
+        required: true
+        schema:
+          type: string
+      - description: 'The source of the tags.
+
+          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+        example: chef
+        in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostTags'
+        description: Update host tags request body.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostTags'
+          description: Created
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add tags to a host
+      tags:
+      - Tags
+      x-codegen-request-body-name: body
+    put:
+      description: 'This endpoint allows you to update/replace all tags in
+
+        an integration source with those supplied in the request.'
+      operationId: UpdateHostTags
+      parameters:
+      - description: This endpoint allows you to update/replace all in an integration
+          source with those supplied in the request.
+        in: path
+        name: host_name
+        required: true
+        schema:
+          type: string
+      - description: 'The source of the tags (for example chef, puppet).
+
+          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
+        in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostTags'
+        description: Add tags to host
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostTags'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update host tags
+      tags:
+      - Tags
+      x-codegen-request-body-name: body
+  /api/v1/usage/analyzed_logs:
+    get:
+      description: 'Get hourly usage for analyzed logs (Security Monitoring).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageAnalyzedLogs
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAnalyzedLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for analyzed logs
+      tags:
+      - Usage Metering
+  /api/v1/usage/attribution:
+    get:
+      deprecated: true
+      description: 'Get usage attribution.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
+        in: query
+        name: fields
+        required: true
+        schema:
+          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionSort'
+      - description: Include child org usage in the response. Defaults to false.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: Number of records to skip before beginning to return.
+        in: query
+        name: offset
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionOffset'
+      - description: Maximum number of records to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionLimit'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get usage attribution
+      tags:
+      - Usage Metering
+  /api/v1/usage/audit_logs:
+    get:
+      description: 'Get hourly usage for audit logs.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageAuditLogs
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAuditLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for audit logs
+      tags:
+      - Usage Metering
+  /api/v1/usage/aws_lambda:
+    get:
+      description: 'Get hourly usage for lambda.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageLambda
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLambdaResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for lambda
+      tags:
+      - Usage Metering
+  /api/v1/usage/billable-summary:
+    get:
+      description: Get billable usage across your account.
+      operationId: GetUsageBillableSummary
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage starting this month.'
+        in: query
+        name: month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageBillableSummaryResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get billable usage across your account
+      tags:
+      - Usage Metering
+  /api/v1/usage/ci-app:
+    get:
+      description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageCIApp
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCIVisibilityResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for CI visibility
+      tags:
+      - Usage Metering
+  /api/v1/usage/cspm:
+    get:
+      description: 'Get hourly usage for cloud security posture management (CSPM).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageCloudSecurityPostureManagement
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCloudSecurityPostureManagementResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for CSPM
+      tags:
+      - Usage Metering
+  /api/v1/usage/cws:
+    get:
+      description: 'Get hourly usage for cloud workload security.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageCWS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCWSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for cloud workload security
+      tags:
+      - Usage Metering
+  /api/v1/usage/dbm:
+    get:
+      description: 'Get hourly usage for database monitoring
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageDBM
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageDBMResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for database monitoring
+      tags:
+      - Usage Metering
+  /api/v1/usage/fargate:
+    get:
+      description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageFargate
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageFargateResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Fargate
+      tags:
+      - Usage Metering
+  /api/v1/usage/hosts:
+    get:
+      description: 'Get hourly usage for hosts and containers.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageHosts
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageHostsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for hosts and containers
+      tags:
+      - Usage Metering
+  /api/v1/usage/hourly-attribution:
+    get:
+      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
+      operationId: GetHourlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Usage type to retrieve.
+        in: query
+        name: usage_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: 'Comma separated list of tags used to group usage. If no value
+          is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/HourlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage attribution
+      tags:
+      - Usage Metering
+  /api/v1/usage/incident-management:
+    get:
+      description: 'Get hourly usage for incident management.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetIncidentManagement
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIncidentManagementResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for incident management
+      tags:
+      - Usage Metering
+  /api/v1/usage/indexed-spans:
+    get:
+      description: 'Get hourly usage for indexed spans.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageIndexedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIndexedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for indexed spans
+      tags:
+      - Usage Metering
+  /api/v1/usage/ingested-spans:
+    get:
+      description: 'Get hourly usage for ingested spans.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetIngestedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIngestedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for ingested spans
+      tags:
+      - Usage Metering
+  /api/v1/usage/iot:
+    get:
+      description: 'Get hourly usage for IoT.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageInternetOfThings
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIoTResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for IoT
+      tags:
+      - Usage Metering
+  /api/v1/usage/logs:
+    get:
+      description: 'Get hourly usage for logs.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageLogs
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for logs
+      tags:
+      - Usage Metering
+  /api/v1/usage/logs-by-retention:
+    get:
+      description: 'Get hourly usage for indexed logs by retention period.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageLogsByRetention
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsByRetentionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly logs usage by retention
+      tags:
+      - Usage Metering
+  /api/v1/usage/logs_by_index:
+    get:
+      description: Get hourly usage for logs by index.
+      operationId: GetUsageLogsByIndex
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of log index names.
+        in: query
+        name: index_name
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsByIndexResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for logs by index
+      tags:
+      - Usage Metering
+  /api/v1/usage/monthly-attribution:
+    get:
+      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
+      operationId: GetMonthlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
+        in: query
+        name: fields
+        required: true
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: 'Comma separated list of tag keys used to group usage. If no
+          value is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/MonthlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get monthly usage attribution
+      tags:
+      - Usage Metering
+  /api/v1/usage/network_flows:
+    get:
+      description: 'Get hourly usage for network flows.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageNetworkFlows
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageNetworkFlowsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: get hourly usage for network flows
+      tags:
+      - Usage Metering
+  /api/v1/usage/network_hosts:
+    get:
+      description: 'Get hourly usage for network hosts.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageNetworkHosts
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageNetworkHostsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for network hosts
+      tags:
+      - Usage Metering
+  /api/v1/usage/online-archive:
+    get:
+      description: 'Get hourly usage for online archive.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageOnlineArchive
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageOnlineArchiveResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for online archive
+      tags:
+      - Usage Metering
+  /api/v1/usage/profiling:
+    get:
+      description: 'Get hourly usage for profiled hosts.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageProfiling
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageProfilingResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for profiled hosts
+      tags:
+      - Usage Metering
+  /api/v1/usage/rum:
+    get:
+      description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
+        Units.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageRumUnits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageRumUnitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for RUM units
+      tags:
+      - Usage Metering
+  /api/v1/usage/rum_sessions:
+    get:
+      description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
+        Sessions.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageRumSessions
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'RUM type: `[browser, mobile]`. Defaults to `browser`.'
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageRumSessionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for RUM sessions
+      tags:
+      - Usage Metering
+  /api/v1/usage/sds:
+    get:
+      description: 'Get hourly usage for sensitive data scanner.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageSDS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSDSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for sensitive data scanner
+      tags:
+      - Usage Metering
+  /api/v1/usage/snmp:
+    get:
+      description: 'Get hourly usage for SNMP devices.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageSNMP
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSNMPResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for SNMP devices
+      tags:
+      - Usage Metering
+  /api/v1/usage/summary:
+    get:
+      description: Get all usage across your account.
+      operationId: GetUsageSummary
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Include usage summaries for each sub-org.
+        in: query
+        name: include_org_details
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSummaryResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get usage across your account
+      tags:
+      - Usage Metering
+  /api/v1/usage/synthetics:
+    get:
+      deprecated: true
+      description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageSynthetics
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSyntheticsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for synthetics checks
+      tags:
+      - Usage Metering
+  /api/v1/usage/synthetics_api:
+    get:
+      description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageSyntheticsAPI
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSyntheticsAPIResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for synthetics API checks
+      tags:
+      - Usage Metering
+  /api/v1/usage/synthetics_browser:
+    get:
+      description: 'Get hourly usage for synthetics browser checks.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageSyntheticsBrowser
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSyntheticsBrowserResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for synthetics browser checks
+      tags:
+      - Usage Metering
+  /api/v1/usage/timeseries:
+    get:
+      description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
+      operationId: GetUsageTimeseries
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTimeseriesResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for custom metrics
+      tags:
+      - Usage Metering
+  /api/v1/usage/top_avg_metrics:
+    get:
+      description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
+        by hourly average. Use the month parameter to get a month-to-date data resolution
+        or use the day parameter to get a daily resolution. One of the two is required,
+        and only one of the two is allowed.
+      operationId: GetUsageTopAvgMetrics
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM]
+          for usage beginning at this hour. (Either month or day should be specified,
+          but not both)'
+        in: query
+        name: month
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: [YYYY-MM-DD]
+          for usage beginning at this hour. (Either month or day should be specified,
+          but not both)'
+        in: query
+        name: day
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of metric names.
+        in: query
+        name: names
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Maximum number of results to return (between 1 and 5000) - defaults
+          to 500 results if limit not specified.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTopAvgMetricsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get all custom metrics by hourly average
+      tags:
+      - Usage Metering
+  /api/v1/user:
+    get:
+      description: List all users for your organization.
+      operationId: ListUsers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_read
+      summary: List all users
+      tags:
+      - Users
+    post:
+      description: 'Create a user for your organization.
+
+
+        **Note**: Users can only be created with the admin access role
+
+        if application keys belong to administrators.'
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User object that needs to be created.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: User created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_invite
+      summary: Create a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v1/user/{user_handle}:
+    delete:
+      description: 'Delete a user from an organization.
+
+
+        **Note**: This endpoint can only be used with application keys belonging to
+
+        administrators.'
+      operationId: DisableUser
+      parameters:
+      - description: The handle of the user.
+        in: path
+        name: user_handle
+        required: true
+        schema:
+          example: test@datadoghq.com
+          format: email
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDisableResponse'
+          description: User disabled
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Disable a user
+      tags:
+      - Users
+    get:
+      description: Get a user's details.
+      operationId: GetUser
+      parameters:
+      - description: The ID of the user.
+        in: path
+        name: user_handle
+        required: true
+        schema:
+          example: test@datadoghq.com
+          format: email
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK for get user
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get user details
+      tags:
+      - Users
+    put:
+      description: 'Update a user information.
+
+
+        **Note**: It can only be used with application keys belonging to administrators.'
+      operationId: UpdateUser
+      parameters:
+      - description: The ID of the user.
+        in: path
+        name: user_handle
+        required: true
+        schema:
+          example: test@datadoghq.com
+          format: email
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Description of the update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: User updated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v1/validate:
+    get:
+      description: Check if the API key (not the APP key) is valid. If invalid, a
+        403 is returned.
+      operationId: Validate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationValidationResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      - AuthZ: []
+      summary: Validate API key
+      tags:
+      - Authentication
+  /v1/input:
+    post:
+      deprecated: true
+      description: 'Send your logs to your Datadog platform over HTTP. Limits per
+        HTTP request are:
+
+
+        - Maximum content size per payload (uncompressed): 5MB
+
+        - Maximum size for a single log: 1MB
+
+        - Maximum array size if sending multiple logs in an array: 1000 entries
+
+
+        Any log exceeding 1MB is accepted and truncated by Datadog:
+
+        - For a single log request, the API truncates the log at 1MB and returns a
+        2xx.
+
+        - For a multi-logs request, the API processes all logs, truncates only logs
+        larger than 1MB, and returns a 2xx.
+
+
+        Datadog recommends sending your logs compressed.
+
+        Add the `Content-Encoding: gzip` header to the request when sending compressed
+        logs.
+
+
+        The status codes answered by the HTTP API are:
+
+        - 200: OK
+
+        - 400: Bad request (likely an issue in the payload formatting)
+
+        - 403: Permission issue (likely using an invalid API Key)
+
+        - 413: Payload too large (batch is above 5MB uncompressed)
+
+        - 5xx: Internal error, request should be retried after some time'
+      operationId: SubmitLog
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContentEncoding'
+      - description: Log tags can be passed as query parameters with `text/plain`
+          content type.
+        example: env:prod,user:my-user
+        in: query
+        name: ddtags
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              multi-json-messages:
+                description: Pass multiple log objects at once.
+                summary: Multi JSON Messages
+                value:
+                - message: hello
+                - message: world
+            schema:
+              $ref: '#/components/schemas/HTTPLog'
+          application/json;simple:
+            examples:
+              simple-json-message:
+                description: Log attributes can be passed as `key:value` pairs in
+                  valid JSON messages.
+                summary: Simple JSON Message
+                value:
+                  ddsource: agent
+                  ddtags: env:prod,user:joe.doe
+                  hostname: fa1e1e739d95
+                  message: hello world
+            schema:
+              $ref: '#/components/schemas/HTTPLogItem'
+          application/logplex-1:
+            examples:
+              multi-raw-message:
+                description: Submit log messages.
+                summary: Multi Logplex Messages
+                value: 'hello
+
+                  world'
+              simple-logplex-message:
+                description: Submit log string.
+                summary: Simple Logplex Message
+                value: hello world
+            schema:
+              type: string
+          text/plain:
+            examples:
+              multi-raw-message:
+                description: Submit log string.
+                summary: Multi Raw Messages
+                value: 'hello
+
+                  world
+
+                  '
+              simple-raw-message:
+                description: 'Submit log string. Log attributes can be passed as query
+                  parameters in the URL. This enables the addition of tags or the
+                  source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
+                summary: Simple Raw Message
+                value: hello world
+            schema:
+              type: string
+        description: Log to send (JSON format).
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Response from server (always 200 empty JSON).
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPLogError'
+          description: unexpected error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for Datadog customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - datadoghq.eu
+            - ddog-gov.com
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: http-intake.logs.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
+      summary: Send logs
+      tags:
+      - Logs
+      x-codegen-request-body-name: body
+security:
+- apiKeyAuth: []
+  appKeyAuth: []
+servers:
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: The regional site for a Datadog customer.
+      enum:
+      - datadoghq.com
+      - us3.datadoghq.com
+      - us5.datadoghq.com
+      - datadoghq.eu
+      - ddog-gov.com
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
+- url: '{protocol}://{name}'
+  variables:
+    name:
+      default: api.datadoghq.com
+      description: Full site DNS name.
+    protocol:
+      default: https
+      description: The protocol for accessing the API.
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: Any Datadog deployment.
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
+tags:
+- description: 'Configure your Datadog-AWS integration directly through the Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).'
+  name: AWS Integration
+- description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs).'
+  externalDocs:
+    url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
+  name: AWS Logs Integration
+- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
+    that write data require reporting access and require an `API key`.\nRequests that
+    read data require full access and also require an `application key`.\n\n**Note:**
+    All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
+    you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu`
+    or override this value directly when creating your client.\n\n[Manage your account\u2019s
+    API and application keys](https://app.datadoghq.com/account/settings#api)."
+  name: Authentication
+- description: 'Configure your Datadog-Azure integration directly through the Datadog
+    API.
+
+    For more information, see the [Datadog-Azure integration page](https://docs.datadoghq.com/integrations/azure).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/azure
+  name: Azure Integration
+- description: 'Interact with your dashboard lists through the API to
+
+    organize, find, and share all of your dashboards with your team and
+
+    organization.'
+  name: Dashboard Lists
+  x-deprecated: true
+- description: 'Interact with your dashboard lists through the API to make it easier
+    to organize,
+
+    find, and share all of your dashboards with your team and organization.'
+  name: Dashboards
+- description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
+    gives
+
+    you greater control over monitor notifications by allowing you to globally exclude
+
+    scopes from alerting. Downtime settings, which can be scheduled with start and
+
+    end times, prevent all alerting related to specified Datadog tags.'
+  name: Downtimes
+- description: 'The events service allows you to programmatically post events to the
+    event stream
+
+    and fetch events from the event stream. Events are limited to 4000 characters.
+
+    If an event is sent out with a message containing more than 4000 characters, only
+    the
+
+    first 4000 characters are displayed.'
+  name: Events
+- description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
+
+    through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/google_cloud_platform
+  name: GCP Integration
+- description: Get information about your live hosts in Datadog.
+  name: Hosts
+- description: Get a list of IP prefixes belonging to Datadog.
+  name: IP Ranges
+- description: 'Manage your Datadog API and application keys. You need an API key
+    and
+
+    an application key for a user with the required permissions to interact
+
+    with these endpoints. The full list of API and application keys can be
+
+    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/api-app-keys/
+  name: Key Management
+- description: Search your logs and send them to your Datadog platform over HTTP.
+  name: Logs
+- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
+
+    You need an API and application key with Admin rights to interact with this endpoint.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/indexes/
+  name: Logs Indexes
+- description: "Pipelines and processors operate on incoming logs, parsing\nand transforming
+    them into structured attributes for easier querying.\n\n- See the [pipelines configuration
+    page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
+    and processors currently configured in web UI.\n\n- Additional API-related information
+    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
+    endpoints are only available for admin users.\nMake sure to use an application
+    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
+    data to be configured before using in a request.**\nFor example, if you are using
+    the data returned from a\nrequest for another request body, and have a parsing
+    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
+    all escaped spaces as `%{space}` to use\nin the body data."
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/log_configuration
+  name: Logs Pipelines
+- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
+    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
+    A graph can only contain a set number of points\nand as the timeframe over which
+    a metric is viewed increases,\naggregation between points occurs to stay below
+    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
+    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+  name: Metrics
+- description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
+    a metric or check that you care about and
+
+    notifies your team when a defined threshold has exceeded.
+
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/monitors/create/types/
+  name: Monitors
+- description: 'Interact with your notebooks through the API to make it easier to
+    organize, find, and
+
+    share all of your notebooks with your team and organization. For more information,
+    see the
+
+    [Notebooks documentation](https://docs.datadoghq.com/notebooks/).'
+  externalDocs:
+    description: For more information, see the Notebooks documentation.
+    url: https://docs.datadoghq.com/notebooks/
+  name: Notebooks
+- description: Create, edit, and manage your organizations. Read more about [multi-org
+    accounts](https://docs.datadoghq.com/account_management/multi_organization).
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/multi_organization
+  name: Organizations
+- description: 'Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/integrations/pagerduty/)
+
+    directly through the Datadog API.'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/pagerduty/
+  name: PagerDuty Integration
+- description: 'Detection rules for generating signals and listing of generated
+
+    signals.'
+  name: Security Monitoring
+- description: 'The service check endpoint allows you to post check statuses for use
+    with monitors.
+
+    Service check messages are limited to 500 characters. If a check is posted with
+    a message
+
+    containing more than 500 characters, only the first 500 characters are displayed.
+    Messages
+
+    are limited for checks with a Critical or Warning status, they are dropped for
+    checks with
+
+    an OK status.
+
+
+    - [Read more about Service Check monitors.][1]
+
+    - [Read more about Process Check monitors.][2]
+
+    - [Read more about Network Check monitors.][3]
+
+    - [Read more about Custom Check monitors.][4]
+
+    - [Read more about Service Check and status codes.][5]
+
+
+    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
+
+    [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
+
+    [3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert
+
+    [4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert
+
+    [5]: https://docs.datadoghq.com/developers/service_checks/'
+  name: Service Checks
+- description: "SLO Status Corrections allow you to prevent specific time periods
+    from negatively impacting\nyour SLO\u2019s status and error budget. You can use
+    Status Corrections for various purposes, such\nas removing planned maintenance
+    windows, non-business hours, or other time periods that do\nnot correspond to
+    genuine issues."
+  name: Service Level Objective Corrections
+- description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
+
+    (or SLOs) are a key part of the site reliability engineering toolkit.
+
+    SLOs provide a framework for defining clear targets around application performance,
+
+    which ultimately help teams provide a consistent customer experience,
+
+    balance feature development with platform stability,
+
+    and improve communication with internal and external users.'
+  name: Service Level Objectives
+- description: 'Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)
+
+    directly through the Datadog API.'
+  externalDocs:
+    description: For more information about the Datadog-Slack integration, see the
+      integration page.
+    url: https://docs.datadoghq.com/integrations/slack
+  name: Slack Integration
+- description: Take graph snapshots using the API.
+  name: Snapshots
+- description: "Datadog Synthetics uses simulated user requests and browser rendering
+    to help you ensure uptime,\nidentify regional issues, and track your application
+    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand
+    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
+    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
+    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+  name: Synthetics
+- description: 'The tag endpoint allows you to assign tags to hosts,
+
+    for example: `role:database`. Those tags are applied to
+
+    all metrics sent by the host. Refer to hosts by name
+
+    (`yourhost.example.com`) when fetching and applying
+
+    tags to a particular host.
+
+
+    The component of your infrastructure responsible for a tag is identified
+
+    by a source. For example, some valid sources include nagios, hudson, jenkins,
+
+    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
+
+
+    Read more about tags on the dedicated
+
+    [documentation page](https://docs.datadoghq.com/tagging).'
+  name: Tags
+- description: 'The usage metering API allows you to get hourly, daily, and
+
+    monthly usage across multiple facets of Datadog.
+
+    This API is available to all Pro and Enterprise customers.
+
+    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+
+
+    **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
+
+    It is retained for 15 months.
+
+
+    You can retrieve up to 24 hours of hourly usage data for multiple organizations,
+
+    and up to two months of hourly usage data for a single organization in one request.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/billing/usage_details/
+  name: Usage Metering
+- description: Create, edit, and disable users.
+  externalDocs:
+    url: https://docs.datadoghq.com/account_management/users
+  name: Users
+- description: 'Configure your Datadog-Webhooks integration directly through the Datadog
+    API.
+
+    For more information about the Datadog-Webhooks integration,
+
+    see the [integration page](https://docs.datadoghq.com/integrations/webhooks).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/webhooks
+  name: Webhooks Integration
+x-group-parameters: true
