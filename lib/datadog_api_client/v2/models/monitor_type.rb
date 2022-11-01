@@ -200,4 +200,7 @@ module DatadogAPIClient::V2
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [created_at, group_status, groups, id, message, modified, name, query, tags, temp
+      [created_at, group_status, groups, id, message, modified, name, query, tags, templated_name, type].hash
+    end
+  end
+end
