@@ -69,4 +69,5 @@ Feature: Events
   Scenario: Post an event with a long title returns "OK" response
     Given new "CreateEvent" request
     And body with value {"title": "{{ unique }} very very very looooooooong looooooooooooong loooooooooooooooooooooong looooooooooooooooooooooooooong title with 100+ characters", "text": "A text message.", "tags": ["test:{{ unique_alnum }}"]}
-    Wh
+    When the request is sent
+    Then the response status is 202 OK
