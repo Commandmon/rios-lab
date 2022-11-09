@@ -70,4 +70,56 @@ Feature: Dashboards
     And the response "title" is equal to "{{ unique }} with Profile Metrics Query"
     And the response "widgets[0].definition.requests[0].profile_metrics_query.search.query" is equal to "runtime:jvm"
     And the response "widgets[0].definition.requests[0].profile_metrics_query.compute.facet" is equal to "@prof_core_cpu_cores"
-    And the
+    And the response "widgets[0].definition.requests[0].profile_metrics_query.compute.aggregation" is equal to "sum"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with a formulas and functions change widget
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [ { "definition": { "title": "", "title_size": "16", "title_align": "left", "time": {}, "type": "change", "requests": [ { "formulas": [ { "formula": "hour_before(query1)" }, { "formula": "query1" } ], "queries": [ { "data_source": "logs", "name": "query1", "search": { "query": "" }, "indexes": [ "*" ], "compute": { "aggregation": "count" }, "group_by": [] } ], "response_format": "scalar", "compare_to": "hour_before", "increase_good": true, "order_by": "change", "change_type": "absolute", "order_dir": "desc" } ] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].compare_to" is equal to "hour_before"
+    And the response "widgets[0].definition.requests[0].increase_good" is equal to true
+    And the response "widgets[0].definition.requests[0].order_by" is equal to "change"
+    And the response "widgets[0].definition.requests[0].change_type" is equal to "absolute"
+    And the response "widgets[0].definition.requests[0].order_dir" is equal to "desc"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "logs"
+    And the response "widgets[0].definition.requests[0].queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].queries[0].compute.aggregation" is equal to "count"
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "hour_before(query1)"
+    And the response "widgets[0].definition.requests[0].formulas[1].formula" is equal to "query1"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with a formulas and functions treemap widget
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [ { "definition": { "title": "", "type": "treemap", "requests": [ { "formulas": [ { "formula": "hour_before(query1)" }, { "formula": "query1" } ], "queries": [ { "data_source": "logs", "name": "query1", "search": { "query": "" }, "indexes": [ "*" ], "compute": { "aggregation": "count" }, "group_by": [] } ], "response_format": "scalar" } ] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "logs"
+    And the response "widgets[0].definition.requests[0].queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].queries[0].compute.aggregation" is equal to "count"
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "hour_before(query1)"
+    And the response "widgets[0].definition.requests[0].formulas[1].formula" is equal to "query1"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with a query value widget using the percentile aggregator
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with QVW Percentile Aggregator", "widgets": [{"definition":{"title_size":"16","title":"","title_align":"left","precision":2,"time":{},"autoscale":true,"requests":[{"formulas":[{"formula":"query1"}],"response_format":"scalar","queries":[{"query":"p90:dist.dd.dogweb.latency{*}","data_source":"metrics","name":"query1","aggregator":"percentile"}]}],"type":"query_value"},"layout":{"y":0,"x":0,"height":2,"width":2}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "title" is equal to "{{ unique }} with QVW Percentile Aggregator"
+    And the response "widgets[0].definition.title_size" is equal to "16"
+    And the response "widgets[0].definition.title_align" is equal to "left"
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with a query value widget using timeseries background
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with QVW Timeseries Background", "widgets": [{"definition":{"title_size":"16","title":"","title_align":"left","precision":2,"time":{},"autoscale":true,"requests":[{"formulas":[{"formula":"query1"}],"response_format":"scalar","queries":[{"query":"sum:my.cool.count.metric{*}","data_source":"metrics","name":"query1","aggregator":"percentile"}]}],"type":"query_value","timeseries_background":{"type":"area","yaxis":{"include_zero":true}}},"layout":{"y":0,"x":0,"height":2,"width":2}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "title" is equal to "{{ unique }} with QVW Timeseries Background"
+    And the response "widge
