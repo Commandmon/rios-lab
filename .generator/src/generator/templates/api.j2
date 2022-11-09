@@ -231,4 +231,22 @@ module {{ module_name }}::{{ version|upper }}
         while true do
             response = {{ operation.operationId|snake_case }}({% for name, parameter in operation|parameters if parameter.required %}{{ name|attribute_name }}, {% endfor %}opts)
             @api_client.get_attribute_from_path(response, "{{ pagination.resultsPath|attribute_path }}").each { |item| yield(item) }
-      
+            if @api_client.get_attribute_from_path(response, "{{ pagination.resultsPath|attribute_path }}").length < page_size
+              break
+            end
+            {%- if pagination.pageOffsetParam %}
+            @api_client.set_attribute_from_path(api_version, {{ get_container(operation, pagination.pageOffsetParam, True) }}, @api_client.get_attribute_from_path({{ get_container(operation, pagination.pageOffsetParam) }}, 0) + page_size)
+            {%- endif %}
+            {%- if pagination.cursorParam %}
+            @api_client.set_attribute_from_path(api_version, {{ get_container(operation, pagination.cursorParam, True) }}, @api_client.get_attribute_from_path(response, "{{ pagination.cursorPath }}"))
+            {%- endif %}
+        end
+    end
+{%- endif %}
+{%- if not loop.last %}
+
+{%- endif %}
+{%- endfor %}
+  end
+end
+{# keep new line at the end of file #}
