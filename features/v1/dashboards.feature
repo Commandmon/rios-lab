@@ -122,4 +122,66 @@ Feature: Dashboards
     When the request is sent
     Then the response status is 200 OK
     And the response "title" is equal to "{{ unique }} with QVW Timeseries Background"
-    And the response "widge
+    And the response "widgets[0].definition.title_size" is equal to "16"
+    And the response "widgets[0].definition.title_align" is equal to "left"
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].queries[0].query" is equal to "sum:my.cool.count.metric{*}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with alert_graph widget
+    Given there is a valid "monitor" in the system
+    And new "CreateDashboard" request
+    And body from file "dashboards_json_payload/alert_graph_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "alert_graph"
+    And the response "widgets[0].definition.viz_type" is equal to "timeseries"
+    And the response "widgets[0].definition.alert_id" is equal to "{{ monitor.id }}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with alert_value widget
+    Given there is a valid "monitor" in the system
+    And new "CreateDashboard" request
+    And body from file "dashboards_json_payload/alert_value_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "alert_value"
+    And the response "widgets[0].definition.alert_id" is equal to "{{ monitor.id }}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with an audit logs query
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with Audit Logs Query", "widgets": [{"definition": {"type": "timeseries","requests": [{"response_format": "timeseries","queries": [{"search": {"query": ""},"data_source": "audit","compute": {"aggregation": "count"},"name": "query1","indexes": ["*"],"group_by": []}]}]},"layout": {"x": 2,"y": 0,"width": 4,"height": 2}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "title" is equal to "{{ unique }} with Audit Logs Query"
+    And the response "widgets[0].definition.type" is equal to "timeseries"
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "timeseries"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "audit"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with apm dependency stats widget
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [{"definition": { "title": "", "title_size": "16", "title_align": "left", "type": "query_table", "requests": [ { "response_format": "scalar", "queries": [ { "primary_tag_value": "edge-eu1.prod.dog", "stat": "avg_duration", "resource_name": "DELETE FROM monitor_history.monitor_state_change_history WHERE org_id = ? AND monitor_id IN ? AND group = ?", "name": "query1", "service": "cassandra", "data_source": "apm_dependency_stats", "env": "ci", "primary_tag_name": "datacenter", "operation_name": "cassandra.query" } ] } ] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].queries[0].primary_tag_value" is equal to "edge-eu1.prod.dog"
+    And the response "widgets[0].definition.requests[0].queries[0].stat" is equal to "avg_duration"
+    And the response "widgets[0].definition.requests[0].queries[0].resource_name" is equal to "DELETE FROM monitor_history.monitor_state_change_history WHERE org_id = ? AND monitor_id IN ? AND group = ?"
+    And the response "widgets[0].definition.requests[0].queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].queries[0].service" is equal to "cassandra"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "apm_dependency_stats"
+    And the response "widgets[0].definition.requests[0].queries[0].env" is equal to "ci"
+    And the response "widgets[0].definition.requests[0].queries[0].primary_tag_name" is equal to "datacenter"
+    And the response "widgets[0].definition.requests[0].queries[0].operation_name" is equal to "cassandra.query"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with apm resource stats widget
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [{"definition": { "title": "", "title_size": "16", "title_align": "left", "type": "query_table", "requests": [ { "response_format": "scalar", "queries": [ { "primary_tag_value": "edge-eu1.prod.dog", "stat": "hits", "name": "query1", "service": "cassandra", "data_source": "apm_resource_stats", "env": "ci", "primary_tag_name": "datacenter", "operation_name": "cassandra.query", "group_by": ["resource_name"] } ] } ] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].queries[0].primary_ta
