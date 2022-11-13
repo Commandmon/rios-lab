@@ -254,3 +254,85 @@ Feature: Dashboards
     And body from file "dashboards_json_payload/event_stream_widget.json"
     When the request is sent
     Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "event_stream"
+    And the response "widgets[0].definition.query" is equal to "example-query"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with event_timeline widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/event_timeline_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "event_timeline"
+    And the response "widgets[0].definition.query" is equal to "status:error priority:all"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with formulas and functions scatterplot widget
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [ { "id": 5346764334358972, "definition": { "title": "", "title_size": "16", "title_align": "left", "type": "scatterplot", "requests": { "table": { "formulas": [ { "formula": "query1", "dimension": "x", "alias": "my-query1" }, { "formula": "query2", "dimension": "y", "alias": "my-query2" } ], "queries": [ { "data_source": "metrics", "name": "query1", "query": "avg:system.cpu.user{*} by {service}", "aggregator": "avg" }, { "data_source": "metrics", "name": "query2", "query": "avg:system.mem.used{*} by {service}", "aggregator": "avg" } ], "response_format": "scalar" } } }, "layout": { "x": 0, "y": 0, "width": 4, "height": 2 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests.table.formulas[0].formula" is equal to "query1"
+    And the response "widgets[0].definition.requests.table.formulas[0].dimension" is equal to "x"
+    And the response "widgets[0].definition.requests.table.formulas[0].alias" is equal to "my-query1"
+    And the response "widgets[0].definition.requests.table.formulas[1].formula" is equal to "query2"
+    And the response "widgets[0].definition.requests.table.formulas[1].dimension" is equal to "y"
+    And the response "widgets[0].definition.requests.table.formulas[1].alias" is equal to "my-query2"
+    And the response "widgets[0].definition.requests.table.queries[0].data_source" is equal to "metrics"
+    And the response "widgets[0].definition.requests.table.queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests.table.queries[0].query" is equal to "avg:system.cpu.user{*} by {service}"
+    And the response "widgets[0].definition.requests.table.queries[0].aggregator" is equal to "avg"
+    And the response "widgets[0].definition.requests.table.queries[1].data_source" is equal to "metrics"
+    And the response "widgets[0].definition.requests.table.queries[1].name" is equal to "query2"
+    And the response "widgets[0].definition.requests.table.queries[1].query" is equal to "avg:system.mem.used{*} by {service}"
+    And the response "widgets[0].definition.requests.table.queries[1].aggregator" is equal to "avg"
+    And the response "widgets[0].definition.requests.table.response_format" is equal to "scalar"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with free_text widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/free_text_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "free_text"
+    And the response "widgets[0].definition.text" is equal to "Example free text"
+    And the response "widgets[0].definition.color" is equal to "#4d4d4d"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with funnel widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with funnel widget","widgets": [{"definition": {"type": "funnel","requests": [{"query":{"data_source":"rum","query_string":"","steps":[]},"request_type":"funnel"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "title" is equal to "{{ unique }} with funnel widget"
+    And the response "widgets[0].definition.type" is equal to "funnel"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "rum"
+    And the response "widgets[0].definition.requests[0].request_type" is equal to "funnel"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with geomap widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/geomap_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "geomap"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with heatmap widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/heatmap_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "heatmap"
+    And the response "widgets[0].definition.requests[0].q" is equal to "avg:system.cpu.user{*} by {service}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with hostmap widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/hostmap_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "hostmap"
+    And the response "widgets[0].definition.requests.fill.q" is equal to "avg:system.cpu.user{*} by {host}"
+
+  @t
