@@ -184,4 +184,73 @@ Feature: Dashboards
     When the request is sent
     Then the response status is 200 OK
     And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
-    And the response "widgets[0].definition.requests[0].queries[0].primary_ta
+    And the response "widgets[0].definition.requests[0].queries[0].primary_tag_value" is equal to "edge-eu1.prod.dog"
+    And the response "widgets[0].definition.requests[0].queries[0].stat" is equal to "hits"
+    And the response "widgets[0].definition.requests[0].queries[0].group_by[0]" is equal to "resource_name"
+    And the response "widgets[0].definition.requests[0].queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].queries[0].service" is equal to "cassandra"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "apm_resource_stats"
+    And the response "widgets[0].definition.requests[0].queries[0].env" is equal to "ci"
+    And the response "widgets[0].definition.requests[0].queries[0].primary_tag_name" is equal to "datacenter"
+    And the response "widgets[0].definition.requests[0].queries[0].operation_name" is equal to "cassandra.query"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with apm_issue_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"apm_issue_stream","query_string":""},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "title" is equal to "{{ unique }} with list_stream widget"
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].columns[0].width" is equal to "auto"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "apm_issue_stream"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with check_status widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/check_status_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "check_status"
+    And the response "widgets[0].definition.check" is equal to "datadog.agent.up"
+    And the response "widgets[0].definition.grouping" is equal to "check"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with ci_test_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"ci_test_stream","query_string":"test_level:suite"},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "ci_test_stream"
+    And the response "widgets[0].definition.requests[0].query.query_string" is equal to "test_level:suite"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with distribution widget and apm stats data
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [{"definition": { "title": "", "title_size": "16", "title_align": "left", "type": "distribution", "requests": [{ "apm_stats_query": { "env": "prod", "service": "cassandra", "name": "cassandra.query", "primary_tag": "datacenter:dc1", "row_type": "service" }}] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].apm_stats_query.primary_tag" is equal to "datacenter:dc1"
+    And the response "widgets[0].definition.requests[0].apm_stats_query.row_type" is equal to "service"
+    And the response "widgets[0].definition.requests[0].apm_stats_query.env" is equal to "prod"
+    And the response "widgets[0].definition.requests[0].apm_stats_query.service" is equal to "cassandra"
+    And the response "widgets[0].definition.requests[0].apm_stats_query.name" is equal to "cassandra.query"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with event_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered","title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns": [{"width": "auto","field": "timestamp"}],"query": {"data_source": "event_stream","query_string": "","event_size": "l"},"response_format": "event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "event_list"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "event_stream"
+    And the response "widgets[0].definition.requests[0].query.event_size" is equal to "l"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with event_stream widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/event_stream_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
