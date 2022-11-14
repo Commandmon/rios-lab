@@ -335,4 +335,77 @@ Feature: Dashboards
     And the response "widgets[0].definition.type" is equal to "hostmap"
     And the response "widgets[0].definition.requests.fill.q" is equal to "avg:system.cpu.user{*} by {host}"
 
-  @t
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with iframe widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/iframe_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "iframe"
+    And the response "widgets[0].definition.url" is equal to "https://docs.datadoghq.com/api/latest/"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with image widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/image_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "image"
+    And the response "widgets[0].definition.url" is equal to "https://example.com/image.png"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"apm_issue_stream","query_string":""},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "apm_issue_stream"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with log_stream widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/log_stream_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "log_stream"
+    And the response "widgets[0].definition.query" is equal to ""
+    And the response "widgets[0].definition.indexes[0]" is equal to "main"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with logs query table widget and storage parameter
+    Given new "CreateDashboard" request
+    And body with value {"layout_type":"ordered","title":"{{ unique }} with query table widget and storage parameter","widgets":[{"definition":{"type":"query_table","requests":[{"queries":[{"data_source":"logs","name":"query1","search":{"query":""},"indexes":["*"],"compute":{"aggregation":"count"},"group_by":[],"storage":"online_archives"}],"formulas":[{"conditional_formats":[],"cell_display_mode":"bar","formula":"query1","limit":{"count":50,"order":"desc"}}],"response_format":"scalar"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "query_table"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "logs"
+    And the response "widgets[0].definition.requests[0].queries[0].storage" is equal to "online_archives"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with logs_pattern_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"logs_pattern_stream","query_string":"","group_by":[{"facet":"service"}]},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "logs_pattern_stream"
+    And the response "widgets[0].definition.requests[0].query.group_by[0].facet" is equal to "service"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with logs_stream list_stream widget and storage parameter
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"logs_stream","query_string":"", "storage": "hot"},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "logs_stream"
+    And the response "widgets[0].definition.requests[0].query.storage" is equal to "hot"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with logs_transaction_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"logs_transaction_stream","query_string":"","group_by":[{"facet":"service"}],"compute":[{"facet":"service","aggregation":"count"}]},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "logs_transaction_stream"
+    And the response "widgets[0].definition.requests[0].query.group_by[0].facet" is equa
