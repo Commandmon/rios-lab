@@ -571,4 +571,66 @@ Feature: Dashboards
     Then the response status is 400 Bad Request
 
   @team:DataDog/dashboards
-  Scenario: Create a new dashboard with template variable presets 
+  Scenario: Create a new dashboard with template variable presets using values returns "OK" response
+    Given new "CreateDashboard" request
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variable_presets": [{"name": "my saved view", "template_variables": [{"name": "datacenter", "values": ["*", "my-host"]}]}], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "defaults": ["my-host"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "template_variable_presets[0].name" is equal to "my saved view"
+    And the response "template_variable_presets[0].template_variables[0].name" is equal to "datacenter"
+    And the response "template_variable_presets[0].template_variables[0].values[0]" is equal to "*"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with timeseries widget and formula style attributes
+    Given new "CreateDashboard" request
+    And body with value {"title": "{{ unique }} with formula style","widgets": [{"definition": {"title": "styled timeseries","show_legend": true,"legend_layout": "auto","legend_columns": ["avg","min","max","value","sum"],"time": {},"type": "timeseries","requests": [{"formulas": [{"formula": "query1","style": {"palette_index": 4,"palette": "classic"}}],"queries": [{"query": "avg:system.cpu.user{*}","data_source": "metrics","name": "query1"}],"response_format": "timeseries","style": {"palette": "dog_classic","line_type": "solid","line_width": "normal"},"display_type": "line"}]}}],"layout_type": "ordered","reflow_type": "auto"}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].formulas[0].style.palette" is equal to "classic"
+    And the response "widgets[0].definition.requests[0].formulas[0].style.palette_index" is equal to 4
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with timeseries widget containing style attributes
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with timeseries widget","widgets": [{"definition": {"type": "timeseries","requests": [{"q": "sum:trace.test.errors{env:prod,service:datadog-api-spec} by {resource_name}.as_count()","on_right_yaxis": false,"style": {"palette": "warm","line_type": "solid","line_width": "normal"},"display_type": "bars"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].on_right_yaxis" is false
+    And the response "widgets[0].definition.requests[0].style" is equal to {"palette": "warm","line_type": "solid","line_width": "normal"}
+    And the response "widgets[0].definition.requests[0].display_type" is equal to "bars"
+    And the response "widgets[0].definition.requests[0].q" is equal to "sum:trace.test.errors{env:prod,service:datadog-api-spec} by {resource_name}.as_count()"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with toplist widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/toplist_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "toplist"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with topology_map widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/topology_map_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "topology_map"
+    And the response "widgets[0].definition.requests[0].request_type" is equal to "topology"
+    And the response "widgets[0].definition.requests[0].query.data_source" is equal to "service_map"
+    And the response "widgets[0].definition.requests[0].query.service" is equal to ""
+    And the response "widgets[0].definition.requests[0].query.filters" is equal to ["env:none","environment:*"]
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with trace_service widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/trace_service_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "trace_service"
+    And the response "widgets[0].definition.env" is equal to "none"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new timeseries widget with ci_pipelines data source
+    Given new "CreateDashboard" request
+    And body with value {"title":"{{ unique }} with ci_pipelines datasource","widgets":[{"definition":{"title":"","show_legend":true,"legend_layout":"auto","legend_columns":["avg","min","max","value","sum"],"time":{},"type":"timeseries","requests":[{"formulas":[{"formula":"query1"}],"queries":[{"data_source":"ci_pipelines","name":"query1","search":{"query":"ci_level:job"},"indexes":["*"],"compute":{"aggregation":"count", "metric": "@ci.queue_time"},"group_by":[]}],"response_format":"timeseries","style":{"palette":"dog_classic","line_type":"solid","li
