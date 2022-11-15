@@ -510,4 +510,65 @@ Feature: Dashboards
     And body from file "dashboards_json_payload/slo_list_widget_with_sort.json"
     When the request is sent
     Then the response status is 200 OK
-    And the response "widgets[0].definition.type
+    And the response "widgets[0].definition.type" is equal to "slo_list"
+    And the response "widgets[0].definition.requests[0].query.query_string" is equal to "env:prod AND service:my-app"
+    And the response "widgets[0].definition.requests[0].query.limit" is equal to 75
+    And the response "widgets[0].definition.requests[0].query.sort[0].column" is equal to "status.sli"
+    And the response "widgets[0].definition.requests[0].query.sort[0].order" is equal to "asc"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with slo widget
+    Given there is a valid "slo" in the system
+    And new "CreateDashboard" request
+    And body from file "dashboards_json_payload/slo_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "slo"
+    And the response "widgets[0].definition.slo_id" is equal to "{{ slo.data[0].id }}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with sunburst widget and metrics data
+    Given new "CreateDashboard" request
+    And body with value { "title": "{{ unique }}", "widgets": [ { "definition": { "title": "", "title_size": "16", "title_align": "left", "type": "sunburst", "requests": [ { "response_format": "scalar", "formulas": [ { "formula": "query1" } ], "queries": [ { "query": "sum:system.mem.used{*} by {service}", "data_source": "metrics", "name": "query1", "aggregator": "sum" } ] } ] }, "layout": { "x": 0, "y": 0, "width": 4, "height": 4 } } ], "layout_type": "ordered" }
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "scalar"
+    And the response "widgets[0].definition.requests[0].queries[0].query" is equal to "sum:system.mem.used{*} by {service}"
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "metrics"
+    And the response "widgets[0].definition.requests[0].queries[0].name" is equal to "query1"
+    And the response "widgets[0].definition.requests[0].queries[0].aggregator" is equal to "sum"
+    And the response "widgets[0].definition.requests[0].formulas[0].formula" is equal to "query1"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with template variable defaults and default returns "Bad Request" response
+    Given new "CreateDashboard" request
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "default": "my-host", "defaults": ["my-host"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with template variable defaults returns "OK" response
+    Given new "CreateDashboard" request
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "defaults": ["my-host"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "template_variables[0].name" is equal to "host1"
+    And the response "template_variables[0].available_values[0]" is equal to "my-host"
+    And the response "template_variables[0].defaults[0]" is equal to "my-host"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with template variable defaults whose value has no length returns "Bad Request" response
+    Given new "CreateDashboard" request
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "defaults": [""], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with template variable presets using values and value returns "Bad Request" response
+    Given new "CreateDashboard" request
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variable_presets": [{"name": "my saved view", "template_variables": [{"name": "datacenter", "value": "*", "values": [ "*" ]}]}], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "defaults": ["my-host"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with template variable presets 
