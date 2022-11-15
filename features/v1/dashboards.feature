@@ -408,4 +408,106 @@ Feature: Dashboards
     When the request is sent
     Then the response status is 200 OK
     And the response "widgets[0].definition.requests[0].query.data_source" is equal to "logs_transaction_stream"
-    And the response "widgets[0].definition.requests[0].query.group_by[0].facet" is equa
+    And the response "widgets[0].definition.requests[0].query.group_by[0].facet" is equal to "service"
+    And the response "widgets[0].definition.requests[0].query.compute[0].facet" is equal to "service"
+    And the response "widgets[0].definition.requests[0].query.compute[0].aggregation" is equal to "count"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with manage_status widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/manage_status_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "manage_status"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with manage_status widget and show_priority parameter
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/manage_status_widget_priority_sort.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "manage_status"
+    And the response "widgets[0].definition.show_priority" is false
+    And the response "widgets[0].definition.sort" is equal to "priority,asc"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with note widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/note_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "note"
+    And the response "widgets[0].definition.content" is equal to "# Example Note"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with query_table widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/query_table_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "query_table"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with query_value widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/query_value_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "query_value"
+    And the response "widgets[0].definition.requests[0].queries[0].query" is equal to "avg:system.cpu.user{*}"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with rum_issue_stream list_stream widget
+    Given new "CreateDashboard" request
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"rum_issue_stream","query_string":""},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "list_stream"
+    And the response "widgets[0].definition.requests[0].response_format" is equal to "event_list"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with run-workflow widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/run_workflow_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "run_workflow"
+    And the response "widgets[0].definition.workflow_id" is equal to "2e055f16-8b6a-4cdd-b452-17a34c44b160"
+    And the response "widgets[0].definition.inputs[0]" is equal to {"name": "environment", "value": "$env.value"}
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with scatterplot widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/scatterplot_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "scatterplot"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with servicemap widget
+    Given new "CreateDashboard" request
+    And body from file "dashboards_json_payload/servicemap_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "servicemap"
+    And the response "widgets[0].definition.filters" is equal to ["env:none","environment:*"]
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with slo list widget
+    Given there is a valid "slo" in the system
+    And new "CreateDashboard" request
+    And body from file "dashboards_json_payload/slo_list_widget.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type" is equal to "slo_list"
+    And the response "widgets[0].definition.requests[0].query.query_string" is equal to "env:prod AND service:my-app"
+    And the response "widgets[0].definition.requests[0].query.limit" is equal to 75
+
+  @team:DataDog/dashboards
+  Scenario: Create a new dashboard with slo list widget with sort
+    Given there is a valid "slo" in the system
+    And new "CreateDashboard" request
+    And body from file "dashboards_json_payload/slo_list_widget_with_sort.json"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.type
