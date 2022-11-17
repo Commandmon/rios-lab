@@ -739,4 +739,44 @@ Feature: Dashboards
     When the request is sent
     Then the response status is 400 Bad Request
 
-  @generated @skip @team:DataDog/dashb
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Restore deleted dashboards returns "Dashboards Not Found" response
+    Given new "RestoreDashboards" request
+    And body with value {"data": [{"id": "123-abc-456", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 404 Dashboards Not Found
+
+  @team:DataDog/dashboards
+  Scenario: Restore deleted dashboards returns "No Content" response
+    Given there is a valid "dashboard" in the system
+    And the "dashboard" was deleted
+    And new "RestoreDashboards" request
+    And body with value {"data": [{"id": "{{ dashboard.id }}", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 204 No Content
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Update a dashboard returns "Bad Request" response
+    Given new "UpdateDashboard" request
+    And request contains "dashboard_id" parameter from "REPLACE.ME"
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variable_presets": [{"template_variables": [{"values": []}]}], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "default": "my-host", "defaults": ["my-host-1", "my-host-2"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Update a dashboard returns "Item Not Found" response
+    Given new "UpdateDashboard" request
+    And request contains "dashboard_id" parameter from "REPLACE.ME"
+    And body with value {"description": null, "is_read_only": false, "layout_type": "ordered", "notify_list": [], "reflow_type": "auto", "restricted_roles": [], "template_variable_presets": [{"template_variables": [{"values": []}]}], "template_variables": [{"available_values": ["my-host", "host1", "host2"], "default": "my-host", "defaults": ["my-host-1", "my-host-2"], "name": "host1", "prefix": "host"}], "title": "", "widgets": [{"definition": {"requests": {"fill": {"q": "avg:system.cpu.user{*}"}}, "type": "hostmap"}}]}
+    When the request is sent
+    Then the response status is 404 Item Not Found
+
+  @team:DataDog/dashboards
+  Scenario: Update a dashboard returns "OK" response
+    Given there is a valid "dashboard" in the system
+    And new "UpdateDashboard" request
+    And request contains "dashboard_id" parameter from "dashboard.id"
+    And body with value {"layout_type": "ordered", "title": "{{ unique }} with list_stream widget","description":"Updated description","widgets": [{"definition": {"type": "list_stream","requests": [{"columns":[{"width":"auto","field":"timestamp"}],"query":{"data_source":"apm_issue_stream","query_string":""},"response_format":"event_list"}]}}]}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "description" is equal to "Updated description"
