@@ -633,4 +633,110 @@ Feature: Dashboards
   @team:DataDog/dashboards
   Scenario: Create a new timeseries widget with ci_pipelines data source
     Given new "CreateDashboard" request
-    And body with value {"title":"{{ unique }} with ci_pipelines datasource","widgets":[{"definition":{"title":"","show_legend":true,"legend_layout":"auto","legend_columns":["avg","min","max","value","sum"],"time":{},"type":"timeseries","requests":[{"formulas":[{"formula":"query1"}],"queries":[{"data_source":"ci_pipelines","name":"query1","search":{"query":"ci_level:job"},"indexes":["*"],"compute":{"aggregation":"count", "metric": "@ci.queue_time"},"group_by":[]}],"response_format":"timeseries","style":{"palette":"dog_classic","line_type":"solid","li
+    And body with value {"title":"{{ unique }} with ci_pipelines datasource","widgets":[{"definition":{"title":"","show_legend":true,"legend_layout":"auto","legend_columns":["avg","min","max","value","sum"],"time":{},"type":"timeseries","requests":[{"formulas":[{"formula":"query1"}],"queries":[{"data_source":"ci_pipelines","name":"query1","search":{"query":"ci_level:job"},"indexes":["*"],"compute":{"aggregation":"count", "metric": "@ci.queue_time"},"group_by":[]}],"response_format":"timeseries","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"},"display_type":"line"}]}}],"layout_type":"ordered","reflow_type":"auto"}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "ci_pipelines"
+    And the response "widgets[0].definition.requests[0].queries[0].search.query" is equal to "ci_level:job"
+
+  @team:DataDog/dashboards
+  Scenario: Create a new timeseries widget with ci_tests data source
+    Given new "CreateDashboard" request
+    And body with value {"title":"{{ unique }} with ci_tests datasource","widgets":[{"definition":{"title":"","show_legend":true,"legend_layout":"auto","legend_columns":["avg","min","max","value","sum"],"time":{},"type":"timeseries","requests":[{"formulas":[{"formula":"query1"}],"queries":[{"data_source":"ci_tests","name":"query1","search":{"query":"test_level:test"},"indexes":["*"],"compute":{"aggregation":"count"},"group_by":[]}],"response_format":"timeseries","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"},"display_type":"line"}]}}],"layout_type":"ordered","reflow_type":"auto"}
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "widgets[0].definition.requests[0].queries[0].data_source" is equal to "ci_tests"
+    And the response "widgets[0].definition.requests[0].queries[0].search.query" is equal to "test_level:test"
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Delete a dashboard returns "Dashboards Not Found" response
+    Given new "DeleteDashboard" request
+    And request contains "dashboard_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Dashboards Not Found
+
+  @team:DataDog/dashboards
+  Scenario: Delete a dashboard returns "OK" response
+    Given there is a valid "dashboard" in the system
+    And new "DeleteDashboard" request
+    And request contains "dashboard_id" parameter from "dashboard.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "deleted_dashboard_id" is equal to "{{ dashboard.id }}"
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Delete dashboards returns "Bad Request" response
+    Given new "DeleteDashboards" request
+    And body with value {"data": [{"id": "123-abc-456", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Delete dashboards returns "Dashboards Not Found" response
+    Given new "DeleteDashboards" request
+    And body with value {"data": [{"id": "123-abc-456", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 404 Dashboards Not Found
+
+  @team:DataDog/dashboards
+  Scenario: Delete dashboards returns "No Content" response
+    Given there is a valid "dashboard" in the system
+    And new "DeleteDashboards" request
+    And body with value {"data": [{"id": "{{ dashboard.id }}", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 204 No Content
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Get a dashboard returns "Item Not Found" response
+    Given new "GetDashboard" request
+    And request contains "dashboard_id" parameter from "REPLACE.ME"
+    When the request is sent
+    Then the response status is 404 Item Not Found
+
+  @team:DataDog/dashboards
+  Scenario: Get a dashboard returns "OK" response
+    Given there is a valid "dashboard" in the system
+    And new "GetDashboard" request
+    And request contains "dashboard_id" parameter from "dashboard.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "description" is equal to null
+
+  @replay-only @team:DataDog/dashboards
+  Scenario: Get a dashboard returns 'author_name'
+    Given there is a valid "dashboard" in the system
+    And new "GetDashboard" request
+    And request contains "dashboard_id" parameter from "dashboard.id"
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "author_name" is equal to "Frog Account"
+
+  @replay-only @team:DataDog/dashboards
+  Scenario: Get all dashboards returns "OK" response
+    Given new "ListDashboards" request
+    And there is a valid "dashboard" in the system
+    And request contains "filter[shared]" parameter with value false
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "dashboards[0].title" has the same value as "dashboard.title"
+    And the response "dashboards[0].id" has the same value as "dashboard.id"
+
+  @replay-only @team:DataDog/dashboards
+  Scenario: Get deleted dashboards returns "OK" response
+    Given new "ListDashboards" request
+    And there is a valid "dashboard" in the system
+    And the "dashboard" was deleted
+    And request contains "filter[deleted]" parameter with value true
+    When the request is sent
+    Then the response status is 200 OK
+    And the response "dashboards[0].title" has the same value as "dashboard.title"
+    And the response "dashboards[0].id" has the same value as "dashboard.id"
+
+  @generated @skip @team:DataDog/dashboards
+  Scenario: Restore deleted dashboards returns "Bad Request" response
+    Given new "RestoreDashboards" request
+    And body with value {"data": [{"id": "123-abc-456", "type": "dashboard"}]}
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip @team:DataDog/dashb
