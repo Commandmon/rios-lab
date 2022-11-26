@@ -17,23 +17,26 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Options on impossible travel rules.
-  class SecurityMonitoringRuleImpossibleTravelOptions
+  # Attributes describing the new assignee of a security signal.
+  class SecurityMonitoringSignalAssigneeUpdateAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular
-    # access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
-    attr_accessor :baseline_user_locations
+    # Object representing a given user entity.
+    attr_reader :assignee
+
+    # Version of the updated signal. If server side version is higher, update will be rejected.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'baseline_user_locations' => :'baselineUserLocations'
+        :'assignee' => :'assignee',
+        :'version' => :'version'
       }
     end
 
@@ -41,7 +44,8 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'baseline_user_locations' => :'Boolean'
+        :'assignee' => :'SecurityMonitoringTriageUser',
+        :'version' => :'Integer'
       }
     end
 
@@ -50,19 +54,23 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SecurityMonitoringRuleImpossibleTravelOptions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::SecurityMonitoringSignalAssigneeUpdateAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SecurityMonitoringRuleImpossibleTravelOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::SecurityMonitoringSignalAssigneeUpdateAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'baseline_user_locations')
-        self.baseline_user_locations = attributes[:'baseline_user_locations']
+      if attributes.key?(:'assignee')
+        self.assignee = attributes[:'assignee']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -70,7 +78,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @assignee.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param assignee [Object] Object to be assigned
+    # @!visibility private
+    def assignee=(assignee)
+      if assignee.nil?
+        fail ArgumentError, 'invalid value for "assignee", assignee cannot be nil.'
+      end
+      @assignee = assignee
     end
 
     # Checks equality by comparing each attribute.
@@ -79,14 +98,15 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          baseline_user_locations == o.baseline_user_locations
+          assignee == o.assignee &&
+          version == o.version
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [baseline_user_locations].hash
+      [assignee, version].hash
     end
   end
 end
