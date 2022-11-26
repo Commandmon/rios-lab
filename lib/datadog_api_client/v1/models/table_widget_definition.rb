@@ -90,4 +90,98 @@ module DatadogAPIClient::V1
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPI
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::TableWidgetDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'custom_links')
+        if (value = attributes[:'custom_links']).is_a?(Array)
+          self.custom_links = value
+        end
+      end
+
+      if attributes.key?(:'has_search_bar')
+        self.has_search_bar = attributes[:'has_search_bar']
+      end
+
+      if attributes.key?(:'requests')
+        if (value = attributes[:'requests']).is_a?(Array)
+          self.requests = value
+        end
+      end
+
+      if attributes.key?(:'time')
+        self.time = attributes[:'time']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'title_align')
+        self.title_align = attributes[:'title_align']
+      end
+
+      if attributes.key?(:'title_size')
+        self.title_size = attributes[:'title_size']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @requests.nil?
+      return false if @type.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param requests [Object] Object to be assigned
+    # @!visibility private
+    def requests=(requests)
+      if requests.nil?
+        fail ArgumentError, 'invalid value for "requests", requests cannot be nil.'
+      end
+      @requests = requests
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          custom_links == o.custom_links &&
+          has_search_bar == o.has_search_bar &&
+          requests == o.requests &&
+          time == o.time &&
+          title == o.title &&
+          title_align == o.title_align &&
+          title_size == o.title_size &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [custom_links, has_search_bar, requests, time, title, title_align, title_size, type].hash
+    end
+  end
+end
