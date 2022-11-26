@@ -17,30 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Compute options.
-  class MonitorFormulaAndFunctionEventQueryDefinitionCompute
+  # Response containing the audit logs usage for each hour for a given organization.
+  class UsageAuditLogsResponse
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Aggregation methods for event platform queries.
-    attr_reader :aggregation
-
-    # A time interval in milliseconds.
-    attr_accessor :interval
-
-    # Measurable attribute to compute.
-    attr_accessor :metric
+    # Get hourly usage for audit logs.
+    attr_accessor :usage
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'aggregation' => :'aggregation',
-        :'interval' => :'interval',
-        :'metric' => :'metric'
+        :'usage' => :'usage'
       }
     end
 
@@ -48,9 +40,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'aggregation' => :'MonitorFormulaAndFunctionEventAggregation',
-        :'interval' => :'Integer',
-        :'metric' => :'String'
+        :'usage' => :'Array<UsageAuditLogsHour>'
       }
     end
 
@@ -59,27 +49,21 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::MonitorFormulaAndFunctionEventQueryDefinitionCompute` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::UsageAuditLogsResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MonitorFormulaAndFunctionEventQueryDefinitionCompute`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::UsageAuditLogsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'aggregation')
-        self.aggregation = attributes[:'aggregation']
-      end
-
-      if attributes.key?(:'interval')
-        self.interval = attributes[:'interval']
-      end
-
-      if attributes.key?(:'metric')
-        self.metric = attributes[:'metric']
+      if attributes.key?(:'usage')
+        if (value = attributes[:'usage']).is_a?(Array)
+          self.usage = value
+        end
       end
     end
 
@@ -87,18 +71,7 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if @aggregation.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param aggregation [Object] Object to be assigned
-    # @!visibility private
-    def aggregation=(aggregation)
-      if aggregation.nil?
-        fail ArgumentError, 'invalid value for "aggregation", aggregation cannot be nil.'
-      end
-      @aggregation = aggregation
     end
 
     # Checks equality by comparing each attribute.
@@ -107,16 +80,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregation == o.aggregation &&
-          interval == o.interval &&
-          metric == o.metric
+          usage == o.usage
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [aggregation, interval, metric].hash
+      [usage].hash
     end
   end
 end
