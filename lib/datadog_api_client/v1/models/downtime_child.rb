@@ -48,4 +48,163 @@ module DatadogAPIClient::V1
     attr_accessor :_end
 
     # The downtime ID.
-   
+    attr_accessor :id
+
+    # A message to include with notifications for this downtime.
+    # Email notifications can be sent to specific users by using the same `@username` notation as events.
+    attr_accessor :message
+
+    # A single monitor to which the downtime applies.
+    # If not provided, the downtime applies to all monitors.
+    attr_accessor :monitor_id
+
+    # A comma-separated list of monitor tags. For example, tags that are applied directly to monitors,
+    # not tags that are used in monitor queries (which are filtered by the scope parameter), to which the downtime applies.
+    # The resulting downtime applies to monitors that match ALL provided monitor tags.
+    # For example, `service:postgres` **AND** `team:frontend`.
+    attr_accessor :monitor_tags
+
+    # If the first recovery notification during a downtime should be muted.
+    attr_accessor :mute_first_recovery_notification
+
+    # ID of the parent Downtime.
+    attr_accessor :parent_id
+
+    # An object defining the recurrence of the downtime.
+    attr_accessor :recurrence
+
+    # The scope(s) to which the downtime applies and must be in `key:value` format. For example, `host:app2`.
+    # Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+    # The resulting downtime applies to sources that matches ALL provided scopes (`env:dev` **AND** `env:prod`).
+    attr_accessor :scope
+
+    # POSIX timestamp to start the downtime.
+    # If not provided, the downtime starts the moment it is created.
+    attr_accessor :start
+
+    # The timezone in which to display the downtime's start and end times in Datadog applications.
+    attr_accessor :timezone
+
+    # ID of the last user that updated the downtime.
+    attr_reader :updater_id
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    # @!visibility private
+    def self.attribute_map
+      {
+        :'active' => :'active',
+        :'canceled' => :'canceled',
+        :'creator_id' => :'creator_id',
+        :'disabled' => :'disabled',
+        :'downtime_type' => :'downtime_type',
+        :'_end' => :'end',
+        :'id' => :'id',
+        :'message' => :'message',
+        :'monitor_id' => :'monitor_id',
+        :'monitor_tags' => :'monitor_tags',
+        :'mute_first_recovery_notification' => :'mute_first_recovery_notification',
+        :'parent_id' => :'parent_id',
+        :'recurrence' => :'recurrence',
+        :'scope' => :'scope',
+        :'start' => :'start',
+        :'timezone' => :'timezone',
+        :'updater_id' => :'updater_id'
+      }
+    end
+
+    # Attribute type mapping.
+    # @!visibility private
+    def self.openapi_types
+      {
+        :'active' => :'Boolean',
+        :'canceled' => :'Integer',
+        :'creator_id' => :'Integer',
+        :'disabled' => :'Boolean',
+        :'downtime_type' => :'Integer',
+        :'_end' => :'Integer',
+        :'id' => :'Integer',
+        :'message' => :'String',
+        :'monitor_id' => :'Integer',
+        :'monitor_tags' => :'Array<String>',
+        :'mute_first_recovery_notification' => :'Boolean',
+        :'parent_id' => :'Integer',
+        :'recurrence' => :'DowntimeRecurrence',
+        :'scope' => :'Array<String>',
+        :'start' => :'Integer',
+        :'timezone' => :'String',
+        :'updater_id' => :'Integer'
+      }
+    end
+
+    # List of attributes with nullable: true
+    # @!visibility private
+    def self.openapi_nullable
+      Set.new([
+        :'canceled',
+        :'_end',
+        :'monitor_id',
+        :'parent_id',
+        :'recurrence',
+        :'updater_id',
+      ])
+    end
+
+    # Initializes the object
+    # @param attributes [Hash] Model attributes in the form of hash
+    # @!visibility private
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::DowntimeChild` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::DowntimeChild`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'active')
+        self.active = attributes[:'active']
+      end
+
+      if attributes.key?(:'canceled')
+        self.canceled = attributes[:'canceled']
+      end
+
+      if attributes.key?(:'creator_id')
+        self.creator_id = attributes[:'creator_id']
+      end
+
+      if attributes.key?(:'disabled')
+        self.disabled = attributes[:'disabled']
+      end
+
+      if attributes.key?(:'downtime_type')
+        self.downtime_type = attributes[:'downtime_type']
+      end
+
+      if attributes.key?(:'_end')
+        self._end = attributes[:'_end']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
+      end
+
+      if attributes.key?(:'monitor_id')
+        self.monitor_id = attributes[:'monitor_id']
+      end
+
+      if attributes.key?(:'monitor_tags')
+        if (value = attributes[:'monitor_tags']).is_a?(Array)
+          self.monitor_tags = value
+        end
+      end
+
+      if attributes.ke
