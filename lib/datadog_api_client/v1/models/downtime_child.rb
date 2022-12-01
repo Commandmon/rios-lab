@@ -207,4 +207,107 @@ module DatadogAPIClient::V1
         end
       end
 
-      if attributes.ke
+      if attributes.key?(:'mute_first_recovery_notification')
+        self.mute_first_recovery_notification = attributes[:'mute_first_recovery_notification']
+      end
+
+      if attributes.key?(:'parent_id')
+        self.parent_id = attributes[:'parent_id']
+      end
+
+      if attributes.key?(:'recurrence')
+        self.recurrence = attributes[:'recurrence']
+      end
+
+      if attributes.key?(:'scope')
+        if (value = attributes[:'scope']).is_a?(Array)
+          self.scope = value
+        end
+      end
+
+      if attributes.key?(:'start')
+        self.start = attributes[:'start']
+      end
+
+      if attributes.key?(:'timezone')
+        self.timezone = attributes[:'timezone']
+      end
+
+      if attributes.key?(:'updater_id')
+        self.updater_id = attributes[:'updater_id']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if !@creator_id.nil? && @creator_id > 2147483647
+      return false if !@downtime_type.nil? && @downtime_type > 2147483647
+      return false if !@updater_id.nil? && @updater_id > 2147483647
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param creator_id [Object] Object to be assigned
+    # @!visibility private
+    def creator_id=(creator_id)
+      if !creator_id.nil? && creator_id > 2147483647
+        fail ArgumentError, 'invalid value for "creator_id", must be smaller than or equal to 2147483647.'
+      end
+      @creator_id = creator_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param downtime_type [Object] Object to be assigned
+    # @!visibility private
+    def downtime_type=(downtime_type)
+      if !downtime_type.nil? && downtime_type > 2147483647
+        fail ArgumentError, 'invalid value for "downtime_type", must be smaller than or equal to 2147483647.'
+      end
+      @downtime_type = downtime_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param updater_id [Object] Object to be assigned
+    # @!visibility private
+    def updater_id=(updater_id)
+      if !updater_id.nil? && updater_id > 2147483647
+        fail ArgumentError, 'invalid value for "updater_id", must be smaller than or equal to 2147483647.'
+      end
+      @updater_id = updater_id
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          active == o.active &&
+          canceled == o.canceled &&
+          creator_id == o.creator_id &&
+          disabled == o.disabled &&
+          downtime_type == o.downtime_type &&
+          _end == o._end &&
+          id == o.id &&
+          message == o.message &&
+          monitor_id == o.monitor_id &&
+          monitor_tags == o.monitor_tags &&
+          mute_first_recovery_notification == o.mute_first_recovery_notification &&
+          parent_id == o.parent_id &&
+          recurrence == o.recurrence &&
+          scope == o.scope &&
+          start == o.start &&
+          timezone == o.timezone &&
+          updater_id == o.updater_id
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [active, canceled, creator_id, disabled, downtime_type, _end, id, message, monitor_id, monitor_tags, mute_first_recovery_notification, parent_id, recurrence, scope, start, timezone, updater_id].hash
+    end
+  end
+end
