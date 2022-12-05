@@ -105,4 +105,50 @@ module DatadogAPIClient::V2
     # Custom attribute writer method with validation
     # @param channel_id [Object] Object to be assigned
     # @!visibility private
-  
+    def channel_id=(channel_id)
+      if channel_id.nil?
+        fail ArgumentError, 'invalid value for "channel_id", channel_id cannot be nil.'
+      end
+      @channel_id = channel_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param channel_name [Object] Object to be assigned
+    # @!visibility private
+    def channel_name=(channel_name)
+      if channel_name.nil?
+        fail ArgumentError, 'invalid value for "channel_name", channel_name cannot be nil.'
+      end
+      @channel_name = channel_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param redirect_url [Object] Object to be assigned
+    # @!visibility private
+    def redirect_url=(redirect_url)
+      if redirect_url.nil?
+        fail ArgumentError, 'invalid value for "redirect_url", redirect_url cannot be nil.'
+      end
+      @redirect_url = redirect_url
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          channel_id == o.channel_id &&
+          channel_name == o.channel_name &&
+          redirect_url == o.redirect_url &&
+          team_id == o.team_id
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [channel_id, channel_name, redirect_url, team_id].hash
+    end
+  end
+end
