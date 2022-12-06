@@ -135,4 +135,70 @@ module DatadogAPIClient::V1
     # @!visibility private
     def valid?
       return false if @cells.nil?
-      retu
+      return false if @name.nil?
+      return false if @name.to_s.length > 80
+      return false if @name.to_s.length < 0
+      return false if @time.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param cells [Object] Object to be assigned
+    # @!visibility private
+    def cells=(cells)
+      if cells.nil?
+        fail ArgumentError, 'invalid value for "cells", cells cannot be nil.'
+      end
+      @cells = cells
+    end
+
+    # Custom attribute writer method with validation
+    # @param name [Object] Object to be assigned
+    # @!visibility private
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      if name.to_s.length > 80
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 80.'
+      end
+      if name.to_s.length < 0
+        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 0.'
+      end
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param time [Object] Object to be assigned
+    # @!visibility private
+    def time=(time)
+      if time.nil?
+        fail ArgumentError, 'invalid value for "time", time cannot be nil.'
+      end
+      @time = time
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          author == o.author &&
+          cells == o.cells &&
+          created == o.created &&
+          metadata == o.metadata &&
+          modified == o.modified &&
+          name == o.name &&
+          status == o.status &&
+          time == o.time
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [author, cells, created, metadata, modified, name, status, time].hash
+    end
+  end
+end

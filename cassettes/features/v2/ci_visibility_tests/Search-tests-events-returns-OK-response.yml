@@ -1,0 +1,22 @@
+http_interactions:
+- recorded_at: Fri, 21 Oct 2022 15:04:00 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"filter":{"from":"now-15m","query":"@test.service:web-ui-tests AND
+        @test.status:skip","to":"now"},"options":{"timezone":"GMT"},"page":{"limit":25},"sort":"timestamp"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v2/ci/tests/events/search
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"AQAAAYP7BNMIuIAxxAAAAABBWVA3Qk5NSUFBQ3dKNTJFSjhrZXlTZ0s","type":"citest","attributes":{"test_level":"test","attributes":{"test_suite":{"fingerprint":"821da1fe0511456d"},"test":{"framework_version":"0.0.2","codeowners":["@DataDog/repo"],"source":{"file":"javascript/datadog/apps-sdk/internal/lib/managers/app-manager-with-controller/controller-manager.unit.ts"},"type":"test","has_parameters":false,"jest":{"test_runner":"jest-circus"},"command":"jest
+        --config jest.browser.config.js --color --testNamePattern=\\[flaky\\] --ci
+        --silent --maxWorkers=7","framework":"jest","suite":"javascript/datadog/apps-sdk/internal/lib/managers/app-manager-with-controller/controller-manager.unit.ts","full_name":"javascript/datadog/apps-sdk/internal/lib/managers/app-manager-with-controller/controller-manager.unit.ts.request()
+        delegates to the main iframe controller request method","service":"web-ui-tests","name":"request()
+        delegates to the main iframe controller request method","fingerprint":"3dbce8739d2972f9","status":"skip"},"os":{"version":"5.15.0-1017-aws","platform":"linux","architecture":"x64"},"ci":{"pipeline":{"number":479973,"name":"DataDog/repo","id":"10631599","url":"https://gitlab.site.io/DataDog/repo/pipelines/10631599"},"workspace_path":"/go/src/github.com/DataDog/repo","stage":{"name":"optional-jobs"},"provider":{"name":"gitlab"},"job":{"name":"unit-test-flaky","url":"https://gitlab.site.io/Dat
