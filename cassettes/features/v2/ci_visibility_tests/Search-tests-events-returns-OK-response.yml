@@ -30,4 +30,13 @@ http_interactions:
         --silent --maxWorkers=7","framework":"jest","suite":"javascript/datadog/dataviz/lib/stats/FrameTimer.unit.ts","full_name":"javascript/datadog/dataviz/lib/stats/FrameTimer.unit.ts.FrameTimer
         should capture timings with a GPU timer","service":"web-ui-tests","name":"FrameTimer
         should capture timings with a GPU timer","fingerprint":"99424c8cd4b1362b","status":"skip"},"os":{"version":"5.15.0-1017-aws","platform":"linux","architecture":"x64"},"ci":{"pipeline":{"number":479961,"name":"DataDog/repo","id":"10631454","url":"https://gitlab.site.io/DataDog/repo/pipelines/10631454"},"workspace_path":"/go/src/github.com/DataDog/repo","stage":{"name":"optional-jobs"},"provider":{"name":"gitlab"},"job":{"name":"unit-test-flaky","url":"https://gitlab.site.io/DataDog/repo/-/jobs/184825642"}},"sampling":{"priority":1},"start":1666363740937000448,"runtime":{"name":"node","version":"v16.3.0"},"language":"javascript","env":"ci","version":"0.0.2","duration":18799,"test_session":{"fingerprint":"6957ad04dea312d6"},"library_version":"3.4.0","git":{"commit":{"committer":{"date":"2022-10-21T10:39:58-04:00","name":"GitHub","email":"noreply@github.com","date_timestamp":1666363198000},"author":{"date":"2022-10-21T10:39:58-04:00","name":"Joe","email":"support@datadoghq.com","date_timestamp":1666363198000},"message":"Merge
-        branch ''preprod'' into zach.anderson/sendgrid_last_login","sha":"ddc2d8cf8a68ca7c67553ea12d41b0df5d069bf7"},"repository_url":"https://gitlab
+        branch ''preprod'' into zach.anderson/sendgrid_last_login","sha":"ddc2d8cf8a68ca7c67553ea12d41b0df5d069bf7"},"repository_url":"https://gitlab.site.io/DataDog/repo.git","repository":{"path":"/DataDog/repo.git","scheme":"https","name":"DataDog/repo","host":"gitlab.site.io","id":"gitlab.site.io/DataDog/repo"},"branch":"zach.anderson/sendgrid_last_login"},"service":"web-ui-tests","runtime-id":"7efabaf6-197f-4fcc-9a4d-6ca6c85d3ae4"},"tags":["source:apm","source:apm"]}}],"meta":{"page":{"after":"eyJhZnRlciI6IkFRQUFBWVA3Qk5OWGUtNGVVQUFBQUFCQldWQTNRazVPV0VGQlJGUnBVbkkxZVU5MWJXSnpiM2MifQ"}},"links":{"next":"https://api.datadoghq.com/api/v2/ci/tests/events?filter%5Bfrom%5D=now-15m&filter%5Bquery%5D=%40test.service%3Aweb-ui-tests+AND+%40test.status%3Askip&filter%5Bto%5D=now&page%5Bcursor%5D=eyJhZnRlciI6IkFRQUFBWVA3Qk5OWGUtNGVVQUFBQUFCQldWQTNRazVPV0VGQlJGUnBVbkkxZVU5MWJXSnpiM2MifQ&page%5Blimit%5D=25&sort=timestamp"}}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
