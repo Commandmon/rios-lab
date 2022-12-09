@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,14 +18,10 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Metadata type of the notebook.
-  class NotebookMetadataType
+  # Type of the log stream widget.
+  class LogStreamWidgetDefinitionType
     include BaseEnumModel
 
-    POSTMORTEM = "postmortem".freeze
-    RUNBOOK = "runbook".freeze
-    INVESTIGATION = "investigation".freeze
-    DOCUMENTATION = "documentation".freeze
-    REPORT = "report".freeze
+    LOG_STREAM = "log_stream".freeze
   end
 end
