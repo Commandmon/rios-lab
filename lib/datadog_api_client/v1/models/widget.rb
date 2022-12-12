@@ -76,4 +76,52 @@ module DatadogAPIClient::V1
       }
 
       if attributes.key?(:'definition')
-        self.def
+        self.definition = attributes[:'definition']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'layout')
+        self.layout = attributes[:'layout']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @definition.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param definition [Object] Object to be assigned
+    # @!visibility private
+    def definition=(definition)
+      if definition.nil?
+        fail ArgumentError, 'invalid value for "definition", definition cannot be nil.'
+      end
+      @definition = definition
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          definition == o.definition &&
+          id == o.id &&
+          layout == o.layout
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [definition, id, layout].hash
+    end
+  end
+end
