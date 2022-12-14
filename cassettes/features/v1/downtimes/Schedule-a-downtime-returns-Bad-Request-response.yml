@@ -16,4 +16,9 @@ http_interactions:
       encoding: UTF-8
       string: '{"errors":["Invalid scope parameter"]}'
     headers:
-      Content-Typ
+      Content-Type:
+      - application/json
+    status:
+      code: 400
+      message: Bad Request
+recorded_with: VCR 6.0.0
