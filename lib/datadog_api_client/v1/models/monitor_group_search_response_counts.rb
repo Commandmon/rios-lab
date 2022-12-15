@@ -72,4 +72,34 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'type')
-        if (value = 
+        if (value = attributes[:'type']).is_a?(Array)
+          self.type = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          status == o.status &&
+          type == o.type
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [status, type].hash
+    end
+  end
+end
