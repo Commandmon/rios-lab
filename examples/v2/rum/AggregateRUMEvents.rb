@@ -17,4 +17,17 @@ body = DatadogAPIClient::V2::RUMAggregateRequest.new({
     to: "now",
   }),
   group_by: [
-    DatadogAPIClient::V2::RUMGroupBy
+    DatadogAPIClient::V2::RUMGroupBy.new({
+      facet: "@view.time_spent",
+      limit: 10,
+      total: false,
+    }),
+  ],
+  options: DatadogAPIClient::V2::RUMQueryOptions.new({
+    timezone: "GMT",
+  }),
+  page: DatadogAPIClient::V2::RUMQueryPageOptions.new({
+    limit: 25,
+  }),
+})
+p api_instance.aggregate_rum_events(body)
