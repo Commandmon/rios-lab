@@ -13,3 +13,13 @@ http_interactions:
     method: POST
     uri: https://api.datadoghq.com/api/v2/audit/events/search
   response:
+    body:
+      encoding: UTF-8
+      string: '{"data":[]}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+recorded_with: VCR 6.0.0
