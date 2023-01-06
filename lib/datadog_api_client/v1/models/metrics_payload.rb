@@ -57,3 +57,49 @@ module DatadogAPIClient::V1
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
           fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::MetricsPayload`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'series')
+        if (value = attributes[:'series']).is_a?(Array)
+          self.series = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @series.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param series [Object] Object to be assigned
+    # @!visibility private
+    def series=(series)
+      if series.nil?
+        fail ArgumentError, 'invalid value for "series", series cannot be nil.'
+      end
+      @series = series
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          series == o.series
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [series].hash
+    end
+  end
+end
