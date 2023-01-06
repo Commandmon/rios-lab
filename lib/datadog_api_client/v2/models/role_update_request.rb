@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,30 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Creator of the object.
-  class Creator
+  # Update a role.
+  class RoleUpdateRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Email of the creator.
-    attr_accessor :email
-
-    # Handle of the creator.
-    attr_accessor :handle
-
-    # Name of the creator.
-    attr_accessor :name
+    # Data related to the update of a role.
+    attr_reader :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'email' => :'email',
-        :'handle' => :'handle',
-        :'name' => :'name'
+        :'data' => :'data'
       }
     end
 
@@ -48,9 +41,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'email' => :'String',
-        :'handle' => :'String',
-        :'name' => :'String'
+        :'data' => :'RoleUpdateData'
       }
     end
 
@@ -59,27 +50,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::Creator` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RoleUpdateRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::Creator`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RoleUpdateRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'handle')
-        self.handle = attributes[:'handle']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -87,7 +70,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @data.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param data [Object] Object to be assigned
+    # @!visibility private
+    def data=(data)
+      if data.nil?
+        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
+      end
+      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -96,16 +90,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          email == o.email &&
-          handle == o.handle &&
-          name == o.name
+          data == o.data
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [email, handle, name].hash
+      [data].hash
     end
   end
 end

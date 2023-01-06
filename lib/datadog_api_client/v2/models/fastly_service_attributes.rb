@@ -17,30 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Creator of the object.
-  class Creator
+  # Attributes object for Fastly service requests.
+  class FastlyServiceAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Email of the creator.
-    attr_accessor :email
-
-    # Handle of the creator.
-    attr_accessor :handle
-
-    # Name of the creator.
-    attr_accessor :name
+    # A list of tags for the Fastly service.
+    attr_accessor :tags
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'email' => :'email',
-        :'handle' => :'handle',
-        :'name' => :'name'
+        :'tags' => :'tags'
       }
     end
 
@@ -48,9 +40,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'email' => :'String',
-        :'handle' => :'String',
-        :'name' => :'String'
+        :'tags' => :'Array<String>'
       }
     end
 
@@ -59,27 +49,21 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::Creator` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::FastlyServiceAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::Creator`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::FastlyServiceAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'handle')
-        self.handle = attributes[:'handle']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
       end
     end
 
@@ -96,16 +80,7 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          email == o.email &&
-          handle == o.handle &&
-          name == o.name
+          tags == o.tags
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    # @!visibility private
-    def hash
-      [email, handle, name].hash
-    end
-  end
-end
+    # Calculates hash code according to
