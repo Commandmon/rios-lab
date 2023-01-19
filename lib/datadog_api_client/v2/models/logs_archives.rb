@@ -83,4 +83,11 @@ module DatadogAPIClient::V2
           data == o.data
     end
 
-    # Calculates hash code according to 
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [data].hash
+    end
+  end
+end
