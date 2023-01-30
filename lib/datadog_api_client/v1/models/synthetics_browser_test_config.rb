@@ -101,3 +101,59 @@ module DatadogAPIClient::V1
       end
 
       if attributes.key?(:'variables')
+        if (value = attributes[:'variables']).is_a?(Array)
+          self.variables = value
+        end
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @assertions.nil?
+      return false if @request.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param assertions [Object] Object to be assigned
+    # @!visibility private
+    def assertions=(assertions)
+      if assertions.nil?
+        fail ArgumentError, 'invalid value for "assertions", assertions cannot be nil.'
+      end
+      @assertions = assertions
+    end
+
+    # Custom attribute writer method with validation
+    # @param request [Object] Object to be assigned
+    # @!visibility private
+    def request=(request)
+      if request.nil?
+        fail ArgumentError, 'invalid value for "request", request cannot be nil.'
+      end
+      @request = request
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          assertions == o.assertions &&
+          config_variables == o.config_variables &&
+          request == o.request &&
+          set_cookie == o.set_cookie &&
+          variables == o.variables
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [assertions, config_variables, request, set_cookie, variables].hash
+    end
+  end
+end
