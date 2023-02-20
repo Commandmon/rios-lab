@@ -143,4 +143,65 @@ module DatadogAPIClient::V1
 
       if attributes.key?(:'monitor_type')
         self.monitor_type = attributes[:'monitor_type']
-      en
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'precision')
+        self.precision = attributes[:'precision']
+      end
+
+      if attributes.key?(:'preview')
+        self.preview = attributes[:'preview']
+      end
+
+      if attributes.key?(:'sli_value')
+        self.sli_value = attributes[:'sli_value']
+      end
+
+      if attributes.key?(:'span_precision')
+        self.span_precision = attributes[:'span_precision']
+      end
+
+      if attributes.key?(:'uptime')
+        self.uptime = attributes[:'uptime']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          error_budget_remaining == o.error_budget_remaining &&
+          errors == o.errors &&
+          group == o.group &&
+          history == o.history &&
+          monitor_modified == o.monitor_modified &&
+          monitor_type == o.monitor_type &&
+          name == o.name &&
+          precision == o.precision &&
+          preview == o.preview &&
+          sli_value == o.sli_value &&
+          span_precision == o.span_precision &&
+          uptime == o.uptime
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [error_budget_remaining, errors, group, history, monitor_modified, monitor_type, name, precision, preview, sli_value, span_precision, uptime].hash
+    end
+  end
+end
