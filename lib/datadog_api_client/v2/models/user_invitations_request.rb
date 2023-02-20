@@ -18,36 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # JSON object containing all event attributes and their associated values.
-  class CIAppEventAttributes
+  # Object to invite users to join the organization.
+  class UserInvitationsRequest
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # JSON object of attributes from CI Visibility events.
-    attr_accessor :attributes
-
-    # The name of the application or service generating CI Visibility events.
-    # It is used to switch from CI Visibility to APM, so make sure you define the same
-    # value when you use both products.
-    attr_accessor :service
-
-    # Array of tags associated with your event.
-    attr_accessor :tags
-
-    # Timestamp of your event.
-    attr_accessor :timestamp
+    # List of user invitations.
+    attr_reader :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'attributes' => :'attributes',
-        :'service' => :'service',
-        :'tags' => :'tags',
-        :'timestamp' => :'timestamp'
+        :'data' => :'data'
       }
     end
 
@@ -55,10 +41,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'attributes' => :'Hash<String, Object>',
-        :'service' => :'String',
-        :'tags' => :'Array<String>',
-        :'timestamp' => :'Time'
+        :'data' => :'Array<UserInvitationData>'
       }
     end
 
@@ -67,33 +50,21 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::CIAppEventAttributes` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::UserInvitationsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::CIAppEventAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::UserInvitationsRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'attributes')
-        self.attributes = attributes[:'attributes']
-      end
-
-      if attributes.key?(:'service')
-        self.service = attributes[:'service']
-      end
-
-      if attributes.key?(:'tags')
-        if (value = attributes[:'tags']).is_a?(Array)
-          self.tags = value
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
         end
-      end
-
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
       end
     end
 
@@ -101,7 +72,18 @@ module DatadogAPIClient::V2
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @data.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param data [Object] Object to be assigned
+    # @!visibility private
+    def data=(data)
+      if data.nil?
+        fail ArgumentError, 'invalid value for "data", data cannot be nil.'
+      end
+      @data = data
     end
 
     # Checks equality by comparing each attribute.
@@ -110,17 +92,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          attributes == o.attributes &&
-          service == o.service &&
-          tags == o.tags &&
-          timestamp == o.timestamp
+          data == o.data
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [attributes, service, tags, timestamp].hash
+      [data].hash
     end
   end
 end
