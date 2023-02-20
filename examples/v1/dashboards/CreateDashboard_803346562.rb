@@ -32,4 +32,6 @@ body = DatadogAPIClient::V1::Dashboard.new({
       }),
     }),
   ],
-  layout_type: DatadogAPI
+  layout_type: DatadogAPIClient::V1::DashboardLayoutType::ORDERED,
+})
+p api_instance.create_dashboard(body)
