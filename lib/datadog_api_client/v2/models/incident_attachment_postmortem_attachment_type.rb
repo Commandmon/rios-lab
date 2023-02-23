@@ -17,10 +17,10 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Opsgenie service resource type.
-  class OpsgenieServiceType
+  # The type of postmortem attachment attributes.
+  class IncidentAttachmentPostmortemAttachmentType
     include BaseEnumModel
 
-    OPSGENIE_SERVICE = "opsgenie-service".freeze
+    POSTMORTEM = "postmortem".freeze
   end
 end

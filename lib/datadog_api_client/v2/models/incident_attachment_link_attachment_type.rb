@@ -17,10 +17,10 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Opsgenie service resource type.
-  class OpsgenieServiceType
+  # The type of link attachment attributes.
+  class IncidentAttachmentLinkAttachmentType
     include BaseEnumModel
 
-    OPSGENIE_SERVICE = "opsgenie-service".freeze
+    LINK = "link".freeze
   end
 end
