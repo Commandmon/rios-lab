@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V2 Collection
 
@@ -17,22 +18,34 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Relationship to multiple permissions objects.
-  class RelationshipToPermissions
+  # A column containing the numerical results for a formula or query.
+  class DataScalarColumn
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Relationships to permission objects.
-    attr_accessor :data
+    # Metadata for the resulting numerical values.
+    attr_accessor :meta
+
+    # The name referencing the formula or query for this column.
+    attr_accessor :name
+
+    # The type of column present.
+    attr_accessor :type
+
+    # The array of numerical values for one formula or query.
+    attr_accessor :values
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'meta' => :'meta',
+        :'name' => :'name',
+        :'type' => :'type',
+        :'values' => :'values'
       }
     end
 
@@ -40,7 +53,10 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<RelationshipToPermissionData>'
+        :'meta' => :'ScalarMeta',
+        :'name' => :'String',
+        :'type' => :'String',
+        :'values' => :'Array<Float>'
       }
     end
 
@@ -49,20 +65,32 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RelationshipToPermissions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::DataScalarColumn` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RelationshipToPermissions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::DataScalarColumn`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'values')
+        if (value = attributes[:'values']).is_a?(Array)
+          self.values = value
         end
       end
     end
@@ -80,14 +108,17 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          meta == o.meta &&
+          name == o.name &&
+          type == o.type &&
+          values == o.values
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [meta, name, type, values].hash
     end
   end
 end

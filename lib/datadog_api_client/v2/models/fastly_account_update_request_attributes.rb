@@ -17,22 +17,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V2
-  # Relationship to multiple permissions objects.
-  class RelationshipToPermissions
+  # Attributes object for updating a Fastly account.
+  class FastlyAccountUpdateRequestAttributes
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Relationships to permission objects.
-    attr_accessor :data
+    # The API key of the Fastly account.
+    attr_accessor :api_key
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'api_key' => :'api_key'
       }
     end
 
@@ -40,7 +40,7 @@ module DatadogAPIClient::V2
     # @!visibility private
     def self.openapi_types
       {
-        :'data' => :'Array<RelationshipToPermissionData>'
+        :'api_key' => :'String'
       }
     end
 
@@ -49,21 +49,19 @@ module DatadogAPIClient::V2
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::RelationshipToPermissions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V2::FastlyAccountUpdateRequestAttributes` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::RelationshipToPermissions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::FastlyAccountUpdateRequestAttributes`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'api_key')
+        self.api_key = attributes[:'api_key']
       end
     end
 
@@ -80,14 +78,14 @@ module DatadogAPIClient::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          api_key == o.api_key
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [data].hash
+      [api_key].hash
     end
   end
 end
