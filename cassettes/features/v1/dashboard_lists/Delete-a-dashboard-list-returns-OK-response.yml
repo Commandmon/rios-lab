@@ -1,0 +1,13 @@
+http_interactions:
+- recorded_at: Thu, 06 Jan 2022 00:50:21 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test-Delete_a_dashboard_list_returns_OK_response-1641430221"}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com
