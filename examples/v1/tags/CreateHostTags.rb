@@ -9,4 +9,4 @@ body = DatadogAPIClient::V1::HostTags.new({
     "environment:production",
   ],
 })
-p api_instance.creat
+p api_instance.create_host_tags("host_name", body)
