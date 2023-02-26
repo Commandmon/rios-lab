@@ -85,4 +85,38 @@ module DatadogAPIClient::V2
       end
 
       if attributes.key?(:'page')
-        self.p
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          filter == o.filter &&
+          options == o.options &&
+          page == o.page &&
+          sort == o.sort
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [filter, options, page, sort].hash
+    end
+  end
+end
