@@ -1,3 +1,4 @@
+
 =begin
 #Datadog API V1 Collection
 
@@ -17,30 +18,31 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Template variables saved views.
-  class DashboardTemplateVariablePresetValue
+  # Custom variable for Webhook integration.
+  class WebhooksIntegrationCustomVariable
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # The name of the variable.
-    attr_accessor :name
+    # Make custom variable is secret or not.
+    # If the custom variable is secret, the value is not returned in the response payload.
+    attr_reader :is_secret
 
-    # (deprecated) The value of the template variable within the saved view. Cannot be used in conjunction with `values`.
-    attr_accessor :value
+    # The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+    attr_reader :name
 
-    # One or many template variable values within the saved view, which will be unioned together using `OR` if more than one is specified. Cannot be used in conjunction with `value`.
-    attr_reader :values
+    # Value of the custom variable.
+    attr_reader :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
+        :'is_secret' => :'is_secret',
         :'name' => :'name',
-        :'value' => :'value',
-        :'values' => :'values'
+        :'value' => :'value'
       }
     end
 
@@ -48,9 +50,9 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
+        :'is_secret' => :'Boolean',
         :'name' => :'String',
-        :'value' => :'String',
-        :'values' => :'Array<String>'
+        :'value' => :'String'
       }
     end
 
@@ -59,16 +61,20 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::DashboardTemplateVariablePresetValue` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::WebhooksIntegrationCustomVariable` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::DashboardTemplateVariablePresetValue`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::WebhooksIntegrationCustomVariable`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'is_secret')
+        self.is_secret = attributes[:'is_secret']
+      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -77,30 +83,46 @@ module DatadogAPIClient::V1
       if attributes.key?(:'value')
         self.value = attributes[:'value']
       end
-
-      if attributes.key?(:'values')
-        if (value = attributes[:'values']).is_a?(Array)
-          self.values = value
-        end
-      end
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     # @!visibility private
     def valid?
-      return false if !@values.nil? && @values.length < 1
+      return false if @is_secret.nil?
+      return false if @name.nil?
+      return false if @value.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param values [Object] Object to be assigned
+    # @param is_secret [Object] Object to be assigned
     # @!visibility private
-    def values=(values)
-      if !values.nil? && values.length < 1
-        fail ArgumentError, 'invalid value for "values", number of items must be greater than or equal to 1.'
+    def is_secret=(is_secret)
+      if is_secret.nil?
+        fail ArgumentError, 'invalid value for "is_secret", is_secret cannot be nil.'
       end
-      @values = values
+      @is_secret = is_secret
+    end
+
+    # Custom attribute writer method with validation
+    # @param name [Object] Object to be assigned
+    # @!visibility private
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'invalid value for "name", name cannot be nil.'
+      end
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param value [Object] Object to be assigned
+    # @!visibility private
+    def value=(value)
+      if value.nil?
+        fail ArgumentError, 'invalid value for "value", value cannot be nil.'
+      end
+      @value = value
     end
 
     # Checks equality by comparing each attribute.
@@ -109,16 +131,16 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          is_secret == o.is_secret &&
           name == o.name &&
-          value == o.value &&
-          values == o.values
+          value == o.value
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [name, value, values].hash
+      [is_secret, name, value].hash
     end
   end
 end
