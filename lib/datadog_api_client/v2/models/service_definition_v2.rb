@@ -105,4 +105,119 @@ module DatadogAPIClient::V2
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ServiceDefinitionV2`. Please check the name to ma
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V2::ServiceDefinitionV2`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'contacts')
+        if (value = attributes[:'contacts']).is_a?(Array)
+          self.contacts = value
+        end
+      end
+
+      if attributes.key?(:'dd_service')
+        self.dd_service = attributes[:'dd_service']
+      end
+
+      if attributes.key?(:'dd_team')
+        self.dd_team = attributes[:'dd_team']
+      end
+
+      if attributes.key?(:'docs')
+        if (value = attributes[:'docs']).is_a?(Array)
+          self.docs = value
+        end
+      end
+
+      if attributes.key?(:'extensions')
+        self.extensions = attributes[:'extensions']
+      end
+
+      if attributes.key?(:'integrations')
+        self.integrations = attributes[:'integrations']
+      end
+
+      if attributes.key?(:'links')
+        if (value = attributes[:'links']).is_a?(Array)
+          self.links = value
+        end
+      end
+
+      if attributes.key?(:'repos')
+        if (value = attributes[:'repos']).is_a?(Array)
+          self.repos = value
+        end
+      end
+
+      if attributes.key?(:'schema_version')
+        self.schema_version = attributes[:'schema_version']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'team')
+        self.team = attributes[:'team']
+      end
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    # @!visibility private
+    def valid?
+      return false if @dd_service.nil?
+      return false if @schema_version.nil?
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param dd_service [Object] Object to be assigned
+    # @!visibility private
+    def dd_service=(dd_service)
+      if dd_service.nil?
+        fail ArgumentError, 'invalid value for "dd_service", dd_service cannot be nil.'
+      end
+      @dd_service = dd_service
+    end
+
+    # Custom attribute writer method with validation
+    # @param schema_version [Object] Object to be assigned
+    # @!visibility private
+    def schema_version=(schema_version)
+      if schema_version.nil?
+        fail ArgumentError, 'invalid value for "schema_version", schema_version cannot be nil.'
+      end
+      @schema_version = schema_version
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param o [Object] Object to be compared
+    # @!visibility private
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          contacts == o.contacts &&
+          dd_service == o.dd_service &&
+          dd_team == o.dd_team &&
+          docs == o.docs &&
+          extensions == o.extensions &&
+          integrations == o.integrations &&
+          links == o.links &&
+          repos == o.repos &&
+          schema_version == o.schema_version &&
+          tags == o.tags &&
+          team == o.team
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    # @!visibility private
+    def hash
+      [contacts, dd_service, dd_team, docs, extensions, integrations, links, repos, schema_version, tags, team].hash
+    end
+  end
+end
