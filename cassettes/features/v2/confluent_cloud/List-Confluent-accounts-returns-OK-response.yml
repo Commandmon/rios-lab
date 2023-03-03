@@ -3,4 +3,35 @@ http_interactions:
   request:
     body:
       encoding: UTF-8
-      string: '{"data":{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresp
+      string: '{"data":{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresponse1665090166","api_secret":"test-api-secret","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts"}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.datadoghq.com/api/v2/integrations/confluent-cloud/accounts
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresponse1665090166","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"45iw6lb8j5"}}
+
+        '
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 201
+      message: Created
+- recorded_at: Thu, 06 Oct 2022 21:02:46 GMT
+  request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+    method: GET
+    uri: https://api.datadoghq.com/api/v2/integrations/confluent-cloud/accounts
+  response:
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"attributes":{"api_key":"test-api-key3","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"iubtgfayp5"},{"attributes":{"api_key":"Test-List_Confluent_accounts_returns_OK_response-1663015727","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"83wqs4ztwc"},{"attributes":{"api_key":"update-key","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":[]},"type":"confluent-cloud-accounts","id":"mrwhlq9oyn"},{"attributes":{"api_key":"Test-List_Confluent_accounts_returns_OK_response-1663017017","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"tuwcfwqe3a"},{"attributes":{"api_key":"Test-Update_Confluent_account_returns_OK_response-1663017018","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"bt2li4wmv5"},{"attributes":{"api_key":"Test-List_Confluent_accounts_returns_OK_response-1663017074","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"snrx0cusau"},{"attributes":{"api_key":"Test-Update_Confluent_account_returns_OK_response-1663017075","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"3r136fz38z"},{"attributes":{"api_key":"Test-List_Confluent_accounts_returns_OK_response-1663035571","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"olnygn7t1v"},{"attributes":{"api_key":"Test-Update_Confluent_account_returns_OK_response-1663035572","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"u61jn2zm67"},{"attributes":{"api_key":"testlistconfluentaccountsreturnsokresponse1663035633","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"u0mnbkhpyg"},{"attributes":{"api_key":"testupdateconfluentaccountreturnsokresponse1663035635","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"1qt90nner9"},{"attributes":{"api_key":"testlistconfluentaccountsreturnsokresponse1663040179","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"rn6627go3o"},{"attributes":{"api_key":"testupdateconfluentaccountreturnsokresponse1663040180","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"hkkcrwodz3"},{"attributes":{"api_key":"api-key-test-123","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"m17r8n1brn"},{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresponse1663081412","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"0ubcaq4ack"},{"attributes":{"api_key":"TestUpdateConfluentaccountreturnsOKresponse1663081413","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-accounts","id":"csu3ol6ewv"},{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresponse1663091740","resources":[{"id":"test-resource-id","resource_type":"kafka","tags":["tag1","tag2:val2"]}],"tags":["tag1","tag2:val2"]},"type":"confluent-cloud-a
