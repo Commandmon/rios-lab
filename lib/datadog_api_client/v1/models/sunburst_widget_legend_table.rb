@@ -18,31 +18,22 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Response object with all logs matching the request and pagination information.
-  class LogsListResponse
+  # Configuration of table-based legend.
+  class SunburstWidgetLegendTable
     include BaseGenericModel
 
     # Whether the object has unparsed attributes
     # @!visibility private
     attr_accessor :_unparsed
 
-    # Array of logs matching the request and the `nextLogId` if sent.
-    attr_accessor :logs
-
-    # Hash identifier of the next log to return in the list.
-    # This parameter is used for the pagination feature.
-    attr_accessor :next_log_id
-
-    # Status of the response.
-    attr_accessor :status
+    # Whether or not to show a table legend.
+    attr_reader :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     # @!visibility private
     def self.attribute_map
       {
-        :'logs' => :'logs',
-        :'next_log_id' => :'nextLogId',
-        :'status' => :'status'
+        :'type' => :'type'
       }
     end
 
@@ -50,9 +41,7 @@ module DatadogAPIClient::V1
     # @!visibility private
     def self.openapi_types
       {
-        :'logs' => :'Array<Log>',
-        :'next_log_id' => :'String',
-        :'status' => :'String'
+        :'type' => :'SunburstWidgetLegendTableType'
       }
     end
 
@@ -61,29 +50,19 @@ module DatadogAPIClient::V1
     # @!visibility private
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::LogsListResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DatadogAPIClient::V1::SunburstWidgetLegendTable` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::LogsListResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DatadogAPIClient::V1::SunburstWidgetLegendTable`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'logs')
-        if (value = attributes[:'logs']).is_a?(Array)
-          self.logs = value
-        end
-      end
-
-      if attributes.key?(:'next_log_id')
-        self.next_log_id = attributes[:'next_log_id']
-      end
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -91,7 +70,18 @@ module DatadogAPIClient::V1
     # @return true if the model is valid
     # @!visibility private
     def valid?
+      return false if @type.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param type [Object] Object to be assigned
+    # @!visibility private
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'invalid value for "type", type cannot be nil.'
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -100,16 +90,14 @@ module DatadogAPIClient::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          logs == o.logs &&
-          next_log_id == o.next_log_id &&
-          status == o.status
+          type == o.type
     end
 
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     # @!visibility private
     def hash
-      [logs, next_log_id, status].hash
+      [type].hash
     end
   end
 end

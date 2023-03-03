@@ -1,0 +1,6 @@
+http_interactions:
+- recorded_at: Thu, 06 Oct 2022 21:02:46 GMT
+  request:
+    body:
+      encoding: UTF-8
+      string: '{"data":{"attributes":{"api_key":"TestListConfluentaccountsreturnsOKresp
