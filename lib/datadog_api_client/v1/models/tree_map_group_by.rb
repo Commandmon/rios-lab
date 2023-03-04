@@ -17,12 +17,14 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Size of the widget.
-  class WidgetSizeFormat
+  # (deprecated) The attribute formerly used to group elements in the widget.
+  #
+  # @deprecated This model is deprecated.
+  class TreeMapGroupBy
     include BaseEnumModel
 
-    SMALL = "small".freeze
-    MEDIUM = "medium".freeze
-    LARGE = "large".freeze
+    USER = "user".freeze
+    FAMILY = "family".freeze
+    PROCESS = "process".freeze
   end
 end

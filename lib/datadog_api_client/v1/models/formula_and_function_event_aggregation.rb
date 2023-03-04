@@ -17,12 +17,21 @@ require 'date'
 require 'time'
 
 module DatadogAPIClient::V1
-  # Size of the widget.
-  class WidgetSizeFormat
+  # Aggregation methods for event platform queries.
+  class FormulaAndFunctionEventAggregation
     include BaseEnumModel
 
-    SMALL = "small".freeze
-    MEDIUM = "medium".freeze
-    LARGE = "large".freeze
+    COUNT = "count".freeze
+    CARDINALITY = "cardinality".freeze
+    MEDIAN = "median".freeze
+    PC75 = "pc75".freeze
+    PC90 = "pc90".freeze
+    PC95 = "pc95".freeze
+    PC98 = "pc98".freeze
+    PC99 = "pc99".freeze
+    SUM = "sum".freeze
+    MIN = "min".freeze
+    MAX = "max".freeze
+    AVG = "avg".freeze
   end
 end
